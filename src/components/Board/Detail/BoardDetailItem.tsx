@@ -16,6 +16,7 @@ import { view } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
 import likeImage from '~/assets/images/like_img.png';
+import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
 
 export default function BoardDetailItem({
@@ -46,7 +47,7 @@ export default function BoardDetailItem({
   }, [board.id]);
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCnt, setLikeCnt] = useState(board.like);
+  const [likeCnt, setLikeCnt] = useState<number>(0);
 
   useEffect(() => {
     const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
@@ -63,6 +64,7 @@ export default function BoardDetailItem({
       setLikeCnt((prevCount) =>
         newLikeState ? (prevCount as number) + 1 : (prevCount as number) - 1,
       );
+      console.log(likeCnt);
       localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
@@ -108,8 +110,8 @@ export default function BoardDetailItem({
               <span>{viewCnt}</span>
             </span>
             <span className={styles.viewContainer}>
-              <button onClick={handleLike}>
-                {isLiked ? '좋아요 취소' : '좋아요'}
+              <button onClick={handleLike} className={styles.like}>
+                {isLiked ? <img src={likeImage} /> : <img src={unLikeImage} />}
               </button>
               <span>{likeCnt}</span>
             </span>
