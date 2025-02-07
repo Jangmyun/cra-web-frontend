@@ -1,6 +1,5 @@
-/* Overlay */
 .overlay {
-  position: fixed; /* 화면에 고정 */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -11,7 +10,7 @@
 
 /* Modal Content */
 .modalContent {
-  position: absolute; /* 부모(.overlay)를 기준으로 위치 설정 */
+  position: absolute;
   background-color: #f4fdff;
   width: 388px;
   height: 365px;
@@ -20,12 +19,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  border: 2.5px solid #2cb4db; /* 기본 border 제거 */
-
-  /* 원하는 위치 설정 */
-  top: 70px; /* 상단에서 20px 떨어짐 */
-  right: 145px; /* 오른쪽에서 20px 떨어짐 */
+  border: 2.5px solid var(--color-primary);
+  top: 55px;
+  right: 125px;
+  scale: 90%;
 }
 
 /* Header */
@@ -79,7 +76,7 @@
 .name {
   font-family: 'Pretendard Bold';
   font-size: 30px;
-  color: #2cb4db;
+  color: var(--color-primary);
 }
 .student-number {
   font-family: 'Pretendard Medium';
@@ -100,11 +97,21 @@
   margin-left: 40px;
   line-height: 2rem;
 }
+
+.GitHubLink {
+  color: #9b9b9b;
+  text-decoration: none;
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
 .line {
   border: 1px solid #c1c1c1;
   margin-right: 40px;
   margin-top: 5px;
 }
+
 .logout {
   font-family: 'Pretendard Semibold';
   font-size: 16px;
@@ -115,12 +122,37 @@
   margin-right: 40px;
   gap: 4px;
   cursor: pointer;
+  &:hover {
+    color: var(--color-primary);
+    img {
+      filter: invert(63%) sepia(83%) saturate(300%) hue-rotate(160deg);
+    }
+  }
+  img {
+    width: 1rem;
+  }
 }
 
-.logout:hover {
-  color: #2cb4db;
+@media (max-width: 1264px) {
+  .modalContent {
+    scale: 85%;
+    top: 45px;
+    right: 115px;
+  }
 }
 
-.logout-image {
-  width: 1rem;
+@media (max-width: 1064px) {
+  .modalContent {
+    scale: 75%;
+    top: 25px;
+    right: 32.5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    scale: 65%;
+    top: 150px;
+    right: 0px;
+  }
 }
