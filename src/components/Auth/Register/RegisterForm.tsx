@@ -9,6 +9,7 @@ import CryptoJS from 'crypto-js';
 import WidthSpacer from '~/components/Common/WidthSpacer';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
+import RegisterInputTextField from './RegisterInputTextField';
 
 const Container = styled.div`
   display: flex;
@@ -97,6 +98,17 @@ const Input = styled.div`
   input:read-only {
     background-color: var(--color-background);
   }
+
+  input.error {
+    border-color: red;
+  }
+
+  div.error {
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+    color: red;
+    font-size: 1rem;
+  }
 `;
 
 const EmailInput = styled.div`
@@ -166,6 +178,7 @@ function RegisterForm() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
+    passwordCheck: '',
     studentId: '',
     name: '',
     email: '',
@@ -183,26 +196,70 @@ function RegisterForm() {
   const [isValid, setIsValid] = useState(false);
 
   const [error, setError] = useState('');
+  const [inputErrors, setInputErrors] = useState<{ [key: string]: boolean }>(
+    {},
+  );
+  const [errorMessages, setErrorMessages] = useState<{
+    [key: string]: string;
+  }>({});
+
+  const [modalMessage, setModalMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
 
   const [timeLeft, setTimeLeft] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateField = (name: string, value: string) => {
+    if (!value) return { valid: false, message: '값을 입력해 주세요.' };
+    if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+      return { valid: false, message: '올바르지 않은 이메일 형식입니다.' };
+    if (name === 'studentId') {
+      if (!/^\d$/.test(value))
+        return { valid: false, message: '숫자로만 입력해 주세요.' };
+      if (value.length != 8)
+        return { valid: false, message: '8글자로 입력해 주세요.' };
+    }
+    if (name === 'term') {
+      if (!/^\d{2}-\d$/.test(value))
+        return { valid: false, message: '올바른 형식이 아닙니다.' };
+    }
+    if (name === 'password') {
+      if (value.length < 8)
+        return { valid: false, message: '비밀번호를 8글자 이상 입력하세요.' };
+    }
+    return { valid: true, message: '' };
+  };
+
   const sendEmailRequest = async () => {
     if (emailLoading) return;
     setEmailLoading(true);
     if (formData.email !== '') {
-      alert('이메일핑');
+      if (!validateEmail(formData.email)) {
+        setIsModalOpen(true); // 모달 열기
+        setModalMessage('올바른 이메일 형식이 아닙니다.');
+        setEmailLoading(false);
+        return;
+      }
       const resStatus = await emailRequest(formData.email);
       if (resStatus === 200) {
         setIsCodeRequired(true);
         setTimeLeft(EMAIL_VERIFICATION_TIME);
         setIsTimerRunning(true);
+
+        setIsModalOpen(true); // 모달 열기
+        setModalMessage('이메일을 확인해 주세요.');
       } else {
-        alert('에러 발생 근데 뭔지는 모름');
+        setIsModalOpen(true); // 모달 열기
+        setModalMessage('이메일 확인 중 에러가 발생하였습니다.');
       }
     } else {
-      alert('이메일 입력해라');
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('이메일을 입력해 주세요.');
     }
     setEmailLoading(false);
   };
@@ -212,12 +269,14 @@ function RegisterForm() {
     setEmailCodeLoading(true);
     const resStatus = await emailCode(formData.emailCode);
     if (resStatus === 200) {
-      alert('성공');
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('이메일 인증을 성공하였습니다.');
       setIsCodeRequired(false);
       setIsTimerRunning(false);
       setIsValid(true);
     } else {
-      alert('error');
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('이메일 인증 중 에러가 발생하였습니다.');
     }
     setEmailCodeLoading(false);
   };
@@ -230,7 +289,32 @@ function RegisterForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const { valid, message } = validateField(name, value);
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setInputErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: !valid,
+    }));
+    setErrorMessages((prevMessages) => ({
+      ...prevMessages,
+      [name]: message,
+    }));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const { valid, message } = validateField(name, value);
+
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setInputErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: !valid,
+    }));
+    setErrorMessages((prevMessages) => ({
+      ...prevMessages,
+      [name]: message,
+    }));
   };
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -244,8 +328,31 @@ function RegisterForm() {
       if (!formData[key as keyof typeof formData]) {
         // 타입 단언 추가
         setIsModalOpen(true); // 모달 열기
+        setModalMessage('모든 항목을 입력해 주세요.');
         return;
       }
+    }
+
+    const termRegex = /^\d{2}-\d$/; // "00-0"
+    const studentIdRegex = /^\d+$/; // 숫자만
+
+    if (formData.password.length < 8) {
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('비밀번호는 8글자 이상이어야 합니다.');
+      return;
+    }
+    if (
+      !studentIdRegex.test(formData.studentId) ||
+      formData.studentId.length < 8
+    ) {
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('학번은 8글자 숫자로 이루어져야 합니다.');
+      return;
+    }
+    if (!termRegex.test(formData.term)) {
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('올바르지 않은 기수 번호입니다.');
+      return;
     }
 
     const secretKey: string = import.meta.env.VITE_SECRET_KEY as string;
@@ -271,11 +378,13 @@ function RegisterForm() {
 
     try {
       await signUp(requestBody);
-      alert('회원가입이 완료되었습니다.');
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('회원가입이 완료되었습니다.');
       await navigate('/welcome');
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message); // UI에서 에러 메시지를 표시하도록 설정
+        setIsModalOpen(true); // 모달 열기
+        setModalMessage(error.message);
       }
     } finally {
       setSubmitLoading(false);
@@ -305,53 +414,46 @@ function RegisterForm() {
     <Container>
       <Title>회원가입</Title>
       <RegisterInputForm onSubmit={handleSubmit}>
-        <Input>
-          <label htmlFor="username">아이디</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="아이디를 입력하세요."
-            value={formData.username}
-            onChange={handleChange}
-          />
-        </Input>
-        <Input>
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="비밀번호를 입력하세요."
-            value={formData.password}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
-        <Input>
-          <label htmlFor="studentId">학번</label>
-          <input
-            type="text"
-            name="studentId"
-            id="studentId"
-            placeholder="학번을 입력하세요."
-            value={formData.studentId}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
-        <Input>
-          <label htmlFor="name">이름</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="이름을 입력하세요."
-            value={formData.name}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
+        <RegisterInputTextField
+          name="username"
+          value={formData.username}
+          label="아이디"
+          placeHolder="아이디를 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['username']}
+          errorMessage={errorMessages['username']}
+        />
+        <RegisterInputTextField
+          name="password"
+          value={formData.password}
+          label="비밀번호"
+          placeHolder="비밀번호를 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['password']}
+          errorMessage={errorMessages['password']}
+        />
+        <RegisterInputTextField
+          name="studentId"
+          value={formData.studentId}
+          label="학번 (22500123)"
+          placeHolder="학번을 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['studentId']}
+          errorMessage={errorMessages['studentId']}
+        />
+        <RegisterInputTextField
+          name="name"
+          value={formData.name}
+          label="이름"
+          placeHolder="이름을 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['name']}
+          errorMessage={errorMessages['name']}
+        />
         <Input>
           <label htmlFor="name">E-mail</label>
           <EmailContainer>
@@ -412,42 +514,36 @@ function RegisterForm() {
             </>
           )}
         </Input>
-
-        <Input>
-          <label htmlFor="term">CRA 기수</label>
-          <input
-            type="text"
-            name="term"
-            id="term"
-            placeholder="CRA 기수를 입력하세요."
-            value={formData.term}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
-        <Input>
-          <label htmlFor="githubId">GitHub 주소</label>
-          <input
-            type="text"
-            name="githubId"
-            id="githubId"
-            placeholder="GitHub 주소를 입력하세요."
-            value={formData.githubId}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
-        <Input>
-          <label htmlFor="code">가입코드</label>
-          <input
-            type="text"
-            name="code"
-            id="code"
-            placeholder="가입코드를 입력하세요."
-            value={formData.code}
-            onChange={handleChange}
-          />{' '}
-        </Input>
+        <RegisterInputTextField
+          name="term"
+          value={formData.term}
+          label="CRA 기수 (25-1)"
+          placeHolder="CRA 기수를 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['term']}
+          errorMessage={errorMessages['term']}
+        />
+        <RegisterInputTextField
+          name="githubId"
+          value={formData.githubId}
+          label="GitHub 주소"
+          placeHolder="GitHub 주소를 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['githubId']}
+          errorMessage={errorMessages['githubId']}
+        />
+        <RegisterInputTextField
+          name="code"
+          value={formData.code}
+          label="가입코드"
+          placeHolder="관리자로부터 받은 가입코드를 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['code']}
+          errorMessage={errorMessages['code']}
+        />
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
@@ -455,7 +551,12 @@ function RegisterForm() {
           {submitLoading ? <ClipLoader size={25} color="#fff" /> : '확인'}
         </SubmitBtn>
       </RegisterInputForm>
-      {isModalOpen && <AlertModal closeModal={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <AlertModal
+          closeModal={() => setIsModalOpen(false)}
+          message={modalMessage}
+        />
+      )}
     </Container>
   );
 }

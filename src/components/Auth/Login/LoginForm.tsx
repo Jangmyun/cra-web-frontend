@@ -78,6 +78,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const [modalIsOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -105,6 +106,7 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Login Handling Error: ', error);
       openModal();
+      setModalMessage('모든 항목을 입력해 주세요.');
     }
   };
 
@@ -171,7 +173,7 @@ const LoginForm = () => {
           </Link>
         </Register>
       </MainContainer>
-      {modalIsOpen && <AlertModal closeModal={closeModal} />}
+      {modalIsOpen && <AlertModal closeModal={closeModal} message={modalMessage} />}
     </Container>
   );
 };
