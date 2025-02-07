@@ -1,6 +1,10 @@
 .delete-button {
   cursor: pointer;
 }
+.delete-button:hover {
+  cursor: pointer;
+  color: #2cb4db;
+}
 
 .item-container {
   display: flex;
@@ -40,6 +44,13 @@
 
 .comment-reply {
   cursor: pointer;
+}
+.comment-reply2 {
+  color: #2cb4db;
+  cursor: pointer;
+}
+.comment-reply:hover {
+  color: #2cb4db;
 }
 
 .comment-footer {
