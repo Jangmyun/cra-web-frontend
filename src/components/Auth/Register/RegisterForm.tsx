@@ -182,11 +182,11 @@ function RegisterForm() {
     studentId: '',
     name: '',
     email: '',
-    emailCode: '',
     term: '',
     githubId: '',
     code: '',
   });
+  const [emailCodeValue, setEmailCodeValue] = useState('');
 
   const [emailLoading, setEmailLoading] = useState(false);
   const [emailCodeLoading, setEmailCodeLoading] = useState(false);
@@ -232,6 +232,10 @@ function RegisterForm() {
       if (value.length < 8)
         return { valid: false, message: '비밀번호를 8글자 이상 입력하세요.' };
     }
+    if (name === 'passwordCheck') {
+      if (value !== formData.password)
+        return { valid: false, message: '비밀번호가 일치하지 않습니다.' };
+    }
     return { valid: true, message: '' };
   };
 
@@ -267,7 +271,7 @@ function RegisterForm() {
   const emailValidCheck = async () => {
     if (emailCodeLoading) return;
     setEmailCodeLoading(true);
-    const resStatus = await emailCode(formData.emailCode);
+    const resStatus = await emailCode(emailCodeValue);
     if (resStatus === 200) {
       setIsModalOpen(true); // 모달 열기
       setModalMessage('이메일 인증을 성공하였습니다.');
@@ -329,6 +333,7 @@ function RegisterForm() {
         // 타입 단언 추가
         setIsModalOpen(true); // 모달 열기
         setModalMessage('모든 항목을 입력해 주세요.');
+        setSubmitLoading(false);
         return;
       }
     }
@@ -339,6 +344,7 @@ function RegisterForm() {
     if (formData.password.length < 8) {
       setIsModalOpen(true); // 모달 열기
       setModalMessage('비밀번호는 8글자 이상이어야 합니다.');
+      setSubmitLoading(false);
       return;
     }
     if (
@@ -347,11 +353,25 @@ function RegisterForm() {
     ) {
       setIsModalOpen(true); // 모달 열기
       setModalMessage('학번은 8글자 숫자로 이루어져야 합니다.');
+      setSubmitLoading(false);
       return;
     }
     if (!termRegex.test(formData.term)) {
       setIsModalOpen(true); // 모달 열기
       setModalMessage('올바르지 않은 기수 번호입니다.');
+      setSubmitLoading(false);
+      return;
+    }
+    if (formData.password !== formData.passwordCheck) {
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('비밀번호가 일치하지 않습니다.');
+      setSubmitLoading(false);
+      return;
+    }
+    if (!isValid) {
+      setIsModalOpen(true); // 모달 열기
+      setModalMessage('이메일을 인증해주세요.');
+      setSubmitLoading(false);
       return;
     }
 
@@ -380,7 +400,7 @@ function RegisterForm() {
       await signUp(requestBody);
       setIsModalOpen(true); // 모달 열기
       setModalMessage('회원가입이 완료되었습니다.');
-      await navigate('/welcome');
+      navigate('./register/welcome');
     } catch (error) {
       if (error instanceof Error) {
         setIsModalOpen(true); // 모달 열기
@@ -433,6 +453,16 @@ function RegisterForm() {
           onBlur={handleBlur}
           valid={!inputErrors['password']}
           errorMessage={errorMessages['password']}
+        />
+        <RegisterInputTextField
+          name="passwordCheck"
+          value={formData.passwordCheck}
+          label="비밀번호 확인"
+          placeHolder="비밀번호를 한번 더 입력해 주세요."
+          onChange={handleChange}
+          onBlur={handleBlur}
+          valid={!inputErrors['passwordCheck']}
+          errorMessage={errorMessages['passwordCheck']}
         />
         <RegisterInputTextField
           name="studentId"
@@ -491,8 +521,8 @@ function RegisterForm() {
                     name="emailCode"
                     id="emailCode"
                     placeholder="인증코드를 입력하세요."
-                    value={formData.emailCode}
-                    onChange={handleChange}
+                    value={emailCodeValue}
+                    onChange={(e) => setEmailCodeValue(e.target.value)}
                     readOnly={isValid}
                   />
                   <WidthSpacer space={30} />
