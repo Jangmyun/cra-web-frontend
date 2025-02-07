@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { emailCode, emailRequest } from '~/api/account';
+import { signUp } from '~/api/auth/authApi';
 import HeightSpacer from '~/components/Common/HeightSpacer';
+import CryptoJS from 'crypto-js';
 import WidthSpacer from '~/components/Common/WidthSpacer';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
+import { ReqSignUp } from '~/models/Auth';
 
 const Container = styled.div`
   display: flex;
@@ -124,6 +128,9 @@ const EmailContainer = styled.div`
 `;
 
 const ValidButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 66px;
   width: 20%;
 
@@ -157,17 +164,21 @@ function RegisterForm() {
 
   // State for storing input values
   const [formData, setFormData] = useState({
-    id: '',
-    pw: '',
-    studentNum: '',
+    username: '',
+    password: '',
+    studentId: '',
     name: '',
     email: '',
     emailCode: '',
-    CRA: '',
-    github: '',
-    talk: '',
+    term: '',
+    githubId: '',
     code: '',
   });
+
+  const [emailLoading, setEmailLoading] = useState(false);
+  const [emailCodeLoading, setEmailCodeLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
+
   const [isCodeRequired, setIsCodeRequired] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
@@ -178,9 +189,11 @@ function RegisterForm() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   const sendEmailRequest = async () => {
+    if (emailLoading) return;
+    setEmailLoading(true);
     if (formData.email !== '') {
       alert('이메일핑');
-      let resStatus = await emailRequest(formData.email);
+      const resStatus = await emailRequest(formData.email);
       if (resStatus === 200) {
         setIsCodeRequired(true);
         setTimeLeft(EMAIL_VERIFICATION_TIME);
@@ -191,31 +204,43 @@ function RegisterForm() {
     } else {
       alert('이메일 입력해라');
     }
+    setEmailLoading(false);
   };
 
   const emailValidCheck = async () => {
-    let resStatus = await emailCode(formData.emailCode);
+    if (emailCodeLoading) return;
+    setEmailCodeLoading(true);
+    const resStatus = await emailCode(formData.emailCode);
     if (resStatus === 200) {
-        alert("성공");
-        setIsCodeRequired(false);
-        setIsTimerRunning(false);
-        setIsValid(true);
+      alert('성공');
+      setIsCodeRequired(false);
+      setIsTimerRunning(false);
+      setIsValid(true);
     } else {
-        alert("error");
+      alert('error');
     }
-  }
+    setEmailCodeLoading(false);
+  };
+
+  const emailRetransmit = () => {
+    setIsCodeRequired(false);
+    setIsTimerRunning(false);
+    setIsValid(false);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    if (submitLoading) return;
+    setSubmitLoading(true);
 
     // Check if any field is empty
     // 모든 필드가 채워졌는지 확인
-    for (let key in formData) {
+    for (const key in formData) {
       if (!formData[key as keyof typeof formData]) {
         // 타입 단언 추가
         setIsModalOpen(true); // 모달 열기
@@ -223,9 +248,38 @@ function RegisterForm() {
       }
     }
 
-    // If all fields are filled, navigate to the next page
+    const secretKey: string = import.meta.env.VITE_SECRET_KEY as string;
+    const iv = CryptoJS.enc.Utf8.parse(
+      import.meta.env.VITE_SECRET_IV as string,
+    );
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      formData.password,
+      CryptoJS.enc.Utf8.parse(secretKey),
+      {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7,
+      },
+    ).toString();
+
     setError('');
-    navigate('/welcome');
+    const requestBody: ReqSignUp = {
+      ...formData,
+      password: encryptedPassword,
+      studentId: parseInt(formData.studentId),
+    };
+
+    try {
+      await signUp(requestBody);
+      alert('회원가입이 완료되었습니다.');
+      await navigate('/welcome');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message); // UI에서 에러 메시지를 표시하도록 설정
+      }
+    } finally {
+      setSubmitLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -252,36 +306,36 @@ function RegisterForm() {
       <Title>회원가입</Title>
       <RegisterInputForm onSubmit={handleSubmit}>
         <Input>
-          <label htmlFor="id">아이디</label>
+          <label htmlFor="username">아이디</label>
           <input
             type="text"
-            name="id"
-            id="id"
+            name="username"
+            id="username"
             placeholder="아이디를 입력하세요."
-            value={formData.id}
+            value={formData.username}
             onChange={handleChange}
           />
         </Input>
         <Input>
-          <label htmlFor="pw">비밀번호</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
-            name="pw"
-            id="pw"
+            name="password"
+            id="password"
             placeholder="비밀번호를 입력하세요."
-            value={formData.pw}
+            value={formData.password}
             onChange={handleChange}
           />{' '}
         </Input>
 
         <Input>
-          <label htmlFor="studentNum">학번</label>
+          <label htmlFor="studentId">학번</label>
           <input
             type="text"
-            name="studentNum"
-            id="studentNum"
+            name="studentId"
+            id="studentId"
             placeholder="학번을 입력하세요."
-            value={formData.studentNum}
+            value={formData.studentId}
             onChange={handleChange}
           />{' '}
         </Input>
@@ -308,11 +362,21 @@ function RegisterForm() {
               placeholder="E-mail을 입력하세요."
               value={formData.email}
               onChange={handleChange}
-              readOnly={isValid || isCodeRequired}
+              readOnly={
+                isValid || isCodeRequired || emailLoading || emailCodeLoading
+              }
             />{' '}
             <WidthSpacer space={6} />
-            <ValidButton type="button" onClick={sendEmailRequest} disabled={isValid}>
-              이메일 인증
+            <ValidButton
+              type="button"
+              onClick={sendEmailRequest}
+              disabled={isValid}
+            >
+              {emailLoading ? (
+                <ClipLoader size={25} color="#fff" />
+              ) : (
+                '이메일 인증'
+              )}
             </ValidButton>
           </EmailContainer>
           {isCodeRequired && (
@@ -333,12 +397,16 @@ function RegisterForm() {
                   <div>{formatTime(timeLeft)}</div>
                 </EmailInput>
                 <WidthSpacer space={6} />
-                <EmailCodeReTransmit type="button" onClick={sendEmailRequest}>
+                <EmailCodeReTransmit type="button" onClick={emailRetransmit}>
                   재전송
                 </EmailCodeReTransmit>
                 <WidthSpacer space={6} />
                 <EmailCodeButton type="button" onClick={emailValidCheck}>
-                  확인
+                  {emailCodeLoading ? (
+                    <ClipLoader size={25} color="#fff" />
+                  ) : (
+                    '확인'
+                  )}
                 </EmailCodeButton>
               </EmailContainer>
             </>
@@ -346,37 +414,25 @@ function RegisterForm() {
         </Input>
 
         <Input>
-          <label htmlFor="CRA">CRA 기수</label>
+          <label htmlFor="term">CRA 기수</label>
           <input
             type="text"
-            name="CRA"
-            id="CRA"
+            name="term"
+            id="term"
             placeholder="CRA 기수를 입력하세요."
-            value={formData.CRA}
+            value={formData.term}
             onChange={handleChange}
           />{' '}
         </Input>
 
         <Input>
-          <label htmlFor="github">GitHub 주소</label>
+          <label htmlFor="githubId">GitHub 주소</label>
           <input
             type="text"
-            name="github"
-            id="github"
+            name="githubId"
+            id="githubId"
             placeholder="GitHub 주소를 입력하세요."
-            value={formData.github}
-            onChange={handleChange}
-          />{' '}
-        </Input>
-
-        <Input>
-          <label htmlFor="talk">나의 한마디</label>
-          <input
-            type="text"
-            name="talk"
-            id="talk"
-            placeholder="나의 한마디를 입력하세요."
-            value={formData.talk}
+            value={formData.githubId}
             onChange={handleChange}
           />{' '}
         </Input>
@@ -395,7 +451,9 @@ function RegisterForm() {
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <SubmitBtn type="submit">확인</SubmitBtn>
+        <SubmitBtn type="submit">
+          {submitLoading ? <ClipLoader size={25} color="#fff" /> : '확인'}
+        </SubmitBtn>
       </RegisterInputForm>
       {isModalOpen && <AlertModal closeModal={() => setIsModalOpen(false)} />}
     </Container>

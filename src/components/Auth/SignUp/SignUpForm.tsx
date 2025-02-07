@@ -8,7 +8,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 `;
 
 const Title = styled.h2`
@@ -89,7 +88,7 @@ function SignUpForm() {
         email,
         name,
         githubId,
-        studentNumber: Number(studentNumber),
+        studentId: Number(studentNumber),
         term,
       });
       alert('회원가입 성공');
