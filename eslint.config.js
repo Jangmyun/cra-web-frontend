@@ -59,9 +59,15 @@ export default tseslint.config(
         'error',
         { argsIgnorePattern: '^_' }, // '_'로 시작하는 매개변수 무시
       ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false,
+        },
+      ],
     },
-    env: {
-      node: true
-    }
+    // env: {
+    //   node: true
+    // }
   },
 );

@@ -12,8 +12,9 @@ interface ReqSignUp {
   email: string;
   name: string;
   githubId: string;
-  studentNumber: number;
+  studentId: number;
   term: string;
+  code: string;
 }
 
 interface ResSignUp {
