@@ -9,11 +9,8 @@ export default function CommentDelete({ id }: { id: number }) {
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteComments(id),
     onSuccess: () => {
-      alert('댓글 삭제 성공');
       // 댓글 목록 캐시 무효화
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEY.comment.commentsById(id),
-      });
+      queryClient.invalidateQueries(QUERY_KEY.comment.commentsById(id));
       queryClient.refetchQueries({
         queryKey: QUERY_KEY.comment.commentsById(id),
       });
