@@ -113,18 +113,27 @@ export const createBoardsView = async (id: number) => {
 };
 
 // PUT
-export const updateBoards = async (board: Board) => {
+export const updateBoards = async (board: Board, files: File[]) => {
   try {
-    // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.put<Board>(`/board/${board.id}`, board, {
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
+    const formData = new FormData();
+
+    formData.append(
+      'board',
+      new Blob([JSON.stringify(board)], { type: 'application/json' }),
+    );
+
+    files.forEach((file) => {
+      formData.append('files', file);
     });
 
+    const response = await authClient.put<FormData>(`/board/${board.id}`, formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+    });
     return response.data;
   } catch (error) {
-    console.error('Failed to update data:', error);
+    console.error('Failed to post data:', error);
 
     if (axios.isAxiosError(error)) {
       throw new Error(`Axios error: ${error.message}`);

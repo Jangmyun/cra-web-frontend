@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
-import { getBoardById, updateBoards } from '~/api/board.ts';
+import { getBoardById, updateBoards, onUploadImage } from '~/api/board.ts';
 import { Board } from '~/models/Board.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import '~/styles/toast-ui';
@@ -13,12 +13,20 @@ import styles from './BoardEdit.module.css';
 export default function BoardEdit({ category }: { category: number }) {
   const navigate = useNavigate();
   const editorRef = useRef<any>();
-  const [formData, setFormData] = useState({
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileName, setFileName] = useState<string>('');
+  const [formData, setFormData] = useState<{
+    userId: number;
+    title: string;
+    content: string;
+    category: number;
+    imageUrls: string[];
+  }>({
     userId: 1,
     title: '',
     content: '',
     category: category,
-    imageUrls: [''],
+    imageUrls: [],
   });
 
   const currentUrl = window.location.href;
@@ -33,23 +41,40 @@ export default function BoardEdit({ category }: { category: number }) {
   let content;
 
   const mutation = useMutation({
-    mutationFn: (newBoard: Board) => updateBoards(newBoard),
+    mutationFn: async () => {
+      const content = editorRef.current.getInstance().getMarkdown();
+      const filesToUpload = files || [];
+      return await updateBoards({ ...formData, content }, filesToUpload);
+    },
     onSuccess: async () => {
-      alert('게시글 수정 성공');
-      await navigate(-2);
+      alert('게시글 작성 성공');
+      const currentPath = window.location.pathname;
+      const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+      window.location.href = parentPath;
+      setFormData({
+        userId: 1,
+        title: '',
+        content: '',
+        category: category,
+        imageUrls: [],
+      });
+      setFiles([]);
     },
     onError: (error) => {
-      console.error('게시글 수정 실패:', error);
-      alert('게시글 수정 실패');
+      console.error('게시글 작성 실패:', error);
+      alert('게시글 작성 실패');
     },
   });
 
   useEffect(() => {
-    if (boardQuery.isSuccess && boardQuery.data) {
+    if (boardQuery.isSuccess && boardQuery.data && editorRef.current) {
       setFormData((prevFormData) => ({
         ...prevFormData,
         ...boardQuery.data,
       }));
+
+      // Editor 내용 설정
+      editorRef.current.getInstance().setMarkdown(boardQuery.data.content);
     }
   }, [boardQuery.isSuccess, boardQuery.data]);
 
@@ -57,15 +82,29 @@ export default function BoardEdit({ category }: { category: number }) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: name === 'imageUrls' ? value.split(',') : value,
-    });
+    }));
   };
 
-  const HandleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // 기존 파일 유지하면서 새 파일 추가
+    }
+  };
+
+  const handleRemoveFile = (index: number) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // 해당 index의 파일 제거
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    console.log('Submit 버튼 클릭됨');
+    console.log('현재 formData:', formData);
+    console.log('현재 files:', files);
+    mutation.mutate();
   };
 
   if (boardQuery.isLoading) {
@@ -76,22 +115,10 @@ export default function BoardEdit({ category }: { category: number }) {
     console.log(formData);
     return (
       <div className={styles['write-container']}>
-        <form className={styles['write-form']} onSubmit={HandleSubmit}>
+        <form className={styles['write-form']} onSubmit={handleSubmit}>
           <h2 className={styles['write-title']}>
             {CATEGORY_STRINGS[category]} 게시글 수정
           </h2>
-
-          <label htmlFor="userId">학번</label>
-          <input
-            type="number"
-            id="userId"
-            name="userId"
-            placeholder="추후 삭제 예정 항목"
-            value={formData.userId}
-            readOnly
-            onChange={handleChange}
-          />
-          <br />
           <label htmlFor="title">제목</label>
           <input
             className={styles['input-title']}
@@ -102,31 +129,66 @@ export default function BoardEdit({ category }: { category: number }) {
             value={formData.title}
             onChange={handleChange}
           />
-          <br />
           <label htmlFor="content">내용</label>
           <Editor
-            ref={editorRef} // Editor 인스턴스를 참조
-            initialValue={formData.content}
+            ref={editorRef}
+            initialValue={formData.content || ' '}
             previewStyle="vertical"
             height="600px"
-            initialEditType="markdown"
+            initialEditType="wysiwyg"
             useCommandShortcut={true}
             plugins={[
               [codeSyntaxHighlight, { highlighter: Prism }],
               colorSyntax,
             ]}
+            hooks={{
+              addImageBlobHook: async (
+                blob: File,
+                callback: (url: string) => void,
+              ) => {
+                try {
+                  const url = await onUploadImage(blob); // URL을 받아옴
+                  callback(url); // Markdown 에디터에 삽입
+
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    imageUrls: [...prevData.imageUrls, url], // DB로 전송할 이미지 URL 배열에 추가
+                  }));
+                } catch (error) {
+                  console.error('이미지 업로드 실패:', error);
+                  alert('이미지 업로드에 실패했습니다.');
+                }
+              },
+            }}
           />
           <br />
-          <label htmlFor="imageUrls">이미지 주소</label>
+          <label className={styles['file-button']} htmlFor="fileUpload">
+            파일 선택
+          </label>
           <input
-            type="text"
-            id="imageUrls"
-            name="imageUrls"
-            placeholder="이미지 주소 (추후 삭제 예정 항목)"
-            value={formData.imageUrls.join(',')}
-            onChange={handleChange}
+            className={styles['file-input']}
+            type="file"
+            id="fileUpload"
+            multiple
+            onChange={handleFileChange}
           />
-          <br />
+          <ul className={styles['file-list']}>
+            {files.map((file, index) => (
+              <React.Fragment key={index}>
+                <li className={styles['file-item']}>
+                  {file.name}
+                  <button
+                    type="button"
+                    className={styles['remove-button']}
+                    onClick={() => handleRemoveFile(index)}
+                  >
+                    ✕
+                  </button>
+                </li>
+                <br /> {/* 리스트 사이 줄바꿈 추가 */}
+              </React.Fragment>
+            ))}
+          </ul>
           <input
             className={styles['submit-button']}
             type="submit"

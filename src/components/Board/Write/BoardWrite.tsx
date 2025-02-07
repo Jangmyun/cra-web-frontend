@@ -139,19 +139,16 @@ export default function BoardWrite({ category }: { category: number }) {
         />
         <ul className={styles['file-list']}>
           {files.map((file, index) => (
-            <React.Fragment key={index}>
-              <li className={styles['file-item']}>
-                {file.name}
-                <button
-                  type="button"
-                  className={styles['remove-button']}
-                  onClick={() => handleRemoveFile(index)}
-                >
-                  ✕
-                </button>
-              </li>
-              <br /> {/* 리스트 사이 줄바꿈 추가 */}
-            </React.Fragment>
+            <li className={styles['file-item']} key={index}>
+              {file.name}
+              <button
+                type="button"
+                className={styles['remove-button']}
+                onClick={() => handleRemoveFile(index)}
+              >
+                ✕
+              </button>
+            </li>
           ))}
         </ul>
 

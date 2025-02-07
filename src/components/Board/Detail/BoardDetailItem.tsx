@@ -14,6 +14,13 @@ import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 
+// fileUrl에서 원래 파일명만 추출하는 함수
+const extractFileName = (fileUrl: string) => {
+  const decodedUrl = decodeURIComponent(fileUrl);
+  const match = decodedUrl.match(/[^/]+\/[^/]+\/[a-f0-9-]+_(.+)/);
+  return match ? match[1] : decodedUrl.split('/').pop() || '파일';
+};
+
 export default function BoardDetailItem({
   board,
   category,
@@ -73,10 +80,29 @@ export default function BoardDetailItem({
           <div className={styles['content-title']}>{board.title}</div>
           <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
+
+            {/* 파일 목록 섹션 수정 */}
+            {board.fileUrls && board.fileUrls.length > 0 && (
+              <div className={styles['file-section']}>
+                <ul className={styles['file-list']}>
+                  {board.fileUrls.map((fileUrl, index) => (
+                    <li key={index} className={styles['file-item']}>
+                      <a
+                        href={fileUrl}
+                        download={extractFileName(fileUrl)}
+                        className={styles['file-link']}
+                      >
+                        {extractFileName(fileUrl)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className={styles['comment-count']}>
             <span>조회 {viewCnt}</span>
-            <span>좋아요 {board.like}1</span>
+            <span>좋아요 {board.like}</span>
             <span>댓글 {commentCount}</span>
           </div>
         </div>

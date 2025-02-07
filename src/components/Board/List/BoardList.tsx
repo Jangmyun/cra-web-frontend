@@ -40,7 +40,6 @@ export default function BoardList({
         .filter((board) => board.id !== undefined)
         .slice()
         .reverse()
-        .slice(0, 5)
         .map((board, index) => (
           <div key={`board-${board.id}`}>
             <div className={styles['board-wrapper']}>
