@@ -13,18 +13,6 @@ import {
 export const login = async (data: Login): Promise<ResponseLogin> => {
   try {
     const response = await AuthClient.post<ResponseLogin>('/auth/login', data);
-    const { resUserDetailDto, resTokenDto } = response.data;
-
-    sessionStorage.setItem('accessToken', resTokenDto.accessToken);
-    sessionStorage.setItem('refreshToken', resTokenDto.refreshToken);
-    sessionStorage.setItem('userId', resTokenDto.userId.toString());
-    sessionStorage.setItem('name', resUserDetailDto.name);
-    sessionStorage.setItem('email', resUserDetailDto.email);
-    sessionStorage.setItem('studentId', resUserDetailDto.studentId.toString());
-    sessionStorage.setItem('term', resUserDetailDto.term);
-    sessionStorage.setItem('githubId', resUserDetailDto.githubId);
-    sessionStorage.setItem('imgUrl', resUserDetailDto.imgUrl);
-
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

@@ -4,6 +4,7 @@ import { useAuthStore } from '~/store/authStore.ts';
 import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import CryptoJS from 'crypto-js';
 import AlertModal from '~/components/Modal/Alert/AlertModal.tsx';
+import { useModalStore } from '~/store/modalStore';
 import styled from 'styled-components';
 import styles from './LoginForm.module.css';
 
@@ -77,9 +78,7 @@ const LoginForm = () => {
   const { login } = useAuthStore();
   const navigate = useNavigate();
 
-  const [modalIsOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const { isOpen: modalIsOpen, openModal, closeModal } = useModalStore();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,11 +95,6 @@ const LoginForm = () => {
     ).toString();
     try {
       await login({ username, password: encryptedPassword });
-      // 확인용 (나중에 없앨꺼임)
-      console.log(username);
-      console.log(password);
-      console.log(encryptedPassword);
-      alert('로그인 성공');
       navigate('/main');
     } catch (error) {
       console.error('Login Handling Error: ', error);
