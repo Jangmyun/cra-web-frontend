@@ -23,9 +23,12 @@ authClient.interceptors.request.use(
       // isTokenExpired 이 True면 토큰이 만료된거고 False면 아직 유효함
       if (isTokenExpired) {
         try {
+          const studentId = parseInt(
+            sessionStorage.getItem('studentId') || '0',
+          );
           // 토큰 만료 시 refreshToken을 사용하여 새로운 accessToken을 발급
           const { accessToken: newAccessToken } = await reissueToken({
-            userId: parseInt(sessionStorage.getItem('userId') || '0'),
+            userId: studentId,
             refreshToken,
           });
           // 새로운 accessToken을 세션에 저장
@@ -34,11 +37,7 @@ authClient.interceptors.request.use(
           config.headers.Authorization = `Bearer ${newAccessToken}`;
         } catch (error) {
           // refreshToken 재발급 실패 시 로그아웃 처리 해버리기
-          sessionStorage.removeItem('accessToken');
-          sessionStorage.removeItem('refreshToken');
-          sessionStorage.removeItem('userId');
-
-          alert('세션이 만료되어 로그아웃 되었습니다.');
+          sessionStorage.clear();
 
           throw new Error('Session expired, please log in again');
         }
