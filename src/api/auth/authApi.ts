@@ -5,22 +5,34 @@ import {
   ResSignUp,
   ReissueToken,
   Login,
-  ResponseToken,
+  ResTokenDto,
+  ResUserDetail,
+  ResponseLogin,
 } from '~/models/Auth.ts';
 
-export const login = async (data: Login): Promise<ResponseToken> => {
+export const login = async (data: Login): Promise<ResponseLogin> => {
   try {
-    const response = await AuthClient.post<ResponseToken>('/auth/login', data);
+    const response = await AuthClient.post<ResponseLogin>('/auth/login', data);
+    const { resUserDetailDto, resTokenDto } = response.data;
+
+    sessionStorage.setItem('accessToken', resTokenDto.accessToken);
+    sessionStorage.setItem('refreshToken', resTokenDto.refreshToken);
+    sessionStorage.setItem('userId', resTokenDto.userId.toString());
+    sessionStorage.setItem('name', resUserDetailDto.name);
+    sessionStorage.setItem('email', resUserDetailDto.email);
+    sessionStorage.setItem('studentId', resUserDetailDto.studentId.toString());
+    sessionStorage.setItem('term', resUserDetailDto.term);
+    sessionStorage.setItem('githubId', resUserDetailDto.githubId);
+    sessionStorage.setItem('imgUrl', resUserDetailDto.imgUrl);
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      // 서버에서 반환한 메시지에 접근
       const errorMessage =
         error.response.data?.message || 'Unknown error during Login';
       console.error('Login Error:', errorMessage);
       throw new Error(errorMessage);
     } else {
-      // 예상치 못한 오류 처리
       console.error('Unexpected Error:', error);
       throw new Error('Unexpected Error occurred during Login');
     }
@@ -43,9 +55,9 @@ export const signUp = async (data: ReqSignUp): Promise<ResSignUp> => {
 
 export const reissueToken = async (
   data: ReissueToken,
-): Promise<ResponseToken> => {
+): Promise<ResTokenDto> => {
   try {
-    const response = await AuthClient.post<ResponseToken>(
+    const response = await AuthClient.post<ResTokenDto>(
       '/auth/reissue-token',
       data,
     );
