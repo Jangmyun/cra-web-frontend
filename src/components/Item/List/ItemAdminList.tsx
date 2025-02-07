@@ -1,12 +1,11 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEY } from '~/api/queryKey';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEY } from '~/api/queryKey.ts';
+import { Item } from '~/models/Item.ts';
+import { getItems } from '~/api/item.ts';
+import { ITEMCATEGORY } from '~/constants/itemCategory.ts';
+import ItemAdminDelete from '~/components/Item/Delete/ItemAdminDelete.tsx';
 import styled from 'styled-components';
-import { Item } from '~/models/Item';
-import { getItems } from '~/api/item';
-import { ITEMCATEGORY } from '~/constants/itemCategory';
-import ItemAdminDelete from '../Delete/ItemAdminDelete';
 
 const Container = styled.div`
   padding: 10rem;

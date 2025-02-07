@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import { QUERY_KEY } from '~/api/queryKey';
+import { useNavigate } from 'react-router-dom';
+import { QUERY_KEY } from '~/api/queryKey.ts';
+import { Item } from '~/models/Item.ts';
+import { getItemById, updateItem } from '~/api/item.ts';
+import { onUploadImage } from '~/api/board.ts';
 import styles from '../../Project/Project.module.css';
-import { Item } from '~/models/Item';
-import { getItemById, updateItem } from '~/api/item';
-import { uploadImage } from '~/api/uploadImage';
 
 function BookAdminEdit() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function BookAdminEdit() {
   const itemId = Number(id);
 
   const itemQuery = useQuery<Item>({
-    queryKey: ['item', 'itemById', itemId],
+    queryKey: QUERY_KEY.item.itemById(itemId),
     queryFn: async () => getItemById(itemId),
   });
 
@@ -62,7 +62,7 @@ function BookAdminEdit() {
       });
     } else if (files && files[0]) {
       const file = files[0];
-      const imageUrl = await uploadImage(file);
+      const imageUrl = await onUploadImage(file);
 
       if (imageUrl) {
         setFormData((formData) => ({ ...formData, imageUrl }));

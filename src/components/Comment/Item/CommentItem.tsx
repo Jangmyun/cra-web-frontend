@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { Comment } from '~/models/Comment';
-import CommentDelete from '../Delete/CommentDelete';
-import CommentEdit from '../Edit/CommentEdit';
+import { useState } from 'react';
+import { Comment } from '~/models/Comment.ts';
+import CommentDelete from '~/components/Comment/Delete/CommentDelete.tsx';
+import CommentEdit from '~/components/Comment/Edit/CommentEdit.tsx';
+import CommentWrite from '~/components/Comment/Write/CommentWrite.tsx';
+import Divider from '~/components/Common/Divider.tsx';
+import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
+import WidthSpacer from '~/components/Common/WidthSpacer.tsx';
+import { dateFormat } from '~/utils/dateForm.ts';
 import styles from './CommentItem.module.css';
-
-import CommentWrite from '../Write/CommentWrite';
-import Divider from '~/components/Common/Divider';
-import HeightSpacer from '~/components/Common/HeightSpacer';
-import WidthSpacer from '~/components/Common/WidthSpacer';
-import { dateFormat } from '~/utils/dateForm';
 
 export default function CommentItem({
   comment,

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Board } from '../../../models/Board';
-import { CATEGORY_STRINGS } from '../../../constants/category_strings';
-import { CATEGORY_STRINGS_EN } from '../../../constants/category_strings_en';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './BoardDetailItem.module.css';
-import CommentWrite from '~/components/Comment/Write/CommentWrite';
-import CommentList from '~/components/Comment/List/CommetList';
-import BoardDelete from '../Delete/BoardDelete';
-import HeightSpacer from '~/components/Common/HeightSpacer';
-import Divider from '~/components/Common/Divider';
-import { dateFormat } from '~/utils/dateForm';
+import { Board } from '~/models/Board.ts';
+import { createBoardsView, getBoardById } from '~/api/board.ts';
+import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
+import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en.ts';
+import CommentWrite from '~/components/Comment/Write/CommentWrite.tsx';
+import CommentList from '~/components/Comment/List/CommetList.tsx';
+import BoardDelete from '~/components/Board/Delete/BoardDelete.tsx';
+import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
+import Divider from '~/components/Common/Divider.tsx';
+import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
-import { createBoardsView, getBoardById } from '~/api/board';
-import { getHavrutaBoardById } from '~/api/havruta/havrutaBoard';
+import styles from './BoardDetailItem.module.css';
 
 export default function BoardDetailItem({
   board,
@@ -72,9 +71,9 @@ export default function BoardDetailItem({
             </div>
           </div>
           <div className={styles['content-title']}>{board.title}</div>
-          <p className={styles['board-content']}>
+          <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
-          </p>
+          </div>
           <div className={styles['comment-count']}>
             <span>조회 {viewCnt}</span>
             <span>좋아요 {board.like}1</span>

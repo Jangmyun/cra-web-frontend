@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import BookList from '~/components/Book/List/BookList.tsx';
+import { ITEMCATEGORY } from '~/constants/itemCategory.ts';
 import styles from './BookPage.module.css';
-import { ITEMCATEGORY } from '~/constants/itemCategory';
-import BookList from '~/components/Book/List/BookList';
 
 export default function BookPage() {
   return (

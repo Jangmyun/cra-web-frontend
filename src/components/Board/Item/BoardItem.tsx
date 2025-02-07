@@ -1,7 +1,6 @@
-import React from 'react';
-import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en';
-import { Board } from '../../../models/Board';
 import { Link } from 'react-router-dom';
+import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en.ts';
+import { Board } from '~/models/Board.ts';
 import styles from './BoardItem.module.css';
 
 export default function BoardItem({

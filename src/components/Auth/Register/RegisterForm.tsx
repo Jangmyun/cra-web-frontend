@@ -219,7 +219,7 @@ function RegisterForm() {
     if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
       return { valid: false, message: '올바르지 않은 이메일 형식입니다.' };
     if (name === 'studentId') {
-      if (!/^\d$/.test(value))
+      if (!/^\d+$/.test(value))
         return { valid: false, message: '숫자로만 입력해 주세요.' };
       if (value.length != 8)
         return { valid: false, message: '8글자로 입력해 주세요.' };

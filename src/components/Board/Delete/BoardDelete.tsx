@@ -1,10 +1,9 @@
-import React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteBoards } from '../../../api/board';
-import { QUERY_KEY } from '~/api/queryKey';
-import styles from './BoardDelete.module.css';
+import { deleteBoards } from '~/api/board.ts';
+import { QUERY_KEY } from '~/api/queryKey.ts';
 import { MdDeleteOutline } from 'react-icons/md';
+import styles from './BoardDelete.module.css';
 
 export default function BoardDelete({
   id,
@@ -23,10 +22,10 @@ export default function BoardDelete({
       await navigate(-1);
       // 게시글 목록 캐시 무효화
       queryClient.invalidateQueries({
-        queryKey: QUERY_KEY.board.boards(category),
+        queryKey: QUERY_KEY.board.boardsCount(category),
       });
       queryClient.refetchQueries({
-        queryKey: QUERY_KEY.board.boards(category),
+        queryKey: QUERY_KEY.board.boardsCount(category),
       });
     },
     onError: (error) => {
@@ -36,12 +35,15 @@ export default function BoardDelete({
   });
 
   const handleDelete = () => {
-    deleteMutation.mutate(id);
+    const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+    if (confirmDelete) {
+      deleteMutation.mutate(id);
+    }
   };
 
   return (
-      <div className={styles['delete-button']} onClick={handleDelete}>
-        <MdDeleteOutline size={24} />
-      </div>
+    <div className={styles['delete-button']} onClick={handleDelete}>
+      <MdDeleteOutline size={24} />
+    </div>
   );
 }

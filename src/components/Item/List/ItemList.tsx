@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { getItems } from '~/api/item';
-import { QUERY_KEY } from '~/api/queryKey';
-import { Item } from '~/models/Item';
-import ItemItem from '../Item/ItemItem';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { getItems } from '~/api/item.ts';
+import { QUERY_KEY } from '~/api/queryKey.ts';
+import { Item } from '~/models/Item.ts';
+import ItemItem from '~/components/Item/Item/ItemItem.tsx';
 import styles from '../../Project/List/ProjectList.module.css';
 
 export default function ItemList({ itemCategory }: { itemCategory: number }) {

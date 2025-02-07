@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { getProjectById, updateProject } from '~/api/project';
-import { Project } from '~/models/Project';
-import { useNavigate, useParams } from 'react-router-dom';
-import { QUERY_KEY } from '~/api/queryKey';
+import { useNavigate } from 'react-router-dom';
+import { getProjectById, updateProject } from '~/api/project.ts';
+import { QUERY_KEY } from '~/api/queryKey.ts';
+import { onUploadImage } from '~/api/board.ts';
+import { Project } from '~/models/Project.ts';
 import styles from '../Project.module.css';
-import { uploadImage } from '~/api/uploadImage';
 
 function ProjectAdminEdit() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function ProjectAdminEdit() {
   const projectId = Number(id);
 
   const projectQuery = useQuery<Project>({
-    queryKey: ['project', 'projectById', projectId],
+    queryKey: QUERY_KEY.project.projectById(projectId),
     queryFn: async () => getProjectById(projectId),
   });
 
@@ -59,7 +59,7 @@ function ProjectAdminEdit() {
 
     if (files && files[0]) {
       const file = files[0];
-      const imageUrl = await uploadImage(file); // 이미지 업로드 함수 호출
+      const imageUrl = await onUploadImage(file); // 이미지 업로드 함수 호출
 
       if (imageUrl) {
         setFormData((formData) => ({ ...formData, imageUrl })); // URL을 formData에 저장
