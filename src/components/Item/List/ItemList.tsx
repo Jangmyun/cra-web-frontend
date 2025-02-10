@@ -22,10 +22,12 @@ export default function ItemList({ itemCategory }: { itemCategory: number }) {
       console.log('서버 통신 가능, 아직 데이터 없음');
     } else {
       content = (
-        <div className={styles['project-list-container']}>
-          {ItemQuery.data.map((ItemElement) => (
-            <ItemItem key={ItemElement.id} item={ItemElement} />
-          ))}
+        <div className={styles['background']}>
+          <div className={styles['project-list-container']}>
+            {ItemQuery.data.map((ItemElement) => (
+              <ItemItem key={ItemElement.id} item={ItemElement} />
+            ))}
+          </div>
         </div>
       );
     }

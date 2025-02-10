@@ -9,3 +9,9 @@
   max-width: 1200px; /* 컨테이너 최대 너비 */
   margin: 0 auto; /* 가로 중앙 정렬 */
 }
+
+.background {
+  background-color: white;
+  margin-bottom: 100px;
+  margin-top: 34px;
+}
