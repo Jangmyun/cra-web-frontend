@@ -62,7 +62,6 @@ export default function BoardWrite({ category }: { category: number }) {
       newErrors.title = '제목을 입력해주세요.';
       isValid = false;
     } else if (formData.title.length > 100) {
-      // 제목 길이 제한 예시
       newErrors.title = '제목은 100자 이내로 입력해주세요.';
       isValid = false;
     }
@@ -92,9 +91,29 @@ export default function BoardWrite({ category }: { category: number }) {
     }
   };
 
+  const handleEditorChange = () => {
+    const content = editorRef.current?.getInstance().getMarkdown();
+
+    setFormData((prev) => ({
+      ...prev,
+      content,
+    }));
+
+    if (errors.content) {
+      setErrors((prev) => ({ ...prev, content: undefined }));
+    }
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
+
+      // 현재 파일 개수 + 추가하려는 파일 개수가 3개를 초과하면 추가 불가능
+      if (files.length + selectedFiles.length > 3) {
+        alert('파일은 최대 3개까지만 업로드할 수 있습니다.');
+        return;
+      }
+
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
     }
   };
@@ -108,7 +127,6 @@ export default function BoardWrite({ category }: { category: number }) {
 
     // 폼 검증 실행
     if (!validateForm()) {
-      // 에러가 있는 필드로 스크롤
       const firstError = Object.keys(errors)[0];
       const errorElement = document.getElementById(firstError);
       if (errorElement) {
@@ -143,7 +161,9 @@ export default function BoardWrite({ category }: { category: number }) {
         )}
 
         <label htmlFor="content">내용</label>
-        <div className={errors.content ? styles['editor-error-container'] : ''}>
+        <div
+          className={`${styles['editor-container']} ${errors.content ? styles['editor-error-container'] : ''}`}
+        >
           <Editor
             ref={editorRef}
             initialValue=" "
@@ -155,6 +175,7 @@ export default function BoardWrite({ category }: { category: number }) {
               [codeSyntaxHighlight, { highlighter: Prism }],
               colorSyntax,
             ]}
+            onChange={handleEditorChange}
             hooks={{
               addImageBlobHook: async (
                 blob: File,
@@ -194,19 +215,16 @@ export default function BoardWrite({ category }: { category: number }) {
         />
         <ul className={styles['file-list']}>
           {files.map((file, index) => (
-            <React.Fragment key={index}>
-              <li className={styles['file-item']}>
-                {file.name}
-                <button
-                  type="button"
-                  className={styles['remove-button']}
-                  onClick={() => handleRemoveFile(index)}
-                >
-                  ✕
-                </button>
-              </li>
-              <br />
-            </React.Fragment>
+            <li className={styles['file-item']} key={index}>
+              {file.name}
+              <button
+                type="button"
+                className={styles['remove-button']}
+                onClick={() => handleRemoveFile(index)}
+              >
+                ✕
+              </button>
+            </li>
           ))}
         </ul>
 

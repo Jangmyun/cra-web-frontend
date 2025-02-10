@@ -80,7 +80,7 @@
   width: 90px;
   height: 30px;
   margin: 0 !important;
-  padding: 10px 15px 8px 15px;
+  padding: 10px 15px 5px 15px;
   background-color: #c1c1c1;
   color: white !important;
   text-decoration: none;
@@ -98,15 +98,20 @@
 .file-input {
   display: none;
 }
+
 .file-list {
+  display: block;
   list-style: none;
 }
 
 .file-item {
+  display: block;
+  width: fit-content;
   background: #f4f4f4;
   border-radius: 5px;
-  padding: 0;
   font-size: 14px !important;
+  padding: 10px;
+  margin-bottom: 8px;
 }
 
 .remove-button {
@@ -147,5 +152,11 @@
 
 .editor-error-container {
   padding-bottom: 2px;
-  border: 1px solid #ff0000;
+  border: 0.05rem solid red; /* 테두리를 빨간색으로 표시 */
+  background-color: rgba(255, 0, 0, 0.1); /* 배경을 옅은 빨간색으로 */
+  border-radius: 5px;
+}
+
+.editor-container {
+  padding-bottom: 2px;
 }
