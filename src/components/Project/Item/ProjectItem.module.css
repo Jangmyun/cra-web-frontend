@@ -6,7 +6,6 @@
   padding: 2rem;
   margin-bottom: 4rem;
 }
-
 .project-block {
   flex-basis: calc(33.33% - 1rem); /* 각 아이템의 너비를 균등하게 설정 */
   aspect-ratio: 1.3 / 1.1;
@@ -54,7 +53,7 @@
 
 .borrow {
   font-family: 'Pretendard Regular';
-  color: #ff0000;
+  color: rgb(255, 0, 0);
   text-align: left;
   padding-left: 10px;
 }
@@ -64,4 +63,17 @@
   color: #2cb4db;
   text-align: left;
   padding-left: 10px;
+}
+
+@media (max-width: 1024px) {
+  .project-block {
+    flex-basis: calc(50% - 1rem); /* 2개씩 배치 */
+  }
+}
+
+/* 화면이 768px 이하일 때: 1개씩 배치 */
+@media (max-width: 768px) {
+  .project-block {
+    flex-basis: calc(100% - 1rem); /* 1개씩 배치 */
+  }
 }

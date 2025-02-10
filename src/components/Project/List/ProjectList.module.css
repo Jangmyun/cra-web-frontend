@@ -3,10 +3,10 @@
   grid-template-columns: repeat(
     auto-fill,
     minmax(300px, 1fr)
-  ); /* 반응형 3등분 */
-  gap: 0.7rem;
+  ); /* 기본적으로 최소 300px 크기, 화면 크기에 맞춰 열 개수 조정 */
+  gap: 0.5rem;
   padding-top: 34px;
   padding-bottom: 10rem;
   max-width: 1200px; /* 컨테이너 최대 너비 */
-  margin: 0 auto;
+  margin: 0 auto; /* 가로 중앙 정렬 */
 }
