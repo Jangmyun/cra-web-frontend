@@ -35,6 +35,7 @@
   top: 5vw;
   left: 5vw;
   right: 3vw;
+  font-family: 'Pretendard Bold';
 }
 
 /* Modal Body */
@@ -68,14 +69,17 @@
 }
 
 .description {
-  width: 55%;
+  font-family: 'Pretendard Regular';
+  font-size: 15px;
+  width: 50%;
   line-height: 1.5;
   flex-direction: column;
   justify-content: center;
   margin-top: 5vw;
 }
 .content-description {
-  font-size: 30px;
+  font-family: 'Pretendard SemiBold';
+  font-size: 20px;
   margin-bottom: 2.5rem;
 }
 
@@ -108,6 +112,7 @@
 /* URL Button */
 .url-button {
   font-size: clamp(0.5rem, 1.5vw, 1.5rem);
+  font-family: 'Pretendard Semibold';
   background-color: #2cb4db;
   color: white;
   border-radius: 0.5rem;

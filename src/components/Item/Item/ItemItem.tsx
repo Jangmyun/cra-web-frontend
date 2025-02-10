@@ -10,8 +10,12 @@ export default function ItemItem({ item }: { item: Item }) {
         </div>
         <div className={styles['title']}>{item.name}</div>
         <div className={styles['content']}>{item.description}</div>
-        <div className={styles['content']}>
-          {item.isBorrowed ? <span>Borrowed</span> : <span>Available</span>}
+        <div>
+          {item.isBorrowed ? (
+            <span className={styles['borrow']}>Borrowed</span>
+          ) : (
+            <span className={styles['available']}>Available</span>
+          )}
         </div>
       </div>
     </>

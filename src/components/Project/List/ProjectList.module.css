@@ -1,8 +1,12 @@
 .project-list-container {
-  display: flex;
-  flex-wrap: wrap; /* 아이템들을 여러 줄로 감싸기 */
-  gap: 20px; /* 아이템 간 간격 */
-  justify-content: flex-start; /* 항목들 사이를 균등하게 배치 */
-  padding: 2rem;
-  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* 반응형 3등분 */
+  gap: 0.7rem;
+  padding-top: 34px;
+  padding-bottom: 10rem;
+  max-width: 1200px; /* 컨테이너 최대 너비 */
+  margin: 0 auto;
 }
