@@ -97,7 +97,7 @@ export const createBoardsView = async (id: number) => {
 };
 
 // PUT
-export const updateBoards = async (board: Board, files: File[]) => {
+export const updateBoards = async (board: Board) => {
   try {
     const formData = new FormData();
 
@@ -106,9 +106,6 @@ export const updateBoards = async (board: Board, files: File[]) => {
       new Blob([JSON.stringify(board)], { type: 'application/json' }),
     );
 
-    files.forEach((file) => {
-      formData.append('files', file);
-    });
 
     const response = await authClient.put<FormData>(`/board/${board.id}`, formData, {
       headers: {

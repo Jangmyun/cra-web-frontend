@@ -80,7 +80,7 @@
   cursor: pointer;
   width: 90px;
   height: 30px;
-  margin: 0 !important;
+  margin: 20px 0 0 0 !important;
   padding: 10px 15px;
   background-color: #c1c1c1;
   color: white !important;
@@ -100,14 +100,31 @@
   display: none;
 }
 .file-list {
+  margin-top: 20px;
   list-style: none;
 }
 
 .file-item {
-  background: #f4f4f4;
+  padding: 8px 12px;
   border-radius: 5px;
-  padding: 0;
-  font-size: 14px !important;
+  transition: background-color 0.3s;
+}
+
+.file-item:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Pretendard Medium';
+  font-size: 16px;
+}
+
+.file-link:hover {
+  text-decoration: underline;
 }
 
 .remove-button {

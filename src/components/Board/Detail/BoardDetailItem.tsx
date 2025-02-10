@@ -16,7 +16,6 @@ import styles from './BoardDetailItem.module.css';
 import { view } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
-import likeImage from '~/assets/images/like_img.png';
 import createLike from '~/api/like';
 
 // fileUrl에서 원래 파일명만 추출하는 함수

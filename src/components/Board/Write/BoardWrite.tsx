@@ -62,6 +62,13 @@ export default function BoardWrite({ category }: { category: number }) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
+
+      // 현재 파일 개수 + 추가하려는 파일 개수가 3개를 초과하면 추가 불가능
+      if (files.length + selectedFiles.length > 3) {
+        alert('파일은 최대 3개까지만 업로드할 수 있습니다.');
+        return;
+      }
+
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // 기존 파일 유지하면서 새 파일 추가
     }
   };
