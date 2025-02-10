@@ -11,6 +11,7 @@ import Divider from '~/components/Common/Divider.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
+import { IoIosLink } from 'react-icons/io';
 import styles from './BoardDetailItem.module.css';
 import { view } from '~/api/view';
 import { getBoardById } from '~/api/board';
@@ -120,6 +121,8 @@ export default function BoardDetailItem({
                         download={extractFileName(fileUrl)}
                         className={styles['file-link']}
                       >
+                        <IoIosLink />
+                        &nbsp;
                         {extractFileName(fileUrl)}
                       </a>
                     </li>

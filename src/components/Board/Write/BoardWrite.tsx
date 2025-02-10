@@ -9,7 +9,6 @@ import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 export default function BoardWrite({ category }: { category: number }) {
   const editorRef = useRef<any>();
   const [files, setFiles] = useState<File[]>([]);
-  const [fileName, setFileName] = useState<string>('');
   const [formData, setFormData] = useState<{
     userId: number;
     title: string;

@@ -116,10 +116,6 @@
   margin-bottom: 6px;
 }
 
-.file-item:hover {
-  background-color: #ececec;
-}
-
 .file-link {
   display: flex;
   align-items: center;

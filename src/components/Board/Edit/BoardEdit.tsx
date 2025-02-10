@@ -11,10 +11,9 @@ import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 import styles from './BoardEdit.module.css';
 
 export default function BoardEdit({ category }: { category: number }) {
-  const navigate = useNavigate();
   const editorRef = useRef<any>();
   const [files, setFiles] = useState<File[]>([]);
-  const [fileName, setFileName] = useState<string>('');
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<{
     userId: number;
     title: string;
@@ -47,10 +46,8 @@ export default function BoardEdit({ category }: { category: number }) {
       return await updateBoards({ ...formData, content }, filesToUpload);
     },
     onSuccess: async () => {
-      alert('게시글 작성 성공');
-      const currentPath = window.location.pathname;
-      const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-      window.location.href = parentPath;
+      alert('게시글 수정 완료');
+      navigate(`/notice/view/${boardId}`);
       setFormData({
         userId: 1,
         title: '',
@@ -61,8 +58,8 @@ export default function BoardEdit({ category }: { category: number }) {
       setFiles([]);
     },
     onError: (error) => {
-      console.error('게시글 작성 실패:', error);
-      alert('게시글 작성 실패');
+      console.error('게시글 수정 실패:', error);
+      alert('게시글 수정 실패');
     },
   });
 
@@ -172,6 +169,7 @@ export default function BoardEdit({ category }: { category: number }) {
             multiple
             onChange={handleFileChange}
           />
+
           <ul className={styles['file-list']}>
             {files.map((file, index) => (
               <React.Fragment key={index}>
