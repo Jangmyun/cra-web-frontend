@@ -1,5 +1,5 @@
 import { Item } from '~/models/Item.ts';
-import styles from '../../Project/Item/ProjectItem.module.css';
+import styles from '~/components/Item/Item/ItemItem.module.css';
 
 export default function ItemItem({ item }: { item: Item }) {
   return (

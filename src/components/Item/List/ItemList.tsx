@@ -3,7 +3,7 @@ import { getItems } from '~/api/item.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import { Item } from '~/models/Item.ts';
 import ItemItem from '~/components/Item/Item/ItemItem.tsx';
-import styles from '../../Project/List/ProjectList.module.css';
+import styles from '~/components/Item/List/ItemList.module.css';
 
 export default function ItemList({ itemCategory }: { itemCategory: number }) {
   const ItemQuery = useQuery<Item[]>({
