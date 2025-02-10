@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { HavrutaBoard } from '~/models/Havruta.ts';
 import { client } from '~/api/client.ts';
 import { authClient } from '~/api/auth/authClient.ts';
@@ -65,9 +64,11 @@ export const getHavrutaBoardsByHavrutaId = async (
 
 export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
   try {
+    console.log('havrutaId : ' + havrutaId);
     const response = await client.get<HavrutaBoard[]>(
       `/board/havruta/${havrutaId}`,
     );
+
     return response.data;
   } catch (error) {
     console.log(error);
