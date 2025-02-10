@@ -98,17 +98,28 @@ export const createBoardsView = async (id: number) => {
 // PUT
 export const updateBoards = async (board: Board) => {
   try {
-    // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.put<Board>(`/board/${board.id}`, board, {
+    const formData = new FormData();
+
+    formData.append(
+      'board',
+      new Blob([JSON.stringify(board)], { type: 'application/json' }),
+    );
+
+
+    const response = await authClient.put<FormData>(`/board/${board.id}`, formData, {
       headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+        'Content-type': 'multipart/form-data',
       },
     });
-
     return response.data;
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.error('Failed to post data:', error);
+
+    if (axios.isAxiosError(error)) {
+      throw new Error(`Axios error: ${error.message}`);
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
 };
 
