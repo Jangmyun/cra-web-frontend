@@ -9,7 +9,10 @@ import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 export default function BoardWrite({ category }: { category: number }) {
   const editorRef = useRef<any>();
   const [files, setFiles] = useState<File[]>([]);
-  const [fileName, setFileName] = useState<string>('');
+  const [errors, setErrors] = useState<{
+    title?: string;
+    content?: string;
+  }>({});
   const [formData, setFormData] = useState<{
     userId: number;
     title: string;
@@ -50,6 +53,31 @@ export default function BoardWrite({ category }: { category: number }) {
     },
   });
 
+  const validateForm = () => {
+    const newErrors: { title?: string; content?: string } = {};
+    let isValid = true;
+
+    // 제목 검증
+    if (!formData.title.trim()) {
+      newErrors.title = '제목을 입력해주세요.';
+      isValid = false;
+    } else if (formData.title.length > 100) {
+      // 제목 길이 제한 예시
+      newErrors.title = '제목은 100자 이내로 입력해주세요.';
+      isValid = false;
+    }
+
+    // 내용 검증
+    const content = editorRef.current.getInstance().getMarkdown();
+    if (!content.trim()) {
+      newErrors.content = '내용을 입력해주세요.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -58,22 +86,37 @@ export default function BoardWrite({ category }: { category: number }) {
       ...prev,
       [name]: name === 'imageUrls' ? value.split(',') : value,
     }));
+    // 에러 메시지 초기화
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
-      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // 기존 파일 유지하면서 새 파일 추가
+      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
     }
   };
 
-  // 특정 파일 삭제 함수
   const handleRemoveFile = (index: number) => {
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index)); // 해당 index의 파일 제거
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 폼 검증 실행
+    if (!validateForm()) {
+      // 에러가 있는 필드로 스크롤
+      const firstError = Object.keys(errors)[0];
+      const errorElement = document.getElementById(firstError);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
     console.log('Submit 버튼 클릭됨');
     console.log('현재 formData:', formData);
     console.log('현재 files:', files);
@@ -87,7 +130,7 @@ export default function BoardWrite({ category }: { category: number }) {
 
         <label htmlFor="title">제목</label>
         <input
-          className={styles['input-title']}
+          className={`${styles['input-title']} ${errors.title ? styles['input-error'] : ''}`}
           type="text"
           id="title"
           name="title"
@@ -95,36 +138,48 @@ export default function BoardWrite({ category }: { category: number }) {
           value={formData.title}
           onChange={handleChange}
         />
+        {errors.title && (
+          <p className={styles['error-message']}>{errors.title}</p>
+        )}
 
         <label htmlFor="content">내용</label>
-        <Editor
-          ref={editorRef}
-          initialValue=" "
-          previewStyle="vertical"
-          height="600px"
-          initialEditType="wysiwyg"
-          useCommandShortcut={true}
-          plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
-          hooks={{
-            addImageBlobHook: async (
-              blob: File,
-              callback: (url: string) => void,
-            ) => {
-              try {
-                const url = await onUploadImage(blob); // URL을 받아옴
-                callback(url); // Markdown 에디터에 삽입
+        <div className={errors.content ? styles['editor-error-container'] : ''}>
+          <Editor
+            ref={editorRef}
+            initialValue=" "
+            previewStyle="vertical"
+            height="600px"
+            initialEditType="wysiwyg"
+            useCommandShortcut={true}
+            plugins={[
+              [codeSyntaxHighlight, { highlighter: Prism }],
+              colorSyntax,
+            ]}
+            hooks={{
+              addImageBlobHook: async (
+                blob: File,
+                callback: (url: string) => void,
+              ) => {
+                try {
+                  const url = await onUploadImage(blob);
+                  callback(url);
 
-                setFormData((prevData) => ({
-                  ...prevData,
-                  imageUrls: [...prevData.imageUrls, url], // DB로 전송할 이미지 URL 배열에 추가
-                }));
-              } catch (error) {
-                console.error('이미지 업로드 실패:', error);
-                alert('이미지 업로드에 실패했습니다.');
-              }
-            },
-          }}
-        />
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    imageUrls: [...prevData.imageUrls, url],
+                  }));
+                } catch (error) {
+                  console.error('이미지 업로드 실패:', error);
+                  alert('이미지 업로드에 실패했습니다.');
+                }
+              },
+            }}
+          />
+        </div>
+
+        {errors.content && (
+          <p className={styles['error-message']}>{errors.content}</p>
+        )}
         <br />
 
         <label className={styles['file-button']} htmlFor="fileUpload">
@@ -150,7 +205,7 @@ export default function BoardWrite({ category }: { category: number }) {
                   ✕
                 </button>
               </li>
-              <br /> {/* 리스트 사이 줄바꿈 추가 */}
+              <br />
             </React.Fragment>
           ))}
         </ul>
