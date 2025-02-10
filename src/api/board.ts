@@ -20,7 +20,6 @@ export const getBoardsByCategory = async (
   page: number = 1,
   perPage: number = 10,
   orderBy: number = 0,
-  isASC: boolean = true,
 ) => {
   try {
     const response = await client.get<Board[]>(
@@ -29,7 +28,7 @@ export const getBoardsByCategory = async (
         params: {
           perPage,
           orderBy,
-          isASC,
+          isASC: false,
         },
       },
     );
