@@ -7,6 +7,7 @@ interface Comment {
   likeCount?: number;
   createdAt: Date;
   updatedAt: Date;
+  deleted: boolean;
 }
 
 export type { Comment }; //props 로 전달달

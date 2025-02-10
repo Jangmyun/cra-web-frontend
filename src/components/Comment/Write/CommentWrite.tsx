@@ -12,10 +12,8 @@ export default function CommentWrite({
 }) {
   const currentUrl = window.location.href;
   const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1); // URL 파라미터에서 id 가져오기
-
   const boardId = Number(id); // id를 숫자로 변환
   const [formData, setFormData] = useState({
-    userId: 1,
     boardId: boardId,
     content: '',
   });
@@ -32,7 +30,6 @@ export default function CommentWrite({
 
       // 폼 데이터 초기화
       setFormData({
-        userId: 1,
         boardId: boardId,
         content: '',
       });

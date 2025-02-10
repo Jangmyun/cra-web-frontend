@@ -8,6 +8,7 @@ import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import WidthSpacer from '~/components/Common/WidthSpacer.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import styles from './CommentItem.module.css';
+import { useUserStore } from '~/store/userStore';
 
 export default function CommentItem({
   comment,
@@ -19,6 +20,7 @@ export default function CommentItem({
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const { name } = useUserStore();
   return (
     <div>
       <Divider />
@@ -36,7 +38,7 @@ export default function CommentItem({
           <div className={styles['item-content']}>
             <div className={styles['comment-user']}>
               <div className={styles['comment-profile-image']} />
-              <div className={styles['comment-id']}>{comment.id}</div>
+              <div className={styles['comment-id']}>{name}</div>
             </div>
             <div className={styles['comment-content']}>{comment.content}</div>
 

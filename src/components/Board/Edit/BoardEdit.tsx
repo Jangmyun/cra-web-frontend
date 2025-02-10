@@ -14,7 +14,6 @@ export default function BoardEdit({ category }: { category: number }) {
   const navigate = useNavigate();
   const editorRef = useRef<any>();
   const [formData, setFormData] = useState({
-    userId: 1,
     title: '',
     content: '',
     category: category,
@@ -80,18 +79,6 @@ export default function BoardEdit({ category }: { category: number }) {
           <h2 className={styles['write-title']}>
             {CATEGORY_STRINGS[category]} 게시글 수정
           </h2>
-
-          <label htmlFor="userId">학번</label>
-          <input
-            type="number"
-            id="userId"
-            name="userId"
-            placeholder="추후 삭제 예정 항목"
-            value={formData.userId}
-            readOnly
-            onChange={handleChange}
-          />
-          <br />
           <label htmlFor="title">제목</label>
           <input
             className={styles['input-title']}
