@@ -1,0 +1,84 @@
+.commentWriteContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+  height: 95px;
+  border-radius: 10px;
+  border: 1px solid #c1c1c1;
+}
+
+.inputField {
+  flex-grow: 1;
+  margin-left: 16px;
+}
+
+.inputField input {
+  border: none;
+  background-color: #f1f1f1;
+  height: 100%;
+  width: 96%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0;
+  font: inherit;
+  vertical-align: baseline;
+  color: #5e5e5e;
+  font-size: 20px;
+}
+
+.inputField input::placeholder {
+  color: #c1c1c1;
+}
+
+.submitButton {
+  padding: 0;
+
+  width: 50px;
+  height: 50px;
+  background-color: #2cb4db;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-family: 'Pretendard Bold';
+}
+
+.submitButton2 {
+  padding: 0;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  background-color: #4099ff;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-family: 'Pretendard Bold';
+}
+
+.submitButton:hover {
+  background-color: #6fbfe4;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #6fbfe4;
+}
+
+.submitButton:focus {
+  outline: none;
+}

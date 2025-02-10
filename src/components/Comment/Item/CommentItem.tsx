@@ -18,7 +18,7 @@ export default function CommentItem({
 }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
+  const [isClicked, setIsClicked] = useState(false);
   return (
     <div>
       <Divider />
@@ -29,6 +29,7 @@ export default function CommentItem({
         {isEditing ? (
           <CommentEdit
             id={comment.id as number}
+            content={comment.content} // 기존 내용을 prop으로 전달
             onClose={() => setIsEditing(false)} // 수정 완료 후 수정 모드를 종료
           />
         ) : (
@@ -49,8 +50,15 @@ export default function CommentItem({
               </div>
               {isRoot && (
                 <div
-                  onClick={() => setShowReplyForm((prev) => !prev)}
-                  className={styles['comment-reply']}
+                  onClick={() => {
+                    setShowReplyForm((prev) => !prev);
+                    setIsClicked((prev) => !prev);
+                  }}
+                  className={
+                    isClicked
+                      ? styles['comment-reply2']
+                      : styles['comment-reply']
+                  }
                 >
                   답글 작성
                 </div>

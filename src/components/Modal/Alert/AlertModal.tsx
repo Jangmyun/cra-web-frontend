@@ -1,7 +1,13 @@
 import Modal from 'react-modal';
 import styles from '../Alert/AlertModal.module.css';
 
-const AlertModal = ({ closeModal }: { closeModal: () => void }) => {
+const AlertModal = ({
+  closeModal,
+  message,
+}: {
+  closeModal: () => void;
+  message: string;
+}) => {
   return (
     <>
       <Modal
@@ -15,9 +21,7 @@ const AlertModal = ({ closeModal }: { closeModal: () => void }) => {
             ✖
           </button>
         </div>
-        <div className={styles['modal-body']}>
-          모든 값을 올바르게 입력해주세요
-        </div>
+        <div className={styles['modal-body']}>{message}</div>
         <button className={styles['check-button']} onClick={closeModal}>
           확인
         </button>
