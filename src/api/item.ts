@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Item } from '~/models/Item.ts';
 import { client } from './client.ts';
+import { authClient } from './auth/authClient.ts';
 
 export const getItems = async (itemCategory: number) => {
   try {
@@ -30,7 +31,7 @@ export const getItemById = async (id: number) => {
 
 export const createItems = async (item: Item) => {
   try {
-    const response = await client.post<Item>('/admin/item', item, {
+    const response = await authClient.post<Item>('/admin/item', item, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -44,11 +45,15 @@ export const createItems = async (item: Item) => {
 
 export const updateItem = async (item: Item) => {
   try {
-    const response = await client.put<Item>(`/admin/item/${item.id}`, item, {
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+    const response = await authClient.put<Item>(
+      `/admin/item/${item.id}`,
+      item,
+      {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
       },
-    });
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -58,7 +63,7 @@ export const updateItem = async (item: Item) => {
 
 export const deleteItem = async (id: number) => {
   try {
-    const response = await client.delete(`/admin/item/${id}`);
+    const response = await authClient.delete(`/admin/item/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
