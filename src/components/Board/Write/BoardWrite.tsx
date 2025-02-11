@@ -10,13 +10,11 @@ export default function BoardWrite({ category }: { category: number }) {
   const editorRef = useRef<any>();
   const [files, setFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState<{
-    userId: number;
     title: string;
     content: string;
     category: number;
     imageUrls: string[];
   }>({
-    userId: 1,
     title: '',
     content: '',
     category: category,
@@ -35,7 +33,6 @@ export default function BoardWrite({ category }: { category: number }) {
       const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
       window.location.href = parentPath;
       setFormData({
-        userId: 1,
         title: '',
         content: '',
         category: category,

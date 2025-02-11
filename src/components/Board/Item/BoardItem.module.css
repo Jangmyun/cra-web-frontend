@@ -11,6 +11,19 @@
   font-size: 16px;
   font-family: 'Pretendard SemiBold';
   color: var(--color-dark-text);
+  display: flex;
+  justify-content: space-between;
+}
+.board-info {
+  font-family: 'Pretendard Medium';
+  margin-right: 20px;
+  display: flex; /* span을 flex 항목으로 만듭니다 */
+  gap: 3px; /* 간격을 10px로 설정 */
+  color: #9b9b9b;
+}
+.comment-img {
+  margin-top: 9px;
+  margin-left: 10px;
 }
 
 .temp-link {
