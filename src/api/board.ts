@@ -59,7 +59,7 @@ export const getBoardById = async (id: number) => {
 // [POST]
 // 새로운 게시판(Board)을 생성하기 위해 서버에 POST 요청을 보내는 메소드
 // parameter로 Board 타입의 객체를 받아서 서버로 전송
-export const createBoards = async (board: Board, files: File[]) => {
+export const createBoards = async (board: Board, file: File | null) => {
   try {
     const formData = new FormData();
 
@@ -68,15 +68,16 @@ export const createBoards = async (board: Board, files: File[]) => {
       new Blob([JSON.stringify(board)], { type: 'application/json' }),
     );
 
-    files.forEach((file) => {
-      formData.append('files', file);
-    });
+    if (file) {
+      formData.append('file', file);
+    }
 
     const response = await authClient.post<FormData>('/board', formData, {
       headers: {
         'Content-type': 'multipart/form-data',
       },
     });
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -105,12 +106,15 @@ export const updateBoards = async (board: Board) => {
       new Blob([JSON.stringify(board)], { type: 'application/json' }),
     );
 
-
-    const response = await authClient.put<FormData>(`/board/${board.id}`, formData, {
-      headers: {
-        'Content-type': 'multipart/form-data',
+    const response = await authClient.put<FormData>(
+      `/board/${board.id}`,
+      formData,
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
       },
-    });
+    );
     return response.data;
   } catch (error) {
     console.error('Failed to post data:', error);

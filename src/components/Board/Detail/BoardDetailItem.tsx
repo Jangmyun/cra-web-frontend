@@ -58,7 +58,7 @@ export default function BoardDetailItem({
   useEffect(() => {
     const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
     if (storedLikeStatus) {
-      setIsLiked(JSON.parse(storedLikeStatus)); // 로컬 스토리지에서 좋아요 상태 불러오기
+      setIsLiked(JSON.parse(storedLikeStatus));
     }
   }, [board.id]);
 
@@ -109,24 +109,19 @@ export default function BoardDetailItem({
           <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
 
-            {/* 파일 목록 섹션 수정 */}
-            {board.fileUrls && board.fileUrls.length > 0 && (
+            {board.fileUrl && (
               <div className={styles['file-section']}>
-                <ul className={styles['file-list']}>
-                  {board.fileUrls.map((fileUrl, index) => (
-                    <li key={index} className={styles['file-item']}>
-                      <a
-                        href={fileUrl}
-                        download={extractFileName(fileUrl)}
-                        className={styles['file-link']}
-                      >
-                        <IoIosLink />
-                        &nbsp;
-                        {extractFileName(fileUrl)}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <div className={styles['file-item']}>
+                  <a
+                    href={board.fileUrl}
+                    download={extractFileName(board.fileUrl)}
+                    className={styles['file-link']}
+                  >
+                    <IoIosLink />
+                    &nbsp;
+                    {extractFileName(board.fileUrl)}
+                  </a>
+                </div>
               </div>
             )}
           </div>

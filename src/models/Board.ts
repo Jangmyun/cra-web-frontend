@@ -10,7 +10,7 @@ interface Board {
   havrutaId?: number;
   like?: number;
   view?: number;
-  fileUrls?: string[];
+  fileUrl?: string;
 }
 
 export type { Board };
