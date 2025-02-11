@@ -20,7 +20,7 @@ export default function CommentItem({
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const { name } = useUserStore();
+
   return (
     <div>
       <Divider />
@@ -38,7 +38,7 @@ export default function CommentItem({
           <div className={styles['item-content']}>
             <div className={styles['comment-user']}>
               <div className={styles['comment-profile-image']} />
-              <div className={styles['comment-id']}>{name}</div>
+              <div className={styles['comment-id']}>{comment.userId}</div>
             </div>
             <div className={styles['comment-content']}>{comment.content}</div>
 
