@@ -12,8 +12,8 @@ interface HavrutaBoardListProps {
   totalPages: number;
   currentPage: number;
   selectedHavrutaId: number | null;
-  onPageChange: (page: number) => void;
-  onHavrutaChange: (id: number | null) => void;
+  onPageChange: (_page: number) => void;
+  onHavrutaChange: (_id: number | null) => void;
 }
 
 export default function HavrutaBoardList({

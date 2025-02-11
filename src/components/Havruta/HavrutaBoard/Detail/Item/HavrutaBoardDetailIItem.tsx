@@ -21,7 +21,8 @@ export default function HavrutaBoardDetailItem({
     <div className={styles['detail-container']}>
       <div className={styles['detail-content']}>
         <div className={styles['title']}>
-          {havrutaBoard.className} ({havrutaBoard.professor})
+          {havrutaBoard.havrutaDto.classname} (
+          {havrutaBoard.havrutaDto.professor})
         </div>
         <Divider />
         <div className={styles['content-body']}>

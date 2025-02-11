@@ -30,12 +30,10 @@ function HavrutaEdit() {
   const mutation = useMutation({
     mutationFn: (newHavruta: Havruta) => updateHavruta(newHavruta),
     onSuccess: async () => {
-      alert('하브루타 수정 성공');
       await navigate(-1);
     },
     onError: (error) => {
       console.error('하브루타 수정 실패: ', error);
-      alert('하브루타 수정 실패');
     },
   });
 
