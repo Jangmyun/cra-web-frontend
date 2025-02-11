@@ -38,7 +38,9 @@ export default function CommentItem({
           <div className={styles['item-content']}>
             <div className={styles['comment-user']}>
               <div className={styles['comment-profile-image']} />
-              <div className={styles['comment-id']}>{comment.userId}</div>
+              <div className={styles['comment-id']}>
+                {comment.resUserDetailDto.name}
+              </div>
             </div>
             <div className={styles['comment-content']}>{comment.content}</div>
 

@@ -10,6 +10,7 @@ export default function BoardItem({
   board: Board;
   category: number;
 }) {
+  console.log(board);
   return (
     <Link
       to={`${CATEGORY_STRINGS_EN[category]}/view/${board.id}`}
@@ -17,7 +18,9 @@ export default function BoardItem({
     >
       <div className={styles['board-item-container']}>
         <div>
-          <div className={styles['board-user-name']}>{board.userId}</div>
+          <div className={styles['board-user-name']}>
+            {board.resUserDetailDto.name}
+          </div>
           <div className={styles['board-title']}>
             <div className={styles['board-title']}>{board.title}</div>
           </div>

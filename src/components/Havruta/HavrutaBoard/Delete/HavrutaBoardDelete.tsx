@@ -1,7 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import styles from './HavrutaBoardDelete.module.css';
+import { useNavigate } from 'react-router-dom';
 import { MdDeleteOutline } from 'react-icons/md';
+import { deleteHavrutaBoards } from '~/api/havruta/havrutaBoard';
+import styles from './HavrutaBoardDelete.module.css';
 
 function HavrutaBoardDelete() {
   const navigate = useNavigate();
@@ -13,8 +14,7 @@ function HavrutaBoardDelete() {
   const mutation = useMutation({
     mutationFn: (havrutaBoardId: number) => deleteHavrutaBoards(havrutaBoardId),
     onSuccess: async () => {
-      alert('하브루타 게시물 삭제 성공');
-      navigate('/havruta');
+      await navigate('/havruta');
     },
     onError: (error) => {
       console.error('하브루타 게시물 삭제 실패: ', error);
