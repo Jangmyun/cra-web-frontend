@@ -10,21 +10,20 @@ interface Board {
   havrutaId?: number;
   like?: number;
   view?: number;
-  fileUrls?: string[];
-
-  havrutaDto: {
-    id: number | null;
-    classname: string;
-    professor: string;
-  };
   resUserDetailDto: {
-    name: string;
-    email: string;
-    studentId: number;
-    term: string;
-    githubId: string;
-    imgUrl: string;
+    name?: string;
+    email?: string;
+    studentId?: number;
+    term?: string;
+    githubId?: string;
+    imgUrl?: string;
   };
+  havrutaDto: {
+    id?: number | null;
+    classname?: string;
+    professor?: string;
+  };
+  fileUrls?: string[];
 }
 
 export type { Board };
