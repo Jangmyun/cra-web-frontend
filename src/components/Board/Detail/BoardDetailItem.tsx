@@ -11,12 +11,19 @@ import Divider from '~/components/Common/Divider.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
+import { IoIosLink } from 'react-icons/io';
 import styles from './BoardDetailItem.module.css';
 import { view } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
-import likeImage from '~/assets/images/like_img.png';
 import createLike from '~/api/like';
+
+// fileUrl에서 원래 파일명만 추출하는 함수
+const extractFileName = (fileUrl: string) => {
+  const decodedUrl = decodeURIComponent(fileUrl);
+  const match = decodedUrl.match(/[^/]+\/[^/]+\/[a-f0-9-]+_(.+)/);
+  return match ? match[1] : decodedUrl.split('/').pop() || '파일';
+};
 
 export default function BoardDetailItem({
   board,
@@ -101,6 +108,27 @@ export default function BoardDetailItem({
           <div className={styles['content-title']}>{board.title}</div>
           <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
+
+            {/* 파일 목록 섹션 수정 */}
+            {board.fileUrls && board.fileUrls.length > 0 && (
+              <div className={styles['file-section']}>
+                <ul className={styles['file-list']}>
+                  {board.fileUrls.map((fileUrl, index) => (
+                    <li key={index} className={styles['file-item']}>
+                      <a
+                        href={fileUrl}
+                        download={extractFileName(fileUrl)}
+                        className={styles['file-link']}
+                      >
+                        <IoIosLink />
+                        &nbsp;
+                        {extractFileName(fileUrl)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className={styles['comment-count']}>
             <span className={styles.viewContainer}>

@@ -2,17 +2,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 115px;
   padding-bottom: 180px;
   width: 100%;
   max-width: 1086px;
   margin: 0 auto;
-  margin-top: 1rem;
 }
 
 .write-title {
   margin-left: 10px;
-  padding-bottom: 60px;
+  padding-bottom: 34px;
   font-size: 40px;
   font-family: 'Pretendard Bold';
   color: var(--color-bright-text);
@@ -33,12 +31,20 @@
 .write-form input[type='number'],
 .write-form textarea {
   font-family: Arial, Helvetica, sans-serif;
-  margin: 0px;
-  padding: 20px;
+  margin-bottom: 34px;
   font-size: 18px;
-  border-color: #c1c1c1;
+  border: 1px solid #c1c1c1;
   border-radius: 10px;
-  color: #3e3e3e;
+}
+
+.write-form input[type='number'],
+.write-form textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 34px;
+  font-size: 18px;
+  padding: 20px;
+  border: 1px solid #c1c1c1;
+  border-radius: 10px;
 }
 
 .write-form input[type='text']::placeholder,
@@ -48,6 +54,8 @@
 
 .input-title {
   height: 68px;
+  border-color: #c1c1c1;
+  padding: 0 20px;
 }
 
 .input-content {
@@ -56,7 +64,7 @@
 
 .write-form input:focus,
 .write-form textarea:focus {
-  border-color: #007bff;
+  border-color: #adadad;
   outline: none;
 }
 
@@ -66,6 +74,65 @@
 
 .write-form input[type='content'] {
   height: 200%;
+}
+
+.file-button {
+  cursor: pointer;
+  width: 90px;
+  height: 30px;
+  margin: 20px 0 0 0 !important;
+  padding: 10px 15px;
+  background-color: #c1c1c1;
+  color: white !important;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  text-align: center;
+  font-size: 20px !important;
+  font-family: 'Pretendard Bold';
+}
+
+.file-button:hover {
+  background-color: #adadad;
+}
+
+.file-input {
+  display: none;
+}
+.file-list {
+  margin-top: 20px;
+  list-style: none;
+}
+
+.file-item {
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.file-item:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Pretendard Medium';
+  font-size: 16px;
+}
+
+.file-link:hover {
+  text-decoration: underline;
+}
+
+.remove-button {
+  color: black;
+  border: none;
+  padding: 3px 7px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .submit-button {

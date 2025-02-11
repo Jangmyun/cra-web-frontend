@@ -124,7 +124,7 @@ function BookAdminEdit() {
           />
           <br />
           <br />
-          <label htmlFor="isBorrowed">대여 불가능</label>
+          <label htmlFor="isBorrowed">대여중</label>
           <br />
           <input
             type="checkbox"
