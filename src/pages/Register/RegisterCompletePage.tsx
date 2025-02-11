@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import BlueCheck from '~/assets/images/Blue-Check.png';
+import { useRegisterStore } from '~/store/registerStore';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -42,11 +43,14 @@ const LoginBtn = styled.button`
 
 function RegisterCompletePage() {
   const navigate = useNavigate();
+  const { username, name } = useRegisterStore();
   return (
     <Container>
       <Img src={BlueCheck} />
       <Title>회원가입 완료</Title>
-      <Content>크랑이님(dncnwhlrkd206),</Content>
+      <Content>
+        {name}({username}),
+      </Content>
       <Content>CRA의 회원이 되신 것을 진심으로 환영합니다.</Content>
       <LoginBtn onClick={() => navigate('/login')}>로그인 바로하기</LoginBtn>
     </Container>
