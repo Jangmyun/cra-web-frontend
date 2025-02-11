@@ -13,6 +13,9 @@ function HavrutaBoardItem({ havrutaBoard }: { havrutaBoard: HavrutaBoard }) {
           <div className={styles['board-professor']}>
             {havrutaBoard.havrutaDto.classname} (
             {havrutaBoard.havrutaDto.professor})
+            <span className={styles['board-time']}>
+              {havrutaBoard.createdAt?.toString().substring(0, 10)}
+            </span>
           </div>
           <div className={styles['board-title']}>
             <div className={styles['board-title']}>{havrutaBoard.title}</div>
