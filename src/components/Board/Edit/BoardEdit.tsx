@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
-import { getBoardById, updateBoards, onUploadImage } from '~/api/board.ts';
+import { getBoardById, updateBoards } from '~/api/board.ts';
 import { Board } from '~/models/Board.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import '~/styles/toast-ui';
@@ -16,16 +16,23 @@ export default function BoardEdit({ category }: { category: number }) {
   const navigate = useNavigate();
   const [existingFiles, setExistingFiles] = useState<string[]>([]);
 
+  // ✅ 추가된 부분: 에러 상태 추가
+  const [errors, setErrors] = useState<{ title?: string; content?: string }>(
+    {},
+  );
+
   const [formData, setFormData] = useState<{
     userId: number;
     title: string;
     content: string;
     category: number;
+    imageUrls: string[];
   }>({
     userId: 1,
     title: '',
     content: '',
     category: category,
+    imageUrls: [],
   });
 
   const currentUrl = window.location.href;
@@ -56,6 +63,7 @@ export default function BoardEdit({ category }: { category: number }) {
         title: '',
         content: '',
         category: category,
+        imageUrls: [],
       });
       setExistingFiles([]);
     },
@@ -84,6 +92,31 @@ export default function BoardEdit({ category }: { category: number }) {
     }
   }, [boardQuery.isSuccess, boardQuery.data]);
 
+  // ✅ 추가된 부분: 유효성 검사 함수
+  const validateForm = () => {
+    const newErrors: { title?: string; content?: string } = {};
+    let isValid = true;
+
+    // 제목 검증
+    if (!formData.title.trim()) {
+      newErrors.title = '제목을 입력해주세요.';
+      isValid = false;
+    } else if (formData.title.length > 100) {
+      newErrors.title = '제목은 100자 이내로 입력해주세요.';
+      isValid = false;
+    }
+
+    // 내용 검증
+    const content = editorRef.current.getInstance().getMarkdown();
+    if (!content.trim()) {
+      newErrors.content = '내용을 입력해주세요.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   // 입력값 변경 핸들러
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -93,11 +126,42 @@ export default function BoardEdit({ category }: { category: number }) {
       ...prev,
       [name]: value,
     }));
+
+    // ✅ 추가된 부분: 입력 변경 시 에러 메시지 제거
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  // 에디터 내용 변경 핸들러
+  const handleEditorChange = () => {
+    const content = editorRef.current?.getInstance().getMarkdown();
+
+    setFormData((prev) => ({
+      ...prev,
+      content,
+    }));
+
+    // ✅ 추가된 부분: 내용 입력 시 에러 메시지 제거
+    if (errors.content) {
+      setErrors((prev) => ({ ...prev, content: undefined }));
+    }
   };
 
   // 폼 제출 (게시글 수정)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // ✅ 추가된 부분: 폼 검증 실행
+    if (!validateForm()) {
+      const firstError = Object.keys(errors)[0];
+      const errorElement = document.getElementById(firstError);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
     mutation.mutate();
   };
 
@@ -118,7 +182,7 @@ export default function BoardEdit({ category }: { category: number }) {
 
         <label htmlFor="title">제목</label>
         <input
-          className={styles['input-title']}
+          className={`${styles['input-title']} ${errors.title ? styles['input-error'] : ''}`}
           type="text"
           id="title"
           name="title"
@@ -126,17 +190,32 @@ export default function BoardEdit({ category }: { category: number }) {
           value={formData.title}
           onChange={handleChange}
         />
+        {errors.title && (
+          <p className={styles['error-message']}>{errors.title}</p>
+        )}
 
         <label htmlFor="content">내용</label>
-        <Editor
-          ref={editorRef}
-          initialValue={formData.content || ' '}
-          previewStyle="vertical"
-          height="600px"
-          initialEditType="wysiwyg"
-          useCommandShortcut={true}
-          plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
-        />
+        <div
+          className={`${styles['editor-container']} ${errors.content ? styles['editor-error-container'] : ''}`}
+        >
+          <Editor
+            ref={editorRef}
+            initialValue={formData.content || ' '}
+            previewStyle="vertical"
+            height="600px"
+            initialEditType="wysiwyg"
+            useCommandShortcut={true}
+            plugins={[
+              [codeSyntaxHighlight, { highlighter: Prism }],
+              colorSyntax,
+            ]}
+            onChange={handleEditorChange}
+          />
+        </div>
+
+        {errors.content && (
+          <p className={styles['error-message']}>{errors.content}</p>
+        )}
 
         <ul className={styles['file-list']}>
           {existingFiles.map((fileUrl, index) => (
@@ -146,9 +225,7 @@ export default function BoardEdit({ category }: { category: number }) {
                 download={extractFileName(fileUrl)}
                 className={styles['file-link']}
               >
-                <IoIosLink />
-                &nbsp;
-                {extractFileName(fileUrl)}
+                <IoIosLink /> &nbsp; {extractFileName(fileUrl)}
               </a>
             </li>
           ))}

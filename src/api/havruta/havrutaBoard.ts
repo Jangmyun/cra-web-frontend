@@ -78,9 +78,7 @@ export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
 // 하브루타 게시물 상세보기
 export const getHavrutaBoardById = async (id: number) => {
   try {
-    const response = await client.get<HavrutaBoard>(
-      `/board/havruta/view/${id}`,
-    );
+    const response = await client.get<HavrutaBoard>(`/board/view/${id}`);
     const havruta = response.data;
 
     return {
