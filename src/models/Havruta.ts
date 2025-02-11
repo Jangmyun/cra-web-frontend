@@ -1,5 +1,5 @@
 interface Havruta {
-  id: number;
+  id?: number;
   className: string;
   professor: string;
   createdAt?: Date;
