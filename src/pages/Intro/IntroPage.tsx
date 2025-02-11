@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderIntro from '~/components/Header/Intro-Header/HeaderIntro.tsx';
 import EmblaCarousel from '~/components/Carousel/EmblaCarousel.tsx';
@@ -14,6 +14,10 @@ import styles from './IntroPage.module.css';
 
 export default function IntroPage() {
   const [isVertical, setIsVertical] = useState(window.innerWidth <= 1024);
+  const ref = useRef<HTMLDivElement>(null);
+  const scrollToSection = () => {
+    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   useEffect(() => {
     const handleResize = () => setIsVertical(window.innerWidth <= 1024);
@@ -55,14 +59,14 @@ export default function IntroPage() {
             <p>2025-1 CRA RECRUITMENT</p>
           </Link>
 
-          <div className={styles['vector']}>
+          <div className={styles['vector']} onClick={scrollToSection}>
             <img src={Vector2} />
             <img src={Vector} />
           </div>
         </div>
       </div>
 
-      <div className={styles['section2']}>
+      <div ref={ref} className={styles['section2']}>
         <div className={styles['comment2']}>
           <div>세대를 아우르는 열정과 끈끈한 유대감의 동아리,</div>
           <div>CRA를 소개합니다.</div>
