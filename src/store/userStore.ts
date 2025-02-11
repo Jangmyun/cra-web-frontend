@@ -7,7 +7,7 @@ interface UserState {
   term: string;
   githubId: string;
   imgUrl: string;
-  setUser: (user: Partial<UserState>) => void;
+  setUser: (_user: Partial<UserState>) => void;
   resetUser: () => void;
 }
 

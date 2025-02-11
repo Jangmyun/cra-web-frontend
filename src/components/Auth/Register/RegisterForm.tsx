@@ -10,6 +10,7 @@ import WidthSpacer from '~/components/Common/WidthSpacer';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
+import { useRegisterStore } from '~/store/registerStore';
 
 const Container = styled.div`
   display: flex;
@@ -174,6 +175,8 @@ const EMAIL_VERIFICATION_TIME = 300;
 function RegisterForm() {
   const navigate = useNavigate();
 
+  const { setName, setUserName } = useRegisterStore();
+
   // State for storing input values
   const [formData, setFormData] = useState({
     username: '',
@@ -321,8 +324,12 @@ function RegisterForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUserName(formData.username);
+    setName(formData.name);
+    console.log(formData.username);
+    console.log(formData.name);
     if (submitLoading) return;
     setSubmitLoading(true);
 
@@ -400,7 +407,7 @@ function RegisterForm() {
       await signUp(requestBody);
       setIsModalOpen(true); // 모달 열기
       setModalMessage('회원가입이 완료되었습니다.');
-      navigate('./register/welcome');
+      void navigate('/welcome');
     } catch (error) {
       if (error instanceof Error) {
         setIsModalOpen(true); // 모달 열기
@@ -557,8 +564,8 @@ function RegisterForm() {
         <RegisterInputTextField
           name="githubId"
           value={formData.githubId}
-          label="GitHub 주소"
-          placeHolder="GitHub 주소를 입력해 주세요."
+          label="GitHub 아이디"
+          placeHolder="GitHub 아이디를 입력해 주세요."
           onChange={handleChange}
           onBlur={handleBlur}
           valid={!inputErrors['githubId']}

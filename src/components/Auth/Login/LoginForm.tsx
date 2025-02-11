@@ -83,8 +83,10 @@ const LoginForm = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const secretKey = import.meta.env.VITE_SECRET_KEY;
-    const iv = CryptoJS.enc.Utf8.parse(import.meta.env.VITE_SECRET_IV);
+    const secretKey = import.meta.env.VITE_SECRET_KEY as string;
+    const iv = CryptoJS.enc.Utf8.parse(
+      import.meta.env.VITE_SECRET_IV as string,
+    );
     const encryptedPassword = CryptoJS.AES.encrypt(
       password,
       CryptoJS.enc.Utf8.parse(secretKey),
@@ -96,7 +98,7 @@ const LoginForm = () => {
     ).toString();
     try {
       await login({ username, password: encryptedPassword });
-      navigate('/main');
+      void navigate('/main');
     } catch (error) {
       console.error('Login Handling Error: ', error);
       openModal();
@@ -167,7 +169,9 @@ const LoginForm = () => {
           </Link>
         </Register>
       </MainContainer>
-      {modalIsOpen && <AlertModal closeModal={closeModal} message={modalMessage} />}
+      {modalIsOpen && (
+        <AlertModal closeModal={closeModal} message={modalMessage} />
+      )}
     </Container>
   );
 };
