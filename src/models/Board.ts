@@ -1,6 +1,6 @@
 interface Board {
   id?: number;
-  userId: number;
+  userId?: number;
   title: string;
   category: number;
   content: string;

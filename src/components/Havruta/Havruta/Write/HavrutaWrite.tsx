@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createHavruta } from '~/api/havruta/havruta';
 import { Havruta } from '~/models/Havruta';
@@ -20,8 +20,7 @@ function HavrutaWrite() {
     mutationFn: (newHavrutaContent: Havruta) =>
       createHavruta(newHavrutaContent),
     onSuccess: async () => {
-      await alert('하브루타 목록 작성 성공');
-      navigate(-1);
+      await navigate(-1);
       setFormData({
         className: '',
         professor: '',

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { HavrutaBoard } from '~/models/Havruta.ts';
 import { client } from '~/api/client.ts';
 import { authClient } from '~/api/auth/authClient.ts';
@@ -68,6 +67,7 @@ export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
     const response = await client.get<HavrutaBoard[]>(
       `/board/havruta/${havrutaId}`,
     );
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -78,9 +78,7 @@ export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
 // 하브루타 게시물 상세보기
 export const getHavrutaBoardById = async (id: number) => {
   try {
-    const response = await client.get<HavrutaBoard>(
-      `/board/havruta/view/${id}`,
-    );
+    const response = await client.get<HavrutaBoard>(`/board/view/${id}`);
     const havruta = response.data;
 
     return {
@@ -116,7 +114,7 @@ export const createHavrutaBoard = async (havrutaBoard: HavrutaBoard) => {
 export const updateHavrutaBoard = async (havrutaBoard: HavrutaBoard) => {
   try {
     const response = await authClient.put<HavrutaBoard>(
-      `/board/havruta/${havrutaBoard.id}`,
+      `/board/${havrutaBoard.id}`,
       havrutaBoard,
       {
         headers: {
@@ -133,9 +131,11 @@ export const updateHavrutaBoard = async (havrutaBoard: HavrutaBoard) => {
 };
 
 // 하브루타 게시물 삭제하기
-export const deleteHavrutaBoards = async (id: number) => {
+export const deleteHavrutaBoards = async (
+  id: number,
+): Promise<HavrutaBoard> => {
   try {
-    const response = await authClient.delete(`/board/${id}`);
+    const response = await authClient.delete<HavrutaBoard>(`/board/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

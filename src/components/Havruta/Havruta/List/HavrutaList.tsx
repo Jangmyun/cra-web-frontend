@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '~/api/queryKey';
 import { Link } from 'react-router-dom';
 import { Havruta } from '~/models/Havruta';
-import { getHavrutas } from '~/api/havruta/havruta';
+import { getAllHavrutas } from '~/api/havruta/havruta';
 import HavrutaDelete from '~/components/Havruta/Havruta/Delete/HavrutaDelete';
 import styled from 'styled-components';
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const Table = styled.table`
   width: 100%;
@@ -54,7 +53,7 @@ const CreateHavrutaLink = styled(Link)`
 function HavrutaList() {
   const havrutaQuery = useQuery<Havruta[]>({
     queryKey: QUERY_KEY.havruta.havrutas(),
-    queryFn: async () => getHavrutas(),
+    queryFn: async () => getAllHavrutas(),
   });
 
   let content;
@@ -103,7 +102,9 @@ function HavrutaList() {
     <Container>
       <h1>관리자 Havruta 페이지</h1>
       {content}
-      <CreateHavrutaLink to="./write">새 하브루타 생성</CreateHavrutaLink>
+      <CreateHavrutaLink to="./admin/havruta/write">
+        새 하브루타 생성
+      </CreateHavrutaLink>
     </Container>
   );
 }

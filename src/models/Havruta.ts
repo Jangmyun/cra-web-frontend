@@ -8,7 +8,7 @@ interface Havruta {
 
 interface HavrutaBoard {
   id?: number;
-  userId: number;
+  userId?: number;
   title: string;
   content: string;
   category: number;
@@ -17,9 +17,11 @@ interface HavrutaBoard {
   imageUrls: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  havrutaId: string;
-  className?: string;
-  professor?: string;
+  havrutaDto: {
+    id: number | null;
+    classname: string;
+    professor: string;
+  };
 }
 
 export type { Havruta, HavrutaBoard };

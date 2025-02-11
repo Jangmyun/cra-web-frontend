@@ -41,7 +41,7 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
         <div className={styles['extra-info']}>
           <div>
             GitHub 프로필 |{' '}
-            <Link to={gitHubLink} className={styles.GitHubLink}>
+            <Link to={gitHubLink} className={styles.GitHubLink} target="_blank">
               {githubId}
             </Link>
           </div>
