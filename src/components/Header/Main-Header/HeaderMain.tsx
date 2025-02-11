@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import craIconBlue from '~/assets/images/cra-logo-blue.png';
 import { useAuthStore } from '~/store/authStore.ts';
 import { useUIStore } from '~/store/uiStore.ts';
+import UserModal from '~/components/Modal/User/UserModal.tsx';
 import styles from './HeaderMain.module.css';
-import styled from 'styled-components';
-import UserModal from '~/components/Modal/User/UserModal';
+import { AxiosError } from 'axios';
 
 export default function HeaderMain() {
   const { isAuthenticated, logout } = useAuthStore();
@@ -17,19 +17,19 @@ export default function HeaderMain() {
   const closeModal = () => setModalOpen(false);
 
   const handleLogin = () => {
-    navigate('/login');
+    void navigate('/login');
   };
 
   const handleLogout = () => {
     // 내정보
     try {
-      logout();
+      void logout();
       closeModal();
       alert('로그아웃 성공');
-      navigate('/main');
+      void navigate('/main');
     } catch (error) {
-      if (error.response) {
-        console.error('Login Error:');
+      if (error instanceof AxiosError) {
+        console.error('Login Error:', error.response?.data);
       } else {
         console.error('Unexpected Error:', error);
         throw new Error('Unexpected Error occurred during Login');

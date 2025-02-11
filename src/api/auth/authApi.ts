@@ -6,7 +6,6 @@ import {
   ReissueToken,
   Login,
   ResTokenDto,
-  ResUserDetail,
   ResponseLogin,
 } from '~/models/Auth.ts';
 import { authClient } from './authClient';
@@ -16,13 +15,8 @@ export const login = async (data: Login): Promise<ResponseLogin> => {
     const response = await AuthClient.post<ResponseLogin>('/auth/login', data);
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      console.error('Login Error:', error);
-      throw new Error(error);
-    } else {
-      console.error('Unexpected Error:', error);
-      throw new Error('Unexpected Error occurred during Login');
-    }
+    console.error('Reissue Token API Error:', error);
+    throw error;
   }
 };
 
@@ -61,12 +55,8 @@ export const reissueToken = async (
     );
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      console.error('SignUp Error:', error.response.data);
-      throw new Error(error.response.data?.message || 'Error during SignUp');
-    } else {
-      throw new Error('Unexpected Error occurred during SignUp');
-    }
+    console.error('Reissue Token API Error:', error);
+    throw error;
   }
 };
 
