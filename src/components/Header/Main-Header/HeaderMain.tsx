@@ -28,7 +28,12 @@ export default function HeaderMain() {
       alert('로그아웃 성공');
       navigate('/main');
     } catch (error) {
-      alert('로그아웃 실패');
+      if (error.response) {
+        console.error('Login Error:');
+      } else {
+        console.error('Unexpected Error:', error);
+        throw new Error('Unexpected Error occurred during Login');
+      }
     }
   };
 

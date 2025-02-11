@@ -14,16 +14,16 @@ import {
   login as loginApi,
   signUp as signUpApi,
   reissueToken as reissueTokenApi,
+  logOut as logOutApi,
 } from '~/api/auth/authApi';
 import { useUserStore } from '~/store/userStore';
-import { useModalStore } from './modalStore';
 
 // Zustand에서 관리할 상태의 구조, 데이터 Type 정의
 interface authStore {
   login: (data: Login) => Promise<void>; // 로그인 요청 처리
   signUp: (data: ReqSignUp) => Promise<void>; // 새로운 사용자 등록 처리
   reissueToken: (data: ReissueToken) => Promise<void>; // 저장된 Refresh Token으로 새로운 Access, Refresh Token 받는 요청 처리
-  logout: () => void; // 로그아웃 처리 (상태 초기화, 토큰 제거)
+  logout: () => Promise<void>; // 로그아웃 처리 (상태 초기화, 토큰 제거)
   userId: number | null; // 현재 로그인된 사용자의 고유 Id 저장 (number 이거나 null)
   accessToken: string | null; // 로그인 성공 시 서버에서 발급한 Access Token 저장
   refreshToken: string | null; // Access Token이 만료되었을때, 새로운 토근을 발급받기 위한 Refresh Token을 저장
@@ -121,16 +121,24 @@ export const useAuthStore = create<authStore>()(
       },
 
       // 로그아웃 메서드
-      logout: () => {
-        // 인증 상태를 초기화
-        set({
-          isAuthenticated: false,
-          accessToken: null,
-          refreshToken: null,
-          userId: null,
-        });
-        // Session Storage에서 토큰을 제거하여 로그아웃 후에는 사용자가 인증되지 않게 함
-        sessionStorage.clear();
+      logout: async () => {
+        try {
+          await logOutApi();
+        } catch (error) {
+          console.error('Logout Error:', error);
+          throw error;
+        } finally {
+          set({
+            isAuthenticated: false,
+            accessToken: null,
+            refreshToken: null,
+            userId: null,
+          });
+          useUserStore.getState().resetUser();
+          sessionStorage.removeItem('accessToken');
+          sessionStorage.removeItem('refreshToken');
+          sessionStorage.removeItem('userId');
+        }
       },
     }),
 

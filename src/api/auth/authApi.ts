@@ -9,6 +9,7 @@ import {
   ResUserDetail,
   ResponseLogin,
 } from '~/models/Auth.ts';
+import { authClient } from './authClient';
 
 export const login = async (data: Login): Promise<ResponseLogin> => {
   try {
@@ -16,10 +17,8 @@ export const login = async (data: Login): Promise<ResponseLogin> => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorMessage =
-        error.response.data?.message || 'Unknown error during Login';
-      console.error('Login Error:', errorMessage);
-      throw new Error(errorMessage);
+      console.error('Login Error:', error);
+      throw new Error(error);
     } else {
       console.error('Unexpected Error:', error);
       throw new Error('Unexpected Error occurred during Login');
@@ -68,5 +67,14 @@ export const reissueToken = async (
     } else {
       throw new Error('Unexpected Error occurred during SignUp');
     }
+  }
+};
+
+export const logOut = async () => {
+  try {
+    await authClient.post('/auth/logout');
+  } catch (error) {
+    console.error('Logout API Error:', error);
+    throw error;
   }
 };
