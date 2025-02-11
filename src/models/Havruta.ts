@@ -17,6 +17,14 @@ interface HavrutaBoard {
   imageUrls: string[];
   createdAt?: Date;
   updatedAt?: Date;
+  resUserDetailDto: {
+    name?: string;
+    email?: string;
+    studentId?: number;
+    term?: string;
+    githubId?: string;
+    imgUrl?: string;
+  };
   havrutaDto: {
     id: number | null;
     classname: string;
