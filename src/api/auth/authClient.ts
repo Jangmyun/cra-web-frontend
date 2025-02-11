@@ -38,7 +38,7 @@ authClient.interceptors.request.use(
         } catch (error) {
           // refreshToken 재발급 실패 시 로그아웃 처리 해버리기
           sessionStorage.clear();
-
+          console.error('Session Error:', error);
           throw new Error('Session expired, please log in again');
         }
       } else {
@@ -50,6 +50,6 @@ authClient.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(new Error(`Request error: ${error}`));
   },
 );
