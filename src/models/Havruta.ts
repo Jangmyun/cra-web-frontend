@@ -11,13 +11,13 @@ interface HavrutaBoard {
   userId: number;
   title: string;
   content: string;
-  category?: number;
+  category: number;
   likeCount?: number;
   view?: number;
   imageUrls: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  havrutaId: number;
+  havrutaId: string;
   className?: string;
   professor?: string;
 }
