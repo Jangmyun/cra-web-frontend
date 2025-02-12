@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Project } from '~/models/Project.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';
@@ -63,10 +62,10 @@ export const updateProject = async (project: Project) => {
   }
 };
 
-export const deleteProject = async (id: number) => {
+export const deleteProject = async (id: number): Promise<Project> => {
   try {
     // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.delete(`/admin/project/${id}`);
+    const response = await authClient.delete<Project>(`/admin/project/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
