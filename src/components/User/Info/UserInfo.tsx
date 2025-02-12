@@ -1,19 +1,32 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '~/store/userStore';
-import { Link } from 'react-router-dom';
 import CRANG from '~/assets/images/Status_Crang.png';
 import styles from '../UserPage.module.css';
 
 function UserInfo() {
+  const navigate = useNavigate();
   const { name, email, studentId, term, githubId, imgUrl } = useUserStore();
-  const gitHubLink = 'https://github.com/' + githubId;
-  console.log('당신의 이름:' + name);
+
+  const handleChangeImage = () => {
+    void navigate(`/user/${name}/image/upload`);
+  };
+
+  const handleUpdate = () => {
+    void navigate(`/user/${name}/edit`);
+  };
+
+  const handleDelete = () => {
+    void navigate(`/user/${name}/delete`);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>마이페이지</div>
       <div className={styles.profile}>
         <p>프로필 사진 </p>
-        <img src={CRANG}></img>
+        <div>
+          <img src={CRANG} />
+        </div>
       </div>
       <div className={styles.info}>
         <p>이름 </p>
@@ -32,15 +45,19 @@ function UserInfo() {
         {term}
       </div>
       <div className={styles.info}>
-        <p>GitHub: </p>
-        <Link to={gitHubLink} className={styles.link}>
-          {githubId}
-        </Link>
+        <p>GitHub </p>
+        {githubId}
       </div>
       <div className={styles.buttons}>
-        <button className={styles.profile}>프로필 사진 변경</button>
-        <button className={styles.edit}>유저 정보 수정</button>
-        <button className={styles.delete}>유저 삭제</button>
+        <button className={styles.profile} onClick={handleChangeImage}>
+          프로필 사진 변경
+        </button>
+        <button className={styles.edit} onClick={handleUpdate}>
+          유저 정보 수정
+        </button>
+        <button className={styles.delete} onClick={handleDelete}>
+          회원 탈퇴
+        </button>
       </div>
     </div>
   );
