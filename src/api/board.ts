@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Board } from '~/models/Board.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';
@@ -20,7 +20,6 @@ export const getBoardsByCategory = async (
   page: number = 1,
   perPage: number = 10,
   orderBy: number = 0,
-  isASC: boolean = true,
 ) => {
   try {
     const response = await client.get<Board[]>(
@@ -29,7 +28,7 @@ export const getBoardsByCategory = async (
         params: {
           perPage,
           orderBy,
-          isASC,
+          isASC: false,
         },
       },
     );
@@ -86,9 +85,9 @@ export const createBoards = async (board: Board, files: File[]) => {
 };
 
 // POST/View
-export const createBoardsView = async (id: number) => {
+export const createBoardsView = async (id: number): Promise<Board> => {
   try {
-    const response = await authClient.post(`/board/view/${id}`);
+    const response = await authClient.post<Board>(`/board/view/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -99,26 +98,40 @@ export const createBoardsView = async (id: number) => {
 // PUT
 export const updateBoards = async (board: Board) => {
   try {
-    // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.put<Board>(`/board/${board.id}`, board, {
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    });
+    const formData = new FormData();
 
+    formData.append(
+      'board',
+      new Blob([JSON.stringify(board)], { type: 'application/json' }),
+    );
+
+    const response = await authClient.put<FormData>(
+      `/board/${board.id}`,
+      formData,
+      {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      },
+    );
     return response.data;
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.error('Failed to post data:', error);
+
+    if (axios.isAxiosError(error)) {
+      throw new Error(`Axios error: ${error.message}`);
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
 };
 
 // DELETE
 
-export const deleteBoards = async (id: number) => {
+export const deleteBoards = async (id: number): Promise<Board> => {
   try {
     // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.delete(`/board/${id}`);
+    const response = await authClient.delete<Board>(`/board/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

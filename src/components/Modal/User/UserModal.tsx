@@ -34,12 +34,14 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
               <div className={styles['student-number']}>{studentId}</div>
             </div>
           </div>
-          <div className={styles['hanmadi']}>" 나의 한마디를 입력하세요. "</div>
+          <div className={styles['hanmadi']}>
+            {' 나의 한마디를 입력하세요. '}
+          </div>
         </div>
         <div className={styles['extra-info']}>
           <div>
             GitHub 프로필 |{' '}
-            <Link to={gitHubLink} className={styles.GitHubLink}>
+            <Link to={gitHubLink} className={styles.GitHubLink} target="_blank">
               {githubId}
             </Link>
           </div>

@@ -9,15 +9,12 @@ import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 export default function BoardWrite({ category }: { category: number }) {
   const editorRef = useRef<any>();
   const [files, setFiles] = useState<File[]>([]);
-  const [fileName, setFileName] = useState<string>('');
   const [formData, setFormData] = useState<{
-    userId: number;
     title: string;
     content: string;
     category: number;
     imageUrls: string[];
   }>({
-    userId: 1,
     title: '',
     content: '',
     category: category,
@@ -36,7 +33,6 @@ export default function BoardWrite({ category }: { category: number }) {
       const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
       window.location.href = parentPath;
       setFormData({
-        userId: 1,
         title: '',
         content: '',
         category: category,
@@ -63,6 +59,13 @@ export default function BoardWrite({ category }: { category: number }) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
+
+      // 현재 파일 개수 + 추가하려는 파일 개수가 3개를 초과하면 추가 불가능
+      if (files.length + selectedFiles.length > 3) {
+        alert('파일은 최대 3개까지만 업로드할 수 있습니다.');
+        return;
+      }
+
       setFiles((prevFiles) => [...prevFiles, ...selectedFiles]); // 기존 파일 유지하면서 새 파일 추가
     }
   };
@@ -139,19 +142,16 @@ export default function BoardWrite({ category }: { category: number }) {
         />
         <ul className={styles['file-list']}>
           {files.map((file, index) => (
-            <React.Fragment key={index}>
-              <li className={styles['file-item']}>
-                {file.name}
-                <button
-                  type="button"
-                  className={styles['remove-button']}
-                  onClick={() => handleRemoveFile(index)}
-                >
-                  ✕
-                </button>
-              </li>
-              <br /> {/* 리스트 사이 줄바꿈 추가 */}
-            </React.Fragment>
+            <li className={styles['file-item']} key={index}>
+              {file.name}
+              <button
+                type="button"
+                className={styles['remove-button']}
+                onClick={() => handleRemoveFile(index)}
+              >
+                ✕
+              </button>
+            </li>
           ))}
         </ul>
 

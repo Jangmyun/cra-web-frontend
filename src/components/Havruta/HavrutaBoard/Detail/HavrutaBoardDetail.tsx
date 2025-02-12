@@ -40,25 +40,25 @@ export default function HavrutaBoardDetail() {
 
         if (status == 404) {
           hasNavigated.current = true;
-          navigate('/not-found');
+          void navigate('/not-found');
           return;
         }
 
         if (status == 403) {
           hasNavigated.current = true;
-          navigate('/forbidden');
+          void navigate('/forbidden');
           return;
         }
 
         if (status == 500) {
           hasNavigated.current = true;
-          navigate('/internal-server-error');
+          void navigate('/internal-server-error');
           return;
         }
       }
 
       hasNavigated.current = true;
-      navigate('/internal-server-error', {
+      void navigate('/internal-server-error', {
         state: {
           message: error instanceof Error ? error.message : 'Unknown error',
         },

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteHavruta } from '~/api/havruta/havruta';
 import { QUERY_KEY } from '~/api/queryKey';
@@ -22,7 +21,6 @@ function HavrutaDelete({ id }: { id: number }) {
   const mutation = useMutation({
     mutationFn: (id: number) => deleteHavruta(id),
     onSuccess: async () => {
-      alert(' 하브루타 삭제 성공');
       queryClient.setQueryData<Havruta[]>(
         QUERY_KEY.havruta.havrutas(),
         (oldData) => {
@@ -37,7 +35,6 @@ function HavrutaDelete({ id }: { id: number }) {
     },
     onError: (error) => {
       console.error('하브루타 삭제 실패', error);
-      alert('하브루타 삭제 실패');
     },
   });
 
