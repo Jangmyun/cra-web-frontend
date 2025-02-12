@@ -11,6 +11,7 @@ import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
 import { useRegisterStore } from '~/store/registerStore';
+import axios, { AxiosError } from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -245,29 +246,44 @@ function RegisterForm() {
   const sendEmailRequest = async () => {
     if (emailLoading) return;
     setEmailLoading(true);
-    if (formData.email !== '') {
-      if (!validateEmail(formData.email)) {
-        setIsModalOpen(true); // 모달 열기
-        setModalMessage('올바른 이메일 형식이 아닙니다.');
-        setEmailLoading(false);
-        return;
-      }
+
+    if (formData.email === '') {
+      setIsModalOpen(true);
+      setModalMessage('이메일을 입력해 주세요.');
+      setEmailLoading(false);
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setIsModalOpen(true);
+      setModalMessage('올바른 이메일 형식이 아닙니다.');
+      setEmailLoading(false);
+      return;
+    }
+
+    try {
       const resStatus = await emailRequest(formData.email);
+
       if (resStatus === 200) {
         setIsCodeRequired(true);
         setTimeLeft(EMAIL_VERIFICATION_TIME);
         setIsTimerRunning(true);
-
-        setIsModalOpen(true); // 모달 열기
+        setIsModalOpen(true);
         setModalMessage('이메일을 확인해 주세요.');
-      } else {
-        setIsModalOpen(true); // 모달 열기
-        setModalMessage('이메일 확인 중 에러가 발생하였습니다.');
       }
-    } else {
-      setIsModalOpen(true); // 모달 열기
-      setModalMessage('이메일을 입력해 주세요.');
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setIsModalOpen(true);
+          setModalMessage('이미 가입된 이메일입니다.');
+          setEmailLoading(false);
+          return;
+        }
+      }
+      setIsModalOpen(true);
+      setModalMessage('이메일 확인 중 에러가 발생하였습니다.');
     }
+
     setEmailLoading(false);
   };
 
@@ -276,13 +292,13 @@ function RegisterForm() {
     setEmailCodeLoading(true);
     const resStatus = await emailCode(emailCodeValue);
     if (resStatus === 200) {
-      setIsModalOpen(true); // 모달 열기
+      setIsModalOpen(true);
       setModalMessage('이메일 인증을 성공하였습니다.');
       setIsCodeRequired(false);
       setIsTimerRunning(false);
       setIsValid(true);
     } else {
-      setIsModalOpen(true); // 모달 열기
+      setIsModalOpen(true);
       setModalMessage('이메일 인증 중 에러가 발생하였습니다.');
     }
     setEmailCodeLoading(false);
