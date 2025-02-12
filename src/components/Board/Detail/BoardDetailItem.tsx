@@ -108,24 +108,25 @@ export default function BoardDetailItem({
           <div className={styles['content-title']}>{board.title}</div>
           <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
-
-            {board.fileUrl && (
-              <div className={styles['file-section']}>
-                <div className={styles['file-item']}>
-                  <a
-                    href={board.fileUrl}
-                    download={extractFileName(board.fileUrl)}
-                    className={styles['file-link']}
-                  >
-                    <IoIosLink />
-                    &nbsp;
-                    {extractFileName(board.fileUrl)}
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
+
           <div className={styles['comment-count']}>
+              {board.fileUrl && (
+                <div className={styles['file-section']}>
+                  <div className={styles['file-item']}>
+                    <a
+                      href={board.fileUrl}
+                      download={extractFileName(board.fileUrl)}
+                      className={styles['file-link']}
+                    >
+                      <IoIosLink />
+                      &nbsp;
+                      {extractFileName(board.fileUrl)}
+                    </a>
+                  </div>
+                </div>
+              )}
+
             <span className={styles.viewContainer}>
               <img src={viewImage} />
               <span>{viewCnt}</span>

@@ -1,26 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
-import { getBoardById, updateBoards } from '~/api/board.ts';
-import { Board } from '~/models/Board.ts';
-import { QUERY_KEY } from '~/api/queryKey.ts';
-import '~/styles/toast-ui';
+import { CATEGORY_STRINGS } from '~/constants/category_strings';
+import { getBoardById, updateBoards } from '~/api/board';
+import { Board } from '~/models/Board';
+import { QUERY_KEY } from '~/api/queryKey';
+import { useMarkdownEditor } from '../Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
 import { IoIosLink } from 'react-icons/io';
-import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 import styles from './BoardEdit.module.css';
 
-export default function BoardEdit({ category }: { category: number }) {
-  const editorRef = useRef<any>();
-  const navigate = useNavigate();
-  const [existingFiles, setExistingFiles] = useState<string[]>([]);
+interface BoardEditProps {
+  category: number;
+}
 
-  // ✅ 추가된 부분: 에러 상태 추가
+export default function BoardEdit({ category }: BoardEditProps) {
+  const navigate = useNavigate();
+  const [existingFile, setExistingFile] = useState<string>('');
   const [errors, setErrors] = useState<{ title?: string; content?: string }>(
     {},
   );
-
   const [formData, setFormData] = useState<{
     userId: number;
     title: string;
@@ -39,20 +38,30 @@ export default function BoardEdit({ category }: { category: number }) {
   const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
   const boardId = Number(id);
 
-  // 게시글 정보 불러오기
+  const {
+    editorRef,
+    error: contentError,
+    handleEditorChange,
+    validateContent,
+    editorConfig,
+  } = useMarkdownEditor({
+    onContentChange: (content) => {
+      setFormData((prev) => ({ ...prev, content }));
+    },
+  });
+
   const boardQuery = useQuery<Board>({
     queryKey: QUERY_KEY.board.boardById(boardId),
     queryFn: async () => getBoardById(boardId),
   });
 
-  // 게시글 수정 요청
   const mutation = useMutation({
     mutationFn: async () => {
       const content = editorRef.current.getInstance().getMarkdown();
       return await updateBoards({
         ...formData,
         content,
-        imageUrls: existingFiles,
+        fileUrl: existingFile,
       });
     },
     onSuccess: async () => {
@@ -65,7 +74,7 @@ export default function BoardEdit({ category }: { category: number }) {
         category: category,
         imageUrls: [],
       });
-      setExistingFiles([]);
+      setExistingFile('');
     },
     onError: (error) => {
       console.error('게시글 수정 실패:', error);
@@ -79,7 +88,6 @@ export default function BoardEdit({ category }: { category: number }) {
     return match ? match[1] : decodedUrl.split('/').pop() || '파일';
   };
 
-  // 게시글 불러왔을 때 기존 파일 저장
   useEffect(() => {
     if (boardQuery.isSuccess && boardQuery.data) {
       setFormData((prev) => ({
@@ -87,17 +95,15 @@ export default function BoardEdit({ category }: { category: number }) {
         title: boardQuery.data.title,
         content: boardQuery.data.content,
       }));
-      setExistingFiles(boardQuery.data.fileUrls || []);
+      setExistingFile(boardQuery.data.fileUrl || '');
       editorRef.current?.getInstance().setMarkdown(boardQuery.data.content);
     }
   }, [boardQuery.isSuccess, boardQuery.data]);
 
-  // ✅ 추가된 부분: 유효성 검사 함수
   const validateForm = () => {
     const newErrors: { title?: string; content?: string } = {};
     let isValid = true;
 
-    // 제목 검증
     if (!formData.title.trim()) {
       newErrors.title = '제목을 입력해주세요.';
       isValid = false;
@@ -106,10 +112,8 @@ export default function BoardEdit({ category }: { category: number }) {
       isValid = false;
     }
 
-    // 내용 검증
-    const content = editorRef.current.getInstance().getMarkdown();
-    if (!content.trim()) {
-      newErrors.content = '내용을 입력해주세요.';
+    if (!validateContent()) {
+      newErrors.content = contentError;
       isValid = false;
     }
 
@@ -117,7 +121,6 @@ export default function BoardEdit({ category }: { category: number }) {
     return isValid;
   };
 
-  // 입력값 변경 핸들러
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -127,32 +130,14 @@ export default function BoardEdit({ category }: { category: number }) {
       [name]: value,
     }));
 
-    // ✅ 추가된 부분: 입력 변경 시 에러 메시지 제거
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
-  // 에디터 내용 변경 핸들러
-  const handleEditorChange = () => {
-    const content = editorRef.current?.getInstance().getMarkdown();
-
-    setFormData((prev) => ({
-      ...prev,
-      content,
-    }));
-
-    // ✅ 추가된 부분: 내용 입력 시 에러 메시지 제거
-    if (errors.content) {
-      setErrors((prev) => ({ ...prev, content: undefined }));
-    }
-  };
-
-  // 폼 제출 (게시글 수정)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ 추가된 부분: 폼 검증 실행
     if (!validateForm()) {
       const firstError = Object.keys(errors)[0];
       const errorElement = document.getElementById(firstError);
@@ -198,38 +183,23 @@ export default function BoardEdit({ category }: { category: number }) {
         <div
           className={`${styles['editor-container']} ${errors.content ? styles['editor-error-container'] : ''}`}
         >
-          <Editor
-            ref={editorRef}
-            initialValue={formData.content || ' '}
-            previewStyle="vertical"
-            height="600px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
-            plugins={[
-              [codeSyntaxHighlight, { highlighter: Prism }],
-              colorSyntax,
-            ]}
-            onChange={handleEditorChange}
-          />
+          <Editor ref={editorRef} {...editorConfig} />
         </div>
-
         {errors.content && (
           <p className={styles['error-message']}>{errors.content}</p>
         )}
 
-        <ul className={styles['file-list']}>
-          {existingFiles.map((fileUrl, index) => (
-            <li key={index} className={styles['file-item']}>
-              <a
-                href={fileUrl}
-                download={extractFileName(fileUrl)}
-                className={styles['file-link']}
-              >
-                <IoIosLink /> &nbsp; {extractFileName(fileUrl)}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {existingFile && (
+          <div className={styles['file-item']}>
+            <a
+              href={existingFile}
+              download={extractFileName(existingFile)}
+              className={styles['file-link']}
+            >
+              <IoIosLink /> &nbsp; {extractFileName(existingFile)}
+            </a>
+          </div>
+        )}
 
         <input
           className={styles['submit-button']}

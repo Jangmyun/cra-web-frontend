@@ -1,12 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { createBoards, onUploadImage } from '~/api/board';
+import { createBoards } from '~/api/board';
+import { useMarkdownEditor } from './Markdown.tsx';
 import { Editor } from '@toast-ui/react-editor';
-import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
 import styles from './BoardWrite.module.css';
 
-export default function BoardWrite({ category }: { category: number }) {
-  const editorRef = useRef<any>();
+interface BoardWriteProps {
+  category: number;
+}
+
+export default function BoardWrite({ category }: BoardWriteProps) {
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ title?: string; content?: string }>(
     {},
@@ -23,6 +26,21 @@ export default function BoardWrite({ category }: { category: number }) {
     content: '',
     category: category,
     imageUrls: [],
+  });
+
+  const {
+    editorRef,
+    error: contentError,
+    handleEditorChange,
+    validateContent,
+    editorConfig,
+  } = useMarkdownEditor({
+    onContentChange: (content) => {
+      setFormData((prev) => ({ ...prev, content }));
+      if (content.trim()) {
+        setErrors((prev) => ({ ...prev, content: undefined }));
+      }
+    },
   });
 
   const mutation = useMutation({
@@ -63,9 +81,8 @@ export default function BoardWrite({ category }: { category: number }) {
       isValid = false;
     }
 
-    const content = editorRef.current.getInstance().getMarkdown();
-    if (!content.trim()) {
-      newErrors.content = '내용을 입력해주세요.';
+    if (!validateContent()) {
+      newErrors.content = contentError;
       isValid = false;
     }
 
@@ -86,17 +103,9 @@ export default function BoardWrite({ category }: { category: number }) {
     }
   };
 
-  const handleEditorChange = () => {
-    const content = editorRef.current?.getInstance().getMarkdown();
-    setFormData((prev) => ({ ...prev, content }));
-    if (errors.content) {
-      setErrors((prev) => ({ ...prev, content: undefined }));
-    }
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]); // 첫 번째 파일만 저장
+      setFile(e.target.files[0]);
     }
   };
 
@@ -135,37 +144,7 @@ export default function BoardWrite({ category }: { category: number }) {
         <div
           className={`${styles['editor-container']} ${errors.content ? styles['editor-error-container'] : ''}`}
         >
-          <Editor
-            ref={editorRef}
-            initialValue=" "
-            previewStyle="vertical"
-            height="600px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
-            plugins={[
-              [codeSyntaxHighlight, { highlighter: Prism }],
-              colorSyntax,
-            ]}
-            onChange={handleEditorChange}
-            hooks={{
-              addImageBlobHook: async (
-                blob: File,
-                callback: (url: string) => void,
-              ) => {
-                try {
-                  const url = await onUploadImage(blob);
-                  callback(url);
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    imageUrls: [...prevData.imageUrls, url],
-                  }));
-                } catch (error) {
-                  console.error('이미지 업로드 실패:', error);
-                  alert('이미지 업로드에 실패했습니다.');
-                }
-              },
-            }}
-          />
+          <Editor ref={editorRef} {...editorConfig} />
         </div>
         {errors.content && (
           <p className={styles['error-message']}>{errors.content}</p>
@@ -192,7 +171,9 @@ export default function BoardWrite({ category }: { category: number }) {
             </button>
           </div>
         )}
-        <div>파일 업로드는 한 개만 가능합니다!</div>
+        <div className={styles['file-comment']}>
+          파일 업로드는 한 개만 가능합니다!
+        </div>
 
         <input
           className={styles['submit-button']}

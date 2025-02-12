@@ -85,6 +85,7 @@ export const createBoards = async (board: Board, file: File | null) => {
   }
 };
 
+
 // POST/View
 export const createBoardsView = async (id: number) => {
   try {

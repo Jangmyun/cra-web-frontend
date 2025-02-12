@@ -99,6 +99,10 @@
   gap: 10px; /* 원하는 간격(px 단위) */
 }
 
+.file-section {
+  display: block;
+}
+
 .file-list {
   display: inline-block;
   list-style: none;

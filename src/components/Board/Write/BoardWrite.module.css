@@ -79,7 +79,7 @@
   cursor: pointer;
   width: 90px;
   height: 30px;
-  margin: 0 !important;
+  margin: 20px 0 0 0 !important;
   padding: 10px 15px 5px 15px;
   background-color: #c1c1c1;
   color: white !important;
@@ -159,4 +159,9 @@
 
 .editor-container {
   padding-bottom: 2px;
+}
+
+.file-comment {
+  margin-top: 5px;
+  font-size: 12px;
 }
