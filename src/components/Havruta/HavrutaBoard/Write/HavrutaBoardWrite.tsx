@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { createHavrutaBoard } from '~/api/havruta/havrutaBoard.ts';
-import { Havruta, HavrutaBoard } from '~/models/Havruta.ts';
+import { Havruta } from '~/models/Havruta.ts';
 import { CATEGORY } from '~/constants/category.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
-import { getHavrutas } from '~/api/havruta/havruta.ts';
+import { getAllHavrutas } from '~/api/havruta/havruta.ts';
 import styles from './HavrutaBoardWrite.module.css';
 import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
 
 export default function HavrutaBoardWrite() {
   const havrutaCategory = CATEGORY.HAVRUTA;
-  const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ title?: string; content?: string }>(
     {},
@@ -50,7 +48,7 @@ export default function HavrutaBoardWrite() {
 
   const havrutaQuery = useQuery<Havruta[]>({
     queryKey: QUERY_KEY.havruta.havrutas(),
-    queryFn: async () => getHavrutas(),
+    queryFn: async () => getAllHavrutas(),
   });
 
   const mutation = useMutation({
@@ -58,7 +56,7 @@ export default function HavrutaBoardWrite() {
       const content = editorRef.current.getInstance().getMarkdown();
       return await createHavrutaBoard({ ...formData, content }, file);
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       alert('게시글 작성 성공');
       window.location.href = window.location.pathname.substring(
         0,
@@ -124,7 +122,7 @@ export default function HavrutaBoardWrite() {
     setFile(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;

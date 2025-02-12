@@ -107,15 +107,11 @@ export const createHavrutaBoard = async (
       formData.append('file', file);
     }
 
-    const response = await authClient.post<FormData>(
-      '/board/havruta',
-      formData,
-      {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
+    const response = await authClient.post<FormData>('/board', formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
       },
-    );
+    });
 
     return response.data;
   } catch (error) {
