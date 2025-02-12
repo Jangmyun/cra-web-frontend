@@ -85,10 +85,9 @@
 
 .comment-count {
   display: flex;
-  justify-content: right;
+  justify-content: left;
   gap: 30px;
-  margin-top: 138px;
-  margin-bottom: 14px;
+  margin: 138px 0 14px 0;
   font-size: 20px;
   color: #9b9b9b;
 }
@@ -111,6 +110,7 @@
 }
 
 .file-item {
+  margin-right: 600px;
   padding: 8px 12px;
   border-radius: 5px;
   transition: background-color 0.3s;

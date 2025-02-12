@@ -17,9 +17,10 @@ interface HavrutaBoard {
   imageUrls: string[];
   createdAt?: Date;
   updatedAt?: Date;
-  havrutaId: string;
+  havrutaId: number;
   className?: string;
   professor?: string;
+  fileUrl?: string;
 }
 
 export type { Havruta, HavrutaBoard };

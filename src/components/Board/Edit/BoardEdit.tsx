@@ -107,13 +107,11 @@ export default function BoardEdit({ category }: BoardEditProps) {
     if (!formData.title.trim()) {
       newErrors.title = '제목을 입력해주세요.';
       isValid = false;
-    } else if (formData.title.length > 100) {
-      newErrors.title = '제목은 100자 이내로 입력해주세요.';
-      isValid = false;
     }
 
-    if (!validateContent()) {
-      newErrors.content = contentError;
+    const content = editorRef.current?.getInstance().getMarkdown() || '';
+    if (!content.trim()) {
+      newErrors.content = '내용을 입력해주세요.';
       isValid = false;
     }
 

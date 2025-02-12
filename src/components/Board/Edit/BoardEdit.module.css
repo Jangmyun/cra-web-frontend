@@ -121,3 +121,32 @@
 .editor-container {
   padding-bottom: 2px;
 }
+
+.file-section {
+  display: block;
+}
+
+.file-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-item:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.file-link {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Pretendard Medium';
+  font-size: 16px;
+}
+
+.file-link:hover {
+  text-decoration: underline;
+}

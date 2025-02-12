@@ -2,17 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 115px;
   padding-bottom: 180px;
-  width: 100%;
+  width: 100vw;
   max-width: 1086px;
   margin: 0 auto;
 }
 
 .edit-title {
   margin-left: 10px;
-  padding-bottom: 60px;
+  padding-bottom: 34px;
   font-size: 40px;
+  font-family: 'Pretendard Bold';
   color: var(--color-bright-text);
 }
 
@@ -22,21 +22,28 @@
 }
 
 .edit-form label {
-  margin: 0 0 16px 10px;
+  margin: 20px 0 16px 10px;
   font-size: 24px;
+  font-family: 'Pretendard SemiBold';
   color: #3e3e3e;
 }
 .edit-form input[type='text'],
 .edit-form input[type='number'],
 .edit-form textarea {
-  margin: 0px;
-  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   border: 1px solid #c1c1c1;
   border-radius: 10px;
-  font-family: 'Pretendard SemiBold';
-  color: #3e3e3e;
-  background-color: white;
+}
+
+.edit-form input[type='number'],
+.edit-form textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 34px;
+  font-size: 18px;
+  padding: 20px;
+  border: 1px solid #c1c1c1;
+  border-radius: 10px;
 }
 
 .edit-form input[type='text']::placeholder,
@@ -46,6 +53,8 @@
 
 .input-title {
   height: 68px;
+  border-color: #c1c1c1;
+  padding: 0 20px;
 }
 
 .input-content {
@@ -54,7 +63,7 @@
 
 .edit-form input:focus,
 .edit-form textarea:focus {
-  border-color: #007bff;
+  border-color: #adadad;
   outline: none;
 }
 
@@ -69,16 +78,67 @@
 .submit-button {
   margin: 0 auto;
   margin-top: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Pretendard Bold';
   font-size: 24px;
   height: 68px;
   width: 46%;
   background-color: #2cb4db;
   color: white;
   cursor: pointer;
+  border: none;
   border-radius: 10px;
 }
 
 .submit-button:hover {
   background-color: #2295ba;
+}
+
+.error-message {
+  color: #ff0000;
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.input-error {
+  border: 1px solid #ff0000 !important;
+}
+
+.editor-error-container {
+  padding-bottom: 2px;
+  border: 0.05rem solid red; /* 테두리를 빨간색으로 표시 */
+  background-color: rgba(255, 0, 0, 0.1); /* 배경을 옅은 빨간색으로 */
+  border-radius: 5px;
+}
+
+.editor-container {
+  padding-bottom: 2px;
+}
+
+.file-section {
+  display: block;
+}
+
+.file-list {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-item:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.file-link {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007bff;
+  font-family: 'Pretendard Medium';
+  font-size: 16px;
+}
+
+.file-link:hover {
+  text-decoration: underline;
 }
