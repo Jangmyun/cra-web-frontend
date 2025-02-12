@@ -13,3 +13,17 @@ export const userEditRoute = createRoute({
   path: '/user/$name/edit',
   component: lazy(() => import('~/pages/User/Edit/UserEditPage.tsx')),
 });
+
+export const userDeleteRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'user/$name/delete',
+  component: lazy(() => import('~/pages/User/Delete/UserDeletePage.tsx')),
+});
+
+export const userImageRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'user/$name/image/upload',
+  component: lazy(
+    () => import('~/pages/User/ImageUpload/UserImageUploadPage.tsx'),
+  ),
+});

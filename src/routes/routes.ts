@@ -63,7 +63,12 @@ import {
   adminProjectUpdateRoute,
   adminProjectCreateRoute,
 } from './adminProjectRoutes.ts';
-import { userInfoRoute, userEditRoute } from './userRoutes.ts';
+import {
+  userInfoRoute,
+  userEditRoute,
+  userDeleteRoute,
+  userImageRoute,
+} from './userRoutes.ts';
 
 export const routes = createRouter({
   routeTree: rootRoute.addChildren([
@@ -116,5 +121,7 @@ export const routes = createRouter({
     adminProjectCreateRoute,
     userEditRoute,
     userInfoRoute,
+    userDeleteRoute,
+    userImageRoute,
   ]),
 });
