@@ -139,12 +139,12 @@ export const deleteBoards = async (id: number): Promise<Board> => {
   }
 };
 
-export const onUploadImage = async (blob: File) => {
+export const onUploadImage = async (blob: File): Promise<string> => {
   const formData = new FormData();
   formData.append('image', blob);
 
   try {
-    const response = await authClient.post('/image/upload', formData, {
+    const response = await authClient.post<string>('/image/upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     const imageUrl = response.data;
