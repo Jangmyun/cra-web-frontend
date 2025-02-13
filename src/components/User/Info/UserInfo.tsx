@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '~/store/userStore';
-import CRANG from '~/assets/images/Status_Crang.png';
 import styles from '../UserPage.module.css';
 
 function UserInfo() {
@@ -25,7 +24,7 @@ function UserInfo() {
       <div className={styles.profile}>
         <p>프로필 사진 </p>
         <div>
-          <img src={CRANG} />
+          <img src={imgUrl} className={styles.preview} />
         </div>
       </div>
       <div className={styles.info}>
