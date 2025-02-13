@@ -11,7 +11,7 @@ import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
 import { useRegisterStore } from '~/store/registerStore';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
