@@ -11,7 +11,6 @@ import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
 import { useRegisterStore } from '~/store/registerStore';
-import { changeUserProfileImage } from '~/api/user';
 
 const Container = styled.div`
   display: flex;
@@ -173,14 +172,11 @@ const SubmitBtn = styled.button`
 
 const EMAIL_VERIFICATION_TIME = 300;
 
-const DEFAULT_CRANG = '~/assets/images/Status_Crang.png';
-
 function RegisterForm() {
   const navigate = useNavigate();
 
   const { setName, setUserName } = useRegisterStore();
 
-  // State for storing input values
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -333,6 +329,7 @@ function RegisterForm() {
     setName(formData.name);
     console.log(formData.username);
     console.log(formData.name);
+
     if (submitLoading) return;
     setSubmitLoading(true);
 
