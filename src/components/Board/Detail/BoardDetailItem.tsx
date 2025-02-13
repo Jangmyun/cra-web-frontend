@@ -17,6 +17,9 @@ import { view } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
 import createLike from '~/api/like';
+import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
+
+const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
 // fileUrl에서 원래 파일명만 추출하는 함수
 const extractFileName = (fileUrl: string) => {
@@ -35,6 +38,10 @@ export default function BoardDetailItem({
   commentCount: number;
 }) {
   const [viewCnt, setViewCnt] = useState(board.view);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
@@ -58,14 +65,14 @@ export default function BoardDetailItem({
   useEffect(() => {
     const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
     if (storedLikeStatus) {
-      setIsLiked(JSON.parse(storedLikeStatus)); // 로컬 스토리지에서 좋아요 상태 불러오기
+      setIsLiked(JSON.parse(storedLikeStatus) as boolean); // 로컬 스토리지에서 좋아요 상태 불러오기
     }
   }, [board.id]);
 
   const handleLike = async () => {
     const newLikeState = !isLiked;
     try {
-      await createLike(board.id as number, board.userId, isLiked);
+      await createLike(board.id as number, board.userId as number, isLiked);
       setIsLiked(newLikeState);
       setLikeCnt((prevCount) =>
         newLikeState ? (prevCount as number) + 1 : (prevCount as number) - 1,
@@ -85,9 +92,25 @@ export default function BoardDetailItem({
         <Divider />
         <div className={styles['content-body']}>
           <div className={styles['nav']}>
-            <div>
+            <div className={styles.writter}>
               <span className={styles['nav-title']}>작성자 | </span>
-              <span className={styles['nav-content']}>{board.userId}</span>
+              <div>
+                <img
+                  src={
+                    board.resUserDetailDto.imgUrl
+                      ? board.resUserDetailDto.imgUrl
+                      : DEFAULT_PROFILE
+                  }
+                  className={styles.profile}
+                  onClick={openModal}
+                />
+                {modalOpen && (
+                  <BoardUserModal closeModal={closeModal} board={board} />
+                )}
+              </div>
+              <span className={styles['nav-content']}>
+                {board.resUserDetailDto.name}
+              </span>
             </div>
             <div>
               <span className={styles['nav-title']}>작성일 | </span>
