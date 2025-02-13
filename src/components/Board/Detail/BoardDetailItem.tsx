@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Board } from '~/models/Board.ts';
 import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
 import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en.ts';
@@ -13,12 +13,13 @@ import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
 import styles from './BoardDetailItem.module.css';
-import { view } from '~/api/view';
+import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
 import likeImage from '~/assets/images/like_img.png';
 import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
+import { AxiosError } from 'axios';
 
 // fileUrl에서 원래 파일명만 추출하는 함수
 const extractFileName = (fileUrl: string) => {
@@ -41,7 +42,7 @@ export default function BoardDetailItem({
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
     if (!viewed) {
-      view(board.id as number)
+      createBoardsView(board.id as number)
         .then(() => {
           localStorage.setItem(`viewed_${board.id}`, 'true');
           return getBoardById(board.id as number);
@@ -58,24 +59,35 @@ export default function BoardDetailItem({
   const [likeCnt, setLikeCnt] = useState<number>(0);
 
   useEffect(() => {
-    const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
-    if (storedLikeStatus) {
-      setIsLiked(JSON.parse(storedLikeStatus)); // 로컬 스토리지에서 좋아요 상태 불러오기
-    }
+    const fetchLikeStatus = async () => {
+      try {
+        const response = await getBoardById(board.id as number);
+        console.log('Fetched board data:', response);
+        setLikeCnt(response.likeCount ?? 0);
+        setIsLiked(response.viewerLiked ?? false);
+      } catch (error) {
+        console.error('좋아요 상태를 가져오는 데 실패했습니다:', error);
+      }
+    };
+    void fetchLikeStatus();
   }, [board.id]);
 
+  const navigate = useNavigate();
   const handleLike = async () => {
-    const newLikeState = !isLiked;
     try {
-      await createLike(board.id as number, board.userId, isLiked);
-      setIsLiked(newLikeState);
-      setLikeCnt((prevCount) =>
-        newLikeState ? (prevCount as number) + 1 : (prevCount as number) - 1,
-      );
-      console.log(likeCnt);
-      localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
+      const data = await createLike(board.id as number, !isLiked);
+      console.log('Response from like API:', data);
+
+      // API 응답을 바로 반영
+      setIsLiked(data.liked);
+      setLikeCnt(data.likes);
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 403) {
+          void navigate(`/login`);
+        }
+      }
     }
   };
 

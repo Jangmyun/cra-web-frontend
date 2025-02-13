@@ -102,6 +102,7 @@
 .like {
   border: none;
   background: white;
+  cursor: pointer;
 }
 
 .file-list {
