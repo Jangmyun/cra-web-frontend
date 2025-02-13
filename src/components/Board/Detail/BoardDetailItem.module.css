@@ -86,17 +86,17 @@
 .comment-count {
   display: flex;
   justify-content: right;
-  gap: 30px;
+  gap: 15px;
   margin-top: 138px;
   margin-bottom: 14px;
   font-size: 20px;
   color: #9b9b9b;
 }
 
-.viewContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* 원하는 간격(px 단위) */
+.viewContainer span {
+  min-width: 30px; /* 숫자 너비 고정 */
+  text-align: center; /* 숫자 중앙 정렬 */
+  display: inline-block;
 }
 
 .like {
