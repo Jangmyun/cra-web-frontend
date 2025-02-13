@@ -3,12 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import craIconBlue from '~/assets/images/cra-logo-blue.png';
 import { useAuthStore } from '~/store/authStore.ts';
 import { useUIStore } from '~/store/uiStore.ts';
-import UserModal from '~/components/Modal/User/UserModal.tsx';
+import UserModal from '~/components/Modal/User/MyUser/UserModal';
 import styles from './HeaderMain.module.css';
 import { AxiosError } from 'axios';
+import { useUserStore } from '~/store/userStore';
 
 export default function HeaderMain() {
   const { isAuthenticated, logout } = useAuthStore();
+  const { name, imgUrl } = useUserStore();
   const { isMenuOpen, toggleMenu } = useUIStore();
   const navigate = useNavigate();
 
@@ -91,9 +93,9 @@ export default function HeaderMain() {
       <div className={styles['desktop-authbutton']}>
         {isAuthenticated ? (
           <>
-            <button className={styles.authbutton} onClick={openModal}>
-              내정보
-            </button>
+            <img src={imgUrl} className={styles.profile} onClick={openModal} />
+            <p>{name}</p>
+            {/* <button className={styles.authbutton}>내정보</button> */}
           </>
         ) : (
           <>

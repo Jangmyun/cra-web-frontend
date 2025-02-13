@@ -49,7 +49,7 @@ function RegisterCompletePage() {
       <Img src={BlueCheck} />
       <Title>회원가입 완료</Title>
       <Content>
-        {name}({username}),
+        {name} ({username}),
       </Content>
       <Content>CRA의 회원이 되신 것을 진심으로 환영합니다.</Content>
       <LoginBtn onClick={() => navigate('/login')}>로그인 바로하기</LoginBtn>

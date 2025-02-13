@@ -20,6 +20,9 @@ import likeImage from '~/assets/images/like_img.png';
 import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
 import { AxiosError } from 'axios';
+import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
+
+const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
 // fileUrl에서 원래 파일명만 추출하는 함수
 const extractFileName = (fileUrl: string) => {
@@ -38,6 +41,10 @@ export default function BoardDetailItem({
   commentCount: number;
 }) {
   const [viewCnt, setViewCnt] = useState(board.view);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
@@ -100,9 +107,25 @@ export default function BoardDetailItem({
         <Divider />
         <div className={styles['content-body']}>
           <div className={styles['nav']}>
-            <div>
+            <div className={styles.writter}>
               <span className={styles['nav-title']}>작성자 | </span>
-              <span className={styles['nav-content']}>{board.userId}</span>
+              <div>
+                <img
+                  src={
+                    board.resUserDetailDto.imgUrl
+                      ? board.resUserDetailDto.imgUrl
+                      : DEFAULT_PROFILE
+                  }
+                  className={styles.profile}
+                  onClick={openModal}
+                />
+                {modalOpen && (
+                  <BoardUserModal closeModal={closeModal} board={board} />
+                )}
+              </div>
+              <span className={styles['nav-content']}>
+                {board.resUserDetailDto.name}
+              </span>
             </div>
             <div>
               <span className={styles['nav-title']}>작성일 | </span>

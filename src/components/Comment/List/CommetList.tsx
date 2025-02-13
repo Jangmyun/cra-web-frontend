@@ -17,17 +17,26 @@ export default function CommentList({ id }: { id: number }) {
   } else if (commentsQuery.isError) {
     content = <div className="error">에러가 발생했습니다!</div>;
   } else if (commentsQuery.isSuccess) {
-    console.log(commentsQuery.data);
     content = commentsQuery.data.map((comment) => (
       <div key={comment.id}>
-        <CommentItem key={comment.id} comment={comment} isRoot={true} />
-        {comment.commentList.map((childComment) => (
-          <CommentItem
-            key={childComment.id}
-            comment={childComment}
-            isRoot={false}
-          />
-        ))}
+        <CommentItem
+          key={comment.id}
+          comment={comment}
+          isRoot={true}
+          commentsQuery={
+            commentsQuery.data.find((c) => c.id === comment.id) || null
+          }
+        />
+        {comment.commentList.map((childComment) => {
+          return (
+            <CommentItem
+              key={childComment.id}
+              comment={childComment}
+              isRoot={false}
+              commentsQuery={childComment}
+            />
+          );
+        })}
       </div>
     ));
   }
