@@ -85,7 +85,6 @@ export const createBoards = async (board: Board, file: File | null) => {
   }
 };
 
-
 // POST/View
 export const createBoardsView = async (id: number): Promise<Board> => {
   try {
@@ -98,7 +97,7 @@ export const createBoardsView = async (id: number): Promise<Board> => {
 };
 
 // PUT
-export const updateBoards = async (board: Board) => {
+export const updateBoards = async (board: Board, file: File | null) => {
   try {
     const formData = new FormData();
 
@@ -106,6 +105,10 @@ export const updateBoards = async (board: Board) => {
       'board',
       new Blob([JSON.stringify(board)], { type: 'application/json' }),
     );
+
+    if (file) {
+      formData.append('file', file);
+    }
 
     const response = await authClient.put<FormData>(
       `/board/${board.id}`,
@@ -116,15 +119,11 @@ export const updateBoards = async (board: Board) => {
         },
       },
     );
+
     return response.data;
   } catch (error) {
-    console.error('Failed to post data:', error);
-
-    if (axios.isAxiosError(error)) {
-      throw new Error(`Axios error: ${error.message}`);
-    } else {
-      throw new Error('An unexpected error occurred');
-    }
+    console.log(error);
+    throw error;
   }
 };
 

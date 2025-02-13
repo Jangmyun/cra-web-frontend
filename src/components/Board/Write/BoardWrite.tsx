@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { createBoards } from '~/api/board';
+import { useNavigate } from 'react-router-dom';
 import { useMarkdownEditor } from './Markdown.tsx';
 import { Editor } from '@toast-ui/react-editor';
 import styles from './BoardWrite.module.css';
@@ -14,6 +15,7 @@ export default function BoardWrite({ category }: BoardWriteProps) {
   const [errors, setErrors] = useState<{ title?: string; content?: string }>(
     {},
   );
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<{
     title: string;
     content: string;
@@ -40,26 +42,49 @@ export default function BoardWrite({ category }: BoardWriteProps) {
       }
     },
   });
-
   const mutation = useMutation({
     mutationFn: async () => {
       const content = editorRef.current.getInstance().getMarkdown();
-      return await createBoards({ ...formData, content }, file);
+      const fileToUpload = file || null;
+
+      // formData 구조를 변경하여 요청 형식에 맞게 변환
+      const payload = {
+        board: {
+          title: formData.title,
+          content,
+          category: formData.category,
+          imageUrls: formData.imageUrls,
+          resUserDetailDto: {
+            name: '사용자 이름', // 실제 사용자 정보로 변경
+            email: 'user@example.com',
+            studentId: 12345678,
+            term: '2025-1',
+            githubId: 'githubUsername',
+            imgUrl: 'https://example.com/profile.jpg',
+          },
+        },
+        file: fileToUpload ? [fileToUpload.name] : [],
+      };
+      console.log(payload.board);
+
+      return await createBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
       alert('게시글 작성 성공');
-      window.location.href = window.location.pathname.substring(
-        0,
-        window.location.pathname.lastIndexOf('/'),
-      );
+      await navigate(-1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+
       setFormData({
         title: '',
         content: '',
-        category,
+        category: category,
         imageUrls: [],
       });
       setFile(null);
     },
+
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
       alert('게시글 작성 실패');

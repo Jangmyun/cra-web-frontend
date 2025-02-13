@@ -18,7 +18,7 @@ interface Board {
     githubId?: string;
     imgUrl?: string;
   };
-  havrutaDto: {
+  havrutaDto?: {
     id?: number | null;
     classname?: string;
     professor?: string;

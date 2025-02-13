@@ -16,22 +16,22 @@ interface BoardEditProps {
 
 export default function BoardEdit({ category }: BoardEditProps) {
   const navigate = useNavigate();
-  const [existingFile, setExistingFile] = useState<string>('');
+  const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{ title?: string; content?: string }>(
     {},
   );
   const [formData, setFormData] = useState<{
-    userId: number;
     title: string;
     content: string;
     category: number;
     imageUrls: string[];
+    fileUrl?: string;
   }>({
-    userId: 1,
     title: '',
     content: '',
     category: category,
     imageUrls: [],
+    fileUrl: '',
   });
 
   const currentUrl = window.location.href;
@@ -47,34 +47,66 @@ export default function BoardEdit({ category }: BoardEditProps) {
   } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
+      if (content.trim()) {
+        setErrors((prev) => ({ ...prev, content: undefined }));
+      }
     },
   });
 
-  const boardQuery = useQuery<Board>({
+  const boardQuery = useQuery({
     queryKey: QUERY_KEY.board.boardById(boardId),
-    queryFn: async () => getBoardById(boardId),
+    queryFn: () => getBoardById(boardId),
+    enabled: !!boardId,
   });
+
+  useEffect(() => {
+    if (boardQuery.data && editorRef.current) {
+      const board = boardQuery.data;
+      setFormData({
+        title: board.title || '',
+        content: board.content || '',
+        category: board.category,
+        imageUrls: board.imageUrls || [],
+        fileUrl: board.fileUrl || '',
+      });
+
+      editorRef.current.getInstance().setMarkdown(board.content || '');
+    }
+  }, [boardQuery.data, editorRef.current]);
 
   const mutation = useMutation({
     mutationFn: async () => {
       const content = editorRef.current.getInstance().getMarkdown();
-      return await updateBoards({
-        ...formData,
-        content,
-        fileUrl: existingFile,
-      });
+      const fileToUpload = file || null;
+
+      const payload = {
+        board: {
+          id: boardId, // 게시물 ID 추가
+          title: formData.title,
+          content,
+          category: formData.category,
+          imageUrls: formData.imageUrls,
+          resUserDetailDto: {
+            name: '사용자 이름',
+            email: 'user@example.com',
+            studentId: 12345678,
+            term: '2025-1',
+            githubId: 'githubUsername',
+            imgUrl: 'https://example.com/profile.jpg',
+          },
+        },
+        file: fileToUpload ? [fileToUpload.name] : [],
+      };
+      console.log(payload.board);
+
+      return await updateBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
-      alert('게시글 수정 완료');
-      navigate(`/notice/view/${boardId}`);
-      setFormData({
-        userId: 1,
-        title: '',
-        content: '',
-        category: category,
-        imageUrls: [],
-      });
-      setExistingFile('');
+      alert('게시글 수정 성공');
+      await navigate(-1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
     },
     onError: (error) => {
       console.error('게시글 수정 실패:', error);
@@ -87,18 +119,6 @@ export default function BoardEdit({ category }: BoardEditProps) {
     const match = decodedUrl.match(/[^/]+\/[^/]+\/[a-f0-9-]+_(.+)/);
     return match ? match[1] : decodedUrl.split('/').pop() || '파일';
   };
-
-  useEffect(() => {
-    if (boardQuery.isSuccess && boardQuery.data) {
-      setFormData((prev) => ({
-        ...prev,
-        title: boardQuery.data.title,
-        content: boardQuery.data.content,
-      }));
-      setExistingFile(boardQuery.data.fileUrl || '');
-      editorRef.current?.getInstance().setMarkdown(boardQuery.data.content);
-    }
-  }, [boardQuery.isSuccess, boardQuery.data]);
 
   const validateForm = () => {
     const newErrors: { title?: string; content?: string } = {};
@@ -120,40 +140,43 @@ export default function BoardEdit({ category }: BoardEditProps) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'imageUrls' ? value.split(',') : value,
     }));
-
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setFile(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) {
-      const firstError = Object.keys(errors)[0];
-      const errorElement = document.getElementById(firstError);
-      if (errorElement) {
-        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
       return;
     }
-
     mutation.mutate();
   };
 
-  if (boardQuery.isLoading) {
-    return <div className="loading">데이터를 불러오는 중입니다...</div>;
+  // 로딩 상태 처리
+  if (boardQuery.isLoading || boardQuery.isLoading) {
+    return <div>데이터를 불러오는 중입니다...</div>;
   }
 
-  if (boardQuery.isError) {
-    return <div className="error">에러가 발생했습니다!</div>;
+  if (boardQuery.isError || boardQuery.isError) {
+    return <div>에러가 발생했습니다!!</div>;
   }
 
   return (
@@ -187,22 +210,48 @@ export default function BoardEdit({ category }: BoardEditProps) {
           <p className={styles['error-message']}>{errors.content}</p>
         )}
 
-        {existingFile && (
+        <label className={styles['file-button']} htmlFor="fileUpload">
+          파일 선택
+        </label>
+        <input
+          className={styles['file-input']}
+          type="file"
+          id="fileUpload"
+          onChange={handleFileChange}
+        />
+        {/* 기존 파일이 있는 경우 표시 */}
+        {formData.fileUrl && !file && (
           <div className={styles['file-item']}>
-            <a
-              href={existingFile}
-              download={extractFileName(existingFile)}
-              className={styles['file-link']}
+            {extractFileName(formData.fileUrl)}
+            <button
+              type="button"
+              className={styles['remove-button']}
+              onClick={() => setFormData((prev) => ({ ...prev, fileUrl: '' }))}
             >
-              <IoIosLink /> &nbsp; {extractFileName(existingFile)}
-            </a>
+              ✕
+            </button>
           </div>
         )}
-
+        {/* 새로 선택한 파일이 있는 경우 표시 */}
+        {file && (
+          <div className={styles['file-item']}>
+            {file.name}
+            <button
+              type="button"
+              className={styles['remove-button']}
+              onClick={handleRemoveFile}
+            >
+              ✕
+            </button>
+          </div>
+        )}
+        <div className={styles['file-comment']}>
+          파일 업로드는 한 개만 가능합니다!
+        </div>
         <input
           className={styles['submit-button']}
           type="submit"
-          value="게시글 수정"
+          value="하브루타 수정"
         />
       </form>
     </div>

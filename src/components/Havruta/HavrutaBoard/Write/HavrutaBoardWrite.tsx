@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { createBoards, onUploadImage } from '~/api/board.ts';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
 import { Havruta } from '~/models/Havruta.ts';
-import { createHavrutaBoard } from '~/api/havruta/havrutaBoard.ts';
 import { CATEGORY } from '~/constants/category.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import styles from './HavrutaBoardWrite.module.css';
@@ -89,7 +88,12 @@ export default function HavrutaBoardWrite() {
       return await createBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
+      alert('게시글 작성 성공');
       await navigate(-1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100); // 화면 위로 끌어올리기
+
       setFormData({
         title: '',
         content: '',
