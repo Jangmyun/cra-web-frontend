@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getCommentsByBoardId, updateComments } from '~/api/comment.ts';
-import { QUERY_KEY } from '~/api/queryKey.ts';
-import { Params } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateComments } from '~/api/comment.ts';
 import { Comment } from '~/models/Comment';
 import styles from './CommentEdit.module.css';
 
@@ -27,7 +25,7 @@ export default function CommentEdit({
     mutationFn: (newComment: { id: number; content: string }) =>
       updateComments(newComment as Comment),
     onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY.comment.commentsById(id)); // 댓글 데이터 쿼리 무효화
+      void queryClient.invalidateQueries(); // 댓글 데이터 쿼리 무효화
       onClose(); // 수정 성공 시 수정 모드 종료
     },
     onError: (error) => {

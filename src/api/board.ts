@@ -42,7 +42,7 @@ export const getBoardsByCategory = async (
 // id로 게시물 가져오기 (Detail 페이지에 사용)
 export const getBoardById = async (id: number) => {
   try {
-    const response = await client.get<Board>(`/board/view/${id}`);
+    const response = await authClient.get<Board>(`/board/view/${id}`);
     const board = response.data;
 
     return {
@@ -77,17 +77,6 @@ export const createBoards = async (board: Board, files: File[]) => {
         'Content-type': 'multipart/form-data',
       },
     });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
-// POST/View
-export const createBoardsView = async (id: number): Promise<Board> => {
-  try {
-    const response = await authClient.post<Board>(`/board/view/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

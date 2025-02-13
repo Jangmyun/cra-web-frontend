@@ -6,7 +6,7 @@ export const QUERY_KEY = {
     boardById: (id: number) => ['board.boardById', id] as const,
   },
   comment: {
-    commentsById: (id: number) => ['comment.commentsById', id] as const,
+    commentsById: (id: number) => ['comment.commentsById', id],
     commentsCountById: (id: number) =>
       ['comment.commentsCountById', id] as const,
   },
