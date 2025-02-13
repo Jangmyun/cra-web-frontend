@@ -10,6 +10,8 @@ import {
 } from '~/api/auth/authApi';
 import { useUserStore } from '~/store/userStore';
 
+const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
+
 // Zustand에서 관리할 상태의 구조, 데이터 Type 정의
 interface authStore {
   login: (_data: Login) => Promise<void>; // 로그인 요청 처리
@@ -67,7 +69,9 @@ export const useAuthStore = create<authStore>()(
             studentId: resUserDetailDto.studentId,
             term: resUserDetailDto.term,
             githubId: resUserDetailDto.githubId,
-            imgUrl: resUserDetailDto.imgUrl,
+            imgUrl: resUserDetailDto.imgUrl
+              ? resUserDetailDto.imgUrl
+              : DEFAULT_PROFILE,
           });
         } catch (error) {
           set({
