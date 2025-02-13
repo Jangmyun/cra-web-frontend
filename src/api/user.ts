@@ -42,20 +42,16 @@ export const changeUserPassword = async (): Promise<UserPassWord> => {
 };
 
 // 유저 프사 변경
-export const changeUserProfileImage = async (file: File): Promise<string> => {
+export const changeUserProfileImage = async (
+  imgUrl: string,
+): Promise<string> => {
   try {
-    const formData = new FormData();
-    formData.append('image', file);
-
-    // PUT 요청으로 이미지 업로드
-    const response = await authClient.put<string>('/user/image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await authClient.put<string>(
+      `/user/image?imgUrl=${encodeURIComponent(imgUrl)}`,
+    );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error('프로필 이미지 변경 실패:', error);
     throw error;
   }
 };
@@ -70,10 +66,6 @@ export const uploadProfileImage = async (blob: File): Promise<string> => {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     const imageUrl = response.data;
-
-    console.log('받은 이미지 URL:', imageUrl);
-    alert('이미지 업로드 성공');
-
     return imageUrl;
   } catch (error) {
     console.error('이미지 업로드 실패:', error);
