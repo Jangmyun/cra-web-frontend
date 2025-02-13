@@ -19,7 +19,7 @@ export default function CommentList({ id }: { id: number }) {
   } else if (commentsQuery.isSuccess) {
     console.log(commentsQuery.data);
     content = commentsQuery.data.map((comment) => (
-      <div>
+      <div key={comment.id}>
         <CommentItem key={comment.id} comment={comment} isRoot={true} />
         {comment.commentList.map((childComment) => (
           <CommentItem

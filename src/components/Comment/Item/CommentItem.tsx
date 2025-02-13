@@ -8,14 +8,13 @@ import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import WidthSpacer from '~/components/Common/WidthSpacer.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import styles from './CommentItem.module.css';
-import { useUserStore } from '~/store/userStore';
 
 export default function CommentItem({
   comment,
   isRoot,
 }: {
   comment: Comment;
-  isRoot: Boolean;
+  isRoot: boolean;
 }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
