@@ -3,7 +3,7 @@
   display: flex;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   background-color: #ffffff;
   font-family: 'Pretendard Bold';
@@ -171,4 +171,15 @@ li {
     margin: 0 auto;
     display: block;
   }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
 }
