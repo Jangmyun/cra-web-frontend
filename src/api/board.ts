@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Board } from '~/models/Board.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';
@@ -87,9 +87,9 @@ export const createBoards = async (board: Board, file: File | null) => {
 
 
 // POST/View
-export const createBoardsView = async (id: number) => {
+export const createBoardsView = async (id: number): Promise<Board> => {
   try {
-    const response = await authClient.post(`/board/view/${id}`);
+    const response = await authClient.post<Board>(`/board/view/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -130,10 +130,10 @@ export const updateBoards = async (board: Board) => {
 
 // DELETE
 
-export const deleteBoards = async (id: number) => {
+export const deleteBoards = async (id: number): Promise<Board> => {
   try {
     // 권한이 필요한 작업에 authClient 사용
-    const response = await authClient.delete(`/board/${id}`);
+    const response = await authClient.delete<Board>(`/board/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

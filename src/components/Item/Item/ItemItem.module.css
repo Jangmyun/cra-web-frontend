@@ -10,8 +10,6 @@
   flex-basis: calc(33.33% - 1rem); /* 각 아이템의 너비를 균등하게 설정 */
   aspect-ratio: 1.3 / 1.1;
   background-color: white;
-  border-radius: 10px;
-  border: 1.5px solid #c1c1c1;
   display: flex;
   flex-direction: column;
   padding: 12px;
@@ -28,10 +26,15 @@
 .project-picture {
   width: 100%;
   height: 100%;
-  border: 1px solid #c1c1c1;
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: #c1c1c1;
   margin-bottom: 10px;
+}
+
+.project-picture-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지를 부모 요소에 맞게 크기 조정, 잘릴 수 있음 */
 }
 
 /* 제목 */

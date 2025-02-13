@@ -63,6 +63,10 @@ export default function BoardDetailItem({
   }, [board.id]);
 
   const handleLike = async () => {
+    if (board.userId === undefined) {
+      console.error('유효하지 않은 사용자 ID');
+      return;
+    }
     const newLikeState = !isLiked;
     try {
       await createLike(board.id as number, board.userId, isLiked);
@@ -111,21 +115,21 @@ export default function BoardDetailItem({
           </div>
 
           <div className={styles['comment-count']}>
-              {board.fileUrl && (
-                <div className={styles['file-section']}>
-                  <div className={styles['file-item']}>
-                    <a
-                      href={board.fileUrl}
-                      download={extractFileName(board.fileUrl)}
-                      className={styles['file-link']}
-                    >
-                      <IoIosLink />
-                      &nbsp;
-                      {extractFileName(board.fileUrl)}
-                    </a>
-                  </div>
+            {board.fileUrl && (
+              <div className={styles['file-section']}>
+                <div className={styles['file-item']}>
+                  <a
+                    href={board.fileUrl}
+                    download={extractFileName(board.fileUrl)}
+                    className={styles['file-link']}
+                  >
+                    <IoIosLink />
+                    &nbsp;
+                    {extractFileName(board.fileUrl)}
+                  </a>
                 </div>
-              )}
+              </div>
+            )}
 
             <span className={styles.viewContainer}>
               <img src={viewImage} />

@@ -11,7 +11,9 @@
 .write-title {
   margin-left: 10px;
   padding-bottom: 34px;
+  padding-bottom: 34px;
   font-size: 40px;
+  font-family: 'Pretendard Bold';
   font-family: 'Pretendard Bold';
   color: var(--color-bright-text);
 }
@@ -24,6 +26,7 @@
 .write-form label {
   margin: 10px 0 16px 10px;
   font-size: 24px;
+  font-family: 'Pretendard SemiBold';
   font-family: 'Pretendard SemiBold';
   color: #3e3e3e;
 }
@@ -46,13 +49,14 @@
   border-radius: 10px;
 }
 
-.write-form input[type='text']::placeholder,
-.write-form textarea::placeholder {
+.write-form input[type='text']::placeholder {
   color: #c1c1c1;
 }
 
 .input-title {
   height: 68px;
+  border-color: #c1c1c1;
+  padding: 0 20px;
   border-color: #c1c1c1;
   padding: 0 20px;
 }

@@ -15,13 +15,11 @@ export default function BoardWrite({ category }: BoardWriteProps) {
     {},
   );
   const [formData, setFormData] = useState<{
-    userId: number;
     title: string;
     content: string;
     category: number;
     imageUrls: string[];
   }>({
-    userId: 1,
     title: '',
     content: '',
     category: category,
@@ -55,7 +53,6 @@ export default function BoardWrite({ category }: BoardWriteProps) {
         window.location.pathname.lastIndexOf('/'),
       );
       setFormData({
-        userId: 1,
         title: '',
         content: '',
         category,

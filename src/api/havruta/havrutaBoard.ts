@@ -68,6 +68,7 @@ export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
     const response = await client.get<HavrutaBoard[]>(
       `/board/havruta/${havrutaId}`,
     );
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -130,7 +131,7 @@ export const updateHavrutaBoard = async (havrutaBoard: HavrutaBoard) => {
     );
 
     const response = await authClient.put<FormData>(
-      `/board/havruta/${havrutaBoard.id}`,
+      `/board/${havrutaBoard.id}`,
       formData,
       {
         headers: {
@@ -151,9 +152,11 @@ export const updateHavrutaBoard = async (havrutaBoard: HavrutaBoard) => {
 };
 
 // 하브루타 게시물 삭제하기
-export const deleteHavrutaBoards = async (id: number) => {
+export const deleteHavrutaBoards = async (
+  id: number,
+): Promise<HavrutaBoard> => {
   try {
-    const response = await authClient.delete(`/board/${id}`);
+    const response = await authClient.delete<HavrutaBoard>(`/board/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

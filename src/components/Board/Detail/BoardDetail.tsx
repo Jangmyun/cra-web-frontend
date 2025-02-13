@@ -40,19 +40,19 @@ export default function BoardDetail({ category }: { category: number }) {
 
         if (status === 404) {
           hasNavigated.current = true;
-          navigate('/not-found');
+          void navigate('/not-found');
           return;
         }
 
         if (status === 403) {
           hasNavigated.current = true;
-          navigate('/forbidden');
+          void navigate('/forbidden');
           return;
         }
 
         if (status === 500) {
           hasNavigated.current = true;
-          navigate('/internal-server-error', {
+          void navigate('/internal-server-error', {
             state: { message: error.message },
           });
           return;
@@ -60,7 +60,7 @@ export default function BoardDetail({ category }: { category: number }) {
       }
 
       hasNavigated.current = true;
-      navigate('/internal-server-error', {
+      void navigate('/internal-server-error', {
         state: {
           message: error instanceof Error ? error.message : 'Unknown error',
         },

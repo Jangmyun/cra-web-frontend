@@ -21,7 +21,8 @@ export default function HavrutaBoardDetailItem({
     <div className={styles['detail-container']}>
       <div className={styles['detail-content']}>
         <div className={styles['title']}>
-          {havrutaBoard.className} ({havrutaBoard.professor})
+          {havrutaBoard.havrutaDto?.classname ?? '정보 없음'} (
+          {havrutaBoard.havrutaDto?.professor ?? '미정'})
         </div>
         <Divider />
         <div className={styles['content-body']}>

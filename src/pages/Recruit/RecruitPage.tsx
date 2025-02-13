@@ -2,8 +2,18 @@ import HeaderIntro from '~/components/Header/Intro-Header/HeaderIntro.tsx';
 import Vector from '~/assets/images/Vector/Arrow-Vector.png';
 import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png';
 import styles from './RecruitPage.module.css';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 export default function RecruitPage() {
+  const recruitTalentRef = useRef<HTMLDivElement>(null);
+  const scrollToSection = () => {
+    recruitTalentRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  };
+
   return (
     <div className={styles['recruit-container']}>
       <div className={styles['recruit-main']}>
@@ -15,7 +25,7 @@ export default function RecruitPage() {
           <p id={styles['content']}>
             CRA는 함께 성장 할 25-1 기수 동아리원을 모집합니다.
           </p>
-          <div className={styles['vector']}>
+          <div className={styles['vector']} onClick={scrollToSection}>
             <img src={Vector2} />
             <img src={Vector} />
           </div>
@@ -24,7 +34,7 @@ export default function RecruitPage() {
 
       <div className={styles['recruit-talent']}>
         <h1>이런 사람과 함께 하고 싶어요</h1>
-        <div className={styles['recruit-talentDetail']}>
+        <div ref={recruitTalentRef} className={styles['recruit-talentDetail']}>
           <div>
             <span className={styles['number']}>01</span>
             <p>
@@ -117,7 +127,9 @@ export default function RecruitPage() {
 
       <div className={styles['recruit-apply']}>
         <h1>CRA와 함께 성장하고 싶다면</h1>
-        <button className={styles['button-style']}>지원하기</button>
+        <Link to="https://docs.google.com/forms/d/e/1FAIpQLSf5uTQbDr7i9WjPfI61hMJ_PqDS1Of_fZRNpD8MRzlvnYFsKA/closedform">
+          <button className={styles['button-style']}>지원하기</button>
+        </Link>
       </div>
     </div>
   );

@@ -10,6 +10,6 @@ export const registerRoute = createRoute({
 
 export const registerWelcomeRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/register/welcome',
+  path: '/welcome',
   component: lazy(() => import('~/pages/Register/RegisterCompletePage.tsx')),
 });

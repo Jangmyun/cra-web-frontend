@@ -10,6 +10,8 @@ import WidthSpacer from '~/components/Common/WidthSpacer';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
+import { useRegisterStore } from '~/store/registerStore';
+import axios, { AxiosError } from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -174,6 +176,8 @@ const EMAIL_VERIFICATION_TIME = 300;
 function RegisterForm() {
   const navigate = useNavigate();
 
+  const { setName, setUserName } = useRegisterStore();
+
   // State for storing input values
   const [formData, setFormData] = useState({
     username: '',
@@ -242,29 +246,44 @@ function RegisterForm() {
   const sendEmailRequest = async () => {
     if (emailLoading) return;
     setEmailLoading(true);
-    if (formData.email !== '') {
-      if (!validateEmail(formData.email)) {
-        setIsModalOpen(true); // 모달 열기
-        setModalMessage('올바른 이메일 형식이 아닙니다.');
-        setEmailLoading(false);
-        return;
-      }
+
+    if (formData.email === '') {
+      setIsModalOpen(true);
+      setModalMessage('이메일을 입력해 주세요.');
+      setEmailLoading(false);
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setIsModalOpen(true);
+      setModalMessage('올바른 이메일 형식이 아닙니다.');
+      setEmailLoading(false);
+      return;
+    }
+
+    try {
       const resStatus = await emailRequest(formData.email);
+
       if (resStatus === 200) {
         setIsCodeRequired(true);
         setTimeLeft(EMAIL_VERIFICATION_TIME);
         setIsTimerRunning(true);
-
-        setIsModalOpen(true); // 모달 열기
+        setIsModalOpen(true);
         setModalMessage('이메일을 확인해 주세요.');
-      } else {
-        setIsModalOpen(true); // 모달 열기
-        setModalMessage('이메일 확인 중 에러가 발생하였습니다.');
       }
-    } else {
-      setIsModalOpen(true); // 모달 열기
-      setModalMessage('이메일을 입력해 주세요.');
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setIsModalOpen(true);
+          setModalMessage('이미 가입된 이메일입니다.');
+          setEmailLoading(false);
+          return;
+        }
+      }
+      setIsModalOpen(true);
+      setModalMessage('이메일 확인 중 에러가 발생하였습니다.');
     }
+
     setEmailLoading(false);
   };
 
@@ -273,13 +292,13 @@ function RegisterForm() {
     setEmailCodeLoading(true);
     const resStatus = await emailCode(emailCodeValue);
     if (resStatus === 200) {
-      setIsModalOpen(true); // 모달 열기
+      setIsModalOpen(true);
       setModalMessage('이메일 인증을 성공하였습니다.');
       setIsCodeRequired(false);
       setIsTimerRunning(false);
       setIsValid(true);
     } else {
-      setIsModalOpen(true); // 모달 열기
+      setIsModalOpen(true);
       setModalMessage('이메일 인증 중 에러가 발생하였습니다.');
     }
     setEmailCodeLoading(false);
@@ -321,8 +340,12 @@ function RegisterForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUserName(formData.username);
+    setName(formData.name);
+    console.log(formData.username);
+    console.log(formData.name);
     if (submitLoading) return;
     setSubmitLoading(true);
 
@@ -400,7 +423,7 @@ function RegisterForm() {
       await signUp(requestBody);
       setIsModalOpen(true); // 모달 열기
       setModalMessage('회원가입이 완료되었습니다.');
-      navigate('./register/welcome');
+      void navigate('/welcome');
     } catch (error) {
       if (error instanceof Error) {
         setIsModalOpen(true); // 모달 열기
@@ -557,8 +580,8 @@ function RegisterForm() {
         <RegisterInputTextField
           name="githubId"
           value={formData.githubId}
-          label="GitHub 주소"
-          placeHolder="GitHub 주소를 입력해 주세요."
+          label="GitHub 아이디"
+          placeHolder="GitHub 아이디를 입력해 주세요."
           onChange={handleChange}
           onBlur={handleBlur}
           valid={!inputErrors['githubId']}
