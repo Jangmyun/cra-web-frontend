@@ -11,8 +11,14 @@ function HavrutaBoardItem({ havrutaBoard }: { havrutaBoard: HavrutaBoard }) {
       <div className={styles['board-item-container']}>
         <div>
           <div className={styles['board-professor']}>
-            {havrutaBoard.havrutaDto.classname} (
-            {havrutaBoard.havrutaDto.professor})
+            {havrutaBoard.havrutaDto ? (
+              <>
+                {havrutaBoard.havrutaDto.classname} (
+                {havrutaBoard.havrutaDto.professor})
+              </>
+            ) : (
+              '정보 없음'
+            )}
             <span className={styles['board-time']}>
               {havrutaBoard.createdAt?.toString().substring(0, 10)}
             </span>
@@ -26,5 +32,4 @@ function HavrutaBoardItem({ havrutaBoard }: { havrutaBoard: HavrutaBoard }) {
     </Link>
   );
 }
-
 export default HavrutaBoardItem;
