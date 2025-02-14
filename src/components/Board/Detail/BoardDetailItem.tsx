@@ -12,14 +12,16 @@ import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
+import { LuEye } from 'react-icons/lu';
+import { BiLike } from 'react-icons/bi';
+import { BiDislike } from 'react-icons/bi';
+import { FaRegComment } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
-import viewImage from '~/assets/images/view_img.png';
 import likeImage from '~/assets/images/like_img.png';
 import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
-import { AxiosError } from 'axios';
 import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
@@ -192,21 +194,22 @@ export default function BoardDetailItem({
                 </div>
               </div>
             )}
-
-            <span className={styles.viewContainer}>
-              <img src={viewImage} />
-              <span>{viewCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <button onClick={handleLike} className={styles.like}>
-                {isLiked ? <img src={likeImage} /> : <img src={unLikeImage} />}
-              </button>
-              <span>{likeCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <span>댓글</span>
-              <span>{commentCount}</span>
-            </span>
+            <div className={styles['stats-container']}>
+              <span className={styles.viewContainer}>
+                <LuEye />
+                <span>{viewCnt}</span>
+              </span>
+              <span className={styles.viewContainer}>
+                <span onClick={handleLike} className={styles.like}>
+                  {isLiked ? <BiLike /> : <BiDislike />}
+                </span>
+                <span>{likeCnt}</span>
+              </span>
+              <span className={styles.viewContainer}>
+                <FaRegComment />
+                <span>{commentCount}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className={styles['footer']}>
