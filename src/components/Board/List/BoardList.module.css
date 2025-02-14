@@ -7,6 +7,35 @@
   margin: 0 auto;
   margin-bottom: 4rem;
 }
+@media (max-width: 1200px) {
+  .container {
+    max-width: 886px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    max-width: 756px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 586px;
+  }
+}
+
+@media (max-width: 628px) {
+  .container {
+    max-width: 486px;
+  }
+}
+
+@media (max-width: 468px) {
+  .container {
+    max-width: 384px;
+  }
+}
 
 .title {
   margin-left: 10px;
