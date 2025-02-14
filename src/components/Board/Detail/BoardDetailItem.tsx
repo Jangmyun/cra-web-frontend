@@ -80,6 +80,39 @@ export default function BoardDetailItem({
     }
   };
 
+  const handleDownload = async () => {
+    if (!board.fileUrl) {
+      alert('다운로드할 파일이 존재하지 않습니다.');
+      return;
+    }
+
+    try {
+      // ResponseType 설정을 통해 바이너리 데이터 처리
+      const response = await fetch(board.fileUrl);
+      if (!response.ok) throw new Error('다운로드 실패');
+
+      const contentType = response.headers.get('content-type');
+      const blob = await response.blob();
+
+      // Blob 객체 생성 시 명시적으로 type 지정
+      const file = new Blob([blob], {
+        type: contentType || 'application/octet-stream',
+      });
+
+      const url = window.URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = extractFileName(board.fileUrl);
+      link.click();
+
+      // 메모리 해제
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('파일 다운로드 실패:', error);
+      alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
   return (
     <div className={styles['detail-container']}>
       <div className={styles['detail-content']}>
@@ -119,8 +152,8 @@ export default function BoardDetailItem({
               <div className={styles['file-section']}>
                 <div className={styles['file-item']}>
                   <a
-                    href={board.fileUrl}
-                    download={extractFileName(board.fileUrl)}
+                    onClick={handleDownload}
+                    style={{ cursor: 'pointer' }}
                     className={styles['file-link']}
                   >
                     <IoIosLink />

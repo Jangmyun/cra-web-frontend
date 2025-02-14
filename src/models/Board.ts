@@ -1,4 +1,4 @@
-interface Board {
+export interface Board {
   id?: number;
   userId?: number;
   title: string;
@@ -26,4 +26,10 @@ interface Board {
   fileUrl?: string;
 }
 
-export type { Board };
+export interface UpdateBoard {
+  title: string;
+  content: string;
+  imageUrls?: string[];
+  isChangedFile: boolean;
+  deleted: boolean;
+}

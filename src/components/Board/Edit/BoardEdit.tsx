@@ -81,23 +81,14 @@ export default function BoardEdit({ category }: BoardEditProps) {
 
       const payload = {
         board: {
-          id: boardId, // 게시물 ID 추가
           title: formData.title,
           content,
-          category: formData.category,
           imageUrls: formData.imageUrls,
-          resUserDetailDto: {
-            name: '사용자 이름',
-            email: 'user@example.com',
-            studentId: 12345678,
-            term: '2025-1',
-            githubId: 'githubUsername',
-            imgUrl: 'https://example.com/profile.jpg',
-          },
+          isChangedFile: !!fileToUpload,
+          deleted: false,
         },
-        file: fileToUpload ? [fileToUpload.name] : [],
+        file: fileToUpload ? fileToUpload.name : null,
       };
-      console.log(payload.board);
 
       return await updateBoards(payload.board, fileToUpload);
     },

@@ -100,20 +100,11 @@ export default function HavrutaBoardEdit() {
 
       const payload = {
         board: {
-          id: boardId, // 게시물 ID 추가
           title: formData.title,
           content,
-          category: formData.category,
           imageUrls: formData.imageUrls,
-          havrutaDto: formData.havrutaDto,
-          resUserDetailDto: {
-            name: '사용자 이름',
-            email: 'user@example.com',
-            studentId: 12345678,
-            term: '2025-1',
-            githubId: 'githubUsername',
-            imgUrl: 'https://example.com/profile.jpg',
-          },
+          isChangedFile: !!fileToUpload,
+          deleted: false,
         },
         file: fileToUpload ? [fileToUpload.name] : [],
       };

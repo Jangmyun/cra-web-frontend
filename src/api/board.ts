@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Board } from '~/models/Board.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';
+import { UpdateBoard } from '~/models/Board.ts';
 
 // [GET]
 export const getBoardCountByCategory = async (category: number) => {
@@ -97,21 +98,33 @@ export const createBoardsView = async (id: number): Promise<Board> => {
 };
 
 // PUT
-export const updateBoards = async (board: Board, file: File | null) => {
+export const updateBoards = async (board: UpdateBoard, file: File | null) => {
   try {
     const formData = new FormData();
 
+    const boardData = {
+      title: board.title,
+      content: board.content,
+      imageUrls: board.imageUrls,
+      isChangedFile: !!file,
+      deleted: false,
+    };
+
     formData.append(
       'board',
-      new Blob([JSON.stringify(board)], { type: 'application/json' }),
+      new Blob([JSON.stringify(boardData)], { type: 'application/json' }),
     );
 
     if (file) {
       formData.append('file', file);
     }
 
+    const currentUrl = window.location.href;
+    const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+    const boardId = Number(id);
+
     const response = await authClient.put<FormData>(
-      `/board/${board.id}`,
+      `/board/${boardId}`,
       formData,
       {
         headers: {
@@ -122,11 +135,10 @@ export const updateBoards = async (board: Board, file: File | null) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error('Update board error:', error);
     throw error;
   }
 };
-
 // DELETE
 
 export const deleteBoards = async (id: number): Promise<Board> => {
