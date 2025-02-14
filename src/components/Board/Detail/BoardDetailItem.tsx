@@ -181,8 +181,8 @@ export default function BoardDetailItem({
           </div>
 
           <div className={styles['comment-count']}>
-            {board.fileUrl && (
-              <div className={styles['file-section']}>
+            <div className={styles['file-section']}>
+              {board.fileUrl ? (
                 <div className={styles['file-item']}>
                   <a
                     onClick={handleDownload}
@@ -194,8 +194,11 @@ export default function BoardDetailItem({
                     {extractFileName(board.fileUrl)}
                   </a>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div style={{ visibility: 'hidden' }}> </div>
+              )}
+            </div>
+
             <div className={styles['stats-container']}>
               <span className={styles.viewContainer}>
                 <LuEye />
