@@ -19,8 +19,6 @@ import { FaRegComment } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
-import likeImage from '~/assets/images/like_img.png';
-import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
 import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
 
@@ -84,7 +82,11 @@ export default function BoardDetailItem({
   const navigate = useNavigate();
   const handleLike = async () => {
     try {
-      const data = await createLike(board.id as number, !isLiked);
+      const data = await createLike(
+        board.id as number,
+        board.userId as number,
+        !isLiked,
+      );
       console.log('Response from like API:', data);
 
       // API 응답을 바로 반영
@@ -201,7 +203,7 @@ export default function BoardDetailItem({
               </span>
               <span className={styles.viewContainer}>
                 <span onClick={handleLike} className={styles.like}>
-                  {isLiked ? <BiLike /> : <BiDislike />}
+                  <BiLike className={isLiked ? styles.activeLike : ''} />
                 </span>
                 <span>{likeCnt}</span>
               </span>
