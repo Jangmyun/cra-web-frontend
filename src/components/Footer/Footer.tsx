@@ -23,16 +23,16 @@ export default function Footer() {
           <p>한동대학교 학생회관 206호</p>
         </div>
         <div className={styles.icons}>
-          <a href="https://www.instagram.com/cra_handong/" target="_blank">
+          <Link to="https://www.instagram.com/cra_handong/" target="_blank">
             <img
               width="32"
               height="32"
               src="https://img.icons8.com/windows/32/FFFFFF/instagram-new.png"
               alt="instagram-new"
             />
-          </a>
-          <a
-            href="https://github.com/Computer-Research-Association"
+          </Link>
+          <Link
+            to="https://github.com/Computer-Research-Association"
             target="_blank"
           >
             <img
@@ -41,7 +41,7 @@ export default function Footer() {
               src="https://img.icons8.com/material-outlined/32/github.png"
               alt="github"
             />
-          </a>
+          </Link>
           <Link to="/admin">
             <img
               width="32"
