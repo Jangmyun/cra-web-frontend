@@ -20,7 +20,7 @@ function HavrutaSidebar({
 
   return (
     <ul className={styles.menu}>
-      <h2>과목 목록</h2>
+      <h2>과목 목록</h2> 
       <li
         className={`${styles.menuItem} ${
           selectedHavrutaId === null ? styles.selected : ''

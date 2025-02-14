@@ -94,7 +94,7 @@
 
 .stats-container {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-right: 10px;
 }
 
@@ -102,6 +102,7 @@
   display: flex;
   align-items: center;
   gap: 10px; /* 원하는 간격(px 단위) */
+  width: 4ch;
 }
 
 .like {

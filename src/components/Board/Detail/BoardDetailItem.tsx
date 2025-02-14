@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Board } from '~/models/Board.ts';
 import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
 import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en.ts';
@@ -14,7 +14,6 @@ import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { BiLike } from 'react-icons/bi';
-import { BiDislike } from 'react-icons/bi';
 import { FaRegComment } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
@@ -181,8 +180,8 @@ export default function BoardDetailItem({
           </div>
 
           <div className={styles['comment-count']}>
-            {board.fileUrl && (
-              <div className={styles['file-section']}>
+            <div className={styles['file-section']}>
+              {board.fileUrl ? (
                 <div className={styles['file-item']}>
                   <a
                     onClick={handleDownload}
@@ -194,8 +193,11 @@ export default function BoardDetailItem({
                     {extractFileName(board.fileUrl)}
                   </a>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div style={{ visibility: 'hidden' }}> </div>
+              )}
+            </div>
+
             <div className={styles['stats-container']}>
               <span className={styles.viewContainer}>
                 <LuEye />

@@ -14,9 +14,9 @@ import { IoIosLink } from 'react-icons/io';
 import styles from './HavrutaBoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
-import viewImage from '~/assets/images/view_img.png';
 import createLike from '~/api/like';
 import { BiLike } from 'react-icons/bi';
+import { LuEye } from 'react-icons/lu';
 
 const extractFileName = (fileUrl: string) => {
   const decodedUrl = decodeURIComponent(fileUrl);
@@ -153,8 +153,8 @@ export default function HavrutaBoardDetailItem({
           </div>
 
           <div className={styles['comment-count']}>
-            {board.fileUrl && (
-              <div className={styles['file-section']}>
+            <div className={styles['file-section']}>
+              {board.fileUrl ? (
                 <div className={styles['file-item']}>
                   <a
                     onClick={handleDownload}
@@ -166,23 +166,27 @@ export default function HavrutaBoardDetailItem({
                     {extractFileName(board.fileUrl)}
                   </a>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div style={{ visibility: 'hidden' }}> </div>
+              )}
+            </div>
 
-            <span className={styles.viewContainer}>
-              <img src={viewImage} />
-              <span>{viewCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <span onClick={handleLike} className={styles.like}>
-                <BiLike className={isLiked ? styles.activeLike : ''} />
+            <div className={styles['stats-container']}>
+              <span className={styles.viewContainer}>
+                <LuEye />
+                <span>{viewCnt}</span>
               </span>
-              <span>{likeCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <FaRegComment />
-              <span>{commentCount}</span>
-            </span>
+              <span className={styles.viewContainer}>
+                <span onClick={handleLike} className={styles.like}>
+                  <BiLike className={isLiked ? styles.activeLike : ''} />
+                </span>
+                <span>{likeCnt}</span>
+              </span>
+              <span className={styles.viewContainer}>
+                <FaRegComment />
+                <span>{commentCount}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className={styles['footer']}>
