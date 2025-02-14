@@ -12,14 +12,16 @@ import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
 import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
+import { LuEye } from 'react-icons/lu';
+import { BiLike } from 'react-icons/bi';
+import { BiDislike } from 'react-icons/bi';
+import { FaRegComment } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
-import viewImage from '~/assets/images/view_img.png';
 import likeImage from '~/assets/images/like_img.png';
 import unLikeImage from '~/assets/images/unlike_img.png';
 import createLike from '~/api/like';
-import { AxiosError } from 'axios';
 import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
@@ -90,11 +92,39 @@ export default function BoardDetailItem({
       setLikeCnt(data.likes);
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 403) {
-          void navigate(`/login`);
-        }
-      }
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!board.fileUrl) {
+      alert('다운로드할 파일이 존재하지 않습니다.');
+      return;
+    }
+
+    try {
+      // ResponseType 설정을 통해 바이너리 데이터 처리
+      const response = await fetch(board.fileUrl);
+      if (!response.ok) throw new Error('다운로드 실패');
+
+      const contentType = response.headers.get('content-type');
+      const blob = await response.blob();
+
+      // Blob 객체 생성 시 명시적으로 type 지정
+      const file = new Blob([blob], {
+        type: contentType || 'application/octet-stream',
+      });
+
+      const url = window.URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = extractFileName(board.fileUrl);
+      link.click();
+
+      // 메모리 해제
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('파일 다운로드 실패:', error);
+      alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 
@@ -146,43 +176,40 @@ export default function BoardDetailItem({
           <div className={styles['content-title']}>{board.title}</div>
           <div className={styles['board-content']}>
             <Viewer initialValue={board.content} />
+          </div>
 
-            {/* 파일 목록 섹션 수정 */}
-            {board.fileUrls && board.fileUrls.length > 0 && (
+          <div className={styles['comment-count']}>
+            {board.fileUrl && (
               <div className={styles['file-section']}>
-                <ul className={styles['file-list']}>
-                  {board.fileUrls.map((fileUrl, index) => (
-                    <li key={index} className={styles['file-item']}>
-                      <a
-                        href={fileUrl}
-                        download={extractFileName(fileUrl)}
-                        className={styles['file-link']}
-                      >
-                        <IoIosLink />
-                        &nbsp;
-                        {extractFileName(fileUrl)}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <div className={styles['file-item']}>
+                  <a
+                    onClick={handleDownload}
+                    style={{ cursor: 'pointer' }}
+                    className={styles['file-link']}
+                  >
+                    <IoIosLink />
+                    &nbsp;
+                    {extractFileName(board.fileUrl)}
+                  </a>
+                </div>
               </div>
             )}
-          </div>
-          <div className={styles['comment-count']}>
-            <span className={styles.viewContainer}>
-              <img src={viewImage} />
-              <span>{viewCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <button onClick={handleLike} className={styles.like}>
-                {isLiked ? <img src={likeImage} /> : <img src={unLikeImage} />}
-              </button>
-              <span>{likeCnt}</span>
-            </span>
-            <span className={styles.viewContainer}>
-              <span>댓글</span>
-              <span>{commentCount}</span>
-            </span>
+            <div className={styles['stats-container']}>
+              <span className={styles.viewContainer}>
+                <LuEye />
+                <span>{viewCnt}</span>
+              </span>
+              <span className={styles.viewContainer}>
+                <span onClick={handleLike} className={styles.like}>
+                  {isLiked ? <BiLike /> : <BiDislike />}
+                </span>
+                <span>{likeCnt}</span>
+              </span>
+              <span className={styles.viewContainer}>
+                <FaRegComment />
+                <span>{commentCount}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className={styles['footer']}>

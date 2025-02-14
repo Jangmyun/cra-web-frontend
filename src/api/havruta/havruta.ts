@@ -2,7 +2,7 @@ import { Havruta } from '~/models/Havruta.ts';
 import { client } from '~/api/client.ts';
 import { authClient } from '~/api/auth/authClient.ts';
 
-// /a/havruta
+// /api/havruta
 export const getAllHavrutas = async () => {
   try {
     const response = await client.get<Havruta[]>(`/havruta`);
