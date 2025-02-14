@@ -147,7 +147,7 @@ li {
   li {
     width: 100%;
     padding-top: 24px;
-    padding-left: 10px;
+    margin-left: 30px;
     text-align: left;
   }
 
@@ -157,7 +157,8 @@ li {
 
   .navbar-link {
     align-items: start;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    cursor: pointer;
   }
 
   .desktop-authbutton {
@@ -168,10 +169,11 @@ li {
     display: block;
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
+    p {
+      text-align: start;
+    }
   }
   .authbutton {
-    margin: 0 auto;
     display: block;
   }
 }
@@ -185,4 +187,28 @@ li {
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+}
+
+.menu-toggle-active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 4px);
+}
+
+.menu-toggle-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle-active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -4px);
+}
+
+.menu-toggle span:nth-child(1) {
+  top: -8px;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 0;
+}
+
+.menu-toggle span:nth-child(3) {
+  top: 8px;
 }
