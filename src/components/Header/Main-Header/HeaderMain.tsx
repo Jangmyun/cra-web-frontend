@@ -40,7 +40,7 @@ export default function HeaderMain() {
   };
 
   // const handleMyInfo = () => {
-  //   navigate('/info');
+  //   navigate('/in  fo');
   // };
   return (
     <div className={styles['header-main']}>
