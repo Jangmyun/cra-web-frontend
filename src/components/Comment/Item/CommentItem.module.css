@@ -28,9 +28,13 @@
   height: 32px;
   border-radius: 50%;
   background-color: #d9d9d9;
+  margin-top: 0.1rem;
+  cursor: pointer;
+  user-select: none;
 }
 
 .comment-id {
+  font-family: 'Pretendard SemiBold';
   line-height: 34px;
   font-size: 20px;
   color: #5e5e5e;

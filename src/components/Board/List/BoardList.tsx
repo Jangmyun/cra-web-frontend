@@ -12,7 +12,7 @@ interface BoardListProps {
   boardsQuery: UseQueryResult<Board[], unknown>;
   totalPages: number;
   currentPage: number;
-  onPageChange: (page: number) => void;
+  onPageChange: (_page: number) => void;
 }
 
 export default function BoardList({

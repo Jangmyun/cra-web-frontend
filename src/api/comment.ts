@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Comment } from '~/models/Comment.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';
@@ -9,9 +8,9 @@ export const getCommentsByBoardId = async (boardId: number) => {
     const response = await client.get<Comment[]>(`/comment/${boardId}`);
 
     // createdAt 필드를 Date 객체로 변환
-    let comments: Comment[] = [];
+    const comments: Comment[] = [];
     response.data.forEach((comment) => {
-      let replies: Comment[] = [];
+      const replies: Comment[] = [];
       comment.commentList.forEach((reply) => {
         replies.push({
           ...reply,

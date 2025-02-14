@@ -1,8 +1,8 @@
 import Modal from 'react-modal';
 import { useUserStore } from '~/store/userStore';
 import logoutImage from '~/assets/images/logoutImage.png';
-import styles from '../User/UserModal.module.css';
 import { Link } from 'react-router-dom';
+import styles from './UserModal.module.css';
 
 interface UserModalProps {
   closeModal: () => void;
@@ -21,13 +21,15 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
         onRequestClose={closeModal}
       >
         <div className={styles['modal-header']}>
-          <button onClick={closeModal} className={styles['setting-button']}>
-            ⚙️
-          </button>
+          <Link to={`/user/${name}`}>
+            <button onClick={closeModal} className={styles['setting-button']}>
+              ⚙️
+            </button>
+          </Link>
         </div>
         <div className={styles['modal-body']}>
           <div className={styles['first-body']}>
-            <div className={styles['profile']} />
+            <img src={imgUrl} className={styles.profile} />
             <div className={styles['user-info']}>
               <div className={styles['semester']}>CRA {term}</div>
               <div className={styles['name']}>{name}</div>

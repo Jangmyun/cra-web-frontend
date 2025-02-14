@@ -1,0 +1,191 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  font-family: 'Pretendard Medium';
+  font-size: 1.2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 4rem 10rem;
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+  p {
+    font-family: 'Pretendard Medium';
+    float: left;
+    margin-right: 0.5rem;
+    background-color: var(--color-pink);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+
+    label {
+      margin: 0 0 16px 10px;
+      font-size: 24px;
+      font-family: 'Pretendard SemiBold';
+      color: #3e3e3e;
+    }
+
+    input {
+      font-family: 'Pretendard SemiBold';
+      margin-bottom: 34px;
+      height: 68px;
+      font-size: 18px;
+      border: 1px solid #c1c1c1;
+      border-radius: 10px;
+    }
+    input[type='text'],
+    input[type='number'] {
+      border-color: #c1c1c1;
+      padding: 0 20px;
+      &:focus {
+        border: 1.5px var(--color-more-primary) solid;
+        outline: none;
+      }
+    }
+
+    input[type='submit'] {
+      align-self: center;
+      width: 15rem;
+      background-color: var(--color-blue-primary);
+      color: var(--color-white);
+      height: 54px;
+      font-size: 1.25rem;
+      font-family: 'Pretendard Bold';
+      border: none;
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.title {
+  align-self: center;
+  font-size: 40px;
+  font-family: 'Pretendard Bold';
+  color: var(--color-bright-text);
+  margin-bottom: 3rem;
+}
+
+.info {
+  margin-top: 2rem;
+  font-family: 'Pretendard SemiBold';
+}
+
+.buttons {
+  display: flex;
+  align-self: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  button {
+    width: 11rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-family: 'Pretendard Bold';
+    border: none;
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    margin-top: 2rem;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.edit {
+  background-color: var(--color-blue-primary) !important;
+}
+
+.delete {
+  background-color: var(--color-pink) !important;
+}
+
+.link {
+  font-family: 'Pretendard SemiBold';
+  color: var(--color-primary);
+  text-decoration: none;
+  &:hover {
+    color: var(--color-blue-primary);
+  }
+}
+
+.realDelete {
+  align-self: center;
+  background-color: var(--color-error) !important;
+  width: 13rem !important;
+  padding: 0.85rem 0 !important;
+}
+
+.onemorechange {
+  align-self: center;
+  background-color: var(--color-more-primary) !important;
+  width: 13rem !important;
+  padding: 0.85rem 0 !important;
+}
+
+.deleting {
+  align-self: center;
+  font-size: 2rem;
+  font-family: 'Pretendard SemiBold';
+}
+
+.image {
+  align-self: center;
+  margin-bottom: 3rem;
+}
+
+.preview {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 2px solid var(--color-bright-text);
+  object-fit: cover;
+}
+
+.fileUpload {
+  display: none;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-blue-primary);
+  color: var(--color-white);
+  font-size: 1.2rem;
+  width: 11rem;
+  height: 54px;
+  font-family: 'Pretendard SemiBold';
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.fileLabel:hover {
+  transform: scale(1.05);
+}
+
+.confirmbutton {
+  width: 11rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1.25rem;
+  font-family: 'Pretendard Bold';
+  border: none;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  margin: 0 !important;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

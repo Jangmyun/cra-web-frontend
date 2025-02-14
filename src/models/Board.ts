@@ -8,7 +8,10 @@ export interface Board {
   createdAt?: Date;
   updatedAt?: Date;
   havrutaId?: number;
-  like?: number;
+  likeCount?: number;
+  viewerLiked?: boolean;
+  likes: number;
+  liked: boolean;
   view?: number;
   resUserDetailDto: {
     name?: string;

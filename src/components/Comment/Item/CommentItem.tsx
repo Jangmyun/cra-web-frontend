@@ -8,18 +8,26 @@ import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import WidthSpacer from '~/components/Common/WidthSpacer.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import styles from './CommentItem.module.css';
-import { useUserStore } from '~/store/userStore';
+import CommentUserModal from '~/components/Modal/User/OtherUser/CommentUserModal';
+
+const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
 export default function CommentItem({
   comment,
   isRoot,
+  commentsQuery,
 }: {
   comment: Comment;
-  isRoot: Boolean;
+  isRoot: boolean;
+  commentsQuery: Comment | null;
 }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   return (
     <div>
@@ -37,10 +45,24 @@ export default function CommentItem({
         ) : (
           <div className={styles['item-content']}>
             <div className={styles['comment-user']}>
-              <div className={styles['comment-profile-image']} />
+              <img
+                src={
+                  comment.resUserDetailDto.imgUrl
+                    ? comment.resUserDetailDto.imgUrl
+                    : DEFAULT_PROFILE
+                }
+                className={styles['comment-profile-image']}
+                onClick={openModal}
+              />
               <div className={styles['comment-id']}>
                 {comment.resUserDetailDto.name}
               </div>
+              {modalOpen && commentsQuery && (
+                <CommentUserModal
+                  closeModal={closeModal}
+                  comment={commentsQuery}
+                />
+              )}
             </div>
             <div className={styles['comment-content']}>{comment.content}</div>
 

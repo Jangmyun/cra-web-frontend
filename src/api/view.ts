@@ -1,12 +1,13 @@
-import { authClient } from './auth/authClient';
+import { Board } from '~/models/Board';
+import { client } from './client';
 
 // POST/View
-export const view = async (id: number) => {
+export const createBoardsView = async (id: number): Promise<Board> => {
   try {
-    const response = await authClient.post(`/board/view/${id}`);
+    const response = await client.post<Board>(`/board/view/${id}`);
     return response.data;
   } catch (error) {
-    console.error('조회수 증가 실패:', error);
-    throw new Error('조회수 증가 중 오류가 발생했습니다.');
+    console.log(error);
+    throw error;
   }
 };

@@ -11,7 +11,7 @@ import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { ReqSignUp } from '~/models/Auth';
 import RegisterInputTextField from './RegisterInputTextField';
 import { useRegisterStore } from '~/store/registerStore';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -178,7 +178,6 @@ function RegisterForm() {
 
   const { setName, setUserName } = useRegisterStore();
 
-  // State for storing input values
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -233,8 +232,14 @@ function RegisterForm() {
         return { valid: false, message: '올바른 형식이 아닙니다.' };
     }
     if (name === 'password') {
-      if (value.length < 8)
-        return { valid: false, message: '비밀번호를 8글자 이상 입력하세요.' };
+      const passwordRegex =
+        /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+      if (!passwordRegex.test(value))
+        return {
+          valid: false,
+          message:
+            '비밀번호는 8자 이상이어야 하며, 대문자와 특수 문자를 포함해야 합니다.',
+        };
     }
     if (name === 'passwordCheck') {
       if (value !== formData.password)
@@ -346,6 +351,7 @@ function RegisterForm() {
     setName(formData.name);
     console.log(formData.username);
     console.log(formData.name);
+
     if (submitLoading) return;
     setSubmitLoading(true);
 
