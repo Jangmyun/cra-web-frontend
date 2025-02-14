@@ -66,12 +66,11 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 468px) {
   .footer {
-    padding: 0rem;
+    padding: 1.5rem 0;
   }
-
   .content {
-    scale: 70%;
+    scale: 80%;
   }
 }
