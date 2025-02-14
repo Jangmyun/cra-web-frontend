@@ -9,13 +9,14 @@ import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import Divider from '~/components/Common/Divider.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
-import { FaRegEdit } from 'react-icons/fa';
+import { FaRegComment, FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
 import styles from './HavrutaBoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import viewImage from '~/assets/images/view_img.png';
 import createLike from '~/api/like';
+import { BiLike } from 'react-icons/bi';
 
 const extractFileName = (fileUrl: string) => {
   const decodedUrl = decodeURIComponent(fileUrl);
@@ -51,28 +52,34 @@ export default function HavrutaBoardDetailItem({
   }, [board.id]);
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCnt, setLikeCnt] = useState(board.likes);
+  const [likeCnt, setLikeCnt] = useState<number>(0);
 
   useEffect(() => {
-    const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
-    if (storedLikeStatus) {
-      setIsLiked(JSON.parse(storedLikeStatus));
-    }
+    const fetchLikeStatus = async () => {
+      try {
+        const response = await getBoardById(board.id as number);
+        console.log('Fetched board data:', response);
+        setLikeCnt(response.likeCount ?? 0);
+        setIsLiked(response.viewerLiked ?? false);
+      } catch (error) {
+        console.error('좋아요 상태를 가져오는 데 실패했습니다:', error);
+      }
+    };
+    void fetchLikeStatus();
   }, [board.id]);
 
   const handleLike = async () => {
-    if (board.userId === undefined) {
-      console.error('유효하지 않은 사용자 ID');
-      return;
-    }
-    const newLikeState = !isLiked;
     try {
-      await createLike(board.id as number, board.userId, isLiked);
-      setIsLiked(newLikeState);
-      setLikeCnt((prevCount) =>
-        newLikeState ? (prevCount as number) + 1 : (prevCount as number) - 1,
+      const data = await createLike(
+        board.id as number,
+        board.userId as number,
+        !isLiked,
       );
-      localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
+      console.log('Response from like API:', data);
+
+      // API 응답을 바로 반영
+      setIsLiked(data.liked);
+      setLikeCnt(data.likes);
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
     }
@@ -167,13 +174,13 @@ export default function HavrutaBoardDetailItem({
               <span>{viewCnt}</span>
             </span>
             <span className={styles.viewContainer}>
-              <button onClick={handleLike}>
-                {isLiked ? '좋아요 취소' : '좋아요'}
-              </button>
+              <span onClick={handleLike} className={styles.like}>
+                <BiLike className={isLiked ? styles.activeLike : ''} />
+              </span>
               <span>{likeCnt}</span>
             </span>
             <span className={styles.viewContainer}>
-              <span>댓글</span>
+              <FaRegComment />
               <span>{commentCount}</span>
             </span>
           </div>

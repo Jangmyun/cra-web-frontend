@@ -48,6 +48,7 @@ export default function BoardDetailItem({
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
+    console.log(viewed);
     if (!viewed) {
       createBoardsView(board.id as number)
         .then(() => {
@@ -79,7 +80,6 @@ export default function BoardDetailItem({
     void fetchLikeStatus();
   }, [board.id]);
 
-  const navigate = useNavigate();
   const handleLike = async () => {
     try {
       const data = await createLike(

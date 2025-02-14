@@ -132,3 +132,17 @@
 .file-link:hover {
   text-decoration: underline;
 }
+
+.like {
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.like:hover {
+  color: var(--color-primary);
+  border-radius: 5px;
+}
+
+.activeLike {
+  color: var(--color-primary);
+}
