@@ -1,7 +1,11 @@
 import { Board } from '~/models/Board';
 import { authClient } from './auth/authClient';
 
-export const createLike = async (id: number, isLike: boolean) => {
+export const createLike = async (
+  id: number,
+  userId: number,
+  isLike: boolean,
+) => {
   try {
     console.log('요청 URL:', `/board/like/${id}`, 'params:', { isLike });
 
