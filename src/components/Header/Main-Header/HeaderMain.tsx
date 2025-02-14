@@ -57,26 +57,50 @@ export default function HeaderMain() {
       <ul
         className={`${styles['nav-menu']} ${isMenuOpen ? styles.active : ''}`}
       >
-        {[
-          { path: '/notice', label: 'Notice' },
-          { path: '/academic', label: 'Academic' },
-          { path: '/book', label: 'Book' },
-          { path: '/item', label: 'Item' },
-          { path: '/havruta', label: 'Havruta' },
-          { path: '/project', label: 'Project' },
-        ].map(({ path, label }) => (
-          <li key={path}>
-            <Link
-              to={path}
-              className={`${styles['link']} ${styles['navbar-link']} ${
-                location.pathname.startsWith(path) ? styles.active : ''
-              }`}
-              onClick={toggleMenu}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
+        {isAuthenticated ? (
+          <>
+            {[
+              { path: '/notice', label: 'Notice' },
+              { path: '/academic', label: 'Academic' },
+              { path: '/book', label: 'Book' },
+              { path: '/item', label: 'Item' },
+              { path: '/havruta', label: 'Havruta' },
+              { path: '/project', label: 'Project' },
+            ].map(({ path, label }) => (
+              <li key={path}>
+                <Link
+                  to={path}
+                  className={`${styles['link']} ${styles['navbar-link']} ${
+                    location.pathname.startsWith(path) ? styles.active : ''
+                  }`}
+                  onClick={toggleMenu}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </>
+        ) : (
+          <>
+            {[
+              { path: '/notice', label: 'Notice' },
+              { path: '/book', label: 'Book' },
+              { path: '/project', label: 'Project' },
+            ].map(({ path, label }) => (
+              <li key={path}>
+                <Link
+                  to={path}
+                  className={`${styles['link']} ${styles['navbar-link']} ${
+                    location.pathname.startsWith(path) ? styles.active : ''
+                  }`}
+                  onClick={toggleMenu}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </>
+        )}
 
         <li className={styles['mobile-authbutton']}>
           {isAuthenticated ? (
