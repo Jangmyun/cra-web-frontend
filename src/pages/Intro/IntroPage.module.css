@@ -1041,7 +1041,23 @@ img {
     font-family: 'Pretendard Bold';
     margin-top: 2rem;
   }
+}
+.ProjectMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7rem;
+  .ProjectMoreComment {
+    font-size: 24px !important;
+  }
 
-  span {
+  .ProjectMoreLink {
+    text-decoration: none;
+    color: var(--color-i-taxi);
+    font-size: 20px !important;
+    margin-top: 2rem;
+    &:hover {
+      color: var(--color-more-primary);
+    }
   }
 }

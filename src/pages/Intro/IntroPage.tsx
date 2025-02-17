@@ -405,7 +405,12 @@ export default function IntroPage() {
         </div>
 
         <div className={styles.ProjectMore}>
-          <Link to="/project"></Link>
+          <p className={styles.ProjectMoreComment}>
+            CRA의 더 많은 프로젝트가 궁금하다면?
+          </p>
+          <Link to="/project" className={styles.ProjectMoreLink}>
+            프로젝트 더보기
+          </Link>
         </div>
       </div>
     </div>
