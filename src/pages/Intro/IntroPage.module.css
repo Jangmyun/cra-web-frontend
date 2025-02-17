@@ -238,6 +238,7 @@ img {
   border-radius: 1rem;
   padding: 2rem;
   margin: 1rem;
+  gap: 2rem;
 }
 
 #card-title {
@@ -269,7 +270,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 11rem;
+  padding: 11rem 11rem 4rem 11rem;
 }
 
 .club-container {
@@ -319,24 +320,9 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
-  border-radius: 2rem;
-  width: 30vw;
-  height: 22vw;
-  user-select: none;
-}
-
-.club-image p {
-  font-size: 1.5625rem;
-}
-
-.project {
-  padding: 10rem 0rem;
-  p {
-    color: #ffffff;
-    font-size: 3.125rem;
-    text-align: center;
-  }
+  width: 500px;
+  border: 5px var(--color-i-taxi) solid;
+  border-radius: 5px;
 }
 
 .crangE {
@@ -372,9 +358,16 @@ img {
   #card-content2 {
     font-size: 42px;
   }
+  .club-image {
+    width: 430px;
+  }
 }
 
-/* 테블릿 */
+@media (max-width: 1200px) {
+  .club-image {
+    width: 380px;
+  }
+} /* 테블릿 */
 @media (max-width: 1024px) /* and (min-width: 768px) { */ {
   .crangE {
     width: 20%; /* 태블릿 크기에서는 좀 더 작게 설정 */
@@ -453,10 +446,13 @@ img {
   }
 
   .club-image {
-    order: 2; /* 이미지 */
-    margin: 1rem; /* 위아래 간격 */
-    width: 60vw;
-    height: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border: 5px var(--color-i-taxi) solid;
+    border-radius: 5px;
+    margin-bottom: 2rem;
   }
 
   .club-content {
@@ -470,21 +466,6 @@ img {
 
   .club-title p {
     font-size: 4vw;
-  }
-
-  .project {
-    padding: 10vw 0; /* 뷰포트 너비에 비례한 패딩 */
-    max-height: 400px; /* 최대 높이 제한 */
-    min-height: 200px; /* 최소 높이 제한 */
-    display: flex; /* 컨테이너를 중앙 정렬 */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .project p {
-    color: #ffffff;
-    font-size: clamp(1.5rem, 4vw, 3.125rem); /* 최소/최대 크기 설정 */
   }
 }
 
@@ -566,7 +547,6 @@ img {
     }
 
     img {
-      max-width: 100%;
       height: auto;
     }
 
@@ -633,8 +613,7 @@ img {
     .crangE {
       user-select: none;
       object-fit: contain;
-      max-width: 100%; /* 화면 크기에 맞게 크기 자동 조정 */
-      height: auto; /* 비율을 유지하며 높이 조정 */
+      width: 10%;
     }
     .recruit-btn {
       display: flex;
@@ -831,29 +810,14 @@ img {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #d9d9d9;
-      border-radius: 2rem;
-      width: 30vw;
-      height: 22vw;
-      user-select: none;
-    }
-
-    .club-image p {
-      font-size: 1.5625rem;
-    }
-
-    .project {
-      padding: 10rem 0rem;
-      p {
-        color: #ffffff;
-        font-size: 3.125rem;
-        text-align: center;
-      }
+      width: 500px;
+      border: 5px var(--color-i-taxi) solid;
+      border-radius: 5px;
     }
 
     .crangE {
       object-fit: contain;
-      max-width: 100%;
+      max-width: 10%;
       height: auto;
     }
 
@@ -983,21 +947,6 @@ img {
       .club-title p {
         font-size: 4vw;
       }
-
-      .project {
-        padding: 10vw 0; /* 뷰포트 너비에 비례한 패딩 */
-        max-height: 400px; /* 최대 높이 제한 */
-        min-height: 200px; /* 최소 높이 제한 */
-        display: flex; /* 컨테이너를 중앙 정렬 */
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .project p {
-        color: #ffffff;
-        font-size: clamp(1.5rem, 4vw, 3.125rem); /* 최소/최대 크기 설정 */
-      }
     }
 
     @media (max-width: 1024px) {
@@ -1027,18 +976,88 @@ img {
       .section2 {
         margin-top: 0rem;
       }
-      .crangE {
-        width: 60%;
-      }
       .comment2 {
         font-size: 19px;
       }
     }
   }
   .crangE {
-    width: 60%;
+    width: 30% !important;
   }
   .comment2 {
     font-size: 19px;
+  }
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+  p {
+    font-size: 50px;
+    color: var(--color-white);
+  }
+}
+
+.ProjectBanner {
+  margin-top: 10rem;
+}
+
+.ProjectSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7.5rem;
+  margin-bottom: 5rem;
+  img {
+    align-self: center;
+    width: 550px;
+    border: 5px var(--color-i-taxi) solid;
+  }
+  p {
+    text-align: center;
+    font-size: 25px;
+  }
+}
+
+.ProjectTitle {
+  color: var(--color-i-taxi) !important;
+  font-family: 'Pretendard Bold' !important;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ProjectContext {
+  font-family: 'Pretendard' !important;
+  font-size: 20px !important;
+  p {
+    padding: 0 5rem;
+    line-height: 3rem;
+  }
+  .ProjectStack {
+    font-family: 'Pretendard Bold';
+    margin-top: 2rem;
+  }
+}
+.ProjectMore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7rem;
+  .ProjectMoreComment {
+    font-size: 24px !important;
+  }
+
+  .ProjectMoreLink {
+    text-decoration: none;
+    color: var(--color-i-taxi);
+    font-size: 20px !important;
+    margin-top: 2rem;
+    &:hover {
+      color: var(--color-more-primary);
+    }
   }
 }

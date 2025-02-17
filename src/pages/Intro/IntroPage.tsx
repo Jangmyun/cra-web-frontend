@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderIntro from '~/components/Header/Intro-Header/HeaderIntro.tsx';
-import EmblaCarousel from '~/components/Carousel/EmblaCarousel.tsx';
 import Vector from '~/assets/images/Vector/Arrow-Vector.png';
 import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png';
 import Crang1 from '~/assets/images/pixelcrang/pixelcrang1.svg';
@@ -9,8 +8,15 @@ import Crang2 from '~/assets/images/pixelcrang/pixelcrang2.svg';
 import Crang3 from '~/assets/images/pixelcrang/pixelcrang3.svg';
 import Crang4 from '~/assets/images/pixelcrang/pixelcrang4.svg';
 import blurround from '~/assets/images/black-blur-round.svg';
+import CRA_ITAXI from '~/assets/images/project/itaxi.png';
+import CRA_HSAFARI from '~/assets/images/project/hsafari.png';
+import CRA_TIMETABLE from '~/assets/images/project/timetable.png';
+import CRA_WEB from '~/assets/images/project/24-2/craweb.png';
+import CRA_MALLANG from '~/assets/images/project/24-2/mallang.jpg';
+import CRA_IMAGE1 from '~/assets/images/main/crabig.jpg';
+import CRA_IMAGE2 from '~/assets/images/main/crastudy2.jpg';
+import CRA_IMAGE3 from '~/assets/images/main/cradevelop.jpg';
 import styles from './IntroPage.module.css';
-// import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
 export default function IntroPage() {
   const [isVertical, setIsVertical] = useState(window.innerWidth <= 1024);
@@ -25,18 +31,26 @@ export default function IntroPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // 여기부터 페이지 컴포넌트
   return (
     <div className={styles['container']}>
       <div className={styles['main']}>
+        {/* 인트로페이지 헤더 */}
         <HeaderIntro />
-        <div className={styles['section']}>
-          <div className={styles['comment']}>
+
+        <div className={styles.section}>
+          {/* 처음 문구 */}
+          <div className={styles.comment}>
             <div>CRA와 함께 성장할 동아리원을 모집합니다</div>
           </div>
-          <div className={styles['banner']}>
+
+          {/* 배너 */}
+          <div className={styles.banner}>
             <div>Why not change the</div>
-            <div className={styles['helloworld']}>hello world!</div>
+            <div className={styles.helloworld}>hello world!</div>
           </div>
+
+          {/* 크랑이 여러마리 */}
           <div className={styles.CranEES}>
             <img
               className={`${styles.crangE} ${styles.character1}`}
@@ -55,27 +69,32 @@ export default function IntroPage() {
               src={Crang4}
             />
           </div>
+
+          {/* 리크루팅 페이지로 가는 버튼 */}
           <Link to="/recruit" className={styles['recruit-btn']}>
             <p>2025-1 CRA RECRUITMENT</p>
           </Link>
 
-          <div className={styles['vector']} onClick={scrollToSection}>
+          {/* 누르면 밑으로 내려가는 화살표 */}
+          <div className={styles.vector} onClick={scrollToSection}>
             <img src={Vector2} />
             <img src={Vector} />
           </div>
         </div>
       </div>
 
-      <div ref={ref} className={styles['section2']}>
-        <div className={styles['comment2']}>
+      {/* CRA 소개 Hook 문구 */}
+      <div ref={ref} className={styles.section2}>
+        <div className={styles.comment2}>
           <div>세대를 아우르는 열정과 끈끈한 유대감의 동아리,</div>
           <div>CRA를 소개합니다.</div>
         </div>
         <img className={styles['blur-round']} src={blurround} />
       </div>
 
-      <div className={styles['cra']}>
-        <div className={styles['title']}>
+      {/* CRA */}
+      <div className={styles.cra}>
+        <div className={styles.title}>
           <span id={styles['cap-letter']}>C</span>
           <p>omputer</p>
           <span id={styles['cap-letter']}>R</span>
@@ -84,7 +103,8 @@ export default function IntroPage() {
           <p>ssoication</p>
         </div>
 
-        <div className={styles['description']}>
+        {/* CRA 소개 */}
+        <div className={styles.description}>
           <p>CRA는 한동대학교 전산 교육과정에 기초하여</p>
           <p>
             한 분야에 국한되지 않는 신기술을 공부하고 습득한 지식과 기술을 통해
@@ -94,16 +114,22 @@ export default function IntroPage() {
           </p>
         </div>
 
-        <div className={styles['content']}>
-          <div className={styles['card']}>
+        {/* CRA 소개 카드 */}
+        <div className={styles.content}>
+          {/* CARD 1 */}
+          <div className={styles.card}>
             <p id={styles['card-title']}>CRA가 창립한지</p>
-            <p id={styles['card-content']}>29년</p>
+            <p id={styles['card-content']}>30년</p>
           </div>
-          <div className={styles['card']}>
+
+          {/* CARD 2 */}
+          <div className={styles.card}>
             <p id={styles['card-title']}>출시 서비스</p>
             <p id={styles['card-content']}>?개</p>
           </div>
-          <div className={styles['card']}>
+
+          {/* CARD 3 */}
+          <div className={styles.card}>
             <p id={styles['card-title']}>선배들과 함께하는</p>
             <p id={styles['card-content2']}>정기적인</p>
             <p id={styles['card-content2']}>교류활동</p>
@@ -111,7 +137,8 @@ export default function IntroPage() {
         </div>
       </div>
 
-      <div className={styles['club']}>
+      {/* CRA 소개 및 이미지 */}
+      <div className={styles.club}>
         {isVertical ? (
           <>
             <div className={styles['club-container']}>
@@ -119,8 +146,9 @@ export default function IntroPage() {
                 <div className={styles['club-title']}>
                   <p>탄탄하고 끈끈한 네트워크</p>
                 </div>
+                {/* 이미지 1 */}
                 <div className={styles['club-image']}>
-                  <p>이미지1</p>
+                  <img src={CRA_IMAGE1} />
                 </div>
                 <div className={styles['club-content']}>
                   <div className={styles['club-content1']}>
@@ -137,8 +165,9 @@ export default function IntroPage() {
                 <div className={styles['club-title']}>
                   <p>함께 성장하기에 최고로 좋은 환경</p>
                 </div>
+                {/* 이미지 2 */}
                 <div className={styles['club-image']}>
-                  <p>이미지2</p>
+                  <img src={CRA_IMAGE2} />
                 </div>
                 <div className={styles['club-content']}>
                   <div className={styles['club-content1']}>
@@ -168,8 +197,9 @@ export default function IntroPage() {
                 <div className={styles['club-title']}>
                   <p>리얼로다가! 개발을 합니다</p>
                 </div>
+                {/* 이미지 3 */}
                 <div className={styles['club-image']}>
-                  <p>이미지3</p>
+                  <img src={CRA_IMAGE3} />
                 </div>
                 <div className={styles['club-content']}>
                   <div className={styles['club-content1']}>
@@ -196,6 +226,7 @@ export default function IntroPage() {
           </>
         ) : (
           <>
+            {/* 모바일 디자인 */}
             <div className={styles['club-container']}>
               <div className={styles['club-card']}>
                 <div className={styles['club-title']}>
@@ -216,13 +247,13 @@ export default function IntroPage() {
                 </div>
               </div>
               <div className={styles['club-image']}>
-                <p>이미지1</p>
+                <img src={CRA_IMAGE1} />
               </div>
             </div>
 
             <div className={styles['club-container']}>
               <div className={styles['club-image']}>
-                <p>이미지2</p>
+                <img src={CRA_IMAGE2} />
               </div>
               <div className={styles['club-card1']}>
                 <div className={styles['club-title']}>
@@ -266,16 +297,121 @@ export default function IntroPage() {
                 </div>
               </div>
               <div className={styles['club-image']}>
-                <p>이미지3</p>
+                <img src={CRA_IMAGE3} />
               </div>
             </div>
           </>
         )}
       </div>
 
-      <div className={styles['project']}>
-        <p>프로젝트 소개</p>
-        <EmblaCarousel />
+      {/* 프로젝트 소개 부분 */}
+      <div className={styles.project}>
+        <p className={styles.ProjectBanner}>CRA 프로젝트 소개</p>
+
+        {/* 아이택시 */}
+        <div className={styles.ProjectSection}>
+          <img src={CRA_ITAXI} className={styles.ProjectImage} />
+          <p className={styles.ProjectTitle}>아이택시</p>
+          <div className={styles.ProjectContext}>
+            <p>
+              한동인의 No.1 교통 애플리케이션입니다.
+              <br />
+              많은 CRA 동아리원들의 노력으로 빚어졌으며, 현재에도 학기 중에
+              틈틈이 개발하고 있습니다.
+              <br />
+              앞으로 합승 후 정산하기에 도움이 되도록 확장 준비중입니다.
+              <br />
+            </p>
+            <p className={styles.ProjectStack}>
+              개발스택: Flutter, Firebase, GCP, AWS, Java Spring boot
+            </p>
+          </div>
+        </div>
+
+        {/* H-Safari */}
+        <div className={styles.ProjectSection}>
+          <img src={CRA_HSAFARI} className={styles.ProjectImage} />
+          <p className={styles.ProjectTitle}>H-Safari</p>
+          <div className={styles.ProjectContext}>
+            <p>
+              한동인들의 중고거래 플랫폼을 제공하는 서비스입니다.
+              <br />
+              20-1학기 신입 방학 프로젝트 때 제작되었습니다.
+              <br />
+            </p>
+            <p className={styles.ProjectStack}>
+              개발스택: Flutter, Node.js, Firebase
+            </p>
+          </div>
+        </div>
+
+        {/* Histime */}
+        <div className={styles.ProjectSection}>
+          <img src={CRA_TIMETABLE} className={styles.ProjectImage} />
+          <p className={styles.ProjectTitle}>대학 시간</p>
+          <div className={styles.ProjectContext}>
+            <p>
+              Histime 재개발 프로젝트입니다!
+              <br />
+              재학생 중 천명이 넘게 사용하고 있으며, 재정비하여 2주차부터
+              서비스를 시작하려고 합니다.
+              <br />
+              앞으로 합승 후 정산하기에 도움이 되도록 확장 준비중입니다.
+              <br />
+            </p>
+            <p className={styles.ProjectStack}>
+              개발스택: Flutter, Firebase, GCP, AWS, Java Spring boot
+            </p>
+          </div>
+        </div>
+
+        <p className={styles.ProjectBanner}>CRA 24-2 신입 프로젝트</p>
+
+        {/* 말랑 타격대 */}
+        <div className={styles.ProjectSection}>
+          <img src={CRA_MALLANG} className={styles.ProjectImage} />
+          <p className={styles.ProjectTitle}>말랑 타격대!!</p>
+          <div className={styles.ProjectContext}>
+            <p>
+              자원을 모아 건물을 짓고, 유닛을 생산해 전략적으로 상대 본진을
+              파괴하는 실시간 전략 게임입니다.
+              <br />
+              그린캠프 팀의 야심작입니다.
+              <br />
+            </p>
+            <p className={styles.ProjectStack}>
+              개발스택: Unity, Photon Server
+            </p>
+          </div>
+        </div>
+
+        {/* 크라 홈페이지 */}
+        <div className={styles.ProjectSection}>
+          <img src={CRA_WEB} className={styles.ProjectImage} />
+          <p className={styles.ProjectTitle}>CRA 홈페이지</p>
+          <div className={styles.ProjectContext}>
+            <p>
+              CRA의 새로운 페이지를 제작하는 웹 개발 프로젝트입니다.
+              <br />
+              동아리의 소개와 CRA 회원들만의 소통 공간 제공합니다.
+              <br />
+              25-1 학기에 출시를 목표로 하고 있습니다.
+              <br />
+            </p>
+            <p className={styles.ProjectStack}>
+              개발스택: React, Spring Boot, MySQL, AWS
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.ProjectMore}>
+          <p className={styles.ProjectMoreComment}>
+            CRA의 더 많은 프로젝트가 궁금하다면?
+          </p>
+          <Link to="/project" className={styles.ProjectMoreLink}>
+            프로젝트 더보기
+          </Link>
+        </div>
       </div>
     </div>
   );
