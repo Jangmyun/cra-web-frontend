@@ -1,35 +1,61 @@
 .cra {
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-white);
   border-radius: 2rem;
-  padding: 6.5rem 0rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  color: var(--color-dark-text);
 }
 
 .title {
   display: flex;
   justify-content: center;
-  font-size: 3.125rem;
+  font-size: 50px;
   user-select: none;
   span {
     color: #13abd7;
   }
   p {
-    color: #3e3e3e;
+    color: var(--color-dark-text);
   }
 }
 
-#cap-letter {
+.CRAtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 50px;
+  user-select: none;
+  span {
+    color: #13abd7;
+  }
+  p {
+    color: var(--color-dark-text);
+  }
+}
+
+.CRATitleContent {
+  display: flex;
+}
+
+.CapLetter {
   padding-left: 0.75rem;
 }
 
 .description {
   padding: 4.5rem 0rem;
   p {
-    font-size: 1.75rem;
+    font-size: 28px;
     text-align: center;
-    padding: 0.35rem 0rem;
+    line-height: 3rem;
   }
   span {
     background-color: #bae6f2;
+    color: var(--color-dark-text);
   }
 }
 
@@ -38,269 +64,212 @@
   justify-content: center;
 }
 
-.card {
+.Card {
   display: flex;
   flex-direction: column;
-  font-family: 'Pretendard SemiBold';
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pretendard Bold';
   width: 19rem;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 0.9;
   background-color: #f3f3f3;
   border-radius: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   padding: 2rem;
-  margin: 1rem;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-#card-title {
+.CardTitle {
   display: flex;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 28px;
   position: relative;
-  top: 1.5rem;
 }
 
-#card-content {
+.CardContent {
+  display: flex;
+  position: relative;
+  font-family: 'Pretendard SemiBold';
+  font-size: 80px;
+}
+
+.CardContent2 {
   display: flex;
   justify-content: center;
-  font-family: 'Pretendard Medium';
-  font-size: 5rem;
+  font-size: 55px;
   position: relative;
-  top: 3rem;
 }
 
-#card-content2 {
-  display: flex;
-  justify-content: center;
-  font-size: 3.4375rem;
-  position: relative;
-  top: 2.5rem;
+@media (max-width: 1280px) {
+  .title {
+    font-size: 45px;
+  }
+  .description {
+    p {
+      font-size: 24px;
+    }
+  }
+  .Card {
+    width: 16rem;
+  }
+  .CardTitle {
+    font-size: 24px;
+  }
+  .CardContent {
+    font-size: 65px;
+  }
+  .CardContent2 {
+    font-size: 45px;
+  }
 }
 
-@media (max-width: 1460px) and (min-width: 1024px) {
+@media (max-width: 1100px) {
+  .Card {
+    width: 14rem;
+    aspect-ratio: 1 / 0.95;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .CardTitle {
+    font-size: 22px;
+  }
+  .CardContent {
+    font-size: 60px;
+  }
+  .CardContent2 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 960px) {
+  .Card {
+    width: 12rem;
+    aspect-ratio: 1 / 0.965;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .CardTitle {
+    font-size: 20px;
+  }
+  .CardContent {
+    font-size: 55px;
+  }
+  .CardContent2 {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 880px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .Card {
+    width: 22rem;
+    aspect-ratio: 1 / 0.9;
+    background-color: #f3f3f3;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .CardTitle {
+    font-size: 24px;
+  }
+  .CardContent {
+    font-size: 70px;
+  }
+  .CardContent2 {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 730px) {
+  .title {
+    font-size: 40px;
+  }
+  .description {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 730px) {
+  .title {
+    font-size: 40px;
+  }
+  .description {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 660px) {
   .title {
     font-size: 38px;
   }
-  .description p {
-    font-size: 24px;
-  }
-
-  #card-title {
-    font-size: 20px;
-  }
-  #card-content,
-  #card-content2 {
-    font-size: 42px;
-  }
 }
 
-@media (max-width: 1024px) {
-  .title {
-    span {
-      font-size: 3.7vw;
-    }
-    p {
-      font-size: 3.7vw;
-    }
-  }
-  .description p {
-    font-size: clamp(15px, 2.3vw, 2.3vw);
-  }
-
-  .content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    width: 25vw;
-    aspect-ratio: 1 / 1;
-    background-color: #f3f3f3;
-    border-radius: 1rem;
-    padding: 2vw;
-    margin: 1vw;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  #card-title {
-    font-size: 2.5vw;
-    margin-top: 1vw;
-    text-align: center;
-  }
-
-  #card-content {
-    font-size: 4.5vw;
-    margin-top: 2vw;
-    text-align: center;
-  }
-
-  #card-content2 {
-    font-size: 3vw;
-    margin-top: 1.5vw;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 620px) {
   .cra {
-    background-color: #ffffff;
-    border-radius: 2rem;
-    padding: 6.5rem 0rem;
-  }
-
-  .title {
-    display: flex;
-    justify-content: center;
-    font-size: 3.125rem;
-    user-select: none;
-    span {
-      color: #13abd7;
-    }
-    p {
-      color: #3e3e3e;
-    }
-  }
-
-  #cap-letter {
-    padding-left: 0.75rem;
-  }
-
-  .description {
-    padding: 4.5rem 0rem;
-    p {
-      font-size: 1.75rem;
-      text-align: center;
-      padding: 0.35rem 0rem;
-    }
-    span {
-      background-color: #bae6f2;
-    }
-  }
-
-  .content {
-    display: flex;
-    justify-content: center;
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Pretendard SemiBold';
-    width: 19rem;
-    aspect-ratio: 1 / 1;
-    background-color: #f3f3f3;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin: 1rem;
-  }
-
-  #card-title {
-    display: flex;
-    justify-content: center;
-    font-size: 1.75rem;
-    position: relative;
-    top: 1.5rem;
-  }
-
-  #card-content {
-    display: flex;
-    justify-content: center;
-    font-family: 'Pretendard Medium';
-    font-size: 5rem;
-    position: relative;
-    top: 3rem;
-  }
-
-  #card-content2 {
-    display: flex;
-    justify-content: center;
-    font-size: 3.4375rem;
-    position: relative;
-    top: 2.5rem;
+    border-radius: 0;
+    padding-top: 5rem;
   }
 }
 
-@media (min-width: 301px) {
-  @media (max-width: 300px) {
-    .cra {
-      background-color: #ffffff;
-      border-radius: 2rem;
-      padding: 6.5rem 0rem;
-    }
+@media (max-width: 460px) {
+  .cra {
+    padding-bottom: 5rem;
+  }
+  .CRAtitle {
+    font-size: 45px;
+  }
+  .Card {
+    width: 14rem;
+    aspect-ratio: 1 / 0.95;
+    background-color: #f3f3f3;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .CardTitle {
+    font-size: 22px;
+  }
+  .CardContent {
+    font-size: 65px;
+  }
+  .CardContent2 {
+    font-size: 45px;
+  }
+}
 
-    .title {
-      display: flex;
-      justify-content: center;
-      font-size: 3.125rem;
-      user-select: none;
-      span {
-        color: #13abd7;
-      }
-      p {
-        color: #3e3e3e;
-      }
+@media (max-width: 348px) {
+  .CRAtitle {
+    font-size: 35px;
+  }
+  .description {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    p {
+      font-size: 20px;
     }
-
-    #cap-letter {
-      padding-left: 0.75rem;
-    }
-
-    .description {
-      padding: 4.5rem 0rem;
-      p {
-        font-size: 1.75rem;
-        text-align: center;
-        padding: 0.35rem 0rem;
-      }
-      span {
-        background-color: #bae6f2;
-      }
-    }
-
-    .content {
-      display: flex;
-      justify-content: center;
-    }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      font-family: 'Pretendard SemiBold';
-      width: 19rem;
-      aspect-ratio: 1 / 1;
-      background-color: #f3f3f3;
-      border-radius: 1rem;
-      padding: 2rem;
-      margin: 1rem;
-    }
-
-    #card-title {
-      display: flex;
-      justify-content: center;
-      font-size: 1.75rem;
-      position: relative;
-      top: 1.5rem;
-    }
-
-    #card-content {
-      display: flex;
-      justify-content: center;
-      font-family: 'Pretendard Medium';
-      font-size: 5rem;
-      position: relative;
-      top: 3rem;
-    }
-
-    #card-content2 {
-      display: flex;
-      justify-content: center;
-      font-size: 3.4375rem;
-      position: relative;
-      top: 2.5rem;
-    }
+  }
+  .Card {
+    width: 10rem;
+    aspect-ratio: 1 / 0.975;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .CardTitle {
+    font-size: 15px;
+  }
+  .CardContent {
+    font-size: 45px;
+  }
+  .CardContent2 {
+    font-size: 30px;
   }
 }
