@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
@@ -7,7 +7,6 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import styles from './HavrutaBoardEdit.module.css';
 import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
-import { IoIosLink } from 'react-icons/io';
 import { CATEGORY } from '~/constants/category.ts';
 import { Havruta } from '~/models/Havruta.ts';
 
@@ -46,13 +45,7 @@ export default function HavrutaBoardEdit() {
   const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
   const boardId = Number(id);
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -91,7 +84,7 @@ export default function HavrutaBoardEdit() {
 
       editorRef.current.getInstance().setMarkdown(board.content || '');
     }
-  }, [boardQuery.data, editorRef.current]);
+  }, [boardQuery.data, editorRef]);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -173,28 +166,28 @@ export default function HavrutaBoardEdit() {
     setFile(null);
   };
 
-  const handleSelectHavruta = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedHavrutaId = parseInt(e.target.value, 10);
-    const selectedHavruta = havrutaQuery.data?.find(
-      (h) => h.id === selectedHavrutaId,
-    );
+  // const handleSelectHavruta = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedHavrutaId = parseInt(e.target.value, 10);
+  //   const selectedHavruta = havrutaQuery.data?.find(
+  //     (h) => h.id === selectedHavrutaId,
+  //   );
 
-    if (!selectedHavruta) {
-      console.error('선택한 하브루타 과목을 찾을 수 없습니다.');
-      return;
-    }
+  //   if (!selectedHavruta) {
+  //     console.error('선택한 하브루타 과목을 찾을 수 없습니다.');
+  //     return;
+  //   }
 
-    setFormData((prev) => ({
-      ...prev,
-      havrutaDto: {
-        id: selectedHavruta.id ?? null,
-        classname: selectedHavruta.className || '',
-        professor: selectedHavruta.professor || '',
-      },
-    }));
-  };
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     havrutaDto: {
+  //       id: selectedHavruta.id ?? null,
+  //       classname: selectedHavruta.className || '',
+  //       professor: selectedHavruta.professor || '',
+  //     },
+  //   }));
+  // };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;

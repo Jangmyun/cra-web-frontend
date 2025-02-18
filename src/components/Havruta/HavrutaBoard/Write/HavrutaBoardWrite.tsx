@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { createBoards, onUploadImage } from '~/api/board.ts';
+import { createBoards } from '~/api/board.ts';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
 import { Havruta } from '~/models/Havruta.ts';
 import { CATEGORY } from '~/constants/category.ts';
@@ -39,13 +39,7 @@ export default function HavrutaBoardWrite() {
     },
   });
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -85,7 +79,10 @@ export default function HavrutaBoardWrite() {
       };
       console.log(payload.board);
 
-      return await createBoards(payload.board, fileToUpload);
+      return await createBoards(
+        { ...payload.board, likes: 0, liked: false },
+        fileToUpload,
+      );
     },
     onSuccess: async () => {
       alert('게시글 작성 성공');
@@ -183,7 +180,7 @@ export default function HavrutaBoardWrite() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;

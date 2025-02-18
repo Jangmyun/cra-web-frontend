@@ -81,11 +81,7 @@ export default function BoardDetailItem({
 
   const handleLike = async () => {
     try {
-      const data = await createLike(
-        board.id as number,
-        board.userId as number,
-        !isLiked,
-      );
+      const data = await createLike(board.id as number, !isLiked);
       console.log('Response from like API:', data);
 
       // API 응답을 바로 반영

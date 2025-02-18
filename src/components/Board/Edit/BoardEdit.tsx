@@ -3,11 +3,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORY_STRINGS } from '~/constants/category_strings';
 import { getBoardById, updateBoards } from '~/api/board';
-import { Board } from '~/models/Board';
 import { QUERY_KEY } from '~/api/queryKey';
 import { useMarkdownEditor } from '../Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
-import { IoIosLink } from 'react-icons/io';
 import styles from './BoardEdit.module.css';
 
 interface BoardEditProps {
@@ -38,13 +36,7 @@ export default function BoardEdit({ category }: BoardEditProps) {
   const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
   const boardId = Number(id);
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {

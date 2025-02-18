@@ -9,14 +9,13 @@ import HeightSpacer from '~/components/Common/HeightSpacer.tsx';
 import Divider from '~/components/Common/Divider.tsx';
 import { dateFormat } from '~/utils/dateForm.ts';
 import { Viewer } from '@toast-ui/react-editor';
-import { FaRegComment, FaRegEdit } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
 import styles from './HavrutaBoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
+import viewImage from '~/assets/images/view_img.png';
 import createLike from '~/api/like';
-import { BiLike } from 'react-icons/bi';
-import { LuEye } from 'react-icons/lu';
 
 const extractFileName = (fileUrl: string) => {
   const decodedUrl = decodeURIComponent(fileUrl);
@@ -52,34 +51,26 @@ export default function HavrutaBoardDetailItem({
   }, [board.id]);
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCnt, setLikeCnt] = useState<number>(0);
+  const [likeCnt, setLikeCnt] = useState(board.likes);
 
   useEffect(() => {
-    const fetchLikeStatus = async () => {
-      try {
-        const response = await getBoardById(board.id as number);
-        console.log('Fetched board data:', response);
-        setLikeCnt(response.likeCount ?? 0);
-        setIsLiked(response.viewerLiked ?? false);
-      } catch (error) {
-        console.error('좋아요 상태를 가져오는 데 실패했습니다:', error);
-      }
-    };
-    void fetchLikeStatus();
+    const storedLikeStatus = localStorage.getItem(`isLiked_${board.id}`);
+    if (storedLikeStatus) {
+      setIsLiked(JSON.parse(storedLikeStatus));
+    }
   }, [board.id]);
 
   const handleLike = async () => {
+    if (board.userId === undefined) {
+      console.error('유효하지 않은 사용자 ID');
+      return;
+    }
+    const newLikeState = !isLiked;
     try {
-      const data = await createLike(
-        board.id as number,
-        board.userId as number,
-        !isLiked,
-      );
-      console.log('Response from like API:', data);
-
-      // API 응답을 바로 반영
-      setIsLiked(data.liked);
-      setLikeCnt(data.likes);
+      await createLike(board.id as number, isLiked);
+      setIsLiked(newLikeState);
+      setLikeCnt((prevCount) => (newLikeState ? prevCount + 1 : prevCount - 1));
+      localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
     }
@@ -153,8 +144,8 @@ export default function HavrutaBoardDetailItem({
           </div>
 
           <div className={styles['comment-count']}>
-            <div className={styles['file-section']}>
-              {board.fileUrl ? (
+            {board.fileUrl && (
+              <div className={styles['file-section']}>
                 <div className={styles['file-item']}>
                   <a
                     onClick={handleDownload}
@@ -166,27 +157,23 @@ export default function HavrutaBoardDetailItem({
                     {extractFileName(board.fileUrl)}
                   </a>
                 </div>
-              ) : (
-                <div style={{ visibility: 'hidden' }}> </div>
-              )}
-            </div>
+              </div>
+            )}
 
-            <div className={styles['stats-container']}>
-              <span className={styles.viewContainer}>
-                <LuEye />
-                <span>{viewCnt}</span>
-              </span>
-              <span className={styles.viewContainer}>
-                <span onClick={handleLike} className={styles.like}>
-                  <BiLike className={isLiked ? styles.activeLike : ''} />
-                </span>
-                <span>{likeCnt}</span>
-              </span>
-              <span className={styles.viewContainer}>
-                <FaRegComment />
-                <span>{commentCount}</span>
-              </span>
-            </div>
+            <span className={styles.viewContainer}>
+              <img src={viewImage} />
+              <span>{viewCnt}</span>
+            </span>
+            <span className={styles.viewContainer}>
+              <button onClick={handleLike}>
+                {isLiked ? '좋아요 취소' : '좋아요'}
+              </button>
+              <span>{likeCnt}</span>
+            </span>
+            <span className={styles.viewContainer}>
+              <span>댓글</span>
+              <span>{commentCount}</span>
+            </span>
           </div>
         </div>
         <div className={styles['footer']}>
