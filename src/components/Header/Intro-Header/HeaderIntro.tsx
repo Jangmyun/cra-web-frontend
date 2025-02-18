@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import styles from './HeaderIntro.module.css';
 import CRALogo from '~/assets/images/cra-logo.png';
+import styles from './HeaderIntro.module.css';
 
 export default function HeaderIntro() {
   return (

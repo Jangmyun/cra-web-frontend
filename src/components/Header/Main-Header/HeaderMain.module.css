@@ -20,7 +20,7 @@
   height: auto;
 }
 
-ul {
+.nav-menu {
   display: flex;
   list-style: none;
   margin: 0;

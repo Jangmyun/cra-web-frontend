@@ -1,0 +1,306 @@
+.cra {
+  background-color: #ffffff;
+  border-radius: 2rem;
+  padding: 6.5rem 0rem;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 3.125rem;
+  user-select: none;
+  span {
+    color: #13abd7;
+  }
+  p {
+    color: #3e3e3e;
+  }
+}
+
+#cap-letter {
+  padding-left: 0.75rem;
+}
+
+.description {
+  padding: 4.5rem 0rem;
+  p {
+    font-size: 1.75rem;
+    text-align: center;
+    padding: 0.35rem 0rem;
+  }
+  span {
+    background-color: #bae6f2;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Pretendard SemiBold';
+  width: 19rem;
+  aspect-ratio: 1 / 1;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 1rem;
+  gap: 2rem;
+}
+
+#card-title {
+  display: flex;
+  justify-content: center;
+  font-size: 1.75rem;
+  position: relative;
+  top: 1.5rem;
+}
+
+#card-content {
+  display: flex;
+  justify-content: center;
+  font-family: 'Pretendard Medium';
+  font-size: 5rem;
+  position: relative;
+  top: 3rem;
+}
+
+#card-content2 {
+  display: flex;
+  justify-content: center;
+  font-size: 3.4375rem;
+  position: relative;
+  top: 2.5rem;
+}
+
+@media (max-width: 1460px) and (min-width: 1024px) {
+  .title {
+    font-size: 38px;
+  }
+  .description p {
+    font-size: 24px;
+  }
+
+  #card-title {
+    font-size: 20px;
+  }
+  #card-content,
+  #card-content2 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .title {
+    span {
+      font-size: 3.7vw;
+    }
+    p {
+      font-size: 3.7vw;
+    }
+  }
+  .description p {
+    font-size: clamp(15px, 2.3vw, 2.3vw);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    aspect-ratio: 1 / 1;
+    background-color: #f3f3f3;
+    border-radius: 1rem;
+    padding: 2vw;
+    margin: 1vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #card-title {
+    font-size: 2.5vw;
+    margin-top: 1vw;
+    text-align: center;
+  }
+
+  #card-content {
+    font-size: 4.5vw;
+    margin-top: 2vw;
+    text-align: center;
+  }
+
+  #card-content2 {
+    font-size: 3vw;
+    margin-top: 1.5vw;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cra {
+    background-color: #ffffff;
+    border-radius: 2rem;
+    padding: 6.5rem 0rem;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    font-size: 3.125rem;
+    user-select: none;
+    span {
+      color: #13abd7;
+    }
+    p {
+      color: #3e3e3e;
+    }
+  }
+
+  #cap-letter {
+    padding-left: 0.75rem;
+  }
+
+  .description {
+    padding: 4.5rem 0rem;
+    p {
+      font-size: 1.75rem;
+      text-align: center;
+      padding: 0.35rem 0rem;
+    }
+    span {
+      background-color: #bae6f2;
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Pretendard SemiBold';
+    width: 19rem;
+    aspect-ratio: 1 / 1;
+    background-color: #f3f3f3;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  #card-title {
+    display: flex;
+    justify-content: center;
+    font-size: 1.75rem;
+    position: relative;
+    top: 1.5rem;
+  }
+
+  #card-content {
+    display: flex;
+    justify-content: center;
+    font-family: 'Pretendard Medium';
+    font-size: 5rem;
+    position: relative;
+    top: 3rem;
+  }
+
+  #card-content2 {
+    display: flex;
+    justify-content: center;
+    font-size: 3.4375rem;
+    position: relative;
+    top: 2.5rem;
+  }
+}
+
+@media (min-width: 301px) {
+  @media (max-width: 300px) {
+    .cra {
+      background-color: #ffffff;
+      border-radius: 2rem;
+      padding: 6.5rem 0rem;
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      font-size: 3.125rem;
+      user-select: none;
+      span {
+        color: #13abd7;
+      }
+      p {
+        color: #3e3e3e;
+      }
+    }
+
+    #cap-letter {
+      padding-left: 0.75rem;
+    }
+
+    .description {
+      padding: 4.5rem 0rem;
+      p {
+        font-size: 1.75rem;
+        text-align: center;
+        padding: 0.35rem 0rem;
+      }
+      span {
+        background-color: #bae6f2;
+      }
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Pretendard SemiBold';
+      width: 19rem;
+      aspect-ratio: 1 / 1;
+      background-color: #f3f3f3;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin: 1rem;
+    }
+
+    #card-title {
+      display: flex;
+      justify-content: center;
+      font-size: 1.75rem;
+      position: relative;
+      top: 1.5rem;
+    }
+
+    #card-content {
+      display: flex;
+      justify-content: center;
+      font-family: 'Pretendard Medium';
+      font-size: 5rem;
+      position: relative;
+      top: 3rem;
+    }
+
+    #card-content2 {
+      display: flex;
+      justify-content: center;
+      font-size: 3.4375rem;
+      position: relative;
+      top: 2.5rem;
+    }
+  }
+}
