@@ -127,3 +127,9 @@
     padding-bottom: 2rem;
   }
 }
+
+@media (max-width: 384px) {
+  .club-content1 p {
+    font-size: 14px;
+  }
+}

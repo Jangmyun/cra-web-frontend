@@ -227,7 +227,7 @@
     font-size: 45px;
   }
   .Card {
-    width: 14rem;
+    width: 15rem;
     aspect-ratio: 1 / 0.95;
     background-color: #f3f3f3;
     border-radius: 1rem;
@@ -236,13 +236,13 @@
     gap: 1.5rem;
   }
   .CardTitle {
-    font-size: 22px;
+    font-size: 20px;
   }
   .CardContent {
-    font-size: 65px;
+    font-size: 60px;
   }
   .CardContent2 {
-    font-size: 45px;
+    font-size: 40px;
   }
 }
 

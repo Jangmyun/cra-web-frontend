@@ -150,3 +150,11 @@
     scale: 80%;
   }
 }
+
+@media (max-width: 384px) {
+  .ProjectContext {
+    p {
+      font-size: 14px !important;
+    }
+  }
+}
