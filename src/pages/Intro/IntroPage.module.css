@@ -1061,3 +1061,44 @@ img {
     }
   }
 }
+
+.History {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  padding-top: 10rem;
+  font-family: 'Pretendard';
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 1000px;
+  }
+  li {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-bright-stroke);
+    width: 100%;
+  }
+  span {
+    color: var(--color-primary);
+    font-family: 'Pretendard Bold' !important;
+  }
+}
+
+.HistoryTitle {
+  margin-bottom: 4rem;
+  font-family: 'Pretendard Bold';
+  font-size: 40px;
+}
+
+.HistoryListElement {
+  padding-left: 42.5px;
+  padding-top: 0.5rem;
+}
+
+.HistoryLastElement {
+  border-bottom: none !important;
+}
