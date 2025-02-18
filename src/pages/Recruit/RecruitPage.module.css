@@ -18,22 +18,51 @@
 
 #title {
   color: #ffffff;
-  font-size: 5vw;
+  font-size: clamp(35px, 6vw, 6vw);
   font-weight: 978;
   letter-spacing: -1px;
-  line-height: 5vw;
+  line-height: clamp(30px, 5vw, 5vw);
   font-family: 'Archivo Black';
 }
 
 #content {
   color: #dcf8ff;
-  font-size: 2.9vw;
-  padding: 2.5rem 0rem;
+  font-size: clamp(15px, 2.9vw, 2.9vw);
+  padding: clamp(1rem, 2.5vw, 2.5rem) 0rem;
   font-family: 'Pretendard Bold';
 }
 
-.recruit-page {
-  padding: 5rem 10rem;
+.recruit-apply1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0rem 1rem 0rem;
+
+  h1 {
+    padding-top: 10px;
+    padding-bottom: 3vw;
+    font-size: 3vw;
+    color: white;
+    font-family: 'Pretendard Bold';
+  }
+
+  .button-style {
+    padding: 1vw 15vw;
+    font-size: 2vw;
+    font-family: 'Pretendard Bold';
+    color: white;
+    background: #2cb4db;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+  }
+
+  .button-style:hover {
+    transform: scale(1.05);
+  }
 }
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -42,13 +71,13 @@
   flex-direction: column;
   align-items: center; /* 부모 요소를 가운데 정렬 */
   justify-content: center; /* 부모 요소를 세로로 가운데 정렬 */
-  padding: 2vw 0rem 2vw 0rem;
+  padding: 2vw 0rem;
   color: white;
 
-  h1 {
-    padding-top: 250px;
+  h2 {
+    padding-top: clamp(100px, 25vw, 250px);
     padding-bottom: 40px;
-    font-size: 3vw;
+    font-size: clamp(25px, 3vw, 3vw);
     font-family: 'Pretendard Bold';
   }
 }
@@ -56,8 +85,8 @@
 .recruit-talentDetail {
   div {
     display: flex;
-    padding: 25px;
-    font-size: clamp(13px, 1.5vw, 30px);
+    padding: clamp(5px, 2.5vw, 25px);
+    font-size: clamp(10px, 2vw, 25px);
     font-weight: bold;
     line-height: 1.6;
     color: white;
@@ -80,12 +109,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0rem 10rem 0rem;
+  padding: 2rem 0rem clamp(2rem, 15vw, 20rem) 0rem;
 
   h2 {
-    padding-top: 100px;
-    padding-bottom: 100px;
-    font-size: 3vw;
+    padding-top: 200px;
+    padding-bottom: clamp(10px, 5vw, 100px);
+    font-size: clamp(25px, 3vw, 3vw);
     color: white;
     font-family: 'Pretendard Bold';
   }
@@ -97,24 +126,24 @@
 }
 
 .content-box {
-  width: clamp(125px, 20vw, 800px);
-  height: clamp(125px, 15vw, 800px);
+  width: clamp(120px, 20vw, 800px);
+  height: clamp(120px, 15vw, 800px);
   aspect-ratio: 397 / 281;
   background-color: rgb(237, 237, 237);
   border-radius: 1vw;
-  margin: 10px;
+  margin: clamp(3px, 0.5vw, 10px);
 
   h3 {
-    padding: 1.5vw;
-    font-size: 1.7vw;
+    padding: 1vw;
+    font-size: clamp(10px, 1.7vw, 1.7vw);
     font-family: 'Pretendard ExtraBold';
   }
 
   p {
     display: flex;
-    font-size: clamp(9px, 1.3vw, 50px);
+    font-size: clamp(8px, 1.2vw, 50px);
     margin-left: 1.4vw;
-    line-height: clamp(15px, 1.6vw, 1.6vw);
+    line-height: clamp(10px, 1.6vw, 1.6vw);
     font-family: 'Pretendard Medium';
   }
 }
@@ -130,8 +159,8 @@
 
   h2 {
     padding-top: 50px;
-    padding-bottom: 200px;
-    font-size: 3vw;
+    padding-bottom: clamp(20px, 13vw, 240px);
+    font-size: clamp(25px, 3vw, 3vw);
     color: white;
     font-family: 'Pretendard Bold';
   }
@@ -147,14 +176,14 @@
 }
 
 .calender-box {
-  width: 60vw;
-  height: 10vw;
+  height: clamp(100px, 10vw, 10vw);
   aspect-ratio: 286 / 199;
   background-color: rgb(237, 237, 237);
   border-radius: 10px;
   margin: 15px;
 
   h3 {
+    font-size: clamp(10px, 1.2vw, 1.2vw);
     padding: 20px;
     font-family: 'Pretendard Bold';
   }
@@ -165,6 +194,7 @@
     line-height: 1.3;
     margin-left: 1.6vw;
     font-family: 'Pretendard Medium';
+    color: #3e3e3e;
   }
 }
 
@@ -211,8 +241,8 @@
   align-items: center;
   padding: 3.25rem 0rem;
   img {
-    width: 3.4375rem;
-    height: 1.6875rem;
+    width: clamp(30px, 4vw, 4vw);
+    height: clamp(15px, 2vw, 2vw);
   }
 }
 

@@ -24,7 +24,7 @@ export default function RecruitPage() {
           <p id={styles['content']}>
             CRA는 함께 성장 할 25-1 기수 동아리원을 모집합니다.
           </p>
-          <div className={styles['recruit-apply']}>
+          <div className={styles['recruit-apply1']}>
             <Link to="https://docs.google.com/forms/d/e/1FAIpQLSf5uTQbDr7i9WjPfI61hMJ_PqDS1Of_fZRNpD8MRzlvnYFsKA/closedform">
               <button className={styles['button-style']}>지원하기</button>
             </Link>
@@ -37,7 +37,7 @@ export default function RecruitPage() {
       </div>
 
       <div className={styles['recruit-talent']}>
-        <h1>이런 사람과 함께 하고 싶어요</h1>
+        <h2>이런 사람과 함께 하고 싶어요</h2>
         <div ref={recruitTalentRef} className={styles['recruit-talentDetail']}>
           <div>
             <span className={styles['number']}>01</span>

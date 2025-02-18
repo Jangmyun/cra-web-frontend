@@ -20,6 +20,7 @@ import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import createLike from '~/api/like';
 import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
+import { useAuthStore } from '~/store/authStore';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
@@ -44,6 +45,7 @@ export default function BoardDetailItem({
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+  const userId = useAuthStore.getState().userId as number;
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
@@ -161,13 +163,17 @@ export default function BoardDetailItem({
               </span>
             </div>
             <div className={styles['fix-button']}>
-              <Link
-                to={`/${CATEGORY_STRINGS_EN[category]}/edit/${board.id}`}
-                className={styles['link']}
-              >
-                <FaRegEdit size={22} />
-              </Link>
-              <BoardDelete id={board.id!} category={category} />
+              {userId === board.userId && (
+                <>
+                  <Link
+                    to={`/${CATEGORY_STRINGS_EN[category]}/edit/${board.id}`}
+                    className={styles['link']}
+                  >
+                    <FaRegEdit size={22} />
+                  </Link>
+                  <BoardDelete id={board.id!} category={category} />
+                </>
+              )}
             </div>
           </div>
           <div className={styles['content-title']}>{board.title}</div>
