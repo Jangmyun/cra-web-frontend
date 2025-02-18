@@ -5,10 +5,10 @@ import CRA_IMAGE3 from '~/assets/images/main/cradevelop.jpg';
 import styles from './IntroNetwork.module.css';
 
 function IntroNetwork() {
-  const [isVertical, setIsVertical] = useState(window.innerWidth <= 1024);
+  const [isVertical, setIsVertical] = useState(window.innerWidth <= 1200);
 
   useEffect(() => {
-    const handleResize = () => setIsVertical(window.innerWidth <= 1024);
+    const handleResize = () => setIsVertical(window.innerWidth <= 1200);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
