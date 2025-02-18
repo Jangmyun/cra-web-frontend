@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { client } from './client';
 
 // email 인증 요청

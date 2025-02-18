@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Board } from '~/models/Board.ts';
 import { CATEGORY_STRINGS } from '~/constants/category_strings.ts';
 import { CATEGORY_STRINGS_EN } from '~/constants/category_strings_en.ts';
@@ -14,7 +14,6 @@ import { FaRegEdit } from 'react-icons/fa';
 import { IoIosLink } from 'react-icons/io';
 import { LuEye } from 'react-icons/lu';
 import { BiLike } from 'react-icons/bi';
-import { BiDislike } from 'react-icons/bi';
 import { FaRegComment } from 'react-icons/fa';
 import styles from './BoardDetailItem.module.css';
 import { createBoardsView } from '~/api/view';
@@ -79,14 +78,9 @@ export default function BoardDetailItem({
     void fetchLikeStatus();
   }, [board.id]);
 
-  const navigate = useNavigate();
   const handleLike = async () => {
     try {
-      const data = await createLike(
-        board.id as number,
-        board.userId as number,
-        !isLiked,
-      );
+      const data = await createLike(board.id as number, !isLiked);
       console.log('Response from like API:', data);
 
       // API 응답을 바로 반영

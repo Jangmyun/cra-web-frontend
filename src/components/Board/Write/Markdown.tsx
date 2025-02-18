@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import { useRef, useState } from 'react';
-import { Editor } from '@toast-ui/react-editor';
 import { colorSyntax, codeSyntaxHighlight, Prism } from '~/styles/toast-ui';
-import { onUploadImage } from '~/api/board';
+// import { onUploadImage } from '~/api/board';
 
 interface UseMarkdownEditorProps {
   initialContent?: string;
-  onContentChange?: (content: string) => void;
+  onContentChange?: (_content: string) => void;
 }
 
 interface UseMarkdownEditorReturn {
@@ -23,10 +24,7 @@ interface UseMarkdownEditorReturn {
     plugins: any[];
     onChange: () => void;
     hooks: {
-      addImageBlobHook: (
-        blob: File,
-        callback: (url: string) => void,
-      ) => Promise<void>;
+      addImageBlobHook: () => Promise<void>;
     };
   };
 }
@@ -55,19 +53,19 @@ export const useMarkdownEditor = ({
     return true;
   };
 
-  const handleImageUpload = async (
-    blob: File,
-    callback: (url: string) => void,
-  ) => {
-    try {
-      const url = await onUploadImage(blob);
-      callback(url);
-      return url;
-    } catch (error) {
-      console.error('이미지 업로드 실패:', error);
-      alert('이미지 업로드에 실패했습니다.');
-    }
-  };
+  // const handleImageUpload = async (
+  //   blob: File,
+  //   callback: (_url: string) => void,
+  // ) => {
+  //   try {
+  //     const url = await onUploadImage(blob);
+  //     callback(url);
+  //     return url;
+  //   } catch (error) {
+  //     console.error('이미지 업로드 실패:', error);
+  //     alert('이미지 업로드에 실패했습니다.');
+  //   }
+  // };
 
   const editorConfig = {
     initialValue: initialContent,
@@ -78,7 +76,7 @@ export const useMarkdownEditor = ({
     plugins: [[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax],
     onChange: handleEditorChange,
     hooks: {
-      addImageBlobHook: handleImageUpload,
+      addImageBlobHook: async () => {},
     },
   };
 

@@ -67,11 +67,9 @@ export default function HavrutaBoardDetailItem({
     }
     const newLikeState = !isLiked;
     try {
-      await createLike(board.id as number, board.userId, isLiked);
+      await createLike(board.id as number, isLiked);
       setIsLiked(newLikeState);
-      setLikeCnt((prevCount) =>
-        newLikeState ? (prevCount as number) + 1 : (prevCount as number) - 1,
-      );
+      setLikeCnt((prevCount) => (newLikeState ? prevCount + 1 : prevCount - 1));
       localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
