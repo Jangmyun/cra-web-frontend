@@ -54,12 +54,11 @@ export const useAuthStore = create<authStore>()(
             refreshToken: resTokenDto.refreshToken,
             userId: resTokenDto.userId,
           });
+          console.log('첫번째 엑세스 토큰: ', resTokenDto.accessToken);
+          console.log('첫번째 리프레시 토큰: ', resTokenDto.refreshToken);
 
           // Session Storage에도 토큰을 저장하여 다른 Api 요청에서도 사용할 수 있게하기
           sessionStorage.setItem('refreshToken', resTokenDto.refreshToken);
-
-          // console.log('testhere : ' + sessionStorage.getItem('refreshToken'));
-          console.log('testhere : ' + resTokenDto.refreshToken);
 
           await useAuthStore.getState().reissueToken({
             userId: resTokenDto.userId,
@@ -101,13 +100,14 @@ export const useAuthStore = create<authStore>()(
       // 토큰 재발급 메서드
       reissueToken: async (data: ReissueToken) => {
         try {
+          console.log('리이슈 토큰 파라미터', data);
           // 토근 재발급 Api를 호출하여 새로운 ResponseToken(accessToken, refreshToken, userId)을 받음
           console.log(data);
           const response: ResTokenDto = await reissueTokenApi(data);
           const newRefreshToken = sessionStorage.getItem(
             'refreshToken',
           ) as string;
-          // 받은 정보를 상태에 저장
+          console.log('세션에서 불러온 리프레시 토큰:', newRefreshToken);
           set({
             accessToken: response.accessToken,
             refreshToken: newRefreshToken,
@@ -117,7 +117,6 @@ export const useAuthStore = create<authStore>()(
           // Session Storage를 갱신해서 최신 인증 정보 유지
           sessionStorage.setItem('accessToken', response.accessToken);
           sessionStorage.setItem('refreshToken', newRefreshToken);
-          console.log('accessToken', response.accessToken);
         } catch (error) {
           useUserStore.getState().resetUser();
           sessionStorage.clear();
