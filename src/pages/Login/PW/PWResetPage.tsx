@@ -93,7 +93,7 @@ function PWResetPage() {
         <Submit
           onClick={(e) => {
             e.preventDefault();
-            navigate('/pwsearch/complete');
+            void navigate('/pwsearch/complete');
           }}
         >
           확인
