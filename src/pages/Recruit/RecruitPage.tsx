@@ -3,7 +3,7 @@ import Vector from '~/assets/images/Vector/Arrow-Vector.png';
 import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png';
 import styles from './RecruitPage.module.css';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function RecruitPage() {
   const recruitTalentRef = useRef<HTMLDivElement>(null);
@@ -13,6 +13,30 @@ export default function RecruitPage() {
       block: 'center',
     });
   };
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      { threshold: 0.3 }, // 30% 이상 보이면 실행
+    );
+
+    if (recruitTalentRef.current) {
+      observer.observe(recruitTalentRef.current);
+    }
+
+    return () => {
+      if (recruitTalentRef.current) {
+        observer.unobserve(recruitTalentRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className={styles['recruit-container']}>
@@ -32,12 +56,19 @@ export default function RecruitPage() {
           <div className={styles['vector']} onClick={scrollToSection}>
             <img src={Vector2} />
             <img src={Vector} />
+            <img src={Vector2} />
           </div>
         </div>
       </div>
 
       <div className={styles['recruit-talent']}>
-        <h2>이런 사람과 함께 하고 싶어요</h2>
+        <h2
+          ref={recruitTalentRef}
+          className={`${styles['recruit-title']} ${isVisible ? styles['animate'] : ''}`}
+        >
+          이런 사람과 함께 하고 싶어요
+        </h2>
+
         <div ref={recruitTalentRef} className={styles['recruit-talentDetail']}>
           <div>
             <span className={styles['number']}>01</span>

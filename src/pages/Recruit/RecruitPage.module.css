@@ -73,12 +73,35 @@
   justify-content: center; /* 부모 요소를 세로로 가운데 정렬 */
   padding: 2vw 0rem;
   color: white;
+}
+.recruit-title {
+  padding-top: clamp(100px, 25vw, 250px);
+  padding-bottom: 40px;
+  font-size: clamp(25px, 3vw, 3vw);
+  font-family: 'Pretendard Bold';
+  opacity: 0; /* 기본적으로 처음엔 안 보이게 설정 */
+  transform: scale(0.8); /* 처음에는 약간 작게 시작 */
+  transition:
+    transform 0.5s ease-out,
+    opacity 0.7s ease-out;
+}
 
-  h2 {
-    padding-top: clamp(100px, 25vw, 250px);
-    padding-bottom: 40px;
-    font-size: clamp(25px, 3vw, 3vw);
-    font-family: 'Pretendard Bold';
+.recruit-title.animate {
+  opacity: 1; /* 서서히 나타남 */
+  transform: scale(1.2); /* 커졌다가 */
+}
+
+.recruit-title.animate::after {
+  content: '';
+  animation: scaleBack 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes scaleBack {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
   }
 }
 
@@ -213,15 +236,28 @@
 
   .calender-line {
     position: relative;
-    height: 2px; /* 줄의 높이 */
-    background-color: rgb(0, 0, 0); /* 줄의 색상 */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-left: thick solid #2cb4db;
-    height: 500px;
+    height: 500px; /* 선 길이 */
+    border-left: thick solid #2cb4db; /* 원래 선 */
     margin-left: 50%;
+
+    /* 기존 배경 제거 */
+    background-color: transparent;
+
+    /* 네온 효과 */
+    filter: drop-shadow(0px -5px 15px rgba(50, 161, 206, 0.7));
+  }
+
+  .calender-line::before {
+    content: '';
+    position: absolute;
+    left: -8px; /* 선 기준으로 왼쪽에만 효과 */
+    top: 0;
+    width: 12px; /* 빛의 두께 */
+    height: 100%;
+    background-color: #32a1ce;
+    opacity: 0.6;
+    filter: blur(12px); /* 부드러운 빛 효과 */
+    z-index: -1; /* 내용보다 뒤에 위치하도록 설정 */
   }
 
   .calender-box {
@@ -308,13 +344,41 @@
   flex-direction: column;
   align-items: center;
   padding: 3.25rem 0rem;
-  img {
-    width: clamp(30px, 4vw, 4vw);
-    height: clamp(15px, 2vw, 2vw);
+  cursor: pointer;
+}
+
+.vector img {
+  width: clamp(30px, 4vw, 4vw);
+  height: clamp(15px, 2vw, 2vw);
+  animation: highwayEffect 1.5s infinite ease-in-out;
+  opacity: 0;
+}
+
+.vector img:nth-child(1) {
+  animation-delay: 0s;
+}
+.vector img:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.vector img:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes highwayEffect {
+  0% {
+    transform: translateY(-10px) scale(0.8); /* 위에서 작게 시작 */
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(5px) scale(1); /* 아래로 내려오면서 확대 */
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(0.8); /* 사라지듯 축소 */
+    opacity: 0;
   }
 }
 
 .vector:hover {
-  cursor: pointer;
   transform: scale(1.05);
 }
