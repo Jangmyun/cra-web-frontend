@@ -15,14 +15,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   z-index: 2;
 
   font-style: normal;
   font-size: 3.125em;
-  line-height: 150px;
   letter-spacing: -0.05em;
   color: #ffffff;
-  margin-bottom: -30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .banner {
@@ -47,12 +48,11 @@
 
 .crangE {
   object-fit: contain;
-  max-width: 100%;
-  height: auto;
+  width: 320px;
   user-select: none;
 }
 
-.recruit-btn {
+.RecruitBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,8 +80,8 @@
   padding: 3.25rem 0rem;
   user-select: none;
   img {
-    width: 3.4375rem;
-    height: 1.6875rem;
+    width: 55px;
+    height: 27px;
   }
 }
 
@@ -95,7 +95,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0rem;
+  padding-bottom: 15rem;
   user-select: none;
 }
 
@@ -106,86 +106,138 @@
   align-items: center;
   width: 100%;
   font-style: normal;
-  font-size: clamp(30px, 3vw, 3vw);
+  font-size: 32px !important;
   color: #ffffff;
   text-align: center;
   line-height: 80px;
-  margin-bottom: -700px;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.blur-round {
+.BlurRound {
   width: 100%;
   height: auto;
 }
 
-@media (max-width: 1460px) and (min-width: 1024px) {
-  .helloworld {
-    font-size: 8.5vw;
-  }
+@media (max-width: 1460px) {
   .comment {
     font-size: clamp(30px, 3.5vw, 3.5vw);
   }
-
+  .helloworld {
+    font-size: 8.5vw;
+  }
+  .crangE {
+    width: 280px;
+  }
   .comment2 {
-    font-size: clamp(30px, 3vw, 3vw);
+    top: 42.5%;
+    font-size: 32px !important;
   }
 }
 
 @media (max-width: 1024px) {
-  .crangE {
-    width: 20%; /* 태블릿 크기에서는 좀 더 작게 설정 */
+  .main {
+    height: 56.5rem;
   }
-
   .comment {
     font-size: clamp(20px, 3.5vw, 100px);
   }
 
+  .crangE {
+    width: 240px !important;
+  }
   .banner {
     line-height: 10vw;
   }
 
   .section2 {
-    margin-top: 2rem;
+    padding-top: 0;
+    margin-top: 0;
     margin-bottom: 6rem;
   }
 
   .comment2 {
-    font-size: clamp(23px, 3vw, 3vw);
+    font-size: 28px !important;
   }
 }
 
 @media (max-width: 894px) {
+  .main {
+    height: 46.5rem;
+  }
   .section2 {
     margin-top: 1.5rem;
     margin-bottom: 6rem;
   }
+  .crangE {
+    width: 200px !important;
+  }
+  .vector {
+    img {
+      width: 45px;
+      height: auto;
+    }
+  }
+  .comment2 {
+    font-size: 24px !important;
+  }
 }
 
 @media (max-width: 768px) {
+  .main {
+    height: 41.5rem;
+  }
   .section2 {
     margin-top: 0rem;
   }
   .comment2 {
+    top: 40%;
     padding: 0 3rem;
+    font-size: 20px !important;
+  }
+  .vector {
+    img {
+      width: 40px;
+      height: auto;
+    }
   }
   .crangE {
-    width: 50% !important;
+    width: 160px !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .vector {
+    img {
+      width: 35px;
+      height: auto;
+    }
+  }
+  .comment2 {
+    top: 36%;
   }
 }
 
 @media (max-width: 480px) {
+  .vector {
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+  .comment {
+    font-size: 16px !important;
+  }
   .section2 {
     margin-top: 0rem;
   }
 
   .crangE {
-    width: 30% !important;
+    width: 130px !important;
   }
 
-  .recruit-btn {
+  .RecruitBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,7 +259,27 @@
   }
 
   .comment2 {
-    font-size: 19px;
+    font-size: 16px !important;
+    top: 33%;
+  }
+
+  .character1,
+  .character4 {
+    top: 55% !important;
+  }
+}
+
+@media (max-width: 368px) {
+  .crangE {
+    width: 100px !important;
+  }
+  .character2,
+  .character3 {
+    top: 10% !important;
+  }
+  .character1,
+  .character4 {
+    top: 52.5% !important;
   }
 }
 
@@ -217,26 +289,22 @@
     top: 65%;
     left: 80%;
     transform: translate(-50%, -50%);
-    width: 317.42px;
-    height: 299.78px;
   }
 
   .character2 {
     position: absolute;
-    top: 12%;
+    top: 8%;
     left: 20%;
     transform: translate(-50%, -50%);
-    width: 262.88px;
-    height: 248.278px;
+    width: 260px;
   }
 
   .character3 {
     position: absolute;
-    top: 13%;
+    top: 8%;
     left: 83%;
     transform: translate(-50%, -50%);
-    width: 262.51px;
-    height: 247.92px;
+    width: 260px;
   }
 
   .character4 {
@@ -244,8 +312,9 @@
     top: 65%;
     left: 15%;
     transform: translate(-50%, -50%);
-    width: 326.58px;
-    height: 308.44px;
+  }
+  .comment2 {
+    font-size: 16px;
   }
 }
 

@@ -17,17 +17,17 @@ function IntroTop() {
 
   return (
     <div>
-      <div className={styles['main']}>
+      <div className={styles.main}>
         <div className={styles.section}>
           {/* 처음 문구 */}
           <div className={styles.comment}>
-            <div>CRA와 함께 성장할 동아리원을 모집합니다</div>
+            CRA와 함께 성장할 동아리원을 모집합니다
           </div>
 
           {/* 배너 */}
           <div className={styles.banner}>
-            <div>Why not change the</div>
-            <div className={styles.helloworld}>hello world!</div>
+            <p>Why not change the</p>
+            <p className={styles.helloworld}>hello world!</p>
           </div>
 
           {/* 크랑이 여러마리 */}
@@ -51,7 +51,7 @@ function IntroTop() {
           </div>
 
           {/* 리크루팅 페이지로 가는 버튼 */}
-          <Link to="/recruit" className={styles['recruit-btn']}>
+          <Link to="/recruit" className={styles.RecruitBtn}>
             <p>2025-1 CRA RECRUITMENT</p>
           </Link>
 
@@ -69,7 +69,7 @@ function IntroTop() {
           <div>세대를 아우르는 열정과 끈끈한 유대감의 동아리,</div>
           <div>CRA를 소개합니다.</div>
         </div>
-        <img className={styles['blur-round']} src={blurround} />
+        <img className={styles.BlurRound} src={blurround} />
       </div>
     </div>
   );
