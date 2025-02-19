@@ -30,7 +30,13 @@ export default function BoardWrite({ category }: BoardWriteProps) {
     imageUrls: [],
   });
 
-  const { editorRef, error: editorConfig } = useMarkdownEditor({
+  const {
+    editorRef,
+    error: contentError,
+    handleEditorChange,
+    validateContent,
+    editorConfig,
+  } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -66,6 +72,7 @@ export default function BoardWrite({ category }: BoardWriteProps) {
       return await createBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
+      alert('게시글 작성 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -82,6 +89,7 @@ export default function BoardWrite({ category }: BoardWriteProps) {
 
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
+      alert('게시글 작성 실패');
     },
   });
 
@@ -127,7 +135,7 @@ export default function BoardWrite({ category }: BoardWriteProps) {
     setFile(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
