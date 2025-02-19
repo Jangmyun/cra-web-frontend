@@ -24,9 +24,7 @@ jobs:
         node-version: '22' 
 
     - name: Install dependencies
-      run: |
-        npm install
-        cd path-to-submodule && npm install
+      run: npm install
     
     - name: Build vite
       run: npm run build
