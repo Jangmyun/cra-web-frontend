@@ -6,13 +6,13 @@ export default function HeaderIntro() {
   return (
     <div className={styles['header-intro']}>
       <ul className={styles['ul-intro']}>
-        <Link to="/intro">
+        <Link to="./intro">
           <li className={`${styles['li-intro']} ${styles['li-img']}`}>
             <img src={CRALogo} className={styles['logo']} />
           </li>
         </Link>
         <Link
-          to="/main"
+          to="./main"
           className={`${styles['li-intro']} ${styles['navbar-link']}`}
         >
           MAIN PAGE

@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -41,13 +39,7 @@ export default function HavrutaBoardWrite() {
     },
   });
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -87,7 +79,10 @@ export default function HavrutaBoardWrite() {
       };
       console.log(payload.board);
 
-      return await createBoards(payload.board, fileToUpload);
+      return await createBoards(
+        { ...payload.board, likes: 0, liked: false },
+        fileToUpload,
+      );
     },
     onSuccess: async () => {
       await navigate(-1);
@@ -183,7 +178,7 @@ export default function HavrutaBoardWrite() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
