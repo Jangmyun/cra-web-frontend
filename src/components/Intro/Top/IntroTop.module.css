@@ -1,5 +1,8 @@
 .main {
   height: 66.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .section {
@@ -128,7 +131,7 @@
     font-size: 8.5vw;
   }
   .crangE {
-    width: 280px;
+    width: 280px !important;
   }
   .comment2 {
     top: 42.5%;
@@ -203,7 +206,7 @@
     }
   }
   .crangE {
-    width: 160px !important;
+    width: 180px !important;
   }
 }
 
@@ -220,6 +223,9 @@
 }
 
 @media (max-width: 480px) {
+  .main {
+    height: 36.5rem;
+  }
   .vector {
     img {
       width: 30px;
@@ -245,7 +251,7 @@
     color: #e5f7fb;
     width: 40vw;
     font-size: 2.5vw;
-    padding: 1rem 0rem;
+    padding: 0.75rem 0rem;
     margin-top: 3rem;
     border-radius: 2rem;
     text-decoration: none;
@@ -265,7 +271,7 @@
 
   .character1,
   .character4 {
-    top: 55% !important;
+    top: 60% !important;
   }
 }
 
@@ -273,28 +279,20 @@
   .crangE {
     width: 100px !important;
   }
-  .character2,
-  .character3 {
-    top: 10% !important;
-  }
-  .character1,
-  .character4 {
-    top: 52.5% !important;
-  }
 }
 
 @media (min-width: 301px) {
   .character1 {
     position: absolute;
     top: 65%;
-    left: 80%;
+    left: 90%;
     transform: translate(-50%, -50%);
   }
 
   .character2 {
     position: absolute;
     top: 8%;
-    left: 20%;
+    left: 10%;
     transform: translate(-50%, -50%);
     width: 260px;
   }
@@ -302,7 +300,7 @@
   .character3 {
     position: absolute;
     top: 8%;
-    left: 83%;
+    left: 93%;
     transform: translate(-50%, -50%);
     width: 260px;
   }
@@ -310,7 +308,7 @@
   .character4 {
     position: absolute;
     top: 65%;
-    left: 15%;
+    left: 5%;
     transform: translate(-50%, -50%);
   }
   .comment2 {
