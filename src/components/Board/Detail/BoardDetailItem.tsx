@@ -20,6 +20,7 @@ import { createBoardsView } from '~/api/view';
 import { getBoardById } from '~/api/board';
 import createLike from '~/api/like';
 import BoardUserModal from '~/components/Modal/User/OtherUser/BoardUserModal';
+import { useAuthStore } from '~/store/authStore';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
@@ -44,9 +45,11 @@ export default function BoardDetailItem({
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+  const userId = useAuthStore.getState().userId as number;
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
+    console.log(viewed);
     if (!viewed) {
       createBoardsView(board.id as number)
         .then(() => {
@@ -93,7 +96,7 @@ export default function BoardDetailItem({
 
   const handleDownload = async () => {
     if (!board.fileUrl) {
-      alert('다운로드할 파일이 존재하지 않습니다.');
+      // alert('다운로드할 파일이 존재하지 않습니다.');
       return;
     }
 
@@ -120,7 +123,7 @@ export default function BoardDetailItem({
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('파일 다운로드 실패:', error);
-      alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
+      // alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 
@@ -160,13 +163,17 @@ export default function BoardDetailItem({
               </span>
             </div>
             <div className={styles['fix-button']}>
-              <Link
-                to={`/${CATEGORY_STRINGS_EN[category]}/edit/${board.id}`}
-                className={styles['link']}
-              >
-                <FaRegEdit size={22} />
-              </Link>
-              <BoardDelete id={board.id!} category={category} />
+              {userId === board.userId && (
+                <>
+                  <Link
+                    to={`/${CATEGORY_STRINGS_EN[category]}/edit/${board.id}`}
+                    className={styles['link']}
+                  >
+                    <FaRegEdit size={22} />
+                  </Link>
+                  <BoardDelete id={board.id!} category={category} />
+                </>
+              )}
             </div>
           </div>
           <div className={styles['content-title']}>{board.title}</div>

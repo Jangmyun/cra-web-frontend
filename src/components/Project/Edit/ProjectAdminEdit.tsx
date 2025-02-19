@@ -34,12 +34,10 @@ function ProjectAdminEdit() {
   const mutation = useMutation({
     mutationFn: (newProject: Project) => updateProject(newProject),
     onSuccess: async () => {
-      alert('프로젝트 수정 성공');
       await navigate(-1);
     },
     onError: (error) => {
       console.error('프로젝트 수정 실패:', error);
-      alert('프로젝트 수정 실패');
     },
   });
 

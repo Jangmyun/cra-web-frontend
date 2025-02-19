@@ -100,7 +100,7 @@ function IDSearchPage() {
         <Submit
           onClick={(e) => {
             e.preventDefault();
-            navigate('/idsearch/complete');
+            void navigate('/idsearch/complete');
           }}
         >
           확인

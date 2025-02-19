@@ -42,14 +42,14 @@ export default function Footer() {
               alt="github"
             />
           </Link>
-          <Link to="/admin">
+          {/* <Link to="/admin">
             <img
               width="32"
               height="32"
               src="https://img.icons8.com/ios-filled/50/automatic.png"
               alt="github"
             />
-          </Link>
+          </Link> */}
         </div>
         <div className={styles['developer']}>
           <p>DEVELOPED BY CRA</p>

@@ -26,6 +26,7 @@ function UserImage() {
   };
 
   const handleConfirm = async () => {
+    // TODO: 모달로 변경 해야됨
     if (!uploadedUrl) return alert('이미지를 먼저 업로드하세요.');
 
     try {

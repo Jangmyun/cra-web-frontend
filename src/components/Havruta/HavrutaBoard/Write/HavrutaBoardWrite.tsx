@@ -85,7 +85,6 @@ export default function HavrutaBoardWrite() {
       );
     },
     onSuccess: async () => {
-      alert('게시글 작성 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -107,7 +106,6 @@ export default function HavrutaBoardWrite() {
 
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
-      alert('게시글 작성 실패');
     },
   });
 
@@ -268,7 +266,7 @@ export default function HavrutaBoardWrite() {
         <input
           className={styles['submit-button']}
           type="submit"
-          value="게시글 작성"
+          value="하브루타 작성"
         />
       </form>
     </div>
