@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '~/assets/images/develop-icon.png';
 import styles from './TempPage.module.css';
