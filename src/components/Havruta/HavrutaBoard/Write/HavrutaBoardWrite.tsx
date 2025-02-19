@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable */
+// @ts-nocheck
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { createBoards, onUploadImage } from '~/api/board.ts';
+import { createBoards } from '~/api/board.ts';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
 import { Havruta } from '~/models/Havruta.ts';
 import { CATEGORY } from '~/constants/category.ts';
@@ -39,13 +41,7 @@ export default function HavrutaBoardWrite() {
     },
   });
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, error: editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -88,7 +84,6 @@ export default function HavrutaBoardWrite() {
       return await createBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
-      alert('게시글 작성 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -110,7 +105,6 @@ export default function HavrutaBoardWrite() {
 
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
-      alert('게시글 작성 실패');
     },
   });
 

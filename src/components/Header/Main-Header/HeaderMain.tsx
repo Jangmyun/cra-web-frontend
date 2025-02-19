@@ -28,7 +28,6 @@ export default function HeaderMain() {
     try {
       void logout();
       closeModal();
-      alert('로그아웃 성공');
       void navigate('/main');
     } catch (error) {
       if (error instanceof AxiosError) {

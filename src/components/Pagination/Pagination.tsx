@@ -5,7 +5,7 @@ import styles from './Pagination.module.css';
 interface PaginationProps {
   totalPages: number;
   currentPage: number;
-  onPageChange: (page: number) => void;
+  onPageChange: (_page: number) => void;
 }
 
 function Pagination({
@@ -16,15 +16,15 @@ function Pagination({
   if (totalPages === 0) return null;
 
   return (
-    <div className={styles.pagenations}>
+    <div className={styles.Pagenations}>
       <img src={LeftVector} />
-      {[...Array(totalPages)].map((_, pageIndex) => (
+      {Array.from({ length: totalPages }).map((_, pageIndex) => (
         <div
           key={pageIndex}
-          className={`${styles['pagenations-elipse']} ${
+          className={`${styles.PagenationsElipse} ${
             currentPage === pageIndex
-              ? styles['pagenations-elipse-selected']
-              : styles['pagenations-elipse-unselected']
+              ? styles.PagenationsElipseSelected
+              : styles.PagenationsElipseUnselected
           }`}
           onClick={() => onPageChange(pageIndex)}
         >

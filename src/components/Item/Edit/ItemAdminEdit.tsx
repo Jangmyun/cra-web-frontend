@@ -31,12 +31,10 @@ function ItemAdminEdit() {
   const mutation = useMutation({
     mutationFn: (newItem: Item) => updateItem(newItem),
     onSuccess: async () => {
-      alert('수정 성공');
       await navigate(-1);
     },
     onError: (error) => {
       console.error('수정 실패:', error);
-      alert('수정 실패');
     },
   });
 
