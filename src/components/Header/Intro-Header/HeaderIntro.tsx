@@ -4,17 +4,14 @@ import styles from './HeaderIntro.module.css';
 
 export default function HeaderIntro() {
   return (
-    <div className={styles['header-intro']}>
-      <ul className={styles['ul-intro']}>
+    <div className={styles.HeaderIntro}>
+      <ul className={styles.UlIntro}>
         <Link to="./intro">
-          <li className={`${styles['li-intro']} ${styles['li-img']}`}>
-            <img src={CRALogo} className={styles['logo']} />
+          <li className={`${styles.LiIntro} ${styles.LiImg}`}>
+            <img src={CRALogo} className={styles.Logo} />
           </li>
         </Link>
-        <Link
-          to="./main"
-          className={`${styles['li-intro']} ${styles['navbar-link']}`}
-        >
+        <Link to="./main" className={`${styles.LiIntro} ${styles.NavbarLink}`}>
           MAIN PAGE
         </Link>
       </ul>
