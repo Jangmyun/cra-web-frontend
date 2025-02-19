@@ -126,15 +126,15 @@
 }
 
 .content-box {
-  width: clamp(120px, 20vw, 800px);
-  height: clamp(120px, 15vw, 800px);
+  width: clamp(100px, 20vw, 800px);
+  height: clamp(110px, 15vw, 800px);
   aspect-ratio: 397 / 281;
   background-color: rgb(237, 237, 237);
   border-radius: 1vw;
   margin: clamp(3px, 0.5vw, 10px);
 
   h3 {
-    padding: 1vw;
+    padding: clamp(10px, 1vw, 1vw);
     font-size: clamp(10px, 1.7vw, 1.7vw);
     font-family: 'Pretendard ExtraBold';
   }
@@ -190,11 +190,79 @@
 
   p {
     display: flex;
-    font-size: 1.3vw;
+    font-size: clamp(10px, 1.2vw, 1.2vw);
     line-height: 1.3;
     margin-left: 1.6vw;
     font-family: 'Pretendard Medium';
     color: #3e3e3e;
+  }
+}
+
+@media (max-width: 768px) {
+  .recruit-calender {
+    padding: 2rem 0rem 30rem 0rem;
+
+    h2 {
+      padding-top: 50px;
+      padding-bottom: clamp(20px, 13vw, 240px);
+      font-size: clamp(25px, 3vw, 3vw);
+      color: white;
+      font-family: 'Pretendard Bold';
+    }
+  }
+
+  .calender-line {
+    position: relative;
+    height: 2px; /* 줄의 높이 */
+    background-color: rgb(0, 0, 0); /* 줄의 색상 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: thick solid #2cb4db;
+    height: 500px;
+    margin-left: 50%;
+  }
+
+  .calender-box {
+    position: absolute;
+    height: clamp(100px, 10vw, 10vw);
+    aspect-ratio: 286 / 199;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    margin: 15px;
+
+    h3 {
+      font-size: clamp(12px, 1.2vw, 1.2vw);
+      padding: 15px;
+      font-family: 'Pretendard Bold';
+    }
+
+    p {
+      display: flex;
+      font-size: clamp(13px, 1.2vw, 1.2vw);
+      line-height: 1.3;
+      margin-left: 24%;
+      font-family: 'Pretendard Medium';
+      color: #3e3e3e;
+    }
+  }
+
+  .calender-box:nth-child(1) {
+    top: -20px;
+    left: -130px;
+  }
+  .calender-box:nth-child(2) {
+    top: 120px;
+    left: -50px;
+  }
+  .calender-box:nth-child(3) {
+    top: 260px;
+    left: -130px;
+  }
+  .calender-box:nth-child(4) {
+    top: 400px;
+    left: -50px;
   }
 }
 
