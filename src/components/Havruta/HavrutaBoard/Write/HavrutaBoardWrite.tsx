@@ -41,7 +41,13 @@ export default function HavrutaBoardWrite() {
     },
   });
 
-  const { editorRef, error: editorConfig } = useMarkdownEditor({
+  const {
+    editorRef,
+    error: contentError,
+    handleEditorChange,
+    validateContent,
+    editorConfig,
+  } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
