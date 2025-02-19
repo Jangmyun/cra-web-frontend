@@ -271,7 +271,7 @@ export default function HavrutaBoardWrite() {
         <input
           className={styles['submit-button']}
           type="submit"
-          value="게시글 작성"
+          value="하브루타 작성"
         />
       </form>
     </div>

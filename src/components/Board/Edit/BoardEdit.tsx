@@ -240,7 +240,7 @@ export default function BoardEdit({ category }: BoardEditProps) {
         <input
           className={styles['submit-button']}
           type="submit"
-          value="하브루타 수정"
+          value="게시물 수정"
         />
       </form>
     </div>
