@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
@@ -7,7 +7,6 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import styles from './HavrutaBoardEdit.module.css';
 import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
-import { IoIosLink } from 'react-icons/io';
 import { CATEGORY } from '~/constants/category.ts';
 import { Havruta } from '~/models/Havruta.ts';
 
@@ -121,7 +120,6 @@ export default function HavrutaBoardEdit() {
     },
     onError: (error) => {
       console.error('게시글 수정 실패:', error);
-      alert('게시글 수정 실패');
     },
   });
 

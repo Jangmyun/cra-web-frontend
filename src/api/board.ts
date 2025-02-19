@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Board } from '~/models/Board.ts';
 import { client } from './client.ts';
 import { authClient } from './auth/authClient.ts';

@@ -93,7 +93,6 @@ export default function BoardEdit({ category }: BoardEditProps) {
       return await updateBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
-      alert('게시글 수정 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -101,7 +100,6 @@ export default function BoardEdit({ category }: BoardEditProps) {
     },
     onError: (error) => {
       console.error('게시글 수정 실패:', error);
-      alert('게시글 수정 실패');
     },
   });
 

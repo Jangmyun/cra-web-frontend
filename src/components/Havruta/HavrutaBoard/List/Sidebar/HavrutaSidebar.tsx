@@ -7,7 +7,7 @@ import styles from './HavrutaSidebar.module.css';
 interface HavrutaSidebarProps {
   havrutaQuery: UseQueryResult<Havruta[], unknown>;
   selectedHavrutaId: number | null;
-  onHavrutaChange: (id: number | null) => void;
+  onHavrutaChange: (_id: number | null) => void;
 }
 
 function HavrutaSidebar({
@@ -20,7 +20,7 @@ function HavrutaSidebar({
 
   return (
     <ul className={styles.menu}>
-      <h2>과목 목록</h2> 
+      <h2>과목 목록</h2>
       <li
         className={`${styles.menuItem} ${
           selectedHavrutaId === null ? styles.selected : ''

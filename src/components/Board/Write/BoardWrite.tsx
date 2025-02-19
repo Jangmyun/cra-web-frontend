@@ -70,7 +70,6 @@ export default function BoardWrite({ category }: BoardWriteProps) {
       return await createBoards(payload.board, fileToUpload);
     },
     onSuccess: async () => {
-      alert('게시글 작성 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -87,7 +86,6 @@ export default function BoardWrite({ category }: BoardWriteProps) {
 
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
-      alert('게시글 작성 실패');
     },
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createRoute } from '@tanstack/react-router';
 import { lazy, useEffect } from 'react';
 import { rootRoute } from './__root';
@@ -16,7 +17,7 @@ export const introRoute = createRoute({
     const navigate = useNavigate();
 
     useEffect(() => {
-      navigate('/');
+      void navigate('/');
     }, [navigate]);
   },
 });
