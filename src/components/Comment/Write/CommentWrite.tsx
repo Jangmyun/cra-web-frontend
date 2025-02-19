@@ -69,7 +69,27 @@ export default function CommentWrite({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    mutation.mutate({
+      ...formData,
+      userId: -1,
+      commentList: [],
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+      deleted: false,
+      havrutaDto: {
+        id: null,
+        classname: '',
+        professor: '',
+      },
+      resUserDetailDto: {
+        name: '',
+        email: '',
+        studentId: -1,
+        term: '',
+        githubId: '',
+        imgUrl: '',
+      },
+    });
   };
 
   return (

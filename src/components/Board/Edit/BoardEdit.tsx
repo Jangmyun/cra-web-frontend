@@ -38,13 +38,7 @@ export default function BoardEdit({ category }: BoardEditProps) {
   const id = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
   const boardId = Number(id);
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
