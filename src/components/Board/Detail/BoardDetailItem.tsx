@@ -71,7 +71,6 @@ export default function BoardDetailItem({
     const fetchLikeStatus = async () => {
       try {
         const response = await getBoardById(board.id as number);
-        console.log('Fetched board data:', response);
         setLikeCnt(response.likeCount ?? 0);
         setIsLiked(response.viewerLiked ?? false);
       } catch (error) {
