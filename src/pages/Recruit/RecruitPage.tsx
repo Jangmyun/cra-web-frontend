@@ -4,6 +4,10 @@ import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png';
 import styles from './RecruitPage.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import CR from '~/assets/images/RecruitImage/CR.png';
+import A from '~/assets/images/RecruitImage/A.png';
+import SCRETCH from '~/assets/images/RecruitImage/scretch.png';
+import CONTENT from '~/assets/images/RecruitImage/content.png';
 
 export default function RecruitPage() {
   const recruitTalentRef = useRef<HTMLDivElement>(null);
@@ -38,10 +42,47 @@ export default function RecruitPage() {
     };
   }, []);
 
+  //---------------------디지인 시도----------------------------
+  const [isExpanding, setIsExpanding] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsExpanding(true); // 애니메이션 시작 (늘어남)
+    }, 1000); // 1초 뒤에 CR과 A가 이동 시작
+
+    const resetTimer = setTimeout(() => {
+      setIsExpanding(false); // 3초 뒤에 원래대로 돌아가게
+    }, 4500); // 4초 뒤에 애니메이션을 원래 상태로 되돌리기
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(resetTimer);
+    };
+  }, []);
+
   return (
     <div className={styles['recruit-container']}>
+      <div className={styles['recruit-main1']}>
+        <div className={styles['recruit-banner1']}>
+          <img
+            src={CR}
+            className={`${styles['cr-image']} ${isExpanding ? styles['cr-expand'] : ''}`}
+          />
+          <img
+            src={SCRETCH}
+            className={`${styles['scratch-image']} ${isExpanding ? styles['scratch-expand'] : ''}`}
+          />
+          <img
+            src={A}
+            className={`${styles['a-image']} ${isExpanding ? styles['a-expand'] : ''}`}
+          />
+          <img
+            src={CONTENT}
+            className={`${styles['content-image']} ${isExpanding ? styles['content-expand'] : ''}`}
+          />
+        </div>
+      </div>
       <div className={styles['recruit-main']}>
-        <HeaderIntro />
         <div className={styles['recruit-banner']}>
           <p id={styles['title']}>2025-1 CRA</p>
           <p id={styles['title']}>RECRUITMENT</p>
