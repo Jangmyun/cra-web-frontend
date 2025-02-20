@@ -28,7 +28,6 @@ export default function HeaderMain() {
     try {
       void logout();
       closeModal();
-      alert('로그아웃 성공');
       void navigate('/main');
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -45,7 +44,8 @@ export default function HeaderMain() {
   // };
   return (
     <div className={styles['header-main']}>
-      <Link to="/main">
+      <Link to="/">
+        {/* <Link to="/main"> */}
         <img src={craIconBlue} alt="크라 아이콘" className={styles.logo} />
       </Link>
 

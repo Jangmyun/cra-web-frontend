@@ -29,8 +29,6 @@ export default function BoardItem({
 
     void fetchCommentsCount(); // 여기서 비동기 호출을 await 처리합니다.
   }, [board.id]);
-  console.log('board.createdAt:', board.createdAt); // board.createdAt 값 확인
-  console.log(board);
   return (
     <Link
       to={`${CATEGORY_STRINGS_EN[category]}/view/${board.id}`}

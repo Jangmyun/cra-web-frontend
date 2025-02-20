@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { createBoards, onUploadImage } from '~/api/board.ts';
+import { createBoards } from '~/api/board.ts';
 import { getAllHavrutas } from '~/api/havruta/havruta.ts';
 import { Havruta } from '~/models/Havruta.ts';
 import { CATEGORY } from '~/constants/category.ts';
@@ -9,6 +9,7 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import styles from './HavrutaBoardWrite.module.css';
 import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 export default function HavrutaBoardWrite() {
   const havrutaCategory = CATEGORY.HAVRUTA;
@@ -39,13 +40,7 @@ export default function HavrutaBoardWrite() {
     },
   });
 
-  const {
-    editorRef,
-    error: contentError,
-    handleEditorChange,
-    validateContent,
-    editorConfig,
-  } = useMarkdownEditor({
+  const { editorRef, editorConfig } = useMarkdownEditor({
     onContentChange: (content) => {
       setFormData((prev) => ({ ...prev, content }));
       if (content.trim()) {
@@ -85,10 +80,12 @@ export default function HavrutaBoardWrite() {
       };
       console.log(payload.board);
 
-      return await createBoards(payload.board, fileToUpload);
+      return await createBoards(
+        { ...payload.board, likes: 0, liked: false },
+        fileToUpload,
+      );
     },
     onSuccess: async () => {
-      alert('게시글 작성 성공');
       await navigate(-1);
       setTimeout(() => {
         window.scrollTo(0, 0);
@@ -110,7 +107,6 @@ export default function HavrutaBoardWrite() {
 
     onError: (error) => {
       console.error('게시글 작성 실패:', error);
-      alert('게시글 작성 실패');
     },
   });
 
@@ -183,7 +179,7 @@ export default function HavrutaBoardWrite() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
@@ -211,7 +207,7 @@ export default function HavrutaBoardWrite() {
 
         <label htmlFor="havrutaId">과목명</label>
         {havrutaQuery.isLoading ? (
-          <p>과목 목록을 불러오는 중입니다...</p>
+          <LoadingSpinner />
         ) : havrutaQuery.isError ? (
           <p>과목 목록을 불러오는데 실패했습니다.</p>
         ) : havrutaQuery.data?.length === 0 ? (
@@ -271,7 +267,7 @@ export default function HavrutaBoardWrite() {
         <input
           className={styles['submit-button']}
           type="submit"
-          value="게시글 작성"
+          value="하브루타 작성"
         />
       </form>
     </div>

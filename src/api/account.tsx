@@ -10,7 +10,7 @@ interface ChangePasswordParams {
   password: string;
 }
 // email 인증 요청
-export const emailRequest = async (email: String): Promise<number> => {
+export const emailRequest = async (email: string): Promise<number> => {
   const response = await client.post<void>(
     `/account/valid/email-request?email=${email}`,
   );
@@ -18,12 +18,13 @@ export const emailRequest = async (email: String): Promise<number> => {
 };
 
 // email 인증
-export const emailCode = async (emailCode: String): Promise<number> => {
+export const emailCode = async (emailCode: string): Promise<number> => {
   const response = await client.post<void>(
     `/account/valid/email-code?code=${emailCode}`,
   );
   return response.status;
 };
+<<<<<<< HEAD
 
 // PW 재설정
 export const changePassword = async ({
@@ -63,3 +64,5 @@ export const findId = async (params: FindUsernameParams): Promise<string> => {
     throw error;
   }
 };
+=======
+>>>>>>> f6dda5ae4326dd6085f6b5a9f1742fd6af896a45

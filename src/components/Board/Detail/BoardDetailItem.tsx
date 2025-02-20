@@ -51,9 +51,9 @@ export default function BoardDetailItem({
     const viewed = localStorage.getItem(`viewed_${board.id}`);
     console.log(viewed);
     if (!viewed) {
+      localStorage.setItem(`viewed_${board.id}`, 'true');
       createBoardsView(board.id as number)
         .then(() => {
-          localStorage.setItem(`viewed_${board.id}`, 'true');
           return getBoardById(board.id as number);
         })
         .then((updatedBoard) => {
@@ -71,7 +71,6 @@ export default function BoardDetailItem({
     const fetchLikeStatus = async () => {
       try {
         const response = await getBoardById(board.id as number);
-        console.log('Fetched board data:', response);
         setLikeCnt(response.likeCount ?? 0);
         setIsLiked(response.viewerLiked ?? false);
       } catch (error) {
@@ -83,11 +82,7 @@ export default function BoardDetailItem({
 
   const handleLike = async () => {
     try {
-      const data = await createLike(
-        board.id as number,
-        board.userId as number,
-        !isLiked,
-      );
+      const data = await createLike(board.id as number, !isLiked);
       console.log('Response from like API:', data);
 
       // API 응답을 바로 반영
@@ -100,7 +95,7 @@ export default function BoardDetailItem({
 
   const handleDownload = async () => {
     if (!board.fileUrl) {
-      alert('다운로드할 파일이 존재하지 않습니다.');
+      // alert('다운로드할 파일이 존재하지 않습니다.');
       return;
     }
 
@@ -127,7 +122,7 @@ export default function BoardDetailItem({
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('파일 다운로드 실패:', error);
-      alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
+      // alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 
