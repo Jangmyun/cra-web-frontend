@@ -51,9 +51,9 @@ export default function BoardDetailItem({
     const viewed = localStorage.getItem(`viewed_${board.id}`);
     console.log(viewed);
     if (!viewed) {
+      localStorage.setItem(`viewed_${board.id}`, 'true');
       createBoardsView(board.id as number)
         .then(() => {
-          localStorage.setItem(`viewed_${board.id}`, 'true');
           return getBoardById(board.id as number);
         })
         .then((updatedBoard) => {
@@ -71,7 +71,6 @@ export default function BoardDetailItem({
     const fetchLikeStatus = async () => {
       try {
         const response = await getBoardById(board.id as number);
-        console.log('Fetched board data:', response);
         setLikeCnt(response.likeCount ?? 0);
         setIsLiked(response.viewerLiked ?? false);
       } catch (error) {

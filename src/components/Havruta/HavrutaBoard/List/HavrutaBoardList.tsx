@@ -69,6 +69,7 @@ export default function HavrutaBoardList({
           havrutaQuery={havrutaQuery}
           selectedHavrutaId={selectedHavrutaId}
           onHavrutaChange={onHavrutaChange}
+          onPageChange={onPageChange}
         />
       </div>
       <div className={styles.content}>

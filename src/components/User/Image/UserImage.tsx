@@ -16,7 +16,6 @@ function UserImage() {
 
     try {
       const url = await uploadProfileImage(file);
-      console.log('받은 이미지 URL:', url);
 
       setPreviewUrl(URL.createObjectURL(file));
       setUploadedUrl(url);

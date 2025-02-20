@@ -60,9 +60,20 @@
   .footer {
     padding: 2.5rem 2rem;
   }
-
   .content {
-    scale: 80%;
+    scale: 90%;
+  }
+}
+
+@media (max-width: 628px) {
+  .description {
+    font-size: 22px !important;
+  }
+  .cra206 {
+    font-size: 19px !important;
+  }
+  .developer {
+    font-size: 18px !important;
   }
 }
 
@@ -71,6 +82,15 @@
     padding: 1.5rem 0;
   }
   .content {
-    scale: 80%;
+    scale: 85%;
+  }
+  .description {
+    font-size: 20px !important;
+  }
+  .cra206 {
+    font-size: 18px !important;
+  }
+  .developer {
+    font-size: 16px !important;
   }
 }

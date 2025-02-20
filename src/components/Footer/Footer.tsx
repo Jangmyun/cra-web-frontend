@@ -4,14 +4,14 @@ import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <div className={styles['footer']}>
-      <div className={styles['content']}>
-        <div className={styles['logo']}>
+    <div className={styles.footer}>
+      <div className={styles.content}>
+        <div className={styles.logo}>
           <Link to="/">
             <img src={craIcon} alt="크라 아이콘" />
           </Link>
         </div>
-        <div className={styles['description']}>
+        <div className={styles.description}>
           <span>C</span>
           <p>omputer </p>
           <span>R</span>
@@ -19,7 +19,7 @@ export default function Footer() {
           <span>A</span>
           <p>ssoication</p>
         </div>
-        <div className={styles['cra206']}>
+        <div className={styles.cra206}>
           <p>한동대학교 학생회관 206호</p>
         </div>
         <div className={styles.icons}>
@@ -51,7 +51,7 @@ export default function Footer() {
             />
           </Link> */}
         </div>
-        <div className={styles['developer']}>
+        <div className={styles.developer}>
           <p>DEVELOPED BY CRA</p>
         </div>
       </div>
