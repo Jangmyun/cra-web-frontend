@@ -5,6 +5,10 @@ interface FindUsernameParams {
   name: string;
   email: string;
 }
+interface ChangePasswordParams {
+  code: string;
+  password: string;
+}
 // email 인증 요청
 export const emailRequest = async (email: String): Promise<number> => {
   const response = await client.post<void>(
@@ -18,6 +22,18 @@ export const emailCode = async (emailCode: String): Promise<number> => {
   const response = await client.post<void>(
     `/account/valid/email-code?code=${emailCode}`,
   );
+  return response.status;
+};
+
+// PW 재설정
+export const changePassword = async ({
+  code,
+  password,
+}: ChangePasswordParams): Promise<number> => {
+  const response = await client.put<void>('/user/password-change', {
+    code,
+    password,
+  });
   return response.status;
 };
 

@@ -3,7 +3,6 @@ import { ClipLoader } from 'react-spinners';
 import styled from 'styled-components';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { useModalStore } from '~/store/modalStore';
-import axios from 'axios';
 import { pwEmailRequest } from '~/api/account';
 
 const Container = styled.div`
@@ -14,6 +13,8 @@ const Container = styled.div`
   width: 100%;
   max-width: 1600px;
   margin-bottom: 4rem;
+  padding-top: 5rem;
+  padding-bottom: 12rem;
   @media (max-width: 768px) {
     width: 80%;
   }

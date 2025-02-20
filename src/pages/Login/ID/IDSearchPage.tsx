@@ -41,7 +41,7 @@ const Label = styled.label`
   user-select: none;
 `;
 
-const StyledInput = styled.input<{ hasError: boolean; isFocused: boolean }>`
+const StyledInput = styled.input<{ hasError: boolean }>`
   width: 100%;
   background-color: var(--color-white);
   color: black;
@@ -50,13 +50,12 @@ const StyledInput = styled.input<{ hasError: boolean; isFocused: boolean }>`
   border-radius: 0.5rem;
   padding: 1.5rem 1rem;
   outline: none;
-  transition:
-    outline 0.2s,
-    border 0.2s;
   box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 
   &:focus {
-    outline: 2px solid black;
+    border: 1px solid black; /* 기본 border 유지 */
+    box-shadow: 0 0 0 1px black; /* 검정색 테두리를 확실하게 적용 */
   }
 `;
 
@@ -183,7 +182,6 @@ function IDSearchPage() {
             onFocus={() => handleFocus('studentId')}
             onBlur={() => handleBlur('studentId')}
             hasError={!!errors.studentId}
-            isFocused={focused.studentId}
           />
           {errors.studentId && <ErrorMessage>{errors.studentId}</ErrorMessage>}
         </InputContainer>
@@ -200,7 +198,6 @@ function IDSearchPage() {
             onFocus={() => handleFocus('name')}
             onBlur={() => handleBlur('name')}
             hasError={!!errors.name}
-            isFocused={focused.name}
           />
           {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
         </InputContainer>
@@ -217,7 +214,6 @@ function IDSearchPage() {
             onFocus={() => handleFocus('email')}
             onBlur={() => handleBlur('email')}
             hasError={!!errors.email}
-            isFocused={focused.email}
           />
           {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
         </InputContainer>

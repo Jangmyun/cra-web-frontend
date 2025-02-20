@@ -5,9 +5,16 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-top: 5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+  margin-bottom: 4rem;
+  padding-top: 5rem;
+  padding-bottom: 12rem;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const Img = styled.img`
