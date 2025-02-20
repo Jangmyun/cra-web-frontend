@@ -7,6 +7,7 @@
   margin: 0 auto;
   margin-bottom: 4rem;
 }
+
 @media (max-width: 1200px) {
   .container {
     max-width: 886px;
@@ -34,6 +35,11 @@
 @media (max-width: 468px) {
   .container {
     max-width: 384px;
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    max-width: 90%;
   }
 }
 
@@ -95,7 +101,7 @@
   width: 131px;
 }
 
-.write-link {
+.WriteLink {
   padding: 10px 15px;
   width: 5rem;
   background-color: var(--color-primary);
@@ -108,7 +114,7 @@
   font-family: 'Pretendard Bold';
 }
 
-.write-link:hover {
+.WriteLink:hover {
   background-color: var(--color-secondary);
 }
 
