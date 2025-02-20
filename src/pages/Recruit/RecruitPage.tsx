@@ -44,6 +44,7 @@ export default function RecruitPage() {
 
   //---------------------디지인 시도----------------------------
   const [isExpanding, setIsExpanding] = useState(false);
+  const titleRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -54,9 +55,17 @@ export default function RecruitPage() {
       setIsExpanding(false); // 3초 뒤에 원래대로 돌아가게
     }, 4500); // 4초 뒤에 애니메이션을 원래 상태로 되돌리기
 
+    const scrollTimer = setTimeout(() => {
+      titleRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }, 4800); // 애니메이션 종료 직후 실행
+
     return () => {
       clearTimeout(timer);
       clearTimeout(resetTimer);
+      clearTimeout(scrollTimer);
     };
   }, []);
 
@@ -86,7 +95,7 @@ export default function RecruitPage() {
         <div className={styles['recruit-banner']}>
           <p id={styles['title']}>2025-1 CRA</p>
           <p id={styles['title']}>RECRUITMENT</p>
-          <p id={styles['content']}>
+          <p ref={titleRef} id={styles['content']}>
             CRA는 함께 성장 할 25-1 기수 동아리원을 모집합니다.
           </p>
           <div className={styles['recruit-apply1']}>
