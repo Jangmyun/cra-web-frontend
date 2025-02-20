@@ -160,3 +160,27 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+@media (max-width: 1200px) {
+  .edit-container {
+    max-width: 886px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .edit-container {
+    max-width: 756px;
+  }
+}
+
+@media (max-width: 788px) {
+  .edit-container {
+    max-width: 566px;
+  }
+}
+
+@media (max-width: 600px) {
+  .edit-container {
+    max-width: 90%;
+  }
+}
