@@ -165,3 +165,26 @@
 .file-section.hidden {
   visibility: hidden;
 }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 18px;
+  }
+  .nav-title,
+  .nav-content {
+    font-size: 15px;
+  }
+  .content-title {
+    font-size: 25px;
+  }
+  .board-content {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 468px) {
+  .nav-title,
+  .nav-content {
+    font-size: 13px;
+  }
+}
