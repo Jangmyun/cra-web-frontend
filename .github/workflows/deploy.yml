@@ -28,6 +28,11 @@ jobs:
     
     - name: Build vite
       run: npm run build
+
+    - name: Add 404.html
+      run: |
+        cd dist
+        cp index.html 404.html
     
     - name: Install Firebase CLI
       run: npm install -g firebase-tools
