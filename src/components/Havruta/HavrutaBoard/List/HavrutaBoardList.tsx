@@ -54,7 +54,7 @@ export default function HavrutaBoardList({
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>하브루타 게시판</h2>
+      <h2 className={styles.title}>하브루타 게시판임</h2>
       <div className={styles.dropdown}>
         <Dropdown
           havrutaQuery={havrutaQuery}
