@@ -65,12 +65,14 @@ export default function HavrutaBoardDetailItem({
       console.error('유효하지 않은 사용자 ID');
       return;
     }
-    const newLikeState = !isLiked;
+
     try {
-      await createLike(board.id as number, isLiked);
-      setIsLiked(newLikeState);
-      setLikeCnt((prevCount) => (newLikeState ? prevCount + 1 : prevCount - 1));
-      localStorage.setItem(`isLiked_${board.id}`, JSON.stringify(newLikeState));
+      const data = await createLike(board.id as number, !isLiked);
+      console.log('Response from like API:', data);
+
+      // API 응답을 바로 반영
+      setIsLiked(data.liked);
+      setLikeCnt(data.likes);
     } catch (error) {
       console.error('좋아요 업데이트 실패:', error);
     }

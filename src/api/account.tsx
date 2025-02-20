@@ -1,7 +1,7 @@
 import { client } from './client';
 
 // email 인증 요청
-export const emailRequest = async (email: String): Promise<number> => {
+export const emailRequest = async (email: string): Promise<number> => {
   const response = await client.post<void>(
     `/account/valid/email-request?email=${email}`,
   );
@@ -9,7 +9,7 @@ export const emailRequest = async (email: String): Promise<number> => {
 };
 
 // email 인증
-export const emailCode = async (emailCode: String): Promise<number> => {
+export const emailCode = async (emailCode: string): Promise<number> => {
   const response = await client.post<void>(
     `/account/valid/email-code?code=${emailCode}`,
   );

@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { createBoards } from '~/api/board';

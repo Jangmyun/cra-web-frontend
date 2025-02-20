@@ -100,7 +100,7 @@ function PWSearchPage() {
         <Submit
           onClick={(e) => {
             e.preventDefault();
-            navigate('/pwsearch/reset');
+            void navigate('/pwsearch/reset');
           }}
         >
           확인
