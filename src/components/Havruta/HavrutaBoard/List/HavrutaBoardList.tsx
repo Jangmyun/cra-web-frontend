@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { UseQueryResult } from '@tanstack/react-query';
 import { Havruta, HavrutaBoard } from '~/models/Havruta.ts';
-
 import SideBar from './Sidebar/HavrutaSidebar.tsx';
-import Dropdown from './Dropdown/HavrutaDropDown.tsx';
+import Dropdown from './Dropdown/HavrutaDropdown.tsx';
 import Pagination from '~/components/Pagination/Pagination.tsx';
 import HavrutaBoardItem from '~/components/Havruta/HavrutaBoard/Item/HavrutaBoardItem.tsx';
 import styles from './HavrutaBoardList.module.css';
