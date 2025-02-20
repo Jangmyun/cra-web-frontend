@@ -24,11 +24,6 @@
   padding: 0 1rem;
 }
 
-span {
-  color: var(--color-primary);
-  font-family: 'Pretendard Bold' !important;
-}
-
 .HistoryListElement {
   padding-left: 42.5px;
   padding-top: 0.5rem;
