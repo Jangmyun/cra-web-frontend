@@ -6,9 +6,6 @@ interface FindUsernameParams {
   name: string;
   email: string;
 }
-interface FindUsernameResponse {
-  username: string;
-}
 interface ChangePasswordParams {
   code: string;
   password: string;
@@ -52,7 +49,7 @@ export const pwEmailRequest = async (username: string): Promise<number> => {
 // ID 찾기 요청
 export const findId = async (params: FindUsernameParams): Promise<string> => {
   try {
-    const response: AxiosResponse<FindUsernameResponse> = await client({
+    const response: AxiosResponse<string> = await client({
       method: 'get',
       url: '/account/find/username',
       params: {
@@ -62,7 +59,13 @@ export const findId = async (params: FindUsernameParams): Promise<string> => {
       },
     });
 
-    return response.data.username; // 명확한 속성 반환
+    console.log('Full API Response:', response);
+
+    if (!response.data) {
+      throw new Error('응답에서 username을 찾을 수 없습니다.');
+    }
+
+    return response.data; // username이 아니라 data 자체를 반환!
   } catch (error) {
     console.error('Find ID API Error:', error);
     throw error;
