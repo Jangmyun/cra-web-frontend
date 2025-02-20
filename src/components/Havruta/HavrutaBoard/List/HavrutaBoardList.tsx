@@ -54,7 +54,7 @@ export default function HavrutaBoardList({
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>하브루타 게시판임</h2>
+      <h2 className={styles.title}>하브루타 게시판</h2>
       <div className={styles.dropdown}>
         <Dropdown
           havrutaQuery={havrutaQuery}
@@ -62,6 +62,9 @@ export default function HavrutaBoardList({
           onHavrutaChange={onHavrutaChange}
           onPageChange={onPageChange}
         />
+        <Link className={styles.MobileWriteLink} to="/havruta/write">
+          글쓰기
+        </Link>
       </div>
       <div className={styles.content}>
         <div className={styles.sidebar}>

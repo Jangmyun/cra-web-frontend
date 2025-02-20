@@ -31,18 +31,20 @@ function HavrutaDropdown({
   };
 
   return (
-    <select
-      value={selectedHavrutaId ?? 'all'}
-      onChange={handleHavrutaChange}
-      className={styles.dropdown}
-    >
-      <option value="all">전체</option>
-      {havrutaQuery.data?.map((havruta) => (
-        <option key={havruta.id} value={havruta.id}>
-          {havruta.className} ({havruta.professor})
-        </option>
-      ))}
-    </select>
+    <div className={styles.container}>
+      <select
+        value={selectedHavrutaId ?? 'all'}
+        onChange={handleHavrutaChange}
+        className={styles.dropdown}
+      >
+        <option value="all">전체</option>
+        {havrutaQuery.data?.map((havruta) => (
+          <option key={havruta.id} value={havruta.id}>
+            {havruta.className} ({havruta.professor})
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 

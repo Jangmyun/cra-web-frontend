@@ -60,7 +60,7 @@ export default function BoardList({
           onPageChange={onPageChange}
         />
         <Link
-          className={styles['write-link']}
+          className={styles.WriteLink}
           to={`/${CATEGORY_STRINGS_EN[category]}/write`}
         >
           글쓰기
