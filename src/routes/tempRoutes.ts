@@ -4,7 +4,7 @@ import { rootRoute } from './__root';
 
 export const comingSoonRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/coming',
+  path: '*',
   component: lazy(() => import('~/pages/Temp/ComingSoonPage.tsx')),
 });
 
