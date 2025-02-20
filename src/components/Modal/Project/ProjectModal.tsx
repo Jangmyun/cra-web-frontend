@@ -4,6 +4,7 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import Modal from 'react-modal';
 import styles from '../Project/ProjectModal.module.css';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 const ProjectModal = ({
   projectId,
@@ -24,7 +25,7 @@ const ProjectModal = ({
   if (isLoading) {
     return (
       <Modal isOpen onRequestClose={closeModal}>
-        Loading...
+        <LoadingSpinner />;
       </Modal>
     );
   }

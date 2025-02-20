@@ -155,7 +155,7 @@ export default function BoardEdit({ category }: BoardEditProps) {
 
   // 로딩 상태 처리
   if (boardQuery.isLoading || boardQuery.isLoading) {
-    return <div>데이터를 불러오는 중입니다...</div>;
+    return <LoadingSpinner />;
   }
 
   if (boardQuery.isError || boardQuery.isError) {

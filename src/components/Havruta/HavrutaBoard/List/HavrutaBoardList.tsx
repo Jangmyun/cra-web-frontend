@@ -7,6 +7,7 @@ import Dropdown from './Dropdown/HavrutaDropDown.tsx';
 import Pagination from '~/components/Pagination/Pagination.tsx';
 import HavrutaBoardItem from '~/components/Havruta/HavrutaBoard/Item/HavrutaBoardItem.tsx';
 import styles from './HavrutaBoardList.module.css';
+import LoadingSpinner from '~/components/Common/LoadingSpinner.tsx';
 
 interface HavrutaBoardListProps {
   havrutaQuery: UseQueryResult<Havruta[], unknown>;
@@ -28,12 +29,8 @@ export default function HavrutaBoardList({
   onHavrutaChange,
 }: HavrutaBoardListProps) {
   const renderBoardContent = () => {
-    if (havrutaBoardQuery.isLoading)
-      return (
-        <div className={styles.loading}>
-          <div className="LoadingSpinner"></div>
-        </div>
-      );
+    if (havrutaBoardQuery.isLoading) return <LoadingSpinner />;
+
     if (totalPages === 0)
       return <div className={styles.noBoards}>현재 게시물이 없습니다.</div>;
 
