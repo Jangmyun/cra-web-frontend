@@ -1,5 +1,14 @@
 import { client } from './client';
 
+interface FindUsernameParams {
+  studentId: string;
+  name: string;
+  email: string;
+}
+interface ChangePasswordParams {
+  code: string;
+  password: string;
+}
 // email 인증 요청
 export const emailRequest = async (email: string): Promise<number> => {
   const response = await client.post<void>(
@@ -15,3 +24,45 @@ export const emailCode = async (emailCode: string): Promise<number> => {
   );
   return response.status;
 };
+<<<<<<< HEAD
+
+// PW 재설정
+export const changePassword = async ({
+  code,
+  password,
+}: ChangePasswordParams): Promise<number> => {
+  const response = await client.put<void>('/user/password-change', {
+    code,
+    password,
+  });
+  return response.status;
+};
+
+// PW 재설정 인증 요청
+export const pwEmailRequest = async (username: String): Promise<number> => {
+  const response = await client.post<void>(
+    `/account/password-change?username=${username}`,
+  );
+  return response.status;
+};
+
+// ID 찾기 요청
+export const findId = async (params: FindUsernameParams): Promise<string> => {
+  try {
+    const response = await client({
+      method: 'get',
+      url: '/account/find/username',
+      params: {
+        name: params.name,
+        email: params.email,
+        studentId: params.studentId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Find ID API Error:', error);
+    throw error;
+  }
+};
+=======
+>>>>>>> f6dda5ae4326dd6085f6b5a9f1742fd6af896a45
