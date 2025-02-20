@@ -5,6 +5,7 @@ import Sidebar from './Sidebar/HavrutaSidebar.tsx';
 import Pagination from '~/components/Pagination/Pagination.tsx';
 import HavrutaBoardItem from '~/components/Havruta/HavrutaBoard/Item/HavrutaBoardItem.tsx';
 import styles from './HavrutaBoardList.module.css';
+import LoadingSpinner from '~/components/Common/LoadingSpinner.tsx';
 
 interface HavrutaBoardListProps {
   havrutaQuery: UseQueryResult<Havruta[], unknown>;
@@ -27,13 +28,7 @@ export default function HavrutaBoardList({
 }: HavrutaBoardListProps) {
   const renderBoardContent = () => {
     if (havrutaBoardQuery.isLoading) {
-      return (
-        <div>
-          <div className={styles['board-wrapper']}>
-            데이터를 불러오는 중입니다...
-          </div>
-        </div>
-      );
+      return <LoadingSpinner />;
     }
 
     if (havrutaBoardQuery.isError) {

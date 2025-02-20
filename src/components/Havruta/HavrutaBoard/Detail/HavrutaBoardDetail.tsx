@@ -9,6 +9,7 @@ import { Board } from '~/models/Board.ts';
 import { CATEGORY } from '~/constants/category.ts';
 import HavrutaBoardDetailItem from './Item/HavrutaBoardDetailIItem.tsx';
 import styles from './HavrutaBoardDetail.module.css';
+import LoadingSpinner from '~/components/Common/LoadingSpinner.tsx';
 
 export default function HavrutaBoardDetail() {
   const currentUrl = window.location.href;
@@ -70,7 +71,7 @@ export default function HavrutaBoardDetail() {
   });
 
   if (boardQuery.isFetching || commentCountQuery.isFetching) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner />;
   }
 
   if (boardQuery.isSuccess && commentCountQuery.isSuccess) {

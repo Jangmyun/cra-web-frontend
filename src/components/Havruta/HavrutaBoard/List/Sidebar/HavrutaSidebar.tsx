@@ -4,6 +4,7 @@ import { UseQueryResult } from '@tanstack/react-query';
 import { Havruta } from '~/models/Havruta.ts';
 import SelectedDot from '~/assets/images/Dot/Selected-Dot.png';
 import styles from './HavrutaSidebar.module.css';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 interface HavrutaSidebarProps {
   havrutaQuery: UseQueryResult<Havruta[], unknown>;
@@ -20,7 +21,7 @@ function HavrutaSidebar({
 }: HavrutaSidebarProps) {
   const navigate = useNavigate();
 
-  if (havrutaQuery.isLoading) return <div>로딩중...</div>;
+  if (havrutaQuery.isLoading) return <LoadingSpinner />;
   if (havrutaQuery.isError) return <div>ERROR!</div>;
 
   const handleHavrutaChange = (id: number | null, event: React.MouseEvent) => {
