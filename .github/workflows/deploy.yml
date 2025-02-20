@@ -38,5 +38,4 @@ jobs:
 
       - name: Deploy to Firebase
         run: |
-          firebase use --add
           firebase deploy --only hosting --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
