@@ -1,9 +1,13 @@
 import { client } from './client';
+import { AxiosResponse } from 'axios';
 
 interface FindUsernameParams {
   studentId: string;
   name: string;
   email: string;
+}
+interface FindUsernameResponse {
+  username: string;
 }
 interface ChangePasswordParams {
   code: string;
@@ -38,7 +42,7 @@ export const changePassword = async ({
 };
 
 // PW 재설정 인증 요청
-export const pwEmailRequest = async (username: String): Promise<number> => {
+export const pwEmailRequest = async (username: string): Promise<number> => {
   const response = await client.post<void>(
     `/account/password-change?username=${username}`,
   );
@@ -48,7 +52,7 @@ export const pwEmailRequest = async (username: String): Promise<number> => {
 // ID 찾기 요청
 export const findId = async (params: FindUsernameParams): Promise<string> => {
   try {
-    const response = await client({
+    const response: AxiosResponse<FindUsernameResponse> = await client({
       method: 'get',
       url: '/account/find/username',
       params: {
@@ -57,7 +61,8 @@ export const findId = async (params: FindUsernameParams): Promise<string> => {
         studentId: params.studentId,
       },
     });
-    return response.data;
+
+    return response.data.username; // 명확한 속성 반환
   } catch (error) {
     console.error('Find ID API Error:', error);
     throw error;
