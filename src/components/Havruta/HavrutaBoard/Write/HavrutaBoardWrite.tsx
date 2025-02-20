@@ -9,6 +9,7 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import styles from './HavrutaBoardWrite.module.css';
 import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 export default function HavrutaBoardWrite() {
   const havrutaCategory = CATEGORY.HAVRUTA;
@@ -206,7 +207,7 @@ export default function HavrutaBoardWrite() {
 
         <label htmlFor="havrutaId">과목명</label>
         {havrutaQuery.isLoading ? (
-          <p>과목 목록을 불러오는 중입니다...</p>
+          <LoadingSpinner />
         ) : havrutaQuery.isError ? (
           <p>과목 목록을 불러오는데 실패했습니다.</p>
         ) : havrutaQuery.data?.length === 0 ? (

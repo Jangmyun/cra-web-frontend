@@ -11,6 +11,7 @@ import { useMarkdownEditor } from '../../../Board/Write/Markdown';
 import { Editor } from '@toast-ui/react-editor';
 import { CATEGORY } from '~/constants/category.ts';
 import { Havruta } from '~/models/Havruta.ts';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 export default function HavrutaBoardEdit() {
   const navigate = useNavigate();
@@ -197,7 +198,7 @@ export default function HavrutaBoardEdit() {
 
   // 로딩 상태 처리
   if (boardQuery.isLoading || havrutaQuery.isLoading) {
-    return <div>데이터를 불러오는 중입니다...</div>;
+    return <LoadingSpinner />;
   }
 
   if (boardQuery.isError || havrutaQuery.isError) {
