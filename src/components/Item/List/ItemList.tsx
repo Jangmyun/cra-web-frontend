@@ -19,7 +19,6 @@ export default function ItemList({ itemCategory }: { itemCategory: number }) {
     content = <div className="error">에러가 발생했습니다!</div>;
   } else if (ItemQuery.isSuccess) {
     if (ItemQuery.data.length === 0) {
-      console.log('서버 통신 가능, 아직 데이터 없음');
     } else {
       content = (
         <div className={styles['background']}>

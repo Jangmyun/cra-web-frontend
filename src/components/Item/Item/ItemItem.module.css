@@ -67,16 +67,3 @@
   text-align: left;
   padding-left: 10px;
 }
-
-@media (max-width: 1024px) {
-  .project-block {
-    flex-basis: calc(50% - 1rem); /* 2개씩 배치 */
-  }
-}
-
-/* 화면이 768px 이하일 때: 1개씩 배치 */
-@media (max-width: 768px) {
-  .project-block {
-    flex-basis: calc(100% - 1rem); /* 1개씩 배치 */
-  }
-}
