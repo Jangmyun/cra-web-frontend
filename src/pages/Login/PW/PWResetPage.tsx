@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
@@ -181,11 +182,11 @@ function PWResetPage() {
 
       if (status === 200) {
         alert('비밀번호가 성공적으로 변경되었습니다.');
-        navigate('/pwsearch/complete');
+        await navigate('/pwsearch/complete');
       } else {
         throw new Error(`서버 오류: 상태 코드 ${status}`);
       }
-    } catch (error) {
+    } catch {
       alert('비밀번호 변경 중 오류가 발생했습니다.');
     }
   };

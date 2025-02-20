@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AlertModal from '~/components/Modal/Alert/AlertModal';
 import { useModalStore } from '~/store/modalStore';
 import { pwEmailRequest } from '~/api/account';
+import { AxiosError } from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -158,22 +159,17 @@ function PasswordResetForm() {
         );
         setUsername('');
       }
-    } catch (error: any) {
-      console.log('Full error:', error);
-      console.log('Error response:', error.response);
-      console.log('Error status:', error.response?.status);
-      console.log('Error data:', error.response?.data);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.log('Full error:', error);
+        console.log('Error response:', error.response);
+        console.log('Error status:', error.response?.status);
+        console.log('Error data:', error.response?.data);
 
-      if (error.response) {
-        const status = error.response.status;
-        const errorData = error.response.data;
+        const status = error.response?.status;
+        const errorData = error.response?.data as { message?: string };
 
-        console.log(
-          `Server responded with status ${status} and data:`,
-          errorData,
-        );
-
-        if (errorData && errorData.message) {
+        if (errorData?.message) {
           safeOpenModal(errorData.message);
         } else {
           switch (status) {
@@ -192,14 +188,12 @@ function PasswordResetForm() {
               );
           }
         }
-      } else if (error.request) {
-        console.log('No response received:', error.request);
-        safeOpenModal(
-          '서버와의 연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.',
-        );
-      } else {
-        console.log('Error setting up request:', error.message);
+      } else if (error instanceof Error) {
+        console.log('Error message:', error.message);
         safeOpenModal('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      } else {
+        console.log('Unknown error:', error);
+        safeOpenModal('예기치 않은 오류가 발생했습니다.');
       }
     } finally {
       setIsLoading(false);

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -96,14 +97,8 @@ function IDSearchPage() {
     email: '',
   });
 
-  const [focused, setFocused] = useState({
-    studentId: false,
-    name: false,
-    email: false,
-  });
-
   const validate = () => {
-    let newErrors = { studentId: '', name: '', email: '' };
+    const newErrors = { studentId: '', name: '', email: '' };
     let isValid = true;
 
     if (!formData.studentId) {
@@ -136,14 +131,6 @@ function IDSearchPage() {
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const handleFocus = (name: string) => {
-    setFocused((prev) => ({ ...prev, [name]: true }));
-  };
-
-  const handleBlur = (name: string) => {
-    setFocused((prev) => ({ ...prev, [name]: false }));
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
@@ -155,7 +142,7 @@ function IDSearchPage() {
 
       if (!username) throw new Error('응답에서 username을 찾을 수 없습니다.');
 
-      navigate(`/idsearch/complete?id=${username}`);
+      await navigate(`/idsearch/complete?id=${username}`);
     } catch (error: unknown) {
       console.error('API Error:', error);
       if (error instanceof Error) {
@@ -179,8 +166,6 @@ function IDSearchPage() {
             placeholder="학번을 입력하세요."
             value={formData.studentId}
             onChange={handleInputChange}
-            onFocus={() => handleFocus('studentId')}
-            onBlur={() => handleBlur('studentId')}
             hasError={!!errors.studentId}
           />
           {errors.studentId && <ErrorMessage>{errors.studentId}</ErrorMessage>}
@@ -195,8 +180,6 @@ function IDSearchPage() {
             placeholder="이름을 입력하세요."
             value={formData.name}
             onChange={handleInputChange}
-            onFocus={() => handleFocus('name')}
-            onBlur={() => handleBlur('name')}
             hasError={!!errors.name}
           />
           {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
@@ -211,8 +194,6 @@ function IDSearchPage() {
             placeholder="이메일을 입력하세요."
             value={formData.email}
             onChange={handleInputChange}
-            onFocus={() => handleFocus('email')}
-            onBlur={() => handleBlur('email')}
             hasError={!!errors.email}
           />
           {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
