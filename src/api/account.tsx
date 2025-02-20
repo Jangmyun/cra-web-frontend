@@ -24,7 +24,6 @@ export const emailCode = async (emailCode: string): Promise<number> => {
   );
   return response.status;
 };
-<<<<<<< HEAD
 
 // PW 재설정
 export const changePassword = async ({
@@ -64,5 +63,3 @@ export const findId = async (params: FindUsernameParams): Promise<string> => {
     throw error;
   }
 };
-=======
->>>>>>> f6dda5ae4326dd6085f6b5a9f1742fd6af896a45
