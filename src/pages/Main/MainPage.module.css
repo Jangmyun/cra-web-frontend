@@ -51,7 +51,7 @@
   aspect-ratio: 1 / 1;
   background-color: white;
   border-radius: 10px;
-  border: 1px solid #c1c1c1;
+  border: 1px solid var(--color-dark-stroke);
   padding-top: 11px;
   display: flex;
   justify-content: center;

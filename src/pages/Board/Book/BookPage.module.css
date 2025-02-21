@@ -10,6 +10,6 @@
 .project-section p {
   font-size: 40px;
   font-family: 'Pretendard Bold';
-  color: #5e5e5e;
+  color: var(--color-bright-text);
   margin-left: 10px;
 }

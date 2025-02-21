@@ -124,7 +124,8 @@ export default function RecruitPage() {
             <p>
               다른 사람과 협력하며 공동의 목표를 <br />
               이루고 서로 배우고 발전하며{' '}
-              <span style={{ color: '#2CB4DB' }}>함께 성장</span>하고 싶은 사람
+              <span style={{ color: 'var(--color-primary)' }}>함께 성장</span>
+              하고 싶은 사람
             </p>
           </div>
           <div>
@@ -133,7 +134,8 @@ export default function RecruitPage() {
               어떤 문제든 두려움 없이 극복하려는 의지를 가지고
               <br />
               새로운 기회를 탐구하는 용기와{' '}
-              <span style={{ color: '#2CB4DB' }}>도전 의식</span>을 지닌 사람
+              <span style={{ color: 'var(--color-primary)' }}>도전 의식</span>을
+              지닌 사람
             </p>
           </div>
           <div>
@@ -142,17 +144,22 @@ export default function RecruitPage() {
               익숙하지 않은 새로운 지식을 접할 때도 적극적으로 받아들이고
               <br />
               실수를 통해 성장하며 자신의 능력을 확장하려고{' '}
-              <span style={{ color: '#2CB4DB' }}>노력</span>하는 사람
+              <span style={{ color: 'var(--color-primary)' }}>노력</span>하는
+              사람
             </p>
           </div>
           <div>
             <span className={styles['number']}>04</span>
             <p>
               다양한 경험과 지식을 습득하며{' '}
-              <span style={{ color: '#2CB4DB' }}>스스로 성장</span>하는 동시에,
+              <span style={{ color: 'var(--color-primary)' }}>스스로 성장</span>
+              하는 동시에,
               <br />
               자신이 얻은 것들을 주변 사람들에게 아낌없이{' '}
-              <span style={{ color: '#2CB4DB' }}>나눠줄 수 있는</span> 사람
+              <span style={{ color: 'var(--color-primary)' }}>
+                나눠줄 수 있는
+              </span>{' '}
+              사람
             </p>
           </div>
         </div>
@@ -172,10 +179,14 @@ export default function RecruitPage() {
           <div className={styles['content-box']}>
             <h3>지원 방법</h3>
             <p>1차 서류</p>
-            <p style={{ color: 'gray' }}>리크루팅 폼에서 지원서 작성</p>
+            <p style={{ color: 'var(--color-gray-text)' }}>
+              리크루팅 폼에서 지원서 작성
+            </p>
             <br />
             <p>2차 서류</p>
-            <p style={{ color: 'gray' }}>대면 면접 이후 최종합격</p>
+            <p style={{ color: 'var(--color-gray-text)' }}>
+              대면 면접 이후 최종합격
+            </p>
           </div>
         </div>
       </div>

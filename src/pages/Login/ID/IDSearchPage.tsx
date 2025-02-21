@@ -45,9 +45,10 @@ const Label = styled.label`
 const StyledInput = styled.input<{ hasError: boolean }>`
   width: 100%;
   background-color: var(--color-white);
-  color: black;
+  color: var(--color-black);
   border: 1px solid
-    ${({ hasError }) => (hasError ? 'red' : 'var(--color-dark-stroke)')};
+    ${({ hasError }) =>
+      hasError ? 'var(--color-error)' : 'var(--color-dark-stroke)'};
   border-radius: 0.5rem;
   padding: 1.5rem 1rem;
   outline: none;
@@ -61,7 +62,7 @@ const StyledInput = styled.input<{ hasError: boolean }>`
 `;
 
 const ErrorMessage = styled.p`
-  color: red;
+  color: var(--color-error);
   font-size: 0.9rem;
   margin-top: 0.5rem;
 `;

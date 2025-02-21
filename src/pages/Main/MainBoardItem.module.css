@@ -36,7 +36,7 @@
   float: right;
   display: inline;
   text-decoration: none;
-  color: #9b9b9b;
+  color: var(--color-brighter-text);
   font-size: 15px;
   font-family: 'Pretendard Medium';
   margin: 8px 0;

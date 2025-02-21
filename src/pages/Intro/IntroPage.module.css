@@ -1,5 +1,5 @@
 .container {
-  background-color: #050505;
+  background-color: var(--color-black);
   font-family: 'Pretendard Bold';
   width: 100%;
   overflow: hidden;

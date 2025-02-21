@@ -83,7 +83,7 @@ const Login = styled.div`
     background-color: var(--color-primary);
     border: none;
     border-radius: 10px;
-    color: #ffffff;
+    color: var(--color-white);
     font-size: 30px;
     font-family: 'Pretendard Bold';
     margin-top: 40px;

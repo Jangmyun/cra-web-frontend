@@ -80,13 +80,13 @@ const Input = styled.div`
   }
 
   input.error {
-    border-color: red;
+    border-color: var(--color-error);
   }
 
   div.error {
     margin-top: 0.25rem;
     margin-left: 0.25rem;
-    color: red;
+    color: var(--color-error);
     font-size: 1rem;
   }
 `;
@@ -109,7 +109,7 @@ const ResetButton = styled.button`
   justify-content: center;
 
   &:disabled {
-    background-color: gray;
+    background-color: var(--color-gray-text);
     cursor: default;
     opacity: 0.6;
   }
@@ -117,7 +117,7 @@ const ResetButton = styled.button`
 
 const Comment = styled.div`
   font-size: 10px;
-  color: #b1b1b1;
+  color: var(--color-brighter-border);
   margin-top: 10px;
 `;
 

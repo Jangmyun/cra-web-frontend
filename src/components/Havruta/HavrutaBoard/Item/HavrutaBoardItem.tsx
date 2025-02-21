@@ -52,7 +52,7 @@ export default function HavrutaBoardItem({
               <span>
                 <img src={COMMENT} className={styles['comment-img']} />
               </span>
-              <span style={{ color: '#2CB4DB' }}>
+              <span style={{ color: 'var(--color-primary)' }}>
                 {commentCnt !== null ? commentCnt : '로딩 중'}
               </span>
             </div>

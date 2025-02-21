@@ -24,7 +24,7 @@
   font-style: normal;
   font-size: 3.125em;
   letter-spacing: -0.05em;
-  color: #ffffff;
+  color: var(--color-white);
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -40,11 +40,15 @@
   font-size: 8.5vw;
   line-height: 175px;
   letter-spacing: -0.05em;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .helloworld {
-  background: linear-gradient(90deg, #2cb4db 0%, #e0f7ff 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-white-blue-text) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -59,8 +63,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00cfff;
-  color: #e5f7fb;
+  background-color: var(--color-crang);
+  color: var(--color-white-blue-text);
   width: 40vw;
   font-size: 2.5vw;
   padding: 1rem 0rem;
@@ -110,7 +114,7 @@
   width: 100%;
   font-style: normal;
   font-size: 40px !important;
-  color: #ffffff;
+  color: var(--color-white);
   text-align: center;
   line-height: 80px;
   top: 45%;
@@ -232,24 +236,11 @@
   }
 
   .RecruitBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #00cfff;
-    color: #e5f7fb;
     width: 40vw;
     font-size: 2.5vw;
     padding: 0.75rem 0rem;
     margin-top: 3rem;
     border-radius: 2rem;
-    text-decoration: none;
-    transition: transform 0.4s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
-    p {
-      text-align: center;
-    }
   }
 
   .comment2 {

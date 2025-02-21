@@ -23,13 +23,13 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solidvar(--color-bright-stroke);
   padding: 10px;
 `;
 
 const ActionLink = styled(Link)`
   padding: 0.25rem 0.5rem;
-  color: #007bff;
+  color: var(--color-more-primary);
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -42,7 +42,7 @@ const DeleteButtonWrapper = styled.div`
 `;
 
 const CreateHavrutaLink = styled(Link)`
-  color: #2cb4db;
+  color: var(--color-primary);
   font-size: 1.25rem;
   text-decoration: none;
   &:hover {
