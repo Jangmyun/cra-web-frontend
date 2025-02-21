@@ -10,7 +10,8 @@ function UserEdit() {
   const navigate = useNavigate();
 
   // zustand로 상태관리 되고 있는 현재 유저 정보 가져오기
-  const { name, email, studentId, term, githubId, setUser } = useUserStore();
+  const { name, email, studentId, term, githubId, greetingMessage, setUser } =
+    useUserStore();
 
   // 폼에 저장될 데이터 정의하기
   const [formData, setFormData] = useState<User>({
@@ -19,6 +20,7 @@ function UserEdit() {
     studentId,
     term,
     githubId,
+    greetingMessage,
   });
 
   // Update Query 실행
@@ -105,6 +107,14 @@ function UserEdit() {
           value={formData.githubId}
           onChange={handleChange}
           required
+        />
+        <label htmlFor="greetingMessage">나의 한마디</label>
+        <input
+          type="text"
+          id="greetingMessage"
+          name="greetingMessage"
+          value={formData.greetingMessage}
+          onChange={handleChange}
         />
         <input
           type="submit"

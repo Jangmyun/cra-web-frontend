@@ -3,6 +3,7 @@ import { useUserStore } from '~/store/userStore';
 import logoutImage from '~/assets/images/logoutImage.png';
 import { Link } from 'react-router-dom';
 import styles from './UserModal.module.css';
+import { FaCog } from 'react-icons/fa'; // Font Awesome에서 cog 아이콘 (설정 아이콘)
 
 interface UserModalProps {
   closeModal: () => void;
@@ -10,7 +11,9 @@ interface UserModalProps {
 }
 
 const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
-  const { name, email, studentId, term, githubId, imgUrl } = useUserStore();
+  const { name, email, studentId, term, githubId, imgUrl, greetingMessage } =
+    useUserStore();
+
   const gitHubLink = 'https://github.com/' + githubId;
   return (
     <>
@@ -23,7 +26,7 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
         <div className={styles['modal-header']}>
           <Link to={`/user/${name}`}>
             <button onClick={closeModal} className={styles['setting-button']}>
-              ⚙️
+              <FaCog />
             </button>
           </Link>
         </div>
@@ -37,7 +40,11 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
             </div>
           </div>
           <div className={styles['hanmadi']}>
-            {' 나의 한마디를 입력하세요. '}
+            <div>
+              {greetingMessage === ''
+                ? '나의 한마디를 입력하세요.'
+                : greetingMessage}
+            </div>
           </div>
         </div>
         <div className={styles['extra-info']}>

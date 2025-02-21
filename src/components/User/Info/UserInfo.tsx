@@ -4,7 +4,8 @@ import styles from '../UserPage.module.css';
 
 function UserInfo() {
   const navigate = useNavigate();
-  const { name, email, studentId, term, githubId, imgUrl } = useUserStore();
+  const { name, email, studentId, term, githubId, imgUrl, greetingMessage } =
+    useUserStore();
 
   const handleChangeImage = () => {
     void navigate(`/user/${name}/image/upload`);
@@ -45,6 +46,10 @@ function UserInfo() {
       <div className={styles.info}>
         <p>GitHub </p>
         {githubId}
+      </div>
+      <div className={styles.info}>
+        <p>나의 한마디 </p>
+        {greetingMessage}
       </div>
       <div className={styles.buttons}>
         <button className={styles.profile} onClick={handleChangeImage}>

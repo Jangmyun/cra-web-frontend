@@ -33,7 +33,6 @@ export const useAuthStore = create<authStore>()(
       accessToken: null,
       refreshToken: null,
       userId: null,
-      isAdmin: false,
 
       // 로그인 메서드
       login: async (data: Login) => {
@@ -70,6 +69,7 @@ export const useAuthStore = create<authStore>()(
             imgUrl: resUserDetailDto.imgUrl
               ? resUserDetailDto.imgUrl
               : DEFAULT_PROFILE,
+            greetingMessage: resUserDetailDto.greetingMessage,
           });
         } catch (error) {
           set({
