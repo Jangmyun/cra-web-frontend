@@ -21,19 +21,15 @@ export default function MainPage() {
         </div>
       </div>
       <div className={styles['notice-section']}>
-        <p>
-          <Link to="/notice" className={styles.link}>
-            동아리 공지사항
-          </Link>
-        </p>
+        <Link to="/notice" className={styles.link}>
+          동아리 공지사항
+        </Link>
         <MainBoardList category={CATEGORY.NOTICE} />
       </div>
       <div className={styles['notice-section']}>
-        <p>
-          <Link to="/academic" className={styles.link}>
-            학술 게시판 내용
-          </Link>
-        </p>
+        <Link to="/academic" className={styles.link}>
+          학술 게시판 내용
+        </Link>
         <MainBoardList category={CATEGORY.ACADEMIC} />
       </div>
     </div>

@@ -30,19 +30,16 @@
   width: 100%;
   max-width: 1086px;
   margin-bottom: 5rem;
-  p {
-    flex-basis: 100%;
-    margin-left: 1rem;
-    margin-bottom: 4rem;
-    font-size: 40px;
-    font-family: 'Pretendard Bold';
-    color: var(--color-bright-text);
-  }
 }
 
 .link {
   text-decoration: none;
   color: var(--color-bright-text);
+  flex-basis: 100%;
+  margin-left: 1rem;
+  margin-bottom: 3rem;
+  font-size: 40px;
+  font-family: 'Pretendard Bold';
   &:hover {
     color: var(--color-primary);
   }
@@ -95,15 +92,15 @@
   }
   .link {
     font-size: 34px;
-    p {
-      margin-left: 0rem;
-    }
+    margin-left: 0.5rem;
+    margin-bottom: 2rem;
   }
 }
 
 @media (max-width: 628px) {
   .link {
     font-size: 32px;
+    margin-bottom: 1.5rem;
   }
   .activity-block {
     height: auto;
