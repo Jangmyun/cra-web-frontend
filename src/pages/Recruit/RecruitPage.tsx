@@ -162,11 +162,6 @@ export default function RecruitPage() {
         <h2>모집 개요</h2>
         <div className={styles['recruit-contentDetail']}>
           <div className={styles['content-box']}>
-            <h3>핵심 인재상</h3>
-            <p>컴퓨터 분야의 최신 기술을 공부 </p>
-            <p>및 연구하고 싶은 누구나</p>
-          </div>
-          <div className={styles['content-box']}>
             <h3>지원 자격</h3>
             <p>신입 하계 방학 프로젝트에 참</p>
             <p>여 가능하신 분</p>
