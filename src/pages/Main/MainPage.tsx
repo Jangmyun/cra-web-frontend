@@ -10,7 +10,7 @@ export default function MainPage() {
   const [imgSrc, setImgSrc] = useState<string>(CRANG);
 
   return (
-    <div className={styles['main-page']}>
+    <div className={styles.container}>
       <div className={styles['activity-section']}>
         <div className={styles['activity-block']}>
           <img
