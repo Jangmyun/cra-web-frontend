@@ -57,6 +57,7 @@
 
 .nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
 }
 
@@ -198,9 +199,31 @@
   }
 }
 
-@media (max-width: 468px) {
+@media (max-width: 595px) {
+  .content-body {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    position: relative;
+  }
+  .fix-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    scale: 90%;
+    transform: translateY(-5px);
+  }
   .nav-title,
   .nav-content {
     font-size: 13px;
+  }
+  .stats-container {
+    scale: 80%;
+    transform: translate(40px, 30px);
   }
 }
