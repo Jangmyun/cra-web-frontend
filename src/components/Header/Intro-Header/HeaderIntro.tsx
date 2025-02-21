@@ -12,7 +12,7 @@ export default function HeaderIntro() {
           </li>
         </Link>
         <Link to="./main" className={`${styles.LiIntro} ${styles.NavbarLink}`}>
-          MAIN PAGE
+          int main()
         </Link>
       </ul>
     </div>

@@ -48,7 +48,7 @@ const RegisterInputForm = styled.form`
   max-width: 600px;
   background-color: var(--color-white);
   border-radius: 1rem;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
 
   @media (max-width: 768px) {
     padding: 3rem 1.5rem;
@@ -355,7 +355,6 @@ function RegisterForm() {
 
     if (submitLoading) return;
     setSubmitLoading(true);
-
     // Check if any field is empty
     // 모든 필드가 채워졌는지 확인
     for (const key in formData) {
@@ -430,7 +429,7 @@ function RegisterForm() {
       await signUp(requestBody);
       setIsModalOpen(true); // 모달 열기
       setModalMessage('회원가입이 완료되었습니다.');
-      void navigate('/welcome');
+      void navigate('/register/complete');
     } catch (error) {
       if (error instanceof Error) {
         setIsModalOpen(true); // 모달 열기
@@ -607,7 +606,6 @@ function RegisterForm() {
 
         {error && <p style={{ color: 'var(--color-error)' }}>{error}</p>}
 
-        <input type="checkbox" />
         <SubmitBtn type="submit">
           {submitLoading ? <ClipLoader size={25} color="#fff" /> : '확인'}
         </SubmitBtn>

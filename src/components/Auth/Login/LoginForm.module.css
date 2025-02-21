@@ -110,3 +110,17 @@
     max-width: 100%; /* 작은 화면에서 너비 100% */
   }
 }
+
+.PrivacyPolicy {
+  background-color: var(--color-primary);
+  font-size: 17px;
+  font-family: 'Pretendard SemiBold';
+  color: var(--color-white);
+  text-decoration: none;
+  padding: 0.6rem 0.65rem;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-comment-blue);
+  }
+}
