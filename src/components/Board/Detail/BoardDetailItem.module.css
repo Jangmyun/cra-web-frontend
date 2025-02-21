@@ -222,6 +222,10 @@
   .nav-content {
     font-size: 13px;
   }
+  .content-title {
+    font-size: 20px;
+    margin-bottom: 13px;
+  }
   .stats-container {
     scale: 80%;
     transform: translate(40px, 30px);
