@@ -9,7 +9,6 @@ import {
   logOut as logOutApi,
 } from '~/api/auth/authApi';
 import { useUserStore } from '~/store/userStore';
-
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
 // Zustand에서 관리할 상태의 구조, 데이터 Type 정의
@@ -40,9 +39,8 @@ export const useAuthStore = create<authStore>()(
         try {
           // 로그인 Api를 호출하여 사용자 인증을 처리하고, 서버로부터 중요한 데이터를 반환
           const response = await loginApi(data);
-          console.log('🔍 로그인 API 응답:', response);
-
           const { resTokenDto, resUserDetailDto } = response;
+
           if (!resTokenDto) {
             throw new Error('resTokenDto가 응답에 없음');
           }
@@ -71,6 +69,7 @@ export const useAuthStore = create<authStore>()(
             imgUrl: resUserDetailDto.imgUrl
               ? resUserDetailDto.imgUrl
               : DEFAULT_PROFILE,
+            greetingMessage: resUserDetailDto.greetingMessage,
           });
         } catch (error) {
           set({
@@ -102,6 +101,7 @@ export const useAuthStore = create<authStore>()(
           const newRefreshToken = sessionStorage.getItem(
             'refreshToken',
           ) as string;
+
           set({
             accessToken: response.accessToken,
             refreshToken: newRefreshToken,

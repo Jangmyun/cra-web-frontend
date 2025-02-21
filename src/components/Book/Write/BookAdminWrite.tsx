@@ -52,7 +52,7 @@ function BookAdminWrite() {
 
   const HandleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sending Data:', formData);
+
     mutation.mutate(formData);
   };
   return (

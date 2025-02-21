@@ -78,7 +78,6 @@ export default function HavrutaBoardWrite() {
         },
         file: fileToUpload ? [fileToUpload.name] : [],
       };
-      console.log(payload.board);
 
       return await createBoards(
         { ...payload.board, likes: 0, liked: false },

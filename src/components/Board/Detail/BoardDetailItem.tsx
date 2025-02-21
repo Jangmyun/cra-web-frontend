@@ -49,7 +49,7 @@ export default function BoardDetailItem({
 
   useEffect(() => {
     const viewed = localStorage.getItem(`viewed_${board.id}`);
-    console.log(viewed);
+
     if (!viewed) {
       localStorage.setItem(`viewed_${board.id}`, 'true');
       createBoardsView(board.id as number)
@@ -58,7 +58,6 @@ export default function BoardDetailItem({
         })
         .then((updatedBoard) => {
           setViewCnt(updatedBoard.view as number);
-          console.log('Updated view count:', updatedBoard.view);
         })
         .catch((err) => console.error('조회수 업데이트 실패:', err));
     }
@@ -83,7 +82,6 @@ export default function BoardDetailItem({
   const handleLike = async () => {
     try {
       const data = await createLike(board.id as number, !isLiked);
-      console.log('Response from like API:', data);
 
       // API 응답을 바로 반영
       setIsLiked(data.liked);

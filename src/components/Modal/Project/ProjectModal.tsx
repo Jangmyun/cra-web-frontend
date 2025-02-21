@@ -3,8 +3,6 @@ import { getProjectById } from '~/api/project.ts';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import Modal from 'react-modal';
 import styles from '../Project/ProjectModal.module.css';
-import { Link } from 'react-router-dom';
-import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 const ProjectModal = ({
   projectId,
@@ -25,7 +23,7 @@ const ProjectModal = ({
   if (isLoading) {
     return (
       <Modal isOpen onRequestClose={closeModal}>
-        <LoadingSpinner />;
+        Loading...
       </Modal>
     );
   }
@@ -49,14 +47,13 @@ const ProjectModal = ({
       >
         <div className={styles['modal-header']}>
           {project.serviceName}
-          <Link
-            to={project.serviceUrl}
-            target="_blank"
+          <a
+            href={project.gitHubUrl}
             rel="none"
             className={styles['url-button']}
           >
-            URL 이동
-          </Link>
+            URL
+          </a>
         </div>
         <div className={styles['modal-body']}>
           <div className={styles['image-box']}>
@@ -65,11 +62,6 @@ const ProjectModal = ({
           <div className={styles['description']}>
             <div className={styles['content-description']}>프로젝트 설명</div>
             <div>{project.content}</div>
-            {/* <div className={styles['info']}>
-              <p>Members: {project.members}</p>
-              <p>Semester: {project.semester}</p>
-              <p>GitHub URL: {project.gitHubUrl}</p>
-            </div> */}
           </div>
         </div>
         <div className={styles['modal-footer']}>
