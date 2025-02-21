@@ -4,8 +4,9 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import Modal from 'react-modal';
 import styles from '../Project/ProjectModal.module.css';
 import { Link } from 'react-router-dom';
+import MONITOR from '~/assets/images/monitor.png';
+import { MdClose } from 'react-icons/md';
 import LoadingSpinner from '~/components/Common/LoadingSpinner';
-
 const ProjectModal = ({
   projectId,
   closeModal,
@@ -59,22 +60,24 @@ const ProjectModal = ({
           </Link>
         </div>
         <div className={styles['modal-body']}>
-          <div className={styles['image-box']}>
-            <img src={project.imageUrl} className={styles['image']} />
-          </div>
+          <img src={project.imageUrl} className={styles['image']} />
+          <img src={MONITOR} className={styles['image2']} />
+
           <div className={styles['description']}>
-            <div className={styles['content-description']}>프로젝트 설명</div>
+            <div className={styles['content-description']}>
+              <div>프로젝트 설명</div>
+            </div>
             <div>{project.content}</div>
-            {/* <div className={styles['info']}>
-              <p>Members: {project.members}</p>
-              <p>Semester: {project.semester}</p>
-              <p>GitHub URL: {project.gitHubUrl}</p>
-            </div> */}
+          </div>
+
+          <div className={styles['right']}>
+            <p>Members: {project.members}</p>
+            <p>Semester: {project.semester}</p>
           </div>
         </div>
         <div className={styles['modal-footer']}>
           <button onClick={closeModal} className={styles['close-button']}>
-            X
+            <MdClose /> {/* 닫기 버튼 아이콘 */}
           </button>
         </div>
       </Modal>

@@ -1,8 +1,8 @@
 /* Modal Content */
 .modalContent {
   background-color: white;
-  width: 80vw;
-  height: 90vh;
+  width: clamp(320px, 70vw, 70vw);
+  height: clamp(450px, 70vw, 70vw);
   max-width: 1000px;
   max-height: 90vh;
   border-radius: 1rem;
@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden; /* 내용이 모달 밖으로 나오지 않도록 */
+  position: relative;
 }
 
 /* Overlay */
@@ -30,9 +31,9 @@
 
 /* Header */
 .modal-header {
-  font-size: 3vw;
+  font-size: clamp(15px, 2vw, 2vw);
   position: absolute;
-  top: 5vw;
+  top: 3vw;
   left: 5vw;
   right: 3vw;
   font-family: 'Pretendard Bold';
@@ -41,47 +42,86 @@
 /* Modal Body */
 .modal-body {
   display: flex;
-  gap: 2vw;
+  flex-direction: column;
   margin-top: 4vw;
   padding-left: 3vw;
   padding-right: 3vw;
-}
-
-.image-box {
-  width: 100%;
-  height: 100%;
-  max-width: 30vw;
-  max-height: 60vh;
-  background-color: lightgray;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 0.3vw;
-  margin-top: 5vw;
-  border-radius: 5%;
-  margin-right: 1vw;
-}
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5%;
+  align-items: center; /* 세로 방향 중앙 정렬 */
+  position: relative; /* 자식 이미지들을 절대 위치로 설정할 수 있게 만듦 */
 }
 
+.image {
+  width: 500px; /* px로 고정된 너비 */
+  height: 250px; /* px로 고정된 높이 */
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 30px; /* top 마진을 고정된 크기로 설정 */
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+.image2 {
+  position: absolute; /* 두 번째 이미지를 절대 위치로 배치 */
+  left: 10; /* 첫 번째 이미지의 왼쪽에 맞추기 */
+  top: -60px; /* 이미지를 첫 번째 이미지 위로 60px 이동 */
+  width: 570px; /* 고정된 너비 */
+  height: 500px; /* 고정된 높이 */
+  z-index: 1; /* 두 번째 이미지를 첫 번째 이미지 위에 겹치게 설정 */
+}
+
+/*----------------이미지 반응형--------------*/
+@media (max-width: 785px) {
+  .image {
+    width: 400px; /* px로 고정된 너비 */
+    height: 200px; /* px로 고정된 높이 */
+  }
+  .image2 {
+    top: -40px; /* 이미지를 첫 번째 이미지 위로 60px 이동 */
+    width: 460px; /* 고정된 너비 */
+    height: 400px; /* 고정된 높이 */
+  }
+}
+@media (max-width: 700px) {
+  .image {
+    width: 300px; /* px로 고정된 너비 */
+    height: 150px; /* px로 고정된 높이 */
+  }
+  .image2 {
+    top: -24px; /* 이미지를 첫 번째 이미지 위로 60px 이동 */
+    width: 340px; /* 고정된 너비 */
+    height: 300px; /* 고정된 높이 */
+  }
+}
+@media (max-width: 570px) {
+  .image {
+    width: 260px; /* px로 고정된 너비 */
+    height: 110px; /* px로 고정된 높이 */
+
+    margin-bottom: 10px;
+    margin-top: 30px; /* top 마진을 고정된 크기로 설정 */
+  }
+  .image2 {
+    top: -10px; /* 이미지를 첫 번째 이미지 위로 60px 이동 */
+    width: 290px; /* 고정된 너비 */
+    height: 220px; /* 고정된 높이 */
+  }
+}
+/*------------------------------------------*/
 .description {
   font-family: 'Pretendard Regular';
-  font-size: 15px;
-  width: 50%;
+  font-size: clamp(8px, 1vw, 1vw);
+  width: 100%;
   line-height: 1.5;
   flex-direction: column;
   justify-content: center;
-  margin-top: 5vw;
   color: #3e3e3e;
 }
 .content-description {
   font-family: 'Pretendard SemiBold';
-  font-size: 20px;
-  margin-bottom: 2.5rem;
+  font-size: clamp(10px, 2.5vw, 25px);
+  margin-top: 30px;
+  margin-bottom: 1.5vw;
 }
 
 .modal-footer {
@@ -99,7 +139,7 @@
 .close-button {
   position: absolute;
   right: 2vw;
-  font-size: 2vw;
+  font-size: clamp(15px, 2vw, 2vw);
   border: none;
   background-color: transparent;
   color: lightgray;
@@ -112,7 +152,7 @@
 
 /* URL Button */
 .url-button {
-  font-size: clamp(0.5rem, 1.5vw, 1.5rem);
+  font-size: clamp(0.3rem, 1.5vw, 1.5rem);
   font-family: 'Pretendard Semibold';
   background-color: #2cb4db;
   color: white;
@@ -120,8 +160,15 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  right: 2rem; /* 오른쪽 끝으로 고정 */
+  padding: 0.3rem 0.5rem;
+  margin-left: 10px;
   position: absolute;
   white-space: nowrap; /* 텍스트가 줄 바꿈 되지 않도록 설정 */
+}
+
+.right {
+  margin-left: auto;
+  font-size: clamp(8px, 1vw, 1vw);
+  font-family: 'Pretendard Bold';
+  color: #2cb4db;
 }

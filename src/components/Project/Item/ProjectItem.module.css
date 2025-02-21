@@ -1,6 +1,5 @@
 .project-list-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem; /* 아이템 간 가로/세로 간격 */
   justify-content: flex-start; /* 왼쪽 정렬 */
   padding: 2rem;
@@ -49,6 +48,7 @@
   color: #c1c1c1;
   text-align: left;
   padding-left: 10px;
+  font-size: clamp(9px, 1vw, 1vw);
 }
 
 .borrow {
@@ -63,17 +63,4 @@
   color: #2cb4db;
   text-align: left;
   padding-left: 10px;
-}
-
-@media (max-width: 1024px) {
-  .project-block {
-    flex-basis: calc(50% - 1rem); /* 2개씩 배치 */
-  }
-}
-
-/* 화면이 768px 이하일 때: 1개씩 배치 */
-@media (max-width: 768px) {
-  .project-block {
-    flex-basis: calc(100% - 1rem); /* 1개씩 배치 */
-  }
 }
