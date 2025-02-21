@@ -44,8 +44,8 @@ export default function HeaderMain() {
   // };
   return (
     <div className={styles['header-main']}>
-      <Link to="/">
-        {/* <Link to="/main"> */}
+      {/* <Link to="/"> */}
+      <Link to="/main">
         <img src={craIconBlue} alt="크라 아이콘" className={styles.logo} />
       </Link>
 
@@ -65,9 +65,9 @@ export default function HeaderMain() {
           {[
             { path: '/notice', label: 'Notice' },
             { path: '/academic', label: 'Academic' },
+            { path: '/havruta', label: 'Havruta' },
             { path: '/book', label: 'Book' },
             { path: '/item', label: 'Item' },
-            { path: '/havruta', label: 'Havruta' },
             { path: '/project', label: 'Project' },
           ].map(({ path, label }) => (
             <li key={path}>

@@ -97,7 +97,6 @@ export const useAuthStore = create<authStore>()(
       reissueToken: async (data: ReissueToken) => {
         try {
           // 토근 재발급 Api를 호출하여 새로운 ResponseToken(accessToken, refreshToken, userId)을 받음
-
           const response: ResTokenDto = await reissueTokenApi(data);
           const newRefreshToken = sessionStorage.getItem(
             'refreshToken',

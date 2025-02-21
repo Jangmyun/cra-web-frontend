@@ -12,7 +12,7 @@ const Container = styled.div`
   margin-bottom: 20rem;
   font-family: 'Pretendard Bold';
   p {
-    color: #2cb4db;
+    color: var(--color-primary);
   }
   button {
     font-family: 'Pretendard Bold';
@@ -32,7 +32,7 @@ const Title = styled.p`
 `;
 
 const Context = styled.p`
-  color: #8c8c8c !important;
+  color: var(--color-context-gray) !important;
   font-size: 1.5625rem;
 `;
 
@@ -53,14 +53,14 @@ const Buttons = styled.div`
 `;
 
 const MainBtn = styled.button`
-  color: #2cb4db;
-  border: 2px solid #2cb4db;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 `;
 
 const PrevBtn = styled.button`
-  background-color: #2cb4db;
-  color: #ffffff;
-  border: 2px solid #2cb4db;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-primary);
 `;
 
 function NotFoundPage() {

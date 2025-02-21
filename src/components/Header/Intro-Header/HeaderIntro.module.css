@@ -27,10 +27,13 @@
 }
 
 .NavbarLink {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: 'Pretendard Bold';
-  color: white;
+  background-color: var(--color-crang);
+  color: var(--color-white);
   text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 15px;
   transition: transform 0.2s ease;
   user-select: none;
   &:hover {
@@ -66,7 +69,7 @@
   .HeaderIntro {
     padding: 0.5rem 1.25rem 2.5rem 0;
   }
-  .Logo { 
+  .Logo {
     width: 5rem;
     transform: translateX(-1.25rem);
   }

@@ -27,7 +27,12 @@ import { HomeRoute, introRoute } from './introRoutes.ts';
 import { recruitRoute } from './recruitRoute.ts';
 import { mainRoute } from './mainRoute.ts';
 import { loginRoute } from './loginRoute.ts';
-import { registerRoute, registerWelcomeRoute } from './registerRoutes.ts';
+import {
+  registerRoute,
+  registerWelcomeRoute,
+  registerInfoRoute,
+  privacyPolicyRoute,
+} from './registerRoutes.ts';
 import {
   idSerachRoute,
   idCompleteRoute,
@@ -101,6 +106,8 @@ export const routes = createRouter({
     loginRoute,
     registerRoute,
     registerWelcomeRoute,
+    registerInfoRoute,
+    privacyPolicyRoute,
     idSerachRoute,
     idCompleteRoute,
     pwSearchRoute,

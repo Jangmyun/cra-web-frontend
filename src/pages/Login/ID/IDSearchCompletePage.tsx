@@ -73,7 +73,7 @@ const LoginBtn = styled.button`
   background-color: var(--color-primary);
   border: 2px solid var(--color-primary);
   border-radius: 1rem;
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 2rem;
   padding: 1rem 5rem;
   font-family: 'Pretendard Bold';
