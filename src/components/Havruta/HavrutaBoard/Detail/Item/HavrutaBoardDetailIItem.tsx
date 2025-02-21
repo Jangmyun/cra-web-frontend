@@ -82,7 +82,6 @@ export default function HavrutaBoardDetailItem({
 
   const handleDownload = async () => {
     if (!board.fileUrl) {
-      alert('다운로드할 파일이 존재하지 않습니다.');
       return;
     }
 
@@ -109,7 +108,6 @@ export default function HavrutaBoardDetailItem({
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('파일 다운로드 실패:', error);
-      alert('파일 다운로드에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 

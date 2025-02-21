@@ -34,3 +34,8 @@
 .PagenationsElipseUnselected {
   color: var(--color-bright-text);
 }
+@media (max-width: 600px) {
+  .Pagenations {
+    scale: 90%;
+  }
+}

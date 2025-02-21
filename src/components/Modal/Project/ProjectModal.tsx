@@ -6,6 +6,7 @@ import styles from '../Project/ProjectModal.module.css';
 import { Link } from 'react-router-dom';
 import MONITOR from '~/assets/images/monitor.png';
 import { MdClose } from 'react-icons/md';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 const ProjectModal = ({
   projectId,
   closeModal,
@@ -25,7 +26,7 @@ const ProjectModal = ({
   if (isLoading) {
     return (
       <Modal isOpen onRequestClose={closeModal}>
-        Loading...
+        <LoadingSpinner />;
       </Modal>
     );
   }

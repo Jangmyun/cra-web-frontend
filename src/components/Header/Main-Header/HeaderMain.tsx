@@ -111,7 +111,7 @@ export default function HeaderMain() {
         {isAuthenticated ? (
           <>
             <img src={imgUrl} className={styles.profile} onClick={openModal} />
-            <p>{name}</p>
+            {/* <p>{name}</p> */}
             {/* <button className={styles.authbutton}>내정보</button> */}
           </>
         ) : (

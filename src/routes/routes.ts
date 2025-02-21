@@ -86,6 +86,7 @@ import {
   userDeleteRoute,
   userImageRoute,
 } from './userRoutes.ts';
+// import { comingSoonRoute, WIPRoute } from './tempRoutes.ts';
 
 export const routes = createRouter({
   routeTree: rootRoute.addChildren([
@@ -140,5 +141,7 @@ export const routes = createRouter({
     userInfoRoute,
     userDeleteRoute,
     userImageRoute,
+    // comingSoonRoute,
+    // WIPRoute,
   ]),
 });

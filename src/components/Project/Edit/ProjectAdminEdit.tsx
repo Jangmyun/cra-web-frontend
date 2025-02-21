@@ -6,6 +6,7 @@ import { QUERY_KEY } from '~/api/queryKey.ts';
 import { onUploadImage } from '~/api/board.ts';
 import { Project } from '~/models/Project.ts';
 import styles from '../Project.module.css';
+import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
 function ProjectAdminEdit() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ function ProjectAdminEdit() {
   };
 
   if (projectQuery.isLoading) {
-    content = <div className="loading">데이터를 불러오는 중입니다...</div>;
+    content = <LoadingSpinner />;
   } else if (projectQuery.isError) {
     content = <div className="error">에러가 발생했습니다!</div>;
   } else if (projectQuery.isSuccess) {
