@@ -9,7 +9,6 @@ import {
   logOut as logOutApi,
 } from '~/api/auth/authApi';
 import { useUserStore } from '~/store/userStore';
-
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
 // Zustand에서 관리할 상태의 구조, 데이터 Type 정의
@@ -34,13 +33,13 @@ export const useAuthStore = create<authStore>()(
       accessToken: null,
       refreshToken: null,
       userId: null,
+      isAdmin: false,
 
       // 로그인 메서드
       login: async (data: Login) => {
         try {
           // 로그인 Api를 호출하여 사용자 인증을 처리하고, 서버로부터 중요한 데이터를 반환
           const response = await loginApi(data);
-
           const { resTokenDto, resUserDetailDto } = response;
 
           if (!resTokenDto) {
