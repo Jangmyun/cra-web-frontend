@@ -65,9 +65,9 @@ export default function HeaderMain() {
           {[
             { path: '/notice', label: 'Notice' },
             { path: '/academic', label: 'Academic' },
+            { path: '/havruta', label: 'Havruta' },
             { path: '/book', label: 'Book' },
             { path: '/item', label: 'Item' },
-            { path: '/havruta', label: 'Havruta' },
             { path: '/project', label: 'Project' },
           ].map(({ path, label }) => (
             <li key={path}>
