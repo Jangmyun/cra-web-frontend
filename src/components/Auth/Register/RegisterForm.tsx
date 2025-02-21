@@ -607,6 +607,7 @@ function RegisterForm() {
 
         {error && <p style={{ color: 'red' }}>{error}</p>}
 
+        <input type="checkbox" />
         <SubmitBtn type="submit">
           {submitLoading ? <ClipLoader size={25} color="#fff" /> : '확인'}
         </SubmitBtn>
