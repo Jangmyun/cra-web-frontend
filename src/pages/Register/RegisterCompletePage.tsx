@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import BlueCheck from '~/assets/images/Blue-Check.png';
+import BlueCheck from '~/assets/images/Blue-Check.png?format=webp&as=srcset';
 import { useRegisterStore } from '~/store/registerStore';
 import styled from 'styled-components';
 
@@ -46,7 +46,7 @@ function RegisterCompletePage() {
   const { username, name } = useRegisterStore();
   return (
     <Container>
-      <Img src={BlueCheck} />
+      <Img srcSet={BlueCheck} loading="lazy" />
       <Title>회원가입 완료</Title>
       <Content>
         {name} ({username}),

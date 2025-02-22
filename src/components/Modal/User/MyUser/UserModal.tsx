@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { useUserStore } from '~/store/userStore';
-import logoutImage from '~/assets/images/logoutImage.png';
-import { Link } from 'react-router-dom';
-import styles from './UserModal.module.css';
 import { FaCog } from 'react-icons/fa'; // Font Awesome에서 cog 아이콘 (설정 아이콘)
+import logoutImage from '~/assets/images/logoutImage.png?format=webp&as=srcset';
+import styles from './UserModal.module.css';
 
 interface UserModalProps {
   closeModal: () => void;
@@ -32,7 +32,7 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
         </div>
         <div className={styles['modal-body']}>
           <div className={styles['first-body']}>
-            <img src={imgUrl} className={styles.profile} />
+            <img srcSet={imgUrl} className={styles.profile} loading="lazy" />
             <div className={styles['user-info']}>
               <div className={styles['semester']}>CRA {term}</div>
               <div className={styles['name']}>{name}</div>
@@ -58,7 +58,11 @@ const UserModal = ({ closeModal, handleLogout }: UserModalProps) => {
           <div className={styles['line']} />
         </div>
         <a className={styles['logout']} onClick={handleLogout}>
-          <img src={logoutImage} className={styles['logout-image']} />
+          <img
+            srcSet={logoutImage}
+            className={styles['logout-image']}
+            loading="lazy"
+          />
           <div>로그아웃</div>
         </a>
       </Modal>

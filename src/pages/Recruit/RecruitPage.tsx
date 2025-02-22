@@ -1,12 +1,12 @@
-import Vector from '~/assets/images/Vector/Arrow-Vector.png';
-import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png';
-import styles from './RecruitPage.module.css';
-import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import CR from '~/assets/images/RecruitImage/CR.png';
-import A from '~/assets/images/RecruitImage/A.png';
-import SCRETCH from '~/assets/images/RecruitImage/scretch.png';
-import CONTENT from '~/assets/images/RecruitImage/content.png';
+import { Link } from 'react-router-dom';
+import Vector from '~/assets/images/Vector/Arrow-Vector.png?format=webp&as=srcset';
+import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png?format=webp&as=srcset';
+import CR from '~/assets/images/RecruitImage/CR.png?format=webp&as=srcset';
+import A from '~/assets/images/RecruitImage/A.png?format=webp&as=srcset';
+import SCRETCH from '~/assets/images/RecruitImage/scretch.png?format=webp&as=srcset';
+import CONTENT from '~/assets/images/RecruitImage/content.png?format=webp&as=srcset';
+import styles from './RecruitPage.module.css';
 
 export default function RecruitPage() {
   const recruitTalentRef = useRef<HTMLDivElement>(null);
@@ -73,19 +73,19 @@ export default function RecruitPage() {
       <div className={styles['recruit-main1']}>
         <div className={styles['recruit-banner1']}>
           <img
-            src={CR}
+            srcSet={CR}
             className={`${styles['cr-image']} ${isExpanding ? styles['cr-expand'] : ''}`}
           />
           <img
-            src={SCRETCH}
+            srcSet={SCRETCH}
             className={`${styles['scratch-image']} ${isExpanding ? styles['scratch-expand'] : ''}`}
           />
           <img
-            src={A}
+            srcSet={A}
             className={`${styles['a-image']} ${isExpanding ? styles['a-expand'] : ''}`}
           />
           <img
-            src={CONTENT}
+            srcSet={CONTENT}
             className={`${styles['content-image']} ${isExpanding ? styles['content-expand'] : ''}`}
           />
         </div>
@@ -103,9 +103,9 @@ export default function RecruitPage() {
             </Link>
           </div>
           <div className={styles['vector']} onClick={scrollToSection}>
-            <img src={Vector2} />
-            <img src={Vector} />
-            <img src={Vector2} />
+            <img srcSet={Vector2} loading="lazy" />
+            <img srcSet={Vector} loading="lazy" />
+            <img srcSet={Vector2} loading="lazy" />
           </div>
         </div>
       </div>

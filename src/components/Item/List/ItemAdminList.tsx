@@ -54,21 +54,22 @@ const CreateItemLink = styled(Link)`
 `;
 
 function ItemAdminList() {
-  const itemQuery = useQuery<Item[]>({
+  const ItemQuery = useQuery<Item[]>({
     queryKey: QUERY_KEY.item.items(ITEMCATEGORY.ITEM),
     queryFn: async () => getItems(ITEMCATEGORY.ITEM),
   });
 
   let content;
 
-  if (itemQuery.isLoading) {
+  if (ItemQuery.isLoading) {
     content = <LoadingSpinner />;
-  } else if (itemQuery.isError) {
+  } else if (ItemQuery.isError) {
     content = <div>에러가 발생했습니다!</div>;
-  } else if (itemQuery.isSuccess) {
-    if (itemQuery.data.length === 0) {
-    } else {
-      content = (
+  } else if (ItemQuery.isSuccess) {
+    content =
+      ItemQuery.data.length === 0 ? (
+        <div className="empty">데이터가 없습니다.</div>
+      ) : (
         <Table>
           <thead>
             <tr>
@@ -79,7 +80,7 @@ function ItemAdminList() {
             </tr>
           </thead>
           <tbody>
-            {itemQuery.data.map((itemElement) => (
+            {ItemQuery.data.map((itemElement) => (
               <tr key={itemElement.id}>
                 <Td>{itemElement.id}</Td>
                 <Td>{itemElement.name}</Td>
@@ -110,7 +111,6 @@ function ItemAdminList() {
           </tbody>
         </Table>
       );
-    }
   }
 
   return (

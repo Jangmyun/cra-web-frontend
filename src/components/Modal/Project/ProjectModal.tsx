@@ -57,7 +57,11 @@ const ProjectModal = ({
         </div>
         <div className={styles['modal-body']}>
           <div className={styles['image-box']}>
-            <img src={project.imageUrl} className={styles['image']} />
+            <img
+              src={project.imageUrl}
+              className={styles['image']}
+              loading="lazy"
+            />
           </div>
           <div className={styles['description']}>
             <div className={styles['content-description']}>프로젝트 설명</div>
