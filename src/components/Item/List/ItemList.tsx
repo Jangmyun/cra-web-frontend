@@ -19,9 +19,10 @@ export default function ItemList({ itemCategory }: { itemCategory: number }) {
   } else if (ItemQuery.isError) {
     content = <div className="error">에러가 발생했습니다!</div>;
   } else if (ItemQuery.isSuccess) {
-    if (ItemQuery.data.length === 0) {
-    } else {
-      content = (
+    content =
+      ItemQuery.data.length === 0 ? (
+        <div className="empty">데이터가 없습니다.</div>
+      ) : (
         <div className={styles['background']}>
           <div className={styles['project-list-container']}>
             {ItemQuery.data.map((ItemElement) => (
@@ -30,12 +31,7 @@ export default function ItemList({ itemCategory }: { itemCategory: number }) {
           </div>
         </div>
       );
-    }
   }
 
-  return (
-    <>
-      <div className={styles['content']}>{content}</div>
-    </>
-  );
+  return <div className={styles['content']}>{content}</div>;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const PrivacyPolicyContainer = styled.div`
@@ -7,8 +7,7 @@ const PrivacyPolicyContainer = styled.div`
   background-color: var(--color-white);
   border-radius: 10px;
   margin: 2rem auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 50px 30px;
   line-height: 1.6;
 `;
 
@@ -20,8 +19,8 @@ const Title = styled.h1`
 
 const Paragraph = styled.p`
   font-family: 'Pretendard Medium';
-  margin-bottom: 1rem;
   font-size: 1rem;
+  margin-bottom: 1rem;
   span {
     color: var(--color-primary);
     font-family: 'Pretendard Bold' !important;
@@ -29,21 +28,25 @@ const Paragraph = styled.p`
 `;
 
 const LinkButton = styled.button`
-  padding: 10px 20px;
   background-color: var(--color-primary);
-  font-family: 'Pretendard SemiBold';
   color: white;
+  font-family: 'Pretendard SemiBold';
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
   margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
   &:hover {
     background-color: var(--color-comment-blue);
   }
 `;
 
 function PrivacyPolicyPage() {
+  const navigate = useNavigate();
+  const goBackRegister = () => {
+    void navigate('/register');
+  };
   return (
     <PrivacyPolicyContainer>
       <Title>개인정보 처리 방침</Title>
@@ -82,7 +85,7 @@ function PrivacyPolicyPage() {
         수정, 삭제를 요청할 수 있습니다.
       </Paragraph>
 
-      <LinkButton onClick={() => window.history.back()}>뒤로 가기</LinkButton>
+      <LinkButton onClick={() => goBackRegister()}>뒤로 가기</LinkButton>
     </PrivacyPolicyContainer>
   );
 }
