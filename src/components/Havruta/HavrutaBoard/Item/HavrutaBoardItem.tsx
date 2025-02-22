@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getCommentsCountByCategory } from '~/api/comment';
 import { HavrutaBoard } from '~/models/Havruta.ts';
 import styles from './HavrutaBoardItem.module.css';
-import COMMENT from '~/assets/images/comment_img.png';
+import COMMENT from '~/assets/images/comment_img.png?format=webp&as=srcset';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
@@ -38,7 +38,7 @@ export default function HavrutaBoardItem({
       <div className={styles.BoardItemContainer}>
         <div>
           <img
-            src={
+            srcSet={
               havrutaBoard.resUserDetailDto.imgUrl
                 ? havrutaBoard.resUserDetailDto.imgUrl
                 : DEFAULT_PROFILE
@@ -50,7 +50,11 @@ export default function HavrutaBoardItem({
             <div className={styles['board-info']}>
               <span>{havrutaBoard.createdAt?.toString().substring(0, 10)}</span>
               <span>
-                <img src={COMMENT} className={styles['comment-img']} />
+                <img
+                  srcSet={COMMENT}
+                  className={styles['comment-img']}
+                  loading="lazy"
+                />
               </span>
               <span style={{ color: 'var(--color-primary)' }}>
                 {commentCnt !== null ? commentCnt : '로딩 중'}

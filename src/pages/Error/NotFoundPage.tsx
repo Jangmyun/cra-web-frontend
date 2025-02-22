@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import HttpStatus from '~/components/HttpStatus/HttpStatus.tsx';
-import WhiteVector from '~/assets/images/Vector/Vector-white.png';
-import SkyBlueVector from '~/assets/images/Vector/Vector-skyblue.png';
+import WhiteVector from '~/assets/images/Vector/Vector-white.png?format=webp&as=srcset';
+import SkyBlueVector from '~/assets/images/Vector/Vector-skyblue.png?format=webp&as=srcset';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -77,11 +77,11 @@ function NotFoundPage() {
       </Content>
       <Buttons>
         <MainBtn onClick={() => navigate('/main')}>
-          메인으로 <img src={SkyBlueVector} />
+          메인으로 <img srcSet={SkyBlueVector} loading="lazy" />
         </MainBtn>
 
         <PrevBtn onClick={() => navigate(-2)}>
-          이전으로 <img src={WhiteVector} />
+          이전으로 <img srcSet={WhiteVector} loading="lazy" />
         </PrevBtn>
       </Buttons>
     </Container>
