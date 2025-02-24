@@ -17,7 +17,7 @@ export default function Footer() {
           <span>R</span>
           <p>esearch </p>
           <span>A</span>
-          <p>ssoication</p>
+          <p>ssociation</p>
         </div>
         <div className={styles.cra206}>
           <p>한동대학교 학생회관 206호</p>
