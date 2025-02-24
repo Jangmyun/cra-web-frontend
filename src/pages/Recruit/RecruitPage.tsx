@@ -187,9 +187,9 @@ export default function RecruitPage() {
               리크루팅 폼에서 지원서 작성
             </p>
             <br />
-            <p>2차 서류</p>
+            <p>2차 면접</p>
             <p style={{ color: 'var(--color-gray-text)' }}>
-              대면 면접 이후 최종합격
+              코딩 테스트 및 대면 면접 이후 최종합격
             </p>
           </div>
         </div>

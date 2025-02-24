@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useState, useRef } from 'react';
 
 const Li = styled.li`
-  font-size: 12px;
+  font-size: 16px;
   width: 100%;
   padding: 2rem 0;
   border-bottom: 1px solid var(--color-bright-stroke);
