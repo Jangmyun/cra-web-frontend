@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Vector from '~/assets/images/Vector/Arrow-Vector.png?format=webp&as=srcset';
 import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png?format=webp&as=srcset';
@@ -9,7 +9,13 @@ import Crang4 from '~/assets/images/pixelcrang/pixelcrang4.svg?format=webp&as=sr
 import blurround from '~/assets/images/black-blur-round.svg?format=webp&as=srcset';
 import styles from './IntroTop.module.css';
 
-function IntroTop() {
+function IntroTop({
+  recruitRef,
+  isHighlighted,
+}: {
+  recruitRef: React.RefObject<HTMLDivElement>;
+  isHighlighted: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const scrollToSection = () => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -17,7 +23,7 @@ function IntroTop() {
 
   return (
     <div>
-      <div className={styles.main}>
+      <div className={styles.main} ref={recruitRef}>
         <div className={styles.section}>
           {/* 처음 문구 */}
           <div className={styles.comment}>
@@ -55,7 +61,11 @@ function IntroTop() {
           </div>
 
           {/* 리크루팅 페이지로 가는 버튼 */}
-          <Link to="/recruit" className={styles.RecruitBtn}>
+
+          <Link
+            to="/recruit"
+            className={`${styles.RecruitBtn} ${isHighlighted ? styles.highlight : ''}`}
+          >
             <p>2025-1 CRA RECRUITMENT</p>
           </Link>
 
