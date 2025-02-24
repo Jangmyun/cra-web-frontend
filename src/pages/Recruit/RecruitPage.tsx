@@ -172,26 +172,16 @@ export default function RecruitPage() {
       <div className={styles['recruit-content']}>
         <h2>모집 개요</h2>
         <div className={styles['recruit-contentDetail']}>
-          <div className={styles['content-box']}>
-            <h3>지원 자격</h3>
-            <p>신입 하계 방학 프로젝트에 참</p>
-            <p>여 가능하신 분</p>
-            <br />
-            <p>매 학기 개강/종강 총회에 참여</p>
-            <p>가능하신 분</p>
-          </div>
-          <div className={styles['content-box']}>
-            <h3>지원 방법</h3>
-            <p>1차 서류</p>
-            <p style={{ color: 'var(--color-gray-text)' }}>
-              리크루팅 폼에서 지원서 작성
-            </p>
-            <br />
-            <p>2차 서류</p>
-            <p style={{ color: 'var(--color-gray-text)' }}>
-              대면 면접 이후 최종합격
-            </p>
-          </div>
+          <h3>지원 자격</h3>
+          <p>신입 하계 방학 프로젝트에 참</p>
+          <p>여 가능하신 분</p>
+          <p>매 학기 개강/종강 총회에 참여</p>
+          <p>가능하신 분</p>
+          <h3>지원 방법</h3>
+          <p>1차 서류</p>
+          <p>리크루팅 폼에서 지원서 작성</p>
+          <p>2차 서류</p>
+          <p>대면 면접 이후 최종합격</p>
         </div>
       </div>
 
