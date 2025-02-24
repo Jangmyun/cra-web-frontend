@@ -21,7 +21,7 @@ function IntroTop() {
         <div className={styles.section}>
           {/* 처음 문구 */}
           <div className={styles.comment}>
-            CRA와 함께 성장할 동아리원을 모집합니다
+            <p>CRA와 함께 성장할 동아리원을 모집합니다</p>
           </div>
 
           {/* 배너 */}
