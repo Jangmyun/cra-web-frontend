@@ -52,13 +52,16 @@ export default function RecruitPage() {
 
     const resetTimer = setTimeout(() => {
       setIsExpanding(false); // 3초 뒤에 원래대로 돌아가게
-    }, 4500); // 4초 뒤에 애니메이션을 원래 상태로 되돌리기
+    }, 4500); // 4.5초 뒤에 애니메이션을 원래 상태로 되돌리기
 
     const scrollTimer = setTimeout(() => {
       titleRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       });
+      setTimeout(() => {
+        setIsExpanding(true); // 다시 벌어짐
+      }, 1000); // 스크롤이 끝난 후 1초 뒤 실행
     }, 4800); // 애니메이션 종료 직후 실행
 
     return () => {
@@ -67,6 +70,7 @@ export default function RecruitPage() {
       clearTimeout(scrollTimer);
     };
   }, []);
+  //------------------------------------------------------------
 
   return (
     <div className={styles['recruit-container']}>

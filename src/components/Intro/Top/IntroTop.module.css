@@ -73,11 +73,17 @@
   &:hover {
     background-color: #e5f7fb;
     color: #00cfff;
+    box-shadow: 0 0 50px rgba(0, 110, 255, 0.7); /* 아우라 효과 (청록색 빛) */
   }
   p {
     text-align: center;
     letter-spacing: -0.05em;
   }
+}
+.highlight {
+  transform: scale(1.1);
+  box-shadow: 0 0 50px rgba(0, 110, 255, 0.7); /* 아우라 효과 (청록색 빛) */
+  transition: transform 1.5s ease-in-out;
 }
 
 .vector {
