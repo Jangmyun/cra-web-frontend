@@ -44,8 +44,8 @@ export default function HeaderMain() {
   // };
   return (
     <div className={styles['header-main']}>
-      {/* <Link to="/"> */}
-      <Link to="/main">
+      <Link to="/">
+        {/* <Link to="/main"> */}
         <img
           srcSet={craIconBlue}
           alt="크라 아이콘"

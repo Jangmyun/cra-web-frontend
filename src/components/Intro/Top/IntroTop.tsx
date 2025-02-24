@@ -57,12 +57,11 @@ function IntroTop({
           </div>
 
           {/* 리크루팅 페이지로 가는 버튼 */}
-
           <Link
             to="/recruit"
             className={`${styles.RecruitBtn} ${isHighlighted ? styles.highlight : ''}`}
           >
-            <p>2025-1 CRA RECRUITMENT</p>
+            <p>2025-1 CRA 리크루팅 지원하기</p>
           </Link>
 
           {/* 누르면 밑으로 내려가는 화살표 */}
