@@ -20,36 +20,32 @@ function UserInfo() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>마이페이지</div>
-      <div className={styles.profile}>
-        <div>
-          <img src={imgUrl} className={styles.preview} />
+      <div className={styles.name}>{name}</div>
+      <div className={styles.profile_container}>
+        <div className={styles.info_container}>
+          <div className={styles.info}>
+            <p>이메일 </p>
+            {email}
+          </div>
+          <div className={styles.info}>
+            <p>학번 </p>
+            {studentId}
+          </div>
+          <div className={styles.info}>
+            <p>기수 </p>
+            {term}
+          </div>
+          <div className={styles.info}>
+            <p>GitHub </p>
+            {githubId}
+          </div>
         </div>
       </div>
-      <div className={styles.name}>
-        {/* <p>이름 </p> */}
-        {name}
-      </div>
-      <div className={styles.info}>
-        <p>이메일 </p>
-        {email}
-      </div>
-      <div className={styles.info}>
-        <p>학번 </p>
-        {studentId}
-      </div>
-      <div className={styles.info}>
-        <p>기수 </p>
-        {term}
-      </div>
-      <div className={styles.info}>
-        <p>GitHub </p>
-        {githubId}
+      <div className={styles.profile_image}>
+        <img src={imgUrl} className={styles.preview} alt="프로필 이미지" />
       </div>
       <div className={styles.buttons}>
-        <button className={styles.profile} onClick={handleChangeImage}>
-          프로필 사진 변경
-        </button>
+        <button onClick={handleChangeImage}>프로필 사진 변경</button>
         <button className={styles.edit} onClick={handleUpdate}>
           유저 정보 수정
         </button>
