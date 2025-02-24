@@ -1,11 +1,13 @@
 .recruit-container {
   background-color: black;
   width: 100%;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* 세로로 스크롤 */
 }
 
 .recruit-main {
   background: black;
+  height: 100vh;
 }
 
 .recruit-banner {
@@ -18,7 +20,7 @@
 
 #title {
   color: var(--color-white);
-  font-size: clamp(35px, 6vw, 6vw);
+  font-size: clamp(40px, 6vw, 6vw);
   font-weight: 978;
   letter-spacing: -1px;
   line-height: clamp(30px, 5vw, 5vw);
@@ -27,7 +29,7 @@
 
 #content {
   color: var(--color-white-blue-text);
-  font-size: clamp(15px, 2.9vw, 2.9vw);
+  font-size: clamp(14px, 2.9vw, 2.9vw);
   padding: clamp(1rem, 2.5vw, 2.5rem) 0rem;
   font-family: 'Pretendard Bold';
 }
@@ -48,8 +50,8 @@
   }
 
   .button-style {
-    padding: 1vw 15vw;
-    font-size: 2vw;
+    padding: clamp(10px, 1vw, 1vw) clamp(20px, 15vw, 15vw);
+    font-size: clamp(15px, 2vw, 2vw);
     font-family: 'Pretendard Bold';
     color: var(--color-white);
     background: var(--color-primary);
@@ -67,17 +69,19 @@
 
 /* ------------------------------------------------------------------------------------------------------------ */
 .recruit-talent {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center; /* 부모 요소를 가운데 정렬 */
   justify-content: center; /* 부모 요소를 세로로 가운데 정렬 */
-  padding: 2vw 0rem;
+
   color: var(--color-white);
 }
+
 .recruit-title {
   padding-top: clamp(100px, 25vw, 250px);
   padding-bottom: 40px;
-  font-size: clamp(25px, 3vw, 3vw);
+  font-size: clamp(20px, 3vw, 50px);
   font-family: 'Pretendard Bold';
   opacity: 0; /* 기본적으로 처음엔 안 보이게 설정 */
   transform: scale(0.8); /* 처음에는 약간 작게 시작 */
@@ -108,9 +112,9 @@
 .recruit-talentDetail {
   div {
     display: flex;
-    padding: clamp(5px, 2.5vw, 25px);
-    font-size: clamp(10px, 2vw, 25px);
-    font-weight: bold;
+    padding: clamp(20px, 4.5vw, 30px);
+    font-size: clamp(13px, 2vw, 25px);
+    font-weight: 'Pretendard Semibold';
     line-height: 1.6;
     color: var(--color-white);
   }
@@ -128,14 +132,13 @@
 /* ------------------------------------------------------------------------------------------------------------ */
 
 .recruit-content {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0rem clamp(2rem, 15vw, 20rem) 0rem;
 
   h2 {
-    padding-top: 200px;
     padding-bottom: clamp(10px, 5vw, 100px);
     font-size: clamp(25px, 3vw, 3vw);
     color: var(--color-white);
@@ -174,15 +177,14 @@
 /* ------------------------------------------------------------------------------------------------------------ */
 
 .recruit-calender {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0rem 30rem 0rem;
 
   h2 {
-    padding-top: 50px;
-    padding-bottom: clamp(20px, 13vw, 240px);
+    padding-bottom: clamp(25px, 13vw, 240px);
     font-size: clamp(25px, 3vw, 3vw);
     color: var(--color-white);
     font-family: 'Pretendard Bold';
@@ -223,8 +225,6 @@
 
 @media (max-width: 768px) {
   .recruit-calender {
-    padding: 2rem 0rem 30rem 0rem;
-
     h2 {
       padding-top: 50px;
       padding-bottom: clamp(20px, 13vw, 240px);
@@ -305,14 +305,13 @@
 /* ------------------------------------------------------------------------------------------------------------ */
 
 .recruit-apply {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0rem 30rem 0rem;
 
   h1 {
-    padding-top: 10px;
     padding-bottom: 3vw;
     font-size: 3vw;
     color: var(--color-white);
@@ -320,7 +319,7 @@
   }
 
   .button-style {
-    padding: 1vw 15vw;
+    padding: clamp(10px, 1vw, 1vw) clamp(20px, 15vw, 15vw);
     font-size: 2vw;
     font-family: 'Pretendard Bold';
     color: var(--color-white);
@@ -390,12 +389,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 110vh; /* 최소 높이를 화면 전체로 설정 (스크롤 가능) */
 }
 
 .recruit-banner1 {
   position: relative;
-  width: 777px; /* 원하는 크기 */
-  height: 303px; /* 원하는 크기 */
+  width: 55vw;
+  max-width: 777px; /* 원하는 크기 */
+  height: auto; /* 비율 유지 */
+  aspect-ratio: 777 / 303; /* 가로세로 비율 유지 */
   margin-top: 15rem;
   margin-bottom: 25rem;
 }
@@ -440,6 +442,7 @@
 .scratch-image {
   left: 50%;
   top: 50%;
+  width: 100%;
   transform: translate(-50%, -50%) scale(0); /* 처음에는 작게 시작 */
   opacity: 0; /* 처음에는 보이지 않음 */
   transition:
@@ -450,6 +453,7 @@
 
 /* 확장될 때 스크래치 이미지 */
 .scratch-expand {
+  width: 100%;
   opacity: 1; /* 보이게 됨 */
   transform: translate(-50%, -50%) scale(1); /* 크기가 커짐 */
   transition:
@@ -466,6 +470,7 @@
 }
 
 .content-expand {
+  width: 100%;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   transition: opacity 1s ease-out 1s;
