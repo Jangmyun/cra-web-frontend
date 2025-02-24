@@ -122,7 +122,9 @@ export default function HavrutaBoardDetailItem({
           <div className={styles['nav']}>
             <div>
               <span className={styles['nav-title']}>작성자 | </span>
-              <span className={styles['nav-content']}>{board.userId}</span>
+              <span className={styles['nav-content']}>
+                {board.resUserDetailDto.name}
+              </span>
             </div>
             <div>
               <span className={styles['nav-title']}>작성일 | </span>
