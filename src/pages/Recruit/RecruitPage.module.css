@@ -132,7 +132,29 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 490px) {
+  .recruit-talentDetail {
+    div {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      padding: clamp(20px, 4.5vw, 30px);
+      font-size: clamp(13px, 2vw, 25px);
+      font-weight: 'Pretendard Semibold';
+      line-height: 1.6;
+      color: var(--color-white);
+    }
+
+    .number {
+      font-family: 'Pretendard ExtraBold';
+      margin-right: 6vw; /* 숫자와 텍스트 사이 간격 */
+      color: var(--color-primary);
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
 }
 
 /* ------------------------------------------------------------------------------------------------------------ */
