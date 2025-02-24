@@ -8,14 +8,16 @@ const CRAProject = ({
 }: {
   image: string;
   title: string;
-  description: string;
+  description: string[];
   stack: string;
 }) => (
   <div className={styles.ProjectSection}>
     <img srcSet={image} className={styles.ProjectImage} />
     <p className={styles.ProjectTitle}>{title}</p>
     <div className={styles.ProjectContext}>
-      <p>{description}</p>
+      {description.map((desc, index) => (
+        <p key={index}>{desc}</p>
+      ))}
       <p className={styles.ProjectStack}>개발스택: {stack}</p>
     </div>
   </div>
