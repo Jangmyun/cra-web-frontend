@@ -82,11 +82,11 @@
 
 @media (max-width: 600px) {
   .History {
-    width: 90%; /* 부모에 맞춤 */
-    max-width: 90%; /* 화면 너비 초과 방지 */
+    width: 90%;
+    max-width: 90%;
   }
   .HistoryUL {
-    width: 90%; /* 화면 너비에 맞춤 */
-    max-width: 90%; /* 고정값 제거, 화면에 맞춤 */
+    width: 90%;
+    max-width: 90%;
   }
 }

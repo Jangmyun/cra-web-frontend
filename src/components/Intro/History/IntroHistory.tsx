@@ -28,6 +28,10 @@ const ToggleButton = styled.button`
     background-color: var(--color-primary);
     color: white;
   }
+
+  @media (max-width: 768px) {
+    margin-left: 30px;
+  }
 `;
 
 function IntroHistory() {
