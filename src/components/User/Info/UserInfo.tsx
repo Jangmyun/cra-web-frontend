@@ -24,7 +24,7 @@ function UserInfo() {
       <div className={styles.title}>마이페이지</div>
       <div className={styles.profile}>
         <div>
-          <img src={imgUrl} className={styles.preview} />
+          <img src={imgUrl} className={styles.preview} loading="lazy" />
         </div>
       </div>
       <div className={styles.name}>
