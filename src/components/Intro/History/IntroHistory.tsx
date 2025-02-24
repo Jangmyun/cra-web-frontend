@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useState, useRef } from 'react';
 
 const Li = styled.li`
+  font-size: 12px;
   width: 100%;
   padding: 2rem 0;
   border-bottom: 1px solid var(--color-bright-stroke);
@@ -14,19 +15,26 @@ const Span = styled.span`
 `;
 
 const ToggleButton = styled.button`
-  width: 100%;
+  width: 40%;
   padding: 1rem;
-  margin: 2rem 0;
+  margin: 2rem auto;
+  font-size: 20px;
   background-color: transparent;
   border: 1px solid var(--color-bright-stroke);
   color: var(--color-primary);
   font-family: 'Pretendard Bold';
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  display: block;
 
   &:hover {
     background-color: var(--color-primary);
     color: white;
+  }
+
+  @media (max-width: 768px) {
+    margin: 2rem auto;
+    transform: translateX(16px);
   }
 `;
 
