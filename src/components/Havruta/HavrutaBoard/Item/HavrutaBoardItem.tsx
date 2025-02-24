@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getCommentsCountByCategory } from '~/api/comment';
 import { HavrutaBoard } from '~/models/Havruta.ts';
 import styles from './HavrutaBoardItem.module.css';
-import COMMENT from '~/assets/images/comment_img.png?format=webp&as=srcset';
+import COMMENT from '~/assets/images/comment_img.png';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
@@ -51,7 +51,7 @@ export default function HavrutaBoardItem({
               <span>{havrutaBoard.createdAt?.toString().substring(0, 10)}</span>
               <span>
                 <img
-                  srcSet={COMMENT}
+                  src={COMMENT}
                   className={styles['comment-img']}
                   loading="lazy"
                 />

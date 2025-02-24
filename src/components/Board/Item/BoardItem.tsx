@@ -4,7 +4,7 @@ import { Board } from '~/models/Board.ts';
 import styles from './BoardItem.module.css';
 import { getCommentsCountByCategory } from '~/api/comment';
 import { useEffect, useState } from 'react';
-import COMMENT from '~/assets/images/comment_img.png?format=webp&as=srcset';
+import COMMENT from '~/assets/images/comment_img.png';
 
 const DEFAULT_PROFILE = import.meta.env.VITE_DEFAULT_IMG as string;
 
@@ -43,7 +43,7 @@ export default function BoardItem({
       <div className={styles['board-item-container']}>
         <div>
           <img
-            srcSet={
+            src={
               board.resUserDetailDto.imgUrl
                 ? board.resUserDetailDto.imgUrl
                 : DEFAULT_PROFILE

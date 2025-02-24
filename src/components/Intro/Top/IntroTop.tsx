@@ -6,7 +6,6 @@ import Crang1 from '~/assets/images/pixelcrang/pixelcrang1.svg?format=webp&as=sr
 import Crang2 from '~/assets/images/pixelcrang/pixelcrang2.svg?format=webp&as=srcset';
 import Crang3 from '~/assets/images/pixelcrang/pixelcrang3.svg?format=webp&as=srcset';
 import Crang4 from '~/assets/images/pixelcrang/pixelcrang4.svg?format=webp&as=srcset';
-import blurround from '~/assets/images/black-blur-round.svg?format=webp&as=srcset';
 import styles from './IntroTop.module.css';
 
 function IntroTop() {
@@ -69,11 +68,11 @@ function IntroTop() {
 
       {/* CRA 소개 Hook 문구 */}
       <div ref={ref} className={styles.section2}>
-        <div className={styles.comment2}>
-          <div>세대를 아우르는 열정과 끈끈한 유대감의 동아리,</div>
-          <div>CRA를 소개합니다.</div>
-        </div>
-        <img className={styles.BlurRound} srcSet={blurround} loading="lazy" />
+        <p>
+          세대를 아우르는 열정과 끈끈한 유대감의 동아리,
+          <br />
+          CRA를 소개합니다.
+        </p>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UseQueryResult } from '@tanstack/react-query';
 import { Havruta } from '~/models/Havruta.ts';
-import SelectedDot from '~/assets/images/Dot/Selected-Dot.png?format=webp&as=srcset';
+import SelectedDot from '~/assets/images/Dot/Selected-Dot.png';
 import styles from './HavrutaSidebar.module.css';
 import LoadingSpinner from '~/components/Common/LoadingSpinner';
 
@@ -39,7 +39,7 @@ function HavrutaSidebar({
           selectedHavrutaId === null ? styles.selected : ''
         }`}
       >
-        <img srcSet={SelectedDot} loading="lazy" />
+        <img src={SelectedDot} loading="lazy" />
         <a
           href="#"
           onClick={(event) => handleHavrutaChange(null, event)} // 전체 선택 시
@@ -54,7 +54,7 @@ function HavrutaSidebar({
             selectedHavrutaId === havruta.id ? styles.selected : ''
           }`}
         >
-          <img srcSet={SelectedDot} loading="lazy" />
+          <img src={SelectedDot} loading="lazy" />
           <a
             href="#"
             onClick={(event) => handleHavrutaChange(havruta.id ?? null, event)} // 개별 과목 선택 시

@@ -27,7 +27,7 @@
 
 .club-title p {
   color: var(--color-cra-title-primary);
-  font-size: 2.5vw;
+  font-size: 40px;
   margin: 0.4rem 0;
 }
 
@@ -53,8 +53,8 @@
 
 .club-content1 p {
   color: var(--color-white);
-  font-size: 1.5vw;
-  font-family: 'Pretendard SemiBold';
+  font-size: 25px;
+  font-family: 'Pretendard Medium';
   margin: 0.3rem 0;
 }
 
@@ -62,16 +62,22 @@
   .club-image {
     width: 520px;
   }
+  .club-title p {
+    font-size: 35px;
+  }
+  .club-content1 p {
+    font-size: 23px;
+  }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1150px) {
   .club-title {
     order: 1;
     text-align: center;
     margin: 0;
     margin-bottom: 1rem;
     p {
-      font-size: 5vw;
+      font-size: 40px;
     }
   }
 
@@ -79,7 +85,7 @@
     display: flex;
     align-self: center;
     order: 2;
-    width: 60% !important;
+    width: 600px !important;
     border: 5px var(--color-i-taxi) solid;
     border-radius: 5px;
     margin-top: 2rem;
@@ -93,13 +99,19 @@
   }
 
   .club-content1 p {
-    padding: 0 2rem;
-    font-size: 3vw;
+    padding: 0 1rem;
+    font-size: 25px;
   }
 }
-@media (max-width: 900px) {
+@media (max-width: 880px) {
+  .club-title p {
+    font-size: 32.5px;
+  }
   .club-content1 p {
-    font-size: 2.6vw;
+    font-size: 21px;
+  }
+  .club-image {
+    width: 70% !important;
   }
 }
 
@@ -108,16 +120,14 @@
     order: 3;
     margin-top: 0 !important;
   }
-  .club-title {
-    p {
-      font-size: 6vw;
-    }
+  .club-title p {
+    font-size: 30px;
+  }
+  .club-content1 p {
+    font-size: 20px;
   }
   .club-image {
     width: 80% !important;
-  }
-  .club-content1 p {
-    font-size: 3vw;
   }
 }
 
@@ -125,6 +135,12 @@
   .club {
     padding-top: 5rem;
     padding-bottom: 2rem;
+  }
+  .club-title p {
+    font-size: 27.5px;
+  }
+  .club-content1 p {
+    font-size: 18px;
   }
 }
 

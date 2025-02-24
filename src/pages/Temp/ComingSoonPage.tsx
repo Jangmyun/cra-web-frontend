@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import Icon from '~/assets/images/warning-icon.png?format=webp&as=srcset';
+import Icon from '~/assets/images/warning-icon.png';
 import styles from './TempPage.module.css';
 
 function ComingSoonPage() {
   return (
     <div className={styles.container}>
-      <img srcSet={Icon} loading="lazy" />
+      <img src={Icon} loading="lazy" />
       <p className={styles.title}>페이지 준비 중입니다!</p>
       <p className={styles.content}>
         빠른 시일 내에 서비스를 제공할 예정입니다.
