@@ -60,6 +60,12 @@
   }
 }
 
+@media (min-width: 768px) {
+  .HistoryUL {
+    min-width: 33.51rem;
+  }
+}
+
 @media (max-width: 768px) {
   .History {
     font-size: 14px !important;
@@ -70,5 +76,17 @@
   .HistoryUL {
     padding-left: 0rem;
     padding-right: 3.5rem;
+    width: 33.14rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .History {
+    width: 90%;
+    max-width: 90%;
+  }
+  .HistoryUL {
+    width: 90%;
+    max-width: 90%;
   }
 }
