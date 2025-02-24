@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import craIcon from '~/assets/images/cra-logo.png?format=webp&as=srcset';
+import craIcon from '~/assets/images/cra-logo.png';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
       <div className={styles.content}>
         <div className={styles.logo}>
           <Link to="/">
-            <img srcSet={craIcon} alt="크라 아이콘" loading="lazy" />
+            <img src={craIcon} alt="크라 아이콘" loading="lazy" />
           </Link>
         </div>
         <div className={styles.description}>
@@ -27,7 +27,7 @@ export default function Footer() {
             <img
               width="32"
               height="32"
-              srcSet="https://img.icons8.com/windows/32/FFFFFF/instagram-new.png"
+              src="https://img.icons8.com/windows/32/FFFFFF/instagram-new.png"
               alt="instagram-new"
               loading="lazy"
             />
@@ -39,7 +39,7 @@ export default function Footer() {
             <img
               width="32"
               height="32"
-              srcSet="https://img.icons8.com/material-outlined/32/github.png"
+              src="https://img.icons8.com/material-outlined/32/github.png"
               alt="github"
               loading="lazy"
             />

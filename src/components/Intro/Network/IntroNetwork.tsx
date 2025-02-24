@@ -60,10 +60,10 @@ const clubContents = [
 
 function IntroNetwork() {
   // 화면 크기를 감지
-  const [isVertical, setIsVertical] = useState(window.innerWidth <= 1200);
+  const [isVertical, setIsVertical] = useState(window.innerWidth <= 1150);
 
   useEffect(() => {
-    const handleResize = () => setIsVertical(window.innerWidth <= 1200);
+    const handleResize = () => setIsVertical(window.innerWidth <= 1150);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);

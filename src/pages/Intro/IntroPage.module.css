@@ -18,17 +18,20 @@ img {
   position: relative;
   background-color: var(--color-primary);
   color: var(--color-white);
-  font-family: "Pretendard SemiBold";
+  font-family: 'Pretendard SemiBold';
   font-size: 25px;
   border: none;
   border-radius: 15px;
   margin-bottom: 5rem;
   padding: 17.5px 25px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.5s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.5s ease;
 
   &:hover {
     transform: scale(1.25);
     background-color: transparent;
+    border: 2px solid var(--color-white-blue-text);
   }
 }
