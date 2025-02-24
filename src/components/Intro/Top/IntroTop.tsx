@@ -2,10 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Vector from '~/assets/images/Vector/Arrow-Vector.png?format=webp&as=srcset';
 import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png?format=webp&as=srcset';
-import Crang1 from '~/assets/images/pixelcrang/pixelcrang1.svg?format=webp&as=srcset';
-import Crang2 from '~/assets/images/pixelcrang/pixelcrang2.svg?format=webp&as=srcset';
-import Crang3 from '~/assets/images/pixelcrang/pixelcrang3.svg?format=webp&as=srcset';
-import Crang4 from '~/assets/images/pixelcrang/pixelcrang4.svg?format=webp&as=srcset';
+import Crang from '~/assets/images/Status_Crang.svg';
 import styles from './IntroTop.module.css';
 
 function IntroTop() {
@@ -33,22 +30,22 @@ function IntroTop() {
           <div className={styles.CranEES}>
             <img
               className={`${styles.crangE} ${styles.character1}`}
-              srcSet={Crang1}
+              srcSet={Crang}
               loading="lazy"
             />
             <img
               className={`${styles.crangE} ${styles.character2}`}
-              srcSet={Crang2}
+              srcSet={Crang}
               loading="lazy"
             />
             <img
               className={`${styles.crangE} ${styles.character3}`}
-              srcSet={Crang3}
+              srcSet={Crang}
               loading="lazy"
             />
             <img
               className={`${styles.crangE} ${styles.character4}`}
-              srcSet={Crang4}
+              srcSet={Crang}
               loading="lazy"
             />
           </div>
@@ -69,9 +66,9 @@ function IntroTop() {
       {/* CRA 소개 Hook 문구 */}
       <div ref={ref} className={styles.section2}>
         <p>
-          세대를 아우르는 열정과 끈끈한 유대감의 동아리,
+          세대를 아우르는 열정과 끈끈한
           <br />
-          CRA를 소개합니다.
+          유대감의 동아리, CRA를 소개합니다.
         </p>
       </div>
     </div>

@@ -51,7 +51,7 @@
 
 .crangE {
   object-fit: contain;
-  width: 320px;
+  width: 280px;
   user-select: none;
 }
 
@@ -115,7 +115,7 @@
     z-index: 1;
   }
   p::before {
-    content: '세대를 아우르는 열정과 끈끈한 유대감의 동아리,\A CRA를 소개합니다.';
+    content: '세대를 아우르는 열정과 끈끈한 \A유대감의 동아리, CRA를 소개합니다.';
     white-space: pre-wrap;
     position: absolute;
     width: 100%;
@@ -258,24 +258,24 @@
 
   .character2 {
     position: absolute;
-    top: 8%;
-    left: 10%;
+    top: 15%;
+    left: 5%;
     transform: translate(-50%, -50%);
-    width: 260px;
+    width: 262.51px;
   }
 
   .character3 {
     position: absolute;
-    top: 8%;
-    left: 93%;
+    top: 12%;
+    left: 105%;
     transform: translate(-50%, -50%);
-    width: 260px;
+    width: 262.51px;
   }
 
   .character4 {
     position: absolute;
     top: 65%;
-    left: 5%;
+    left: -5%;
     transform: translate(-50%, -50%);
   }
 }
