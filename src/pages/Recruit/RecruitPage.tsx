@@ -146,7 +146,7 @@ export default function RecruitPage() {
           <p id={styles['title']}>2025-1 CRA</p>
           <p id={styles['title']}>RECRUITMENT</p>
           <p ref={titleRef} id={styles['content']}>
-            CRA는 함께 성장 할 25-1 기수 동아리원을 모집합니다.
+            CRA와 함께 성장 할 25-1 기수 동아리원을 모집합니다.
           </p>
           <div className={styles['recruit-apply1']}>
             <Link to="https://docs.google.com/forms/d/e/1FAIpQLSf5uTQbDr7i9WjPfI61hMJ_PqDS1Of_fZRNpD8MRzlvnYFsKA/closedform">
@@ -212,21 +212,19 @@ export default function RecruitPage() {
         <div className={styles['calender-line']}>
           <div className={styles['calender-box']}>
             <h3>서류 접수</h3>
-            <p>2025.3.4.(화)</p>
-            <p>~ 3.18.(화)</p>
+            <p>3/4(화)~ 3/18(화)</p>
           </div>
           <div className={styles['calender-box']}>
             <h3>서류 합격 발표</h3>
-            <p>2025.3.21(금)</p>
+            <p>3/21(금)</p>
           </div>
           <div className={styles['calender-box']}>
             <h3>면접</h3>
-            <p>2025.3.24(월)</p>
-            <p>~3.26(수)</p>
+            <p>3/24(월)~ 3/26(수)</p>
           </div>
           <div className={styles['calender-box']}>
             <h3>최종합격 발표</h3>
-            <p>2025.3.28(금)</p>
+            <p>3/28(금)</p>
           </div>
         </div>
       </div>
