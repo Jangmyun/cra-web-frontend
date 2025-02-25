@@ -14,9 +14,9 @@
 }
 
 .calender-line {
-  width: 50%; /* 줄의 길이를 조금 짧게 조정 */
-  height: 8px; /* 줄의 높이 */
-  background-color: #2cb4db; /* 줄의 색상 */
+  width: 50%;
+  height: 8px;
+  background-color: #2cb4db;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,23 +27,29 @@
 }
 
 .calender-box {
-  height: clamp(100px, 10vw, 10vw);
-  aspect-ratio: 286 / 199;
+  height: clamp(80px, 8vw, 8vw);
+  aspect-ratio: 286 / 150;
   background-color: rgb(237, 237, 237);
   border-radius: 10px;
   margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
 
   h3 {
     font-size: clamp(15px, 1.4vw, 1.4vw);
-    padding: clamp(5px, 1vw, 20px);
+    padding: clamp(3px, 1vw, 12px);
+    margin: 0;
     font-family: 'Pretendard Bold';
   }
 
   p {
-    display: flex;
     font-size: clamp(15px, 1.3vw, 1.3vw);
     line-height: 1.3;
-    margin-left: 1.6vw;
+    margin: 0;
     font-family: 'Pretendard Medium';
     color: var(--color-dark-text);
   }
@@ -62,28 +68,25 @@
 
   .calender-line {
     position: relative;
-    height: 500px; /* 선 길이 */
-    border-left: thick solid var(--color-primary); /* 원래 선 */
+    height: 500px;
+    border-left: thick solid var(--color-primary);
     margin-left: 50%;
-
-    /* 기존 배경 제거 */
     background-color: transparent;
     box-shadow: none;
-    /* 네온 효과 */
     filter: drop-shadow(0px -5px 15px rgba(50, 161, 206, 0.7));
   }
 
   .calender-line::before {
     content: '';
     position: absolute;
-    left: -8px; /* 선 기준으로 왼쪽에만 효과 */
+    left: -8px;
     top: 0;
-    width: 12px; /* 빛의 두께 */
+    width: 12px;
     height: 100%;
     background-color: var(--color-calender-blue);
     opacity: 0.6;
-    filter: blur(12px); /* 부드러운 빛 효과 */
-    z-index: -1; /* 내용보다 뒤에 위치하도록 설정 */
+    filter: blur(12px);
+    z-index: -1;
   }
 
   .calender-box {
@@ -93,18 +96,24 @@
     background-color: rgb(237, 237, 237);
     border-radius: 10px;
     margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: translateY(-16px);
 
     h3 {
       font-size: clamp(15px, 1.2vw, 1.2vw);
       padding: 15px;
+      margin: 0;
       font-family: 'Pretendard Bold';
     }
 
     p {
-      display: flex;
       font-size: clamp(15px, 1.2vw, 1.2vw);
       line-height: 1.3;
-      margin-left: 20%;
+      margin: 0;
       font-family: 'Pretendard Medium';
       color: var(--color-dark-text);
     }
