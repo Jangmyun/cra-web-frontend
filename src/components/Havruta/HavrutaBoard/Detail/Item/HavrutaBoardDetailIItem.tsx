@@ -45,7 +45,7 @@ export default function HavrutaBoardDetailItem({
         })
         .then((updatedBoard) => {
           setViewCnt(updatedBoard.view as number);
-          console.log('Updated view count:', updatedBoard.view);
+          console.error('Updated view count:', updatedBoard.view);
         })
         .catch((err) => console.error('조회수 업데이트 실패:', err));
     }
@@ -70,7 +70,7 @@ export default function HavrutaBoardDetailItem({
   const handleLike = async () => {
     try {
       const data = await createLike(board.id as number, !isLiked);
-      console.log('Response from like API:', data);
+      console.error('Response from like API:', data);
 
       // API 응답을 바로 반영
       setIsLiked(data.liked);

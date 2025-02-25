@@ -25,7 +25,6 @@ function ItemAdminDelete({ id }: { id: number }) {
       queryClient.setQueryData<Item[]>(
         QUERY_KEY.item.items(ITEMCATEGORY.ITEM),
         (oldData) => {
-          console.log('Old Cached Data Before Update:', oldData);
           if (!oldData) return [];
           return oldData.filter((item) => item.id !== id);
         },

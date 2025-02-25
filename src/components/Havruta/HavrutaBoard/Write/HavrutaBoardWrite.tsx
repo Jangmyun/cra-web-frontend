@@ -162,12 +162,6 @@ export default function HavrutaBoardWrite() {
       return;
     }
 
-    console.log(
-      '선택한 과목:',
-      selectedHavruta?.className,
-      selectedHavruta?.professor,
-    ); // 추가
-
     setFormData((prev) => ({
       ...prev,
       havrutaDto: {

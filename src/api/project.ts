@@ -7,7 +7,7 @@ export const getProjects = async () => {
     const response = await client.get<Project[]>(`/project`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -23,7 +23,7 @@ export const getProjectById = async (id: number) => {
       createdAt: project.createdAt ? new Date(project.createdAt) : new Date(),
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -38,7 +38,7 @@ export const createProjects = async (project: Project) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -57,7 +57,7 @@ export const updateProject = async (project: Project) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -68,7 +68,7 @@ export const deleteProject = async (id: number): Promise<Project> => {
     const response = await authClient.delete<Project>(`/admin/project/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };

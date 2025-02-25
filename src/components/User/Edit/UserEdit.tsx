@@ -37,7 +37,7 @@ function UserEdit() {
     },
     onError: () => {
       // 테스트용
-      console.log('유저 정보 수정 실패');
+      console.error('유저 정보 수정 실패');
     },
   });
 
