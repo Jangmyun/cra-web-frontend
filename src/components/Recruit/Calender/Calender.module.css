@@ -6,7 +6,7 @@
   justify-content: center;
 
   h2 {
-    padding-bottom: clamp(25px, 10vw, 240px);
+    padding-bottom: clamp(25px, 10vw, 150px);
     font-size: clamp(25px, 3vw, 3vw);
     color: var(--color-white);
     font-family: 'Pretendard Bold';
@@ -27,14 +27,12 @@
 }
 
 .calender-box {
-  height: clamp(80px, 8vw, 8vw);
+  height: clamp(80px, 8.5vw, 8.5vw);
   aspect-ratio: 286 / 150;
-  /* background-color: rgb(237, 237, 237); */
   background-color: black;
   box-shadow: 0 0 10px rgba(44, 180, 219, 0.8);
   border-radius: 10px;
   margin: 15px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,8 +41,7 @@
 
   h3 {
     font-size: clamp(15px, 1.4vw, 1.4vw);
-    padding: clamp(3px, 1vw, 12px);
-    margin: 0;
+    margin: clamp(5px, 1.2vw, 25px);
     font-family: 'Pretendard Bold';
     color: white;
   }
@@ -52,7 +49,6 @@
   p {
     font-size: clamp(15px, 1.3vw, 1.3vw);
     line-height: 1.3;
-    margin: 0;
     font-family: 'Pretendard Medium';
     color: var(--color-dark-text);
   }
@@ -62,7 +58,7 @@
   .recruit-calender {
     h2 {
       padding-top: 50px;
-      padding-bottom: clamp(20px, 13vw, 240px);
+      padding-bottom: clamp(50px, 13vw, 240px);
       font-size: clamp(25px, 3vw, 3vw);
       color: var(--color-white);
       font-family: 'Pretendard Bold';
