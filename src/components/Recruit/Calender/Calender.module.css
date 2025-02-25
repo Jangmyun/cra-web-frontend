@@ -29,7 +29,9 @@
 .calender-box {
   height: clamp(80px, 8vw, 8vw);
   aspect-ratio: 286 / 150;
-  background-color: rgb(237, 237, 237);
+  /* background-color: rgb(237, 237, 237); */
+  background-color: black;
+  box-shadow: 0 0 10px rgba(44, 180, 219, 0.8);
   border-radius: 10px;
   margin: 15px;
   display: flex;
@@ -44,6 +46,7 @@
     padding: clamp(3px, 1vw, 12px);
     margin: 0;
     font-family: 'Pretendard Bold';
+    color: white;
   }
 
   p {
@@ -93,7 +96,8 @@
     position: absolute;
     height: clamp(100px, 10vw, 10vw);
     aspect-ratio: 286 / 199;
-    background-color: rgb(237, 237, 237);
+    /* background-color: rgb(237, 237, 237); */
+    background-color: black;
     border-radius: 10px;
     margin: 15px;
     display: flex;
