@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import BlueCheck from '~/assets/images/Blue-Check.png?format=webp&as=srcset';
+import BlueCheck from '~/assets/images/Blue-Check.png';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -90,7 +90,7 @@ function IDSearchCompletePage() {
 
   return (
     <Container>
-      <Img srcSet={BlueCheck} loading="lazy" />
+      <Img src={BlueCheck} loading="lazy" />
       <Title>아이디 찾기 완료</Title>
       <Content>
         <Context>

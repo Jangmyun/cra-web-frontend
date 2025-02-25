@@ -1,5 +1,5 @@
-import LeftVector from '~/assets/images/Vector/LeftVector.png?format=webp&as=srcset';
-import RightVector from '~/assets/images/Vector/RightVector.png?format=webp&as=srcset';
+import LeftVector from '~/assets/images/Vector/LeftVector.png';
+import RightVector from '~/assets/images/Vector/RightVector.png';
 import styles from './Pagination.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ function Pagination({
 
   return (
     <div className={styles.Pagenations}>
-      <img srcSet={LeftVector} loading="lazy" />
+      <img src={LeftVector} loading="lazy" />
       {Array.from({ length: totalPages }).map((_, pageIndex) => (
         <div
           key={pageIndex}
@@ -41,7 +41,7 @@ function Pagination({
           {pageIndex + 1}
         </div>
       ))}
-      <img srcSet={RightVector} loading="lazy" />
+      <img src={RightVector} loading="lazy" />
     </div>
   );
 }
