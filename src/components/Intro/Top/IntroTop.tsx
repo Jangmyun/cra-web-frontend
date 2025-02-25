@@ -74,11 +74,12 @@ function IntroTop({
 
       {/* CRA 소개 Hook 문구 */}
       <div ref={ref} className={styles.section2}>
-        <p>
-          세대를 아우르는 열정과 끈끈한
+        <h1 className={styles.heading}>
+          세대를 아우르는 열정과 끈끈한 유대감의 동아리,
           <br />
-          유대감의 동아리, CRA를 소개합니다.
-        </p>
+          CRA를 소개합니다.
+        </h1>
+        <div className={styles.glowBackground}></div>
       </div>
     </div>
   );

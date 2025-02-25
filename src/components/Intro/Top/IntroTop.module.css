@@ -24,7 +24,7 @@
   font-style: normal;
   font-size: 50px;
   letter-spacing: -0.05em;
-  color: #ffffff;
+  color: var(--color-white);
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -45,7 +45,11 @@
 }
 
 .helloworld {
-  background: linear-gradient(90deg, #2cb4db 0%, #e0f7ff 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-white-blue-text) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -60,19 +64,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00cfff;
-  color: #e5f7fb;
+  background-color: var(--color-recruit-blue);
+  color: var(--color-white-blue-text);
   font-size: 50px;
   padding: 1rem 3rem;
   margin-top: 3rem;
   border-radius: 2rem;
+  z-index: 2;
   text-decoration: none;
   transition:
     background-color 0.5s ease,
     color 0.5s ease;
   &:hover {
-    background-color: #e5f7fb;
-    color: #00cfff;
+    background-color: var(--color-white-blue-text);
+    color: var(--color-recruit-blue);
     box-shadow: 0 0 50px rgba(0, 110, 255, 0.7); /* 아우라 효과 (청록색 빛) */
   }
   p {
@@ -110,30 +115,35 @@
   align-items: center;
   justify-content: center;
   margin-top: 40rem;
+  min-height: 100vh;
   margin-bottom: 50rem;
-  p {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    font-style: normal;
-    font-size: 40px !important;
-    color: #ffffff;
-    text-align: center;
-    line-height: 100px;
-    z-index: 1;
-  }
-  p::before {
-    content: '세대를 아우르는 열정과 끈끈한 \A유대감의 동아리, CRA를 소개합니다.';
-    white-space: pre-wrap;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    color: #ffffff;
-    filter: blur(20px);
-  }
+  overflow: visible;
+  z-index: 2;
+}
+.heading {
+  text-align: center;
+  color: var(--color-white);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 70px;
+  letter-spacing: -0.02em;
+}
+.glowBackground {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2),
+    rgba(0, 0, 0, 0)
+  );
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 1460px) {
@@ -143,13 +153,20 @@
   .banner {
     font-size: 110px;
   }
-  .crangE {
-    width: 280px !important;
+  .character2,
+  .character3 {
+    width: 250px !important;
   }
-  .section2 p {
-    font-size: 37px !important;
+  .character1,
+  .character4 {
+    width: 260px !important;
   }
-
+  .character1 {
+    left: 95% !important;
+  }
+  .heading {
+    font-size: 1.9rem;
+  }
   .RecruitBtn {
     font-size: 45px;
   }
@@ -163,11 +180,16 @@
     font-size: 90px;
     line-height: 115px;
   }
-  .crangE {
+  .character2,
+  .character3 {
+    width: 220px !important;
+  }
+  .character1,
+  .character4 {
     width: 240px !important;
   }
-  .section2 p {
-    font-size: 34px !important;
+  .heading {
+    font-size: 1.7rem;
   }
   .RecruitBtn {
     font-size: 40px;
@@ -182,17 +204,22 @@
     font-size: 80px;
     line-height: 100px;
   }
-  .crangE {
+  .character2,
+  .character3 {
     width: 200px !important;
+  }
+  .character1,
+  .character4 {
+    width: 220px !important;
+  }
+  .character1 {
+    left: 100% !important;
   }
   .vector {
     img {
       width: 45px;
       height: auto;
     }
-  }
-  .section2 p {
-    font-size: 31px !important;
   }
   .RecruitBtn {
     font-size: 35px;
@@ -213,11 +240,16 @@
       height: auto;
     }
   }
-  .crangE {
+  .character2,
+  .character3 {
+    width: 160px !important;
+  }
+  .character1,
+  .character4 {
     width: 180px !important;
   }
-  .section2 p {
-    font-size: 28px !important;
+  .heading {
+    font-size: 1.6rem;
   }
   .RecruitBtn {
     font-size: 30px;
@@ -243,11 +275,15 @@
       height: auto;
     }
   }
-  .section2 p {
-    font-size: 23px !important;
-  }
   .crangE {
     display: none;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .glowBackground {
+    width: 100%;
+    filter: blur(80px);
   }
   .RecruitBtn {
     font-size: 25px;
@@ -267,8 +303,8 @@
       height: auto;
     }
   }
-  .section2 p {
-    font-size: 20px !important;
+  .heading {
+    font-size: 1.2rem;
   }
   .RecruitBtn {
     font-size: 20px;
@@ -283,8 +319,8 @@
   .banner {
     font-size: 36px;
   }
-  .section2 p {
-    font-size: 18px !important;
+  .heading {
+    font-size: 1rem;
   }
   .RecruitBtn {
     font-size: 18px;
@@ -296,23 +332,23 @@
   .character1 {
     position: absolute;
     top: 65%;
-    left: 95%;
-    transform: translate(-50%, -50%);
+    left: 90%;
+    transform: translate(-50%, -50%) rotate(-12.174deg);
   }
 
   .character2 {
     position: absolute;
     top: 15%;
     left: 5%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(7.854deg);
     width: 262.51px;
   }
 
   .character3 {
     position: absolute;
     top: 12%;
-    left: 105%;
-    transform: translate(-50%, -50%);
+    left: 95%;
+    transform: translate(-50%, -50%) rotate(-2.317deg);
     width: 262.51px;
   }
 
@@ -320,7 +356,7 @@
     position: absolute;
     top: 65%;
     left: -5%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(9.858deg);
   }
 }
 
