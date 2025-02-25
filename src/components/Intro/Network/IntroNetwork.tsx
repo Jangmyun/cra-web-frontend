@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import CRA_IMAGE1 from '~/assets/images/main/crabig.jpg?format=webp&as=srcset';
-import CRA_IMAGE2 from '~/assets/images/main/crastudy2.jpg?format=webp&as=srcset';
+import CRA_IMAGE2 from '~/assets/images/main/crastudy1.jpg?format=webp&as=srcset';
 import CRA_IMAGE3 from '~/assets/images/main/cradevelop.jpg?format=webp&as=srcset';
 import styles from './IntroNetwork.module.css';
 
