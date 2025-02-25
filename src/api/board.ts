@@ -9,7 +9,7 @@ export const getBoardCountByCategory = async (category: number) => {
     const response = await client.get<Board[]>(`/board/${category}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -34,7 +34,7 @@ export const getBoardsByCategory = async (
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -50,7 +50,7 @@ export const getBoardById = async (id: number) => {
       createdAt: board.createdAt ? new Date(board.createdAt) : new Date(), // createAt을 Date 객체로 변환
     };
   } catch (error) {
-    console.log('⚠️ Error occurred while fetching board:', error);
+    console.error('⚠️ Error occurred while fetching board:', error);
     // 원본 error를 그대로 throw
     throw error;
   }
@@ -80,7 +80,7 @@ export const createBoards = async (board: Board, file: File | null) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -135,7 +135,7 @@ export const deleteBoards = async (id: number): Promise<Board> => {
     const response = await authClient.delete<Board>(`/board/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -149,8 +149,6 @@ export const onUploadImage = async (blob: File): Promise<string> => {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     const imageUrl = response.data;
-
-    console.log('받은 이미지 URL:', imageUrl);
 
     return imageUrl; // 이미지 URL만 반환 (callback 없음)
   } catch (error) {

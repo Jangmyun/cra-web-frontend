@@ -350,8 +350,6 @@ function RegisterForm() {
     e.preventDefault();
     setUserName(formData.username);
     setName(formData.name);
-    console.log(formData.username);
-    console.log(formData.name);
 
     if (submitLoading) return;
     setSubmitLoading(true);

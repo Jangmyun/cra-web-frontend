@@ -40,11 +40,11 @@ export default function RecruitPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsExpanding(true); // 애니메이션 시작 (늘어남)
-    }, 1000); // 1초 뒤에 CR과 A가 이동 시작
+    }, 500); // 1초 뒤에 CR과 A가 이동 시작
 
     const resetTimer = setTimeout(() => {
       setIsExpanding(false); // 3초 뒤에 원래대로 돌아가게
-    }, 4500); // 4.5초 뒤에 애니메이션을 원래 상태로 되돌리기
+    }, 3000); // 4.5초 뒤에 애니메이션을 원래 상태로 되돌리기
 
     const scrollTimer = setTimeout(() => {
       titleRef.current?.scrollIntoView({
@@ -54,7 +54,7 @@ export default function RecruitPage() {
       setTimeout(() => {
         setIsExpanding(true); // 다시 벌어짐
       }, 1000); // 스크롤이 끝난 후 1초 뒤 실행
-    }, 4800); // 애니메이션 종료 직후 실행
+    }, 3800); // 애니메이션 종료 직후 실행
 
     return () => {
       clearTimeout(timer);

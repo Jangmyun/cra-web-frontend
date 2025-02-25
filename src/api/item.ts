@@ -6,7 +6,7 @@ export const getItems = async (itemCategory: number) => {
     const response = await authClient.get<Item[]>(`/item/${itemCategory}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -22,7 +22,7 @@ export const getItemById = async (id: number) => {
       createdAt: Item.createdAt ? new Date(Item.createdAt) : new Date(),
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -36,7 +36,7 @@ export const createItems = async (item: Item) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -54,7 +54,7 @@ export const updateItem = async (item: Item) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -63,7 +63,7 @@ export const deleteItem = async (id: number) => {
   try {
     await authClient.delete(`/admin/item/${id}`);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };

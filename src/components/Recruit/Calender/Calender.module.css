@@ -41,7 +41,7 @@
 
   h3 {
     font-size: clamp(15px, 1.4vw, 1.4vw);
-    margin: clamp(5px, 1.2vw, 25px);
+    margin: clamp(10px, 1.2vw, 25px);
     font-family: 'Pretendard Bold';
     color: white;
   }
@@ -50,7 +50,7 @@
     font-size: clamp(15px, 1.3vw, 1.3vw);
     line-height: 1.3;
     font-family: 'Pretendard Medium';
-    color: var(--color-dark-text);
+    color: var(--color-primary);
   }
 }
 
@@ -115,7 +115,6 @@
       line-height: 1.3;
       margin: 0;
       font-family: 'Pretendard Medium';
-      color: var(--color-dark-text);
     }
   }
 

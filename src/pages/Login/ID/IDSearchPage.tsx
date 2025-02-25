@@ -137,9 +137,7 @@ function IDSearchPage() {
     if (!validate()) return;
 
     try {
-      console.log('Request Data:', formData);
       const username = await findId(formData);
-      console.log('API Response:', username);
 
       if (!username) throw new Error('응답에서 username을 찾을 수 없습니다.');
 

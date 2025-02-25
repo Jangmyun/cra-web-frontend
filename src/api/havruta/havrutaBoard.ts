@@ -22,7 +22,7 @@ export const getHavrutaBoards = async (
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -33,7 +33,7 @@ export const getHavrutaBoardsCount = async () => {
     const response = await client.get<HavrutaBoard[]>(`/board/havruta`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -58,7 +58,7 @@ export const getHavrutaBoardsByHavrutaId = async (
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -71,7 +71,7 @@ export const getHavrutaBoardsCountByHavrutaId = async (havrutaId: number) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -87,7 +87,7 @@ export const getHavrutaBoardById = async (id: number) => {
       createdAt: havruta.createdAt ? new Date(havruta.createdAt) : new Date(),
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -116,7 +116,7 @@ export const createHavrutaBoard = async (
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -159,7 +159,7 @@ export const deleteHavrutaBoards = async (
     const response = await authClient.delete<HavrutaBoard>(`/board/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
