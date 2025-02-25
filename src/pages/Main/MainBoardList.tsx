@@ -16,8 +16,10 @@ export default function MainBoardList({ category }: { category: number }) {
   });
 
   useEffect(() => {
-    void navigate('/internal-server-error');
-  }, [navigate]);
+    if (boardsQuery.isError) {
+      void navigate('/internal-server-error');
+    }
+  }, [boardsQuery.isError, navigate]);
 
   let content;
 

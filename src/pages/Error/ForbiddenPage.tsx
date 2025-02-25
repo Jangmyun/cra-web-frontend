@@ -4,6 +4,8 @@ import WhiteVector from '~/assets/images/Vector/Vector-white.png';
 import SkyBlueVector from '~/assets/images/Vector/Vector-skyblue.png';
 import styled from 'styled-components';
 
+const STATUSCODE = 403;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,7 +69,7 @@ function NotFoundPage() {
   const navigate = useNavigate();
   return (
     <Container>
-      <HttpStatus statusCode={403} />
+      <HttpStatus statusCode={STATUSCODE} />
       <Content>
         <Title>Forbidden</Title>
         <Context>존재하지 않는 주소를 입력하셨거나,</Context>
