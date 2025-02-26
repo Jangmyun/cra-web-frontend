@@ -7,7 +7,7 @@ import Talent from '~/components/Recruit/Talent/Talent';
 import Calender from '~/components/Recruit/Calender/Calender';
 
 const RECRUITLINK =
-  'https://docs.google.com/forms/d/e/1FAIpQLSf5uTQbDr7i9WjPfI61hMJ_PqDS1Of_fZRNpD8MRzlvnYFsKA/closedform';
+  'https://docs.google.com/forms/d/e/1FAIpQLSd-Yq9rq7tTuYXyn_RnkEvQRXP7yYVJLAWhChnPnMKtRQqrsQ/viewform';
 
 export default function RecruitPage() {
   const recruitTalentRef = useRef<HTMLDivElement>(null);
