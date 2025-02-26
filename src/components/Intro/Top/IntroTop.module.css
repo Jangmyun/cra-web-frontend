@@ -123,7 +123,7 @@
 .heading {
   text-align: center;
   color: var(--color-white);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
   line-height: 70px;
   letter-spacing: -0.02em;
@@ -204,6 +204,10 @@
     font-size: 80px;
     line-height: 100px;
   }
+  .section {
+    margin-top: -110px;
+    padding-top: 0;
+  }
   .character2,
   .character3 {
     width: 200px !important;
@@ -265,10 +269,7 @@
     font-size: 50px;
     line-height: 70px;
   }
-  .section {
-    margin-top: 0;
-    padding-top: 0;
-  }
+
   .vector {
     img {
       width: 35px;
@@ -296,6 +297,7 @@
   }
   .banner {
     font-size: 40px;
+    line-height: 1;
   }
   .vector {
     img {
@@ -304,7 +306,8 @@
     }
   }
   .heading {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    line-height: 2;
   }
   .RecruitBtn {
     font-size: 20px;
@@ -367,4 +370,12 @@
   .character4 {
     display: none !important;
   }
+}
+
+.interview {
+  color: white;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-family: 'Pretendard';
+  text-align: center;
 }

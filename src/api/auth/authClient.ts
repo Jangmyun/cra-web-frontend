@@ -19,6 +19,7 @@ authClient.interceptors.request.use(
     if (accessToken && refreshToken) {
       // exp는 JWT의 만료시간 (초 단위)를 나타냄
       const decoded: { exp: number } = jwtDecode(accessToken);
+
       // 밀리초 단위로 시간을 반환하는 Data.now()와 비교하기 위해 * 1000 을 해서 비교
       const isTokenExpired = decoded.exp * 1000 < Date.now();
       // isTokenExpired 이 True면 토큰이 만료된거고 False면 아직 유효함
