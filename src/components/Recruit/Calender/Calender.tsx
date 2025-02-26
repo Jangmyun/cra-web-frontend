@@ -7,21 +7,21 @@ function Calender() {
       <div className={styles['calender-line']}>
         <div className={styles['calender-box']}>
           <h3>서류 접수</h3>
-          <p>2025.3.4.(화)</p>
-          <p>~ 3.18.(화)</p>
+          <p>2025.2.26.(목)</p>
+          <p>~ 3.12.(수)</p>
         </div>
         <div className={styles['calender-box']}>
-          <h3>서류 합격 발표</h3>
-          <p>2025.3.21(금)</p>
+          <h3>면접 일정 안내</h3>
+          <p>2025.3.12(수)</p>
         </div>
         <div className={styles['calender-box']}>
           <h3>코딩 테스트 / 면접</h3>
-          <p>2025.3.24(월)</p>
-          <p>~3.26(수)</p>
+          <p>2025.3.13(목)</p>
+          <p>~3.19(수)</p>
         </div>
         <div className={styles['calender-box']}>
           <h3>최종합격 발표</h3>
-          <p>2025.3.28(금)</p>
+          <p>2025.3.20(목)</p>
         </div>
       </div>
     </div>
