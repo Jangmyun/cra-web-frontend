@@ -370,6 +370,10 @@
   .character4 {
     display: none !important;
   }
+  .section2 {
+    margin-top: 0rem;
+    margin-bottom: 20rem;
+  }
 }
 
 .interview {
