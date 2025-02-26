@@ -23,7 +23,7 @@ const clubContents = [
     ],
   },
   {
-    title: ['함께 성장하기에 최고로 좋은 환경'],
+    title: ['함께 성장하기에 좋은 환경'],
     image: CRA_IMAGE2,
     content: [
       [
