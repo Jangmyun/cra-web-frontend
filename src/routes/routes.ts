@@ -1,4 +1,5 @@
-// // ------------------------------배포용 route------------------------------------
+// ------------------------------배포용 route------------------------------------
+
 // import { createRouter } from '@tanstack/react-router';
 // import { rootRoute } from './__root.tsx';
 // import { HomeRoute, introRoute } from './introRoutes.ts';
@@ -13,7 +14,8 @@
 //     comingSoonRoute,
 //   ]),
 // });
-// //-------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------
 
 import { createRouter } from '@tanstack/react-router';
 import { rootRoute } from './__root.tsx';

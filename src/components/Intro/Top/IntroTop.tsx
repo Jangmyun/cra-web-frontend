@@ -68,6 +68,7 @@ function IntroTop({
           <div className={styles.vector} onClick={scrollToSection}>
             <img srcSet={Vector2} loading="lazy" />
             <img srcSet={Vector} loading="lazy" />
+            <div className={styles['interview']}>CRA가 궁금하다면?</div>
           </div>
         </div>
       </div>
