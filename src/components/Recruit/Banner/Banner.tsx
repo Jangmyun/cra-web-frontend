@@ -37,7 +37,7 @@ function Banner({
           <img srcSet={Vector2} loading="lazy" />
           <img srcSet={Vector} loading="lazy" />
           <img srcSet={Vector2} loading="lazy" />
-          <div className={styles['interview']}>면접 상세보기</div>
+          <div className={styles['interview']}>모집 개요</div>
         </div>
       </div>
     </div>
