@@ -1,0 +1,381 @@
+.main {
+  height: 99vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  position: relative;
+  padding: 2rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+
+  font-style: normal;
+  font-size: 50px;
+  letter-spacing: -0.05em;
+  color: var(--color-white);
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+
+  font-family: 'Pixelify Sans Regular';
+  font-style: normal;
+  font-size: 130px;
+  line-height: 130px;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+}
+
+.helloworld {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-white-blue-text) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.crangE {
+  object-fit: contain;
+  width: 280px;
+  user-select: none;
+}
+
+.RecruitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-recruit-blue);
+  color: var(--color-white-blue-text);
+  font-size: 50px;
+  padding: 1rem 3rem;
+  margin-top: 3rem;
+  border-radius: 2rem;
+  z-index: 2;
+  text-decoration: none;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+  &:hover {
+    background-color: var(--color-white-blue-text);
+    color: var(--color-recruit-blue);
+    box-shadow: 0 0 50px rgba(0, 110, 255, 0.7); /* 아우라 효과 (청록색 빛) */
+  }
+  p {
+    text-align: center;
+    letter-spacing: -0.05em;
+  }
+}
+.highlight {
+  transform: scale(1.1);
+  box-shadow: 0 0 50px rgba(0, 110, 255, 0.7); /* 아우라 효과 (청록색 빛) */
+  transition: transform 1.5s ease-in-out;
+}
+
+.vector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.25rem 0rem;
+  user-select: none;
+  img {
+    width: 55px;
+    height: 27px;
+  }
+}
+
+.vector:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.section2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40rem;
+  min-height: 100vh;
+  margin-bottom: 50rem;
+  overflow: visible;
+  z-index: 2;
+}
+.heading {
+  text-align: center;
+  color: var(--color-white);
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 70px;
+  letter-spacing: -0.02em;
+}
+.glowBackground {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2),
+    rgba(0, 0, 0, 0)
+  );
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1460px) {
+  .comment {
+    font-size: 46px;
+  }
+  .banner {
+    font-size: 110px;
+  }
+  .character2,
+  .character3 {
+    width: 250px !important;
+  }
+  .character1,
+  .character4 {
+    width: 260px !important;
+  }
+  .character1 {
+    left: 95% !important;
+  }
+  .heading {
+    font-size: 1.9rem;
+  }
+  .RecruitBtn {
+    font-size: 45px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .comment {
+    font-size: 42px;
+  }
+  .banner {
+    font-size: 90px;
+    line-height: 115px;
+  }
+  .character2,
+  .character3 {
+    width: 220px !important;
+  }
+  .character1,
+  .character4 {
+    width: 240px !important;
+  }
+  .heading {
+    font-size: 1.7rem;
+  }
+  .RecruitBtn {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 894px) {
+  .comment {
+    font-size: 38px;
+  }
+  .banner {
+    font-size: 80px;
+    line-height: 100px;
+  }
+  .section {
+    margin-top: -110px;
+    padding-top: 0;
+  }
+  .character2,
+  .character3 {
+    width: 200px !important;
+  }
+  .character1,
+  .character4 {
+    width: 220px !important;
+  }
+  .character1 {
+    left: 100% !important;
+  }
+  .vector {
+    img {
+      width: 45px;
+      height: auto;
+    }
+  }
+  .RecruitBtn {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .comment {
+    font-size: 34px;
+  }
+  .banner {
+    font-size: 68px;
+    line-height: 90px;
+  }
+  .vector {
+    img {
+      width: 40px;
+      height: auto;
+    }
+  }
+  .character2,
+  .character3 {
+    width: 160px !important;
+  }
+  .character1,
+  .character4 {
+    width: 180px !important;
+  }
+  .heading {
+    font-size: 1.6rem;
+  }
+  .RecruitBtn {
+    font-size: 30px;
+    padding: 0.75rem 2.5rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .comment {
+    font-size: 27px;
+  }
+  .banner {
+    font-size: 50px;
+    line-height: 70px;
+  }
+
+  .vector {
+    img {
+      width: 35px;
+      height: auto;
+    }
+  }
+  .crangE {
+    display: none;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .glowBackground {
+    width: 100%;
+    filter: blur(80px);
+  }
+  .RecruitBtn {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comment {
+    font-size: 20px;
+  }
+  .banner {
+    font-size: 40px;
+    line-height: 1;
+  }
+  .vector {
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+  .heading {
+    font-size: 1rem;
+    line-height: 2;
+  }
+  .RecruitBtn {
+    font-size: 20px;
+    padding: 0.75rem 2rem;
+  }
+}
+
+@media (max-width: 368px) {
+  .comment {
+    font-size: 18px;
+  }
+  .banner {
+    font-size: 36px;
+  }
+  .heading {
+    font-size: 1rem;
+  }
+  .RecruitBtn {
+    font-size: 18px;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (min-width: 621px) {
+  .character1 {
+    position: absolute;
+    top: 65%;
+    left: 90%;
+    transform: translate(-50%, -50%) rotate(-12.174deg);
+  }
+
+  .character2 {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    transform: translate(-50%, -50%) rotate(7.854deg);
+    width: 262.51px;
+  }
+
+  .character3 {
+    position: absolute;
+    top: 12%;
+    left: 95%;
+    transform: translate(-50%, -50%) rotate(-2.317deg);
+    width: 262.51px;
+  }
+
+  .character4 {
+    position: absolute;
+    top: 65%;
+    left: -5%;
+    transform: translate(-50%, -50%) rotate(9.858deg);
+  }
+}
+
+@media (max-width: 620px) {
+  .character1,
+  .character2,
+  .character3,
+  .character4 {
+    display: none !important;
+  }
+}
+
+.interview {
+  color: white;
+  margin-top: 20px;
+  margin-left: 5px;
+  font-family: 'Pretendard';
+  text-align: center;
+}

@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  font-family: 'Pretendard SemiBold';
+  border: none;
+  background-color: var(--color-primary);
+  padding: 2.25rem 6rem;
+  user-select: none;
+}
+
+.content {
+  scale: 90%;
+}
+
+.logo {
+  padding-left: 0.4rem;
+  img {
+    width: 5rem;
+  }
+}
+
+.description {
+  display: flex;
+  font-size: 1.5625rem;
+  padding: 0.5rem 0rem 1rem 0rem;
+  p {
+    color: var(--color-secondary);
+  }
+  span {
+    color: var(--color-white);
+    padding-left: 0.4rem;
+  }
+}
+.cra206 {
+  font-size: 1.25rem;
+  color: var(--color-white);
+  padding-left: 0.4rem;
+  margin-top: 1rem;
+}
+
+.icons {
+  padding: 1rem 0rem;
+  margin-left: 0.1rem;
+  float: left;
+}
+
+.developer {
+  text-align: end;
+  font-size: 1.25rem;
+  padding: 1.5rem 0rem;
+  p {
+    color: var(--color-white);
+  }
+}
+
+@media (max-width: 1064px) {
+  .footer {
+    padding: 2.5rem 2rem;
+  }
+  .content {
+    scale: 90%;
+  }
+}
+
+@media (max-width: 628px) {
+  .description {
+    font-size: 22px !important;
+  }
+  .cra206 {
+    font-size: 19px !important;
+  }
+  .developer {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 468px) {
+  .footer {
+    padding: 1.5rem 0;
+  }
+  .content {
+    scale: 85%;
+  }
+  .description {
+    font-size: 20px !important;
+  }
+  .cra206 {
+    font-size: 18px !important;
+  }
+  .developer {
+    font-size: 16px !important;
+  }
+}

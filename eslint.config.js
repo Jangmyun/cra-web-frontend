@@ -24,7 +24,15 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        node: {},
+        typescript: {
+          project: '/tsconfig.json',
+        },
+      },
+    },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
@@ -51,6 +59,19 @@ export default tseslint.config(
         'error',
         { argsIgnorePattern: '^_' }, // '_'로 시작하는 매개변수 무시
       ],
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false,
+        },
+      ],
     },
+    // env: {
+    //   node: true
+    // }
   },
 );

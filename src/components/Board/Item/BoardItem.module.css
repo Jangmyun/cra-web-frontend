@@ -1,0 +1,62 @@
+.board-item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 17px;
+  margin-left: 17px;
+}
+
+.board-user-name {
+  line-height: 34px;
+  font-size: 16px;
+  font-family: 'Pretendard SemiBold';
+  color: var(--color-dark-text);
+  display: flex;
+  justify-content: space-between;
+}
+.board-info {
+  font-family: 'Pretendard Medium';
+  margin-right: 20px;
+  display: flex; /* span을 flex 항목으로 만듭니다 */
+  gap: 3px; /* 간격을 10px로 설정 */
+  color: var(--color-secondary-button);
+}
+.comment-img {
+  margin-top: 9px;
+  margin-left: 10px;
+}
+
+.temp-link {
+  width: 100%;
+  display: block;
+  text-decoration: none;
+}
+
+.board-title {
+  line-height: 34px;
+  font-size: 18px;
+  font-family: 'Pretendard SemiBold';
+  text-decoration: none;
+  color: var(--color-dark-text);
+  margin-top: 5px;
+}
+
+.board-content {
+  line-height: 32px;
+  font-size: 15px;
+  font-family: 'Pretendard Medium';
+  color: var(--color-dark-text);
+}
+
+.profile {
+  display: flex;
+  float: left;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}

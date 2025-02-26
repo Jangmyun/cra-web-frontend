@@ -1,0 +1,114 @@
+.commentWriteContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 95px;
+  border-radius: 10px;
+  border: 1px solid var(--color-dark-stroke);
+}
+
+.inputField {
+  flex-grow: 1;
+  margin-left: 16px;
+}
+
+.inputField input {
+  border: none;
+  background-color: var(--color-hover-white);
+  height: 100%;
+  width: 96%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0;
+  font: inherit;
+  vertical-align: baseline;
+  color: var(--color-bright-text);
+  font-size: 20px;
+}
+
+.inputField input::placeholder {
+  color: var(--color-dark-stroke);
+}
+
+.submitButton {
+  padding: 0;
+  width: 75px;
+  height: 64px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-family: 'Pretendard Bold';
+}
+
+.submitButton2 {
+  padding: 0;
+  margin-right: 10px;
+  width: 75px;
+  height: 64px;
+  background-color: var(--color-comment-blue);
+  color: var(--color-white);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-family: 'Pretendard Bold';
+}
+
+.submitButton:hover {
+  background-color: var(--color-comment-blue-primary);
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: var(--color-comment-blue-primary);
+}
+
+.submitButton:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .inputField input,
+  .submitButton,
+  .submitButton2 {
+    font-size: 16px;
+  }
+  .submitButton,
+  .submitButton2 {
+    height: 60px;
+  }
+}
+
+@media (max-width: 548px) {
+  .form {
+    gap: 5px;
+  }
+  .inputField input,
+  .submitButton,
+  .submitButton2 {
+    font-size: 12px;
+  }
+  .submitButton,
+  .submitButton2 {
+    width: 80px;
+    height: 45px;
+  }
+  .inputField input {
+    padding: 15px;
+  }
+}

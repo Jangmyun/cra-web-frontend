@@ -1,0 +1,126 @@
+.id label,
+.password label {
+  line-height: 34px;
+  margin-bottom: 11px;
+  font-size: 20px;
+  font-family: 'Pretendard SemiBold';
+  color: var(--color-dark-text);
+  user-select: none;
+}
+
+.id input,
+.password input,
+.login input {
+  background-color: var(--color-white);
+  width: 100%;
+  max-width: 640px; /* 기본 max-width 설정 */
+  height: 68px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-dark-stroke);
+  margin-bottom: 0;
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .id input,
+  .password input,
+  .login input {
+    width: 598px !important;
+  }
+}
+
+@media (max-width: 684px) {
+  .id input,
+  .password input,
+  .login input {
+    width: 572px !important;
+  }
+}
+
+@media (max-width: 468px) {
+  .id input,
+  .password input,
+  .login input {
+    max-width: 100%;
+  }
+}
+
+.id input::placeholder,
+.password input::placeholder {
+  font-size: 20px;
+  color: var(--color-dark-stroke);
+}
+
+.search-link {
+  font-size: 16px;
+  font-family: 'Pretendard Medium';
+  padding: 0px 0.5rem;
+  text-decoration: none;
+  color: var(--color-dark-text);
+}
+
+.register-link {
+  font-family: 'Pretendard Medium';
+  color: var(--color-primary);
+  user-select: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  color: var(--color-dark-text);
+}
+
+.checkbox-container input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  margin: 0 7px 0 7px;
+}
+
+.checkbox-container label {
+  user-select: none;
+  cursor: pointer;
+  color: var(--color-dark-text);
+  font-size: 1rem;
+  color: var(--color-bright-text);
+}
+
+.login input {
+  width: 100%; /* 로그인 버튼도 width 100%로 설정 */
+  max-width: 662px; /* 최대 너비 설정 */
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 10px;
+  color: var(--color-white);
+  font-size: 30px;
+  font-family: 'Pretendard Bold';
+  margin-top: 40px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .id input,
+  .password input,
+  .login input {
+    width: 100%;
+    max-width: 100%; /* 작은 화면에서 너비 100% */
+  }
+}
+
+.PrivacyPolicy {
+  background-color: var(--color-primary);
+  font-size: 17px;
+  font-family: 'Pretendard SemiBold';
+  color: var(--color-white);
+  text-decoration: none;
+  padding: 0.6rem 0.65rem;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-comment-blue);
+  }
+}
