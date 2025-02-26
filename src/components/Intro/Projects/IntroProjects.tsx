@@ -94,7 +94,7 @@ function IntroProjects() {
         </p>
         <Link to="/project" className={styles.ProjectMoreLink}>
           프로젝트 더보기
-        </Link>
+        </Link> 
       </div>
     </div>
   );
