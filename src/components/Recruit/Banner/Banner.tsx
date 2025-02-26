@@ -22,10 +22,10 @@ function Banner({
       <div className={styles['recruit-banner']}>
         <p id={styles['title']}>2025-1 CRA</p>
         <p id={styles['title']}>RECRUITMENT</p>
-        <p ref={titleRef} id={styles['content']}>
+        <p id={styles['content']}>
           CRA는 함께 성장 할 25-1 기수 동아리원을 모집합니다.
         </p>
-        <div className={styles['recruit-apply1']}>
+        <div ref={titleRef} className={styles['recruit-apply1']}>
           <Link to="https://docs.google.com/forms/d/e/1FAIpQLSf5uTQbDr7i9WjPfI61hMJ_PqDS1Of_fZRNpD8MRzlvnYFsKA/closedform">
             <button className={styles['button-style']}>지원하기</button>
           </Link>
@@ -34,6 +34,7 @@ function Banner({
           <img srcSet={Vector2} loading="lazy" />
           <img srcSet={Vector} loading="lazy" />
           <img srcSet={Vector2} loading="lazy" />
+          <div className={styles['interview']}>면접 상세보기</div>
         </div>
       </div>
     </div>
