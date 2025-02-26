@@ -36,8 +36,8 @@ const ToggleButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    margin: 2rem auto;
-    transform: translateX(16px);
+    margin: 0 auto;
+    margin-top: 2rem;
   }
 `;
 
