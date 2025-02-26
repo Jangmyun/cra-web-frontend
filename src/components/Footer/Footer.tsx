@@ -1,15 +1,23 @@
 import { Link } from 'react-router-dom';
 import craIcon from '~/assets/images/cra-logo.png';
+import { useLocation } from 'react-router-dom';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const location = useLocation();
+  const isIntro = location.pathname === '/';
+  const isRecruit = location.pathname === '/recruit';
   return (
     <div className={styles.footer}>
       <div className={styles.content}>
         <div className={styles.logo}>
-          <Link to="/">
+          {isIntro || isRecruit ? (
             <img src={craIcon} alt="크라 아이콘" loading="lazy" />
-          </Link>
+          ) : (
+            <Link to="/">
+              <img src={craIcon} alt="크라 아이콘" loading="lazy" />
+            </Link>
+          )}
         </div>
         <div className={styles.description}>
           <span>C</span>
