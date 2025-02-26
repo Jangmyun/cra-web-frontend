@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column; /* 세로로 스크롤 */
+  overflow-x: hidden;
 }
 
 .recruit-apply {
