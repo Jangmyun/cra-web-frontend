@@ -153,7 +153,7 @@ export default function BoardDetailItem({
                 {board.resUserDetailDto.name}
               </span>
             </div>
-            <div>
+            <div className={styles.NavDate}>
               <span className={styles['nav-title']}>작성일 | </span>
               <span className={styles['nav-content']}>
                 {dateFormat(board.createdAt)}

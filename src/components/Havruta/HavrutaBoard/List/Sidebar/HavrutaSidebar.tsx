@@ -39,7 +39,7 @@ function HavrutaSidebar({
           selectedHavrutaId === null ? styles.selected : ''
         }`}
       >
-        <img src={SelectedDot} />
+        <img src={SelectedDot} loading="lazy" />
         <a
           href="#"
           onClick={(event) => handleHavrutaChange(null, event)} // 전체 선택 시
@@ -54,7 +54,7 @@ function HavrutaSidebar({
             selectedHavrutaId === havruta.id ? styles.selected : ''
           }`}
         >
-          <img src={SelectedDot} />
+          <img src={SelectedDot} loading="lazy" />
           <a
             href="#"
             onClick={(event) => handleHavrutaChange(havruta.id ?? null, event)} // 개별 과목 선택 시

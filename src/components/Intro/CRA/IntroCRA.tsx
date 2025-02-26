@@ -66,7 +66,7 @@ function IntroCRA() {
         {/* CARD 2 */}
         <div className={styles.Card}>
           <p className={styles.CardTitle}>출시 서비스</p>
-          <p className={styles.CardContent}>?개</p>
+          <p className={styles.CardContent}>11개</p>
         </div>
 
         {/* CARD 3 */}

@@ -40,8 +40,9 @@
 }
 
 .ProjectContext {
-  font-family: 'Pretendard' !important;
+  font-family: 'Pretendard Medium' !important;
   font-size: 20px !important;
+  padding: 0 2rem;
   p {
     padding: 0 5rem;
     line-height: 3rem;
@@ -66,7 +67,7 @@
     font-size: 20px !important;
     margin-top: 2rem;
     &:hover {
-      color: var(--color-more-primary);
+      color: var(--color-white);
     }
   }
 }
@@ -117,7 +118,7 @@
   .ProjectContext {
     p {
       padding: 0 1rem;
-      font-size: 16px !important;
+      font-size: 18px !important;
     }
   }
   .ProjectBanner {

@@ -38,7 +38,7 @@ export default function HavrutaBoardItem({
       <div className={styles.BoardItemContainer}>
         <div>
           <img
-            src={
+            srcSet={
               havrutaBoard.resUserDetailDto.imgUrl
                 ? havrutaBoard.resUserDetailDto.imgUrl
                 : DEFAULT_PROFILE
@@ -50,9 +50,13 @@ export default function HavrutaBoardItem({
             <div className={styles['board-info']}>
               <span>{havrutaBoard.createdAt?.toString().substring(0, 10)}</span>
               <span>
-                <img src={COMMENT} className={styles['comment-img']} />
+                <img
+                  src={COMMENT}
+                  className={styles['comment-img']}
+                  loading="lazy"
+                />
               </span>
-              <span style={{ color: '#2CB4DB' }}>
+              <span style={{ color: 'var(--color-primary)' }}>
                 {commentCnt !== null ? commentCnt : '로딩 중'}
               </span>
             </div>

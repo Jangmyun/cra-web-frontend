@@ -26,13 +26,13 @@ const Th = styled.th`
 `;
 
 const Td = styled.td`
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solidvar(--color-bright-stroke);
   padding: 10px;
 `;
 
 const ActionLink = styled(Link)`
   padding: 0.25rem 0.5rem;
-  color: #007bff;
+  color: var(--color-more-primary);
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -45,7 +45,7 @@ const DeleteButtonWrapper = styled.div`
 `;
 
 const CreateItemLink = styled(Link)`
-  color: #2cb4db;
+  color: var(--color-primary);
   font-size: 1.25rem;
   text-decoration: none;
   &:hover {
@@ -54,21 +54,22 @@ const CreateItemLink = styled(Link)`
 `;
 
 function ItemAdminList() {
-  const itemQuery = useQuery<Item[]>({
+  const ItemQuery = useQuery<Item[]>({
     queryKey: QUERY_KEY.item.items(ITEMCATEGORY.ITEM),
     queryFn: async () => getItems(ITEMCATEGORY.ITEM),
   });
 
   let content;
 
-  if (itemQuery.isLoading) {
+  if (ItemQuery.isLoading) {
     content = <LoadingSpinner />;
-  } else if (itemQuery.isError) {
+  } else if (ItemQuery.isError) {
     content = <div>에러가 발생했습니다!</div>;
-  } else if (itemQuery.isSuccess) {
-    if (itemQuery.data.length === 0) {
-    } else {
-      content = (
+  } else if (ItemQuery.isSuccess) {
+    content =
+      ItemQuery.data.length === 0 ? (
+        <div className="empty">데이터가 없습니다.</div>
+      ) : (
         <Table>
           <thead>
             <tr>
@@ -79,7 +80,7 @@ function ItemAdminList() {
             </tr>
           </thead>
           <tbody>
-            {itemQuery.data.map((itemElement) => (
+            {ItemQuery.data.map((itemElement) => (
               <tr key={itemElement.id}>
                 <Td>{itemElement.id}</Td>
                 <Td>{itemElement.name}</Td>
@@ -110,7 +111,6 @@ function ItemAdminList() {
           </tbody>
         </Table>
       );
-    }
   }
 
   return (

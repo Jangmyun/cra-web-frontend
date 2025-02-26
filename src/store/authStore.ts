@@ -33,7 +33,6 @@ export const useAuthStore = create<authStore>()(
       accessToken: null,
       refreshToken: null,
       userId: null,
-      isAdmin: false,
 
       // 로그인 메서드
       login: async (data: Login) => {
@@ -70,6 +69,7 @@ export const useAuthStore = create<authStore>()(
             imgUrl: resUserDetailDto.imgUrl
               ? resUserDetailDto.imgUrl
               : DEFAULT_PROFILE,
+            greetingMessage: resUserDetailDto.greetingMessage,
           });
         } catch (error) {
           set({
@@ -97,7 +97,6 @@ export const useAuthStore = create<authStore>()(
       reissueToken: async (data: ReissueToken) => {
         try {
           // 토근 재발급 Api를 호출하여 새로운 ResponseToken(accessToken, refreshToken, userId)을 받음
-
           const response: ResTokenDto = await reissueTokenApi(data);
           const newRefreshToken = sessionStorage.getItem(
             'refreshToken',

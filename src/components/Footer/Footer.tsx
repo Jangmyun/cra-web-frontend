@@ -8,7 +8,7 @@ export default function Footer() {
       <div className={styles.content}>
         <div className={styles.logo}>
           <Link to="/">
-            <img src={craIcon} alt="크라 아이콘" />
+            <img src={craIcon} alt="크라 아이콘" loading="lazy" />
           </Link>
         </div>
         <div className={styles.description}>
@@ -17,7 +17,7 @@ export default function Footer() {
           <span>R</span>
           <p>esearch </p>
           <span>A</span>
-          <p>ssoication</p>
+          <p>ssociation</p>
         </div>
         <div className={styles.cra206}>
           <p>한동대학교 학생회관 206호</p>
@@ -29,6 +29,7 @@ export default function Footer() {
               height="32"
               src="https://img.icons8.com/windows/32/FFFFFF/instagram-new.png"
               alt="instagram-new"
+              loading="lazy"
             />
           </Link>
           <Link
@@ -40,14 +41,16 @@ export default function Footer() {
               height="32"
               src="https://img.icons8.com/material-outlined/32/github.png"
               alt="github"
+              loading="lazy"
             />
           </Link>
           {/* <Link to="/admin">
             <img
               width="32"
               height="32"
-              src="https://img.icons8.com/ios-filled/50/automatic.png"
+              srcSet="https://img.icons8.com/ios-filled/50/automatic.png"
               alt="github"
+              loading="lazy" 
             />
           </Link> */}
         </div>

@@ -26,7 +26,7 @@ export const getCommentsByBoardId = async (boardId: number) => {
 
     return comments;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -36,7 +36,7 @@ export const getCommentsCountByCategory = async (boardId: number) => {
     const response = await client.get<number>(`/comment/count/${boardId}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -54,7 +54,7 @@ export const createComments = async (comment: Comment, boardId: number) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -80,7 +80,7 @@ export const createChildComments = async (
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -98,7 +98,7 @@ export const updateComments = async (comment: Comment) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };
@@ -110,7 +110,7 @@ export const deleteComments = async (id: number) => {
     const response = await authClient.delete<Comment>(`/comment/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 };

@@ -7,6 +7,7 @@ interface UserState {
   term: string;
   githubId: string;
   imgUrl: string;
+  greetingMessage: string;
   setUser: (_user: Partial<UserState>) => void;
   resetUser: () => void;
 }
@@ -18,6 +19,7 @@ export const useUserStore = create<UserState>((set) => ({
   term: sessionStorage.getItem('term') || '',
   githubId: sessionStorage.getItem('githubId') || '',
   imgUrl: sessionStorage.getItem('imgUrl') || '',
+  greetingMessage: sessionStorage.getItem('greetingMessage') || '',
 
   setUser: (user) => {
     set(user);
@@ -34,6 +36,7 @@ export const useUserStore = create<UserState>((set) => ({
       term: '',
       githubId: '',
       imgUrl: '',
+      greetingMessage: '',
     });
   },
 }));

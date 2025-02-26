@@ -55,9 +55,13 @@ export default function BoardItem({
             <div className={styles['board-info']}>
               <span>{board.createdAt?.toString().substring(0, 10)}</span>
               <span>
-                <img src={COMMENT} className={styles['comment-img']} />
+                <img
+                  srcSet={COMMENT}
+                  className={styles['comment-img']}
+                  loading="lazy"
+                />
               </span>
-              <span style={{ color: '#2CB4DB' }}>
+              <span style={{ color: 'var(--color-primary)' }}>
                 {commentCnt !== null ? commentCnt : '로딩 중'}
               </span>
             </div>
