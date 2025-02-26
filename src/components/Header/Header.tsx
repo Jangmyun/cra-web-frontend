@@ -8,5 +8,5 @@ export default function Header() {
   const location = useLocation();
   const isIntro = location.pathname === '/';
   const isRecruit = location.pathname === '/recruit';
-  return isIntro || isRecruit ? <></> : <HeaderMain />;
+  return isIntro || isRecruit ? <></> : <></>;
 }
