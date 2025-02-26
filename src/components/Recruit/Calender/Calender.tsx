@@ -15,7 +15,7 @@ function Calender() {
           <p>2025.3.21(금)</p>
         </div>
         <div className={styles['calender-box']}>
-          <h3>면접</h3>
+          <h3>코딩 테스트 / 면접</h3>
           <p>2025.3.24(월)</p>
           <p>~3.26(수)</p>
         </div>
