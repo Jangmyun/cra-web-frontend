@@ -5,10 +5,14 @@ import Header from './components/Header/Header.tsx';
 import Footer from './components/Footer/Footer.tsx';
 import ScrollToTop from './utils/ScrollToTop.ts';
 import styles from './App.module.css';
+import FlapAnimationWrapper from './components/Common/FlapAnimationWrapper.tsx';
 
 function App() {
   return (
     <div className={styles.appContainer}>
+      <FlapAnimationWrapper
+        value={new Date().getHours()}
+      ></FlapAnimationWrapper>
       <Header />
       <div className={styles.contents}>
         <ScrollToTop />
