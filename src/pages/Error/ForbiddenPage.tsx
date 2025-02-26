@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import HttpStatus from '~/components/HttpStatus/HttpStatus.tsx';
-import WhiteVector from '~/assets/images/Vector/Vector-white.png?format=webp&as=srcset';
-import SkyBlueVector from '~/assets/images/Vector/Vector-skyblue.png?format=webp&as=srcset';
+import WhiteVector from '~/assets/images/Vector/Vector-white.png';
+import SkyBlueVector from '~/assets/images/Vector/Vector-skyblue.png';
 import styled from 'styled-components';
+
+const STATUSCODE = 403;
 
 const Container = styled.div`
   display: flex;
@@ -67,7 +69,7 @@ function NotFoundPage() {
   const navigate = useNavigate();
   return (
     <Container>
-      <HttpStatus statusCode={403} />
+      <HttpStatus statusCode={STATUSCODE} />
       <Content>
         <Title>Forbidden</Title>
         <Context>존재하지 않는 주소를 입력하셨거나,</Context>
@@ -77,11 +79,11 @@ function NotFoundPage() {
       </Content>
       <Buttons>
         <MainBtn onClick={() => navigate('/')}>
-          메인으로 <img srcSet={SkyBlueVector} loading="lazy" />
+          메인으로 <img src={SkyBlueVector} loading="lazy" />
         </MainBtn>
 
         <PrevBtn onClick={() => navigate(-1)}>
-          이전으로 <img srcSet={WhiteVector} loading="lazy" />
+          이전으로 <img src={WhiteVector} loading="lazy" />
         </PrevBtn>
       </Buttons>
     </Container>

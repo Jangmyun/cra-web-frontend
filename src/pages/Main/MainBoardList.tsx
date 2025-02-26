@@ -1,23 +1,30 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '~/api/queryKey.ts';
 import { getBoardCountByCategory } from '~/api/board.ts';
 import { Board } from '~/models/Board.ts';
 import MainBoardItem from './MainBoardItem.tsx';
-import styles from './MainBoardList.module.css';
 import LoadingSpinner from '~/components/Common/LoadingSpinner.tsx';
+import styles from './MainBoardList.module.css';
 
 export default function MainBoardList({ category }: { category: number }) {
+  const navigate = useNavigate();
   const boardsQuery = useQuery<Board[]>({
     queryKey: QUERY_KEY.board.boardsCount(category),
     queryFn: async () => getBoardCountByCategory(category),
   });
 
+  useEffect(() => {
+    if (boardsQuery.isError) {
+      void navigate('/internal-server-error');
+    }
+  }, [boardsQuery.isError, navigate]);
+
   let content;
 
   if (boardsQuery.isLoading) {
     content = <LoadingSpinner />;
-  } else if (boardsQuery.isError) {
-    content = <div className="error">에러가 발생했습니다!</div>;
   } else if (boardsQuery.isSuccess) {
     content = boardsQuery.data
       .slice()

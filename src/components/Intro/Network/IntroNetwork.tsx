@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import CRA_IMAGE1 from '~/assets/images/main/crabig.jpg?format=webp&as=srcset';
-import CRA_IMAGE2 from '~/assets/images/main/crastudy2.jpg?format=webp&as=srcset';
+import CRA_IMAGE2 from '~/assets/images/main/crastudy1.jpg?format=webp&as=srcset';
 import CRA_IMAGE3 from '~/assets/images/main/cradevelop.jpg?format=webp&as=srcset';
 import styles from './IntroNetwork.module.css';
 
@@ -16,14 +16,14 @@ const clubContents = [
         '‘큰모임’이 진행됩니다.',
       ],
       [
-        '재학생들은 대기업, 공기업, 스타트업, 실리콘 밸',
-        '리, 대학원 등 다양한 직군에 계시는 졸업생 선배',
-        '님들로부터 많은 도움을 받을 수 있습니다.',
+        '재학생들은 대기업, 공기업, 스타트업, 실리콘 밸리,',
+        '대학원 등 다양한 직군에 계시는 졸업생 선배님들',
+        '로부터 많은 도움을 받을 수 있습니다.',
       ],
     ],
   },
   {
-    title: ['함께 성장하기에 최고로 좋은 환경'],
+    title: ['함께 성장하기에 좋은 환경'],
     image: CRA_IMAGE2,
     content: [
       [
@@ -45,8 +45,8 @@ const clubContents = [
     content: [
       [
         '신입회원은 방학 프로젝트를 진행하게 됩니다.',
-        '선배의 가이드와 함께 지식을 공부하고 실제로 프로',
-        '젝트를 기획하며 개발합니다.',
+        '선배의 가이드와 함께 지식을 공부하고 실제로',
+        '프로젝트를 기획하며 개발합니다.',
       ],
       [
         '더 나아가, 실제로 개발의 결과물을 바탕으로 서',

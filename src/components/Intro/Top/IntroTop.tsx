@@ -5,6 +5,8 @@ import Vector2 from '~/assets/images/Vector/Arrow-Vector2.png?format=webp&as=src
 import Crang from '~/assets/images/Status_Crang.svg';
 import styles from './IntroTop.module.css';
 
+const RECRUIT_SEMESTER = '2025-1';
+
 function IntroTop({
   recruitRef,
   isHighlighted,
@@ -61,13 +63,14 @@ function IntroTop({
             to="/recruit"
             className={`${styles.RecruitBtn} ${isHighlighted ? styles.highlight : ''}`}
           >
-            <p>2025-1 CRA 리크루팅 지원하기</p>
+            <p>{RECRUIT_SEMESTER} CRA 리크루팅 지원하기</p>
           </Link>
 
           {/* 누르면 밑으로 내려가는 화살표 */}
           <div className={styles.vector} onClick={scrollToSection}>
             <img srcSet={Vector2} loading="lazy" />
             <img srcSet={Vector} loading="lazy" />
+            <div className={styles['interview']}>CRA가 궁금하다면?</div>
           </div>
         </div>
       </div>

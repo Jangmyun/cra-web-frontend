@@ -67,7 +67,7 @@
 
   .calender-line {
     position: relative;
-    height: 500px;
+    height: 400px;
     border-left: thick solid var(--color-primary);
     margin-left: 50%;
     background-color: transparent;
