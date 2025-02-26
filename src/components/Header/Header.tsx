@@ -1,4 +1,4 @@
-import HeaderMain from './Main-Header/HeaderMain';
+// import HeaderMain from './Main-Header/HeaderMain';
 import { useLocation } from 'react-router-dom';
 
 // 현재 페이지가 Intro & Recruit 일 경우 Header_Intro 출력
